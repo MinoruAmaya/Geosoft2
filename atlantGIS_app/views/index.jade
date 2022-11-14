@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    .container-fluid
+      button.navbar-toggler(type='button')
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link.active(href='#') Home
+          li.nav-item
+            a.nav-link(href='#') Start 
+          li.nav-item
+            a.nav-link.disabled Analyse 
