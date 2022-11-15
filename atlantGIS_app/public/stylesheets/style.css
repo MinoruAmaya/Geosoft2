@@ -18,3 +18,8 @@ a {
   padding-left: 15px;
   list-style-type: none;
 }
+
+#map{
+  height: 500px;
+  width: 100%;
+}
