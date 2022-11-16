@@ -11,7 +11,7 @@ const collectionName = "trainData"; // collection name
 
 //GET home page
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "" });
+  res.render("index", { title: "Startseite AOA" });
 });
 
 
