@@ -1,0 +1,1 @@
+document.getElementById('navbarStart').classList.add('active');

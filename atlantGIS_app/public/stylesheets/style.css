@@ -8,14 +8,12 @@ a {
 }
 
 .navbar{
-  background-color: gainsboro;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  background-color: rgb(127, 179, 247);
 }
 
+
 .nav-item{
-  padding-top: 15px;
-  padding-left: 15px;
+  padding-left: 10px;
   list-style-type: none;
 }
 
