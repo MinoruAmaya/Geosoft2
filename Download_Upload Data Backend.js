@@ -1,8 +1,5 @@
 //Download Part
 
-
-
-
 <div className="field" >
     <div className="ui icon input">
         <i className="file alternate icon"></i>
@@ -93,8 +90,6 @@ resolve(reader.result.split(','[1]));
 
 
 
-
-
 const {MongoClient} = require ('mongodb')
 const url = 'mongodb://localhost:27017'  //connect to URL
 const client = new MongoClient(url)//mongodb client
@@ -123,7 +118,7 @@ fetch('http://localhost:27017/........, {
 
 
 
-
+-------------------------------------------------------------------------------------------------------------------
 
 //File Upload
 
@@ -155,6 +150,7 @@ function dateiauswahl(evt) {
     document.getElementById('dateien').addEventListener('change', dateiauswahl, false);
   });
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 //Drag & Drop FUnktion
 
