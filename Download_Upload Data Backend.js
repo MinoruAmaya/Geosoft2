@@ -1,8 +1,5 @@
 //Download Part
 
-
-
-
 <div className="field" >
     <div className="ui icon input">
         <i className="file alternate icon"></i>
@@ -93,8 +90,6 @@ resolve(reader.result.split(','[1]));
 
 
 
-
-
 const {MongoClient} = require ('mongodb')
 const url = 'mongodb://localhost:27017'  //connect to URL
 const client = new MongoClient(url)//mongodb client
@@ -123,7 +118,7 @@ fetch('http://localhost:27017/........, {
 
 
 
-
+-------------------------------------------------------------------------------------------------------------------
 
 //File Upload
 
@@ -154,3 +149,34 @@ function dateiauswahl(evt) {
     // Falls neue Eingabe, neuer Aufruf der Auswahlfunktion
     document.getElementById('dateien').addEventListener('change', dateiauswahl, false);
   });
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Drag & Drop FUnktion
+
+function dateiauswahl(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var gewaehlteDateien = evt.dataTransfer.files; // FileList Objekt
+
+
+    var output = [];
+    for (var i = 0, f; f = gewaehlteDateien[i]; i++) {
+      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModified.toLocaleDateString(), '</li>');
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; 
+  }
+
+  // Initialisiere Drag&Drop EventListener
+  var dropZone = document.getElementById('dropzone');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', dateiauswahl, false);
