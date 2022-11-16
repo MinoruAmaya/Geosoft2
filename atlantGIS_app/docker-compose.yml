@@ -6,7 +6,7 @@ services:
         build: .
         #image: 
         ports: 
-            - '4000:3000'
+            - '3000:3000'
         depends_on: 
             - mongoservice
     mongoservice:
