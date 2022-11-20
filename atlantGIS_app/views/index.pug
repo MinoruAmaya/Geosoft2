@@ -5,15 +5,15 @@ block content
   .container
       .row 
         .col-md-4
-          form(action='/index/upload_satellitenbild' method='post')
+          form(action='/upload_satellitenbild' method='post')
             label.col-md-4.col-form-label(for='satellitenbild') Satellitenbild
             input#satellitenbild.form-control(type='file' name="satellitenbild" accept=".tif")
             button.btn.btn-primary.mb-2(type='submit') Speichern
-          form(action='/index/upload_training' method='post')
+          form(action='/upload_training' method='post')
             label.col-md-4.col-form-label(for='training') Trainingsdaten
             input#training.form-control(type='file' name="training" accept=".gpkg")
             button.btn.btn-primary.mb-2(type='submit') Speichern
-          form(action='/index/calculate_AOA' method='post')
+          form(action='/calculate_AOA' method='post')
             button.btn.btn-primary.mb-2(type='submit') AOA berechnen
         .col-md-8
           #map
