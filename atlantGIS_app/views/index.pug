@@ -14,10 +14,10 @@ block content
             input#training.form-control(type='file' name="training" accept=".gpkg")
             button.btn.btn-primary.mb-2(type='submit') Speichern
           form(action='/calculate_AOA' method='post')
+            input#testR.form-control(type='text' name="testR")
             button.btn.btn-primary.mb-2(type='submit') AOA berechnen
         .col-md-8
           #map
 
 block scripts 
-  script(src="/javascripts/leaflet.js" defer)
-  script(src="/javascripts/indexJS.js")
+  script(src="/javascripts/indexJS.js" defer)

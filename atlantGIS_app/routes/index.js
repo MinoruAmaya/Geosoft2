@@ -3,6 +3,7 @@ var router = express.Router();
 const MongoClient = require("mongodb").MongoClient;
 
 const fs = require("fs");
+const R = require('r-integration');
 
 const url = "mongodb://127.0.0.1:27017"; // connection URL
 const client = new MongoClient(url, { useUnifiedTopology: true }); // mongodb client
@@ -12,7 +13,7 @@ const collectionName = "trainData"; // collection name
 
 //GET home page
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Startseite AOA" });
+  res.render("index", { title: "Startseite" });
 });
 
 
@@ -64,5 +65,12 @@ router.post("/upload_training", function (req, res, next) {
     });
   });
 })
+
+
+router.post("/calculate_AOA", function (req, res, next) {
+  let a = req.body.testR
+  let result = R.callMethod("./public/rscripts/test.R", "x", {data: a});
+  res.render("notification", { title: result });
+});
 
 module.exports = router;
