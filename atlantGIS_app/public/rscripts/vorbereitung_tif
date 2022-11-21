@@ -10,7 +10,7 @@ library(mapview)
 
 # ANPASSEN:
 
-setwd("C:/Sentinel2/S2A_MSIL2A_20220812T103031_N0400_R108_T32UNF_20220812T182800/S2A_MSIL2A_20220812T103031_N0400_R108_T32UNF_20220812T182800.SAFE/GRANULE/L2A_T32UNF_A037285_20220812T103132/IMG_DATA")
+setwd("tif downloaden und als WD setzen")
 
 ################################################################################
 
@@ -53,7 +53,7 @@ senstack_all <- crop(senstack_all, c(565000, 585000, 6010000,6033000))
 
 # Raster rausschreiben, WD anpassen!!!
 writeRaster(senstack_all,
-            "C:/Sentinel2/Kiel_3a.tif",
+            "das gedownloadete Sentinel-Bild.tif",
             overwrite=T)
 
 ###############################################################################
@@ -64,7 +64,7 @@ setwd("Passendes WD finden")
 
 # Raster einladen
 
-combined <- rast("Kiel_3a.tif")
+combined <- rast("das gedownloadete Sentinel-Bild.tif")
 
 
 ################################################################################
@@ -97,7 +97,7 @@ values(lat) <- coords[,2] # Koordinaten auf das Raster schreiben
 values(lon) <- coords[,1] # Koordinaten auf das Raster schreiben
 coords <- rast(list(lat,lon)) # neuen Steck erstellen
 names(coords) <- c("lat","lon") #...und benennen
-coords <- project(coords,crs(combined)) # wieder in Projektion des Combiend stacks bringen
+coords <- project(coords,crs(combined)) # wieder in Projektion des Combined stacks bringen
 coords <- resample(coords,combined) # und auf die gleiche Geometrie
 #plot(coords)
 combined <- rast(list(combined,coords)) # alles zusammenführen
@@ -109,5 +109,5 @@ names(combined)
 # Raster rausschreiben
 
 writeRaster(combined,
-            "Kiel.tif",
+            "MeinSatellitenbild.tif",
             overwrite=TRUE)
