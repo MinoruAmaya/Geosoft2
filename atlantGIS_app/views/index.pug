@@ -3,21 +3,24 @@ extends layout
 block content
   h1= message
   .container
-      .row 
-        .col-md-4
+      .row.justify-content-md-center
+        .col-md-3
+        .col-md-auto
+          h1 Willkommen auf unserer Website
+        .col-md-3 
+      br
+      br
+      br
+      br
+      .row.justify-content-md-center
+        .col-md-3
+        .col-md-auto
           form(action='/upload_satellitenbild' method='post')
-            label.col-md-4.col-form-label(for='satellitenbild') Satellitenbild
-            input#satellitenbild.form-control(type='file' name="satellitenbild" accept=".tif")
-            button.btn.btn-primary.mb-2(type='submit') Speichern
-          form(action='/upload_training' method='post')
-            label.col-md-4.col-form-label(for='training') Trainingsdaten
-            input#training.form-control(type='file' name="training" accept=".gpkg")
-            button.btn.btn-primary.mb-2(type='submit') Speichern
-          form(action='/calculate_AOA' method='post')
-            input#testR.form-control(type='text' name="testR")
-            button.btn.btn-primary.mb-2(type='submit') AOA berechnen
-        .col-md-8
-          #map
+            label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
+            input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept=".tif")
+            button.btn.btn-primary.mb-2(type='submit') Weiter
+        .col-md-3
+          
 
 block scripts 
   script(src="/javascripts/indexJS.js" defer)
