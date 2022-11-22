@@ -5,6 +5,12 @@ var mongodb = require('mongodb');
 
 const fs = require("fs");
 const R = require('r-integration');
+const utif = require('utif')
+
+
+var bodyParser = require('body-parser')
+var rawParser = bodyParser.raw({ type: 'image/tiff' })
+
 
 const url = "mongodb://127.0.0.1:27017"; // connection URL
 const client = new MongoClient(url, { useUnifiedTopology: true }); // mongodb client
@@ -22,18 +28,21 @@ router.get("/", function (req, res, next) {
 
 router.post("/upload_satellitenbild", function (req, res, next) {
 
-    console.log(req.body.satellitenbild);
+    console.log(req.body.mimetype);
     test = { test: "test" }
   	
-    /**
-    fs.readFile(req.body.satellitenbild, 'utf8', function (err,data) {
+    //const ifds = utif.decode(req.body.satellitenbild)
+    //console.log(ifds)
+
+    
+    fs.readFile(req.body.satellitenbild, rawParser, function (err,data) {
       if (err) {
         return console.log(err);
       }
       console.log(data);
     });
 
-    
+    /**
     fs.createReadStream(test).
      pipe(bucket.openUploadStreamWithId(req.body.satellitenbild, req.body.satellitenbild, {
          chunkSizeBytes: 1048576,
@@ -43,7 +52,7 @@ router.post("/upload_satellitenbild", function (req, res, next) {
     // connect to the mongodb database and afterwards, insert one the new element
     */
 
-    
+
     client.connect(function (err) {
 
       console.log("Connected successfully to server");
@@ -65,6 +74,13 @@ router.post("/upload_satellitenbild", function (req, res, next) {
 router.post("/upload_training", function (req, res, next) {
 
   test = { test: "test" }
+
+  fs.readFile(req.body.training, "utf-8", function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log(data);
+  });
 
   // connect to the mongodb database and afterwards, insert one the new element
   client.connect(function (err) {
