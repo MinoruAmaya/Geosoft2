@@ -1,7 +1,5 @@
 var express = require("express");
 var router = express.Router();
-const MongoClient = require("mongodb").MongoClient;
-var mongodb = require('mongodb');
 
 const fs = require("fs");
 const R = require('r-integration');
@@ -10,14 +8,6 @@ const Jimp = require('jimp')
 
 var bodyParser = require('body-parser')
 var rawParser = bodyParser.raw({ type: 'image/tif' })
-
-
-const url = "mongodb://127.0.0.1:27017"; // connection URL
-const client = new MongoClient(url, { useUnifiedTopology: true }); // mongodb client
-const dbName = "mydatabase"; // database name
-const collectionName = "trainData"; // collection name
-const db = client.db(dbName);
-var bucket = new mongodb.GridFSBucket(db, { bucketName: 'TrainDataBucket' });
 
 //GET home page
 router.get("/", function (req, res, next) {
@@ -49,21 +39,7 @@ router.post("/upload_satellitenbild", function (req, res, next) {
   // connect to the mongodb database and afterwards, insert one the new element
   */
 
-  test = { test: "test" }
-  client.connect(function (err) {
-
-    console.log("Connected successfully to server");
-
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-
-    // Insert the document in the database
-    collection.insertOne(test, function (err, result) {
-      console.log(
-        `Inserted ${result.insertedCount} document into the collection`);
-      res.render("workflow_sat", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
-    });
-  });
+  res.render("workflow_train", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
 });
 
 
@@ -78,22 +54,7 @@ router.post("/upload_training", function (req, res, next) {
     }
     console.log(data);
   });
-
-  // connect to the mongodb database and afterwards, insert one the new element
-  client.connect(function (err) {
-
-    console.log("Connected successfully to server");
-
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-
-    // Insert the document in the database
-    collection.insertOne(test, function (err, result) {
-      console.log(
-        `Inserted ${result.insertedCount} document into the collection`);
-      res.render("workflow_train", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
-    });
-  });
+  res.render("workflow_train", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
 })
 
 
