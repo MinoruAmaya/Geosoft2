@@ -1,23 +1,28 @@
 extends layout
 
 block content
-  h1= message
-  .container
-      .row 
-        .col-md-4
-          form(action='/upload_satellitenbild' method='post')
-            label.col-md-4.col-form-label(for='satellitenbild') Satellitenbild
-            input#satellitenbild.form-control(type='file' name="satellitenbild" accept=".tif" enctype="multipart/form-data")
-            button.btn.btn-primary.mb-2(type='submit') Speichern
-          form(action='/upload_training' method='post')
-            label.col-md-4.col-form-label(for='training') Trainingsdaten
-            input#training.form-control(type='file' name="training" accept=".gpkg" enctype="multipart/form-data")
-            button.btn.btn-primary.mb-2(type='submit') Speichern
-          form(action='/calculate_AOA' method='post')
-            input#testR.form-control(type='text' name="testR")
-            button.btn.btn-primary.mb-2(type='submit') AOA berechnen
-        .col-md-8
-          #map
+  .container-fluid
+      .row.justify-content-md-center
+        .col-md-3
+            img.float-start.img-fluid(src='./images/Münster_Karte_links.png')
+        .col-md-6
+          br
+          h1.text-center Willkommen auf unserer Website
+          br
+          br
+          .row.justify-content-md-center
+            .col-md-10
+              p.fs-3 Auf dieser Website können Sie Satelliten- und Trainigsdaten hochladen 
+                |  diese mit hilfe des "Random Forest"-Algorithmus klassifizieren
+                |  und außerdem die AOA ("Area of applicability") für das Modell berechnen lassen.
+              br
+              br
+          .row.justify-content-md-center
+            .col-md-4
+              a.btn.btn-primary.btn-lg(href='/workflow' role='button') Beginne jetzt
+        .col-md-3      
+          img.float-end.img-fluid(src='./images/Münster_Karte_rechts.png') 
+          
 
 block scripts 
   script(src="/javascripts/indexJS.js" defer)

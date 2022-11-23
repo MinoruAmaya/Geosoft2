@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1= message
+  .container
+      .row.justify-content-md-center
+        .col-md-1
+        .col-md-4 
+            div#form-div
+                form(action='/upload_satellitenbild' method='post')
+                    label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
+                    input#satellitenbild.form-control.form-control-lg(type='text' value='Satellitendaten wurden gespeichert' aria-label='Satellitendaten wurden gespeichert' readonly='', disabled='')
+                    button.btn.btn-secondary.mb-2(type='submit').disabled Weiter 
+            div#form-div
+                form#active-form(action='/upload_training' method='post')
+                    label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
+                    input#training.form-control.form-control-lg(type='text' value='Trainingsdaten wurden gespeichert' aria-label='Trainingsdaten wurden gespeichert' readonly='', disabled='')
+                    button.btn.btn-secondary.mb-2(type='submit').disabled Weiter
+            br
+            div#form-div.active-form
+                form(action='/calculate_AOA' method='post')
+                    input#testR.form-control(type='text' name="testR")
+                    button.btn.btn-primary.mb-2(type='submit') AOA berechnen
+        .col-md-6
+            #map
+        .col-md-1
+
+
+block scripts 
+  script(src="/javascripts/indexJS.js" defer)
