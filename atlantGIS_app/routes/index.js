@@ -3,11 +3,6 @@ var router = express.Router();
 
 const fs = require("fs");
 const R = require('r-integration');
-const Jimp = require('jimp')
-
-
-var bodyParser = require('body-parser')
-var rawParser = bodyParser.raw({ type: 'image/tif' })
 
 //GET home page
 router.get("/", function (req, res, next) {
@@ -18,26 +13,7 @@ router.get("/", function (req, res, next) {
 router.post("/upload_satellitenbild", function (req, res, next) {
 
 
-  const satellitenbild = Jimp.read('req.body.satellitenbild')
-    .then(satellitenbild => {
-      console.log(satellitenbild)
-      return satellitenbild
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
-
-
-  /**
-  fs.createReadStream(test).
-   pipe(bucket.openUploadStreamWithId(req.body.satellitenbild, req.body.satellitenbild, {
-       chunkSizeBytes: 1048576,
-       metadata: { field: 'myField', value: 'myValue' }
-   }));
-   res.render("notification", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
-  // connect to the mongodb database and afterwards, insert one the new element
-  */
+  
 
   res.render("workflow_train", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
 });
