@@ -53,7 +53,7 @@ senstack_all <- crop(senstack_all, c(565000, 585000, 6010000,6033000))
 
 # Raster rausschreiben, WD anpassen!!!
 writeRaster(senstack_all,
-            "das gedownloadete Sentinel-Bild.tif",
+            "L1C_T19KFV_A036129_20220523T144523.tif",
             overwrite=T)
 
 ###############################################################################
@@ -64,7 +64,7 @@ setwd("Passendes WD finden")
 
 # Raster einladen
 
-combined <- rast("das gedownloadete Sentinel-Bild.tif")
+combined <- rast("L1C_T19KFV_A036129_20220523T144523.tif")
 
 
 ################################################################################

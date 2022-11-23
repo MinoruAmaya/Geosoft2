@@ -17,12 +17,12 @@ Referenzdaten <- st_read("Classification.shp")
 setwd("Passendes WD finden")
 
 # Kiel einladen
-sentinel <- rast("MeinSatellitenbild.tif")
+sentinel <- rast("L1C_T19KFV_A036129_20220523T144523.tif")
 
 # Trainingsdaten auf die Kiel Projektion umändern
 Referenzdaten <- st_transform(Referenzdaten, crs(sentinel))
 
-Referenzdaten$Area <- "Area von meinem Satellitenbild"
+Referenzdaten$Area <- "PopoSee"
 
 extr <- extract(sentinel, Referenzdaten)
 head(extr)
@@ -60,7 +60,7 @@ plot(prediction_terra,col=cols)
 
 writeRaster(prediction_terra,"prediction2.grd",overwrite=TRUE)
 
-pdf("LULC_Area MeinSatellitenbild")
+pdf("LULC_PopoSee")
 #spplot(deratify(prediction),maxpixels=ncell(prediction)*0.4,
 #       col.regions=cols)
 plot(prediction_terra,col=cols,maxcell=ncell(prediction_terra)*0.4)
