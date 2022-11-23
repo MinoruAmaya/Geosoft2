@@ -1,25 +1,27 @@
 extends layout
 
 block content
-  h1= message
-  .container
+  .container-fluid
       .row.justify-content-md-center
         .col-md-3
-        .col-md-auto
-          h1 Willkommen auf unserer Website
-        .col-md-3 
-      br
-      br
-      br
-      br
-      .row.justify-content-md-center
-        .col-md-3
-        .col-md-auto
-          form(action='/upload_satellitenbild' method='post')
-            label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
-            input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept=".tif")
-            button.btn.btn-primary.mb-2(type='submit') Weiter
-        .col-md-3
+            img.float-start.img-fluid(src='./images/Münster_Karte_links.png')
+        .col-md-6
+          br
+          h1.text-center Willkommen auf unserer Website
+          br
+          br
+          .row.justify-content-md-center
+            .col-md-10
+              p.fs-3 Auf dieser Website können Sie Satelliten- und Trainigsdaten hochladen 
+                |  diese mit hilfe des "Random Forest"-Algorithmus klassifizieren
+                |  und außerdem die AOA ("Area of applicability") für das Modell berechnen lassen.
+              br
+              br
+          .row.justify-content-md-center
+            .col-md-4
+              a.btn.btn-primary.btn-lg(href='/workflow' role='button') Beginne jetzt
+        .col-md-3      
+          img.float-end.img-fluid(src='./images/Münster_Karte_rechts.png') 
           
 
 block scripts 

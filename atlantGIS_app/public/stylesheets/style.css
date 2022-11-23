@@ -22,6 +22,20 @@ a {
   width: 100%;
 }
 
-#satellitenbild{
+#logo{
+  width: 51px;
+  height: 30px;
+}
+
+#satellitenbild, #training{
   margin-bottom: 3px;
+}
+
+#form-div{
+  padding: 10px;
+}
+
+.active-form{
+  background-color: rgb(127, 179, 247);
+  border-radius: 15px;
 }
