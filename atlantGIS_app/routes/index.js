@@ -64,7 +64,7 @@ router.post("/upload_satellitenbild", function (req, res, next) {
       collection.insertOne(test, function (err, result) {
         console.log(
           `Inserted ${result.insertedCount} document into the collection`);
-        res.render("notification", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
+        res.render("workflow_sat", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
       });
     });
 })
@@ -94,7 +94,7 @@ router.post("/upload_training", function (req, res, next) {
     collection.insertOne(test, function (err, result) {
       console.log(
         `Inserted ${result.insertedCount} document into the collection`);
-      res.render("notification", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
+      res.render("workflow_train", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
     });
   });
 })
