@@ -16,10 +16,10 @@ Referenzdaten <- st_read("Classification.shp")
 # Working Directory ändern
 setwd("Passendes WD finden")
 
-# Kiel einladen
+# Bolivien einladen
 sentinel <- rast("L1C_T19KFV_A036129_20220523T144523.tif")
 
-# Trainingsdaten auf die Kiel Projektion umändern
+# Trainingsdaten auf die Bolivien Projektion umändern
 Referenzdaten <- st_transform(Referenzdaten, crs(sentinel))
 
 Referenzdaten$Area <- "PopoSee"
