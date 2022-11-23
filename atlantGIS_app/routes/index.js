@@ -37,7 +37,7 @@ router.post("/upload_satellitenbild", function (req, res, next) {
       console.error(err);
     });
 
-  
+
 
   /**
   fs.createReadStream(test).
@@ -61,16 +61,10 @@ router.post("/upload_satellitenbild", function (req, res, next) {
     collection.insertOne(test, function (err, result) {
       console.log(
         `Inserted ${result.insertedCount} document into the collection`);
-      res.render("notification", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
-      // Insert the document in the database
-      collection.insertOne(test, function (err, result) {
-        console.log(
-          `Inserted ${result.insertedCount} document into the collection`);
-        res.render("workflow_sat", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
-      });
+      res.render("workflow_sat", { title: "Satelitenbild hinzugefügt", data: JSON.stringify(test) });
     });
   });
-})
+});
 
 
 
