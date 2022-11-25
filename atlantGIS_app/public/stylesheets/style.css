@@ -27,11 +27,11 @@ a {
   height: 30px;
 }
 
-#satellitenbild, #training{
+#satellitenbild, #training, #label, #klassenID{
   margin-bottom: 3px;
 }
 
-#form-div{
+#form-div, #form_div_l, #form_div_k{
   padding: 10px;
 }
 

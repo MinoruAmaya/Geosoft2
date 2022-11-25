@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var analyseRouter = require('./routes/analyse');
 var workflowRouter = require('./routes/workflow');
 var impressumRouter = require('./routes/impressum');
+var trainDataRouter = require('./routes/trainData');
+var demoRouter = require('./routes/demo');
 
 var app = express();
 
@@ -25,6 +27,8 @@ app.use('/', indexRouter);
 app.use('/analyse', analyseRouter);
 app.use('/workflow', workflowRouter);
 app.use('/impressum', impressumRouter);
+app.use('/trainData', trainDataRouter);
+app.use('/demo', demoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

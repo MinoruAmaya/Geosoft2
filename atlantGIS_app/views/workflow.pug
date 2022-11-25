@@ -1,24 +1,25 @@
 extends layout
 
 block content
-    h1= message
+    br
+    br
     .container
         .row.justify-content-md-center
             .col-md-1
             .col-md-4
                 div#form-div.active-form
-                    form(action='/upload_satellitenbild' method='post')
+                    form
                         label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
                         input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept="image/tif" enctype="multipart/form-data")
                         button.btn.btn-primary.mb-2(type='submit') Weiter
                 div#form-div
-                    form(action='/upload_training' method='post')
+                    form
                         label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
                         input#training.form-control.form-control-lg(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data" disabled='')
                         button.btn.btn-secondary.mb-2(type='submit').disabled Weiter
                 br
                 div#form-div
-                    form(action='/calculate_AOA' method='post')
+                    form
                         input#testR.form-control(type='text' name="testR", disabled = '')
                         button.btn.btn-secondary.mb-2(type='submit').disabled AOA berechnen
             .col-md-6
