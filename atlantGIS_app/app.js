@@ -10,6 +10,7 @@ var workflowRouter = require('./routes/workflow');
 var impressumRouter = require('./routes/impressum');
 var trainDataRouter = require('./routes/trainData');
 var demoRouter = require('./routes/demo');
+var areaRouter = require('./routes/area');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/workflow', workflowRouter);
 app.use('/impressum', impressumRouter);
 app.use('/trainData', trainDataRouter);
 app.use('/demo', demoRouter);
+app.use('/area', areaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

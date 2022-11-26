@@ -18,7 +18,7 @@ a {
 }
 
 #map{
-  height: 500px;
+  height: 400px;
   width: 100%;
 }
 
@@ -31,11 +31,11 @@ a {
   margin-bottom: 3px;
 }
 
-#form-div, #form_div_l, #form_div_k{
+#form_div{
   padding: 10px;
+  border-radius: 15px;
 }
 
 .active-form{
   background-color: rgb(127, 179, 247);
-  border-radius: 15px;
 }

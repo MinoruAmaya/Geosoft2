@@ -1,0 +1,22 @@
+extends layout 
+
+block content
+    br
+    br
+    .container
+        .row.justify-content-md-center
+            .col-md-2 
+            .col-md-8
+                #map
+            .col-md-2
+        br
+        br
+        .row.justify-content-md-center
+            .col-md-4 
+            .col-md-4
+                div.d-grid.gap-2.col-6.mx-auto
+                    button.btn.btn-primary.mb-2 Klassifikation starten
+            .col-md-4
+
+block scripts 
+  script(src="/javascripts/areaJS.js" defer)

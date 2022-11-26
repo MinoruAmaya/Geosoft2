@@ -5,25 +5,40 @@ block content
     br
     .container
         .row.justify-content-md-center
-            .col-md-1
-            .col-md-4
-                div#form-div.active-form
+            .col-md-3
+            .col-md-6
+                div#form_div.active-form
                     form
                         label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
                         input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept="image/tif" enctype="multipart/form-data")
-                        button.btn.btn-primary.mb-2(type='submit') Weiter
-                div#form-div
-                    form
-                        label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
-                        input#training.form-control.form-control-lg(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data" disabled='')
-                        button.btn.btn-secondary.mb-2(type='submit').disabled Weiter
+                        button.btn.btn-primary.mb-2 Weiter
                 br
-                div#form-div
+                br
+                br
+            .col-md-3
+        .row.justify-content-md-center
+            .col-md-1 
+            .col-md-4 
+                div#form_div
+                    form
+                        label.col-md-4.col-form-label.fw-bolder(for='trainModell') Trainiertes Modell
+                        input#training.form-control.form-control-lg(type='file' name="trainModell" accept=" " enctype="multipart/form-data" disabled=true)
+                        button.btn.btn-secondary.mb-2.disabled Weiter
+            .col-md-2 
+                br
+                br
+                h3.text-center oder
+            .col-md-4 
+                div#form_div
+                    form
+                        label.col-md-4.col-form-label.fw-bolder(for='untrainModell') Nicht-trainiertes Modell
+                        input#training.form-control.form-control-lg(type='file' name="untrainModell" accept=" " enctype="multipart/form-data" disabled=true)
+                        button.btn.btn-secondary.mb-2.disabled Weiter
+                br
+                div#form_div
                     form
                         input#testR.form-control(type='text' name="testR", disabled = '')
                         button.btn.btn-secondary.mb-2(type='submit').disabled AOA berechnen
-            .col-md-6
-                #map
             .col-md-1
 
 block scripts 

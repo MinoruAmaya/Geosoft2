@@ -5,23 +5,41 @@ block content
     br
     .container
         .row.justify-content-md-center
+            .col-md-3
+                br
+                br
+                br
+                br
+                br
+                div#form_div
+                    form
+                        label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
+                        input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
+                        button.btn.btn-primary.mb-2(type='submit') Weiter
             .col-md-1
-            .col-md-6
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+                h3 oder 
+            .col-md-5
                 #map
-            .col-md-4
-                div#form_div_l.active-form
+            .col-md-3
+                div#form_div
                     label.col-md-4.col-form-label.fw-bolder(for='label') Label
                     input#label.form-control.form-control-lg(type='text' name="label")
                     button#btn_label.btn.btn-primary.mb-2 Weiter
                 br
-                div#form_div_k
+                div#form_div
                     label.col-md-4.col-form-label.fw-bolder(for='klassenID') Klassen ID
-                    input#klassenID.form-control.form-control-lg(type='number' name="klassenID" disabled=true)
-                    button#btn_klassenID.btn.btn-secondary.mb-2.disabled Weiter
+                    input#klassenID.form-control.form-control-lg(type='number' name="klassenID")
+                    button#btn_klassenID.btn.btn-primary.mb-2 Weiter
                 br
-                div#form-div
+                div
                     button#btn_save.btn.btn-secondary.mb-2.disabled Trainingsdaten speichern 
-            .col-md-1
 
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)
