@@ -11,11 +11,11 @@ block content
                 br
                 br
                 br
-                div#form_div
+                div#form_div.active-form
                     form
                         label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
                         input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                        button.btn.btn-primary.mb-2(type='submit') Weiter
+                    button#btn_trainData.btn.btn-primary.mb-2 Weiter
             .col-md-1
                 br
                 br
@@ -28,18 +28,18 @@ block content
             .col-md-5
                 #map
             .col-md-3
-                div#form_div
-                    label.col-md-4.col-form-label.fw-bolder(for='label') Label
-                    input#label.form-control.form-control-lg(type='text' name="label")
-                    button#btn_label.btn.btn-primary.mb-2 Weiter
+                div#form_div.active-form
+                    div#form_div
+                        label.col-md-4.col-form-label.fw-bolder(for='label') Label
+                        input#label.form-control.form-control-lg(type='text' name="label")
+                    div#form_div
+                        label.col-md-4.col-form-label.fw-bolder(for='klassenID') Klassen ID
+                        input#klassenID.form-control.form-control-lg(type='number' name="klassenID")
+                    div#form_div
+                        button#btn_save.btn.btn-primary.mb-2.d-grid.gap-2.col-10.mx-auto Trainingsdaten speichern 
                 br
                 div#form_div
-                    label.col-md-4.col-form-label.fw-bolder(for='klassenID') Klassen ID
-                    input#klassenID.form-control.form-control-lg(type='number' name="klassenID")
-                    button#btn_klassenID.btn.btn-primary.mb-2 Weiter
-                br
-                div
-                    button#btn_save.btn.btn-secondary.mb-2.disabled Trainingsdaten speichern 
+                    button#btn_digitalization.btn.btn-secondary.mb-2.d-grid.gap-2.col-6.mx-auto.disabled Weiter 
 
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)

@@ -8,9 +8,9 @@ let formdiv_sat = document.getElementById('form_div_sat');
 let formdiv_train = document.getElementById('form_div_train');
 let formdiv_untrain = document.getElementById('form_div_untrain');
 
-btn_satellite.addEventListener('click', function(){changeActiveForm()});
-btn_trainMod.addEventListener('click', function(){});
-btn_untrainMod.addEventListener('click', function(){});
+btn_satellite.addEventListener('click', function(){changeActiveForm() /* funtion to get the data here */});
+btn_trainMod.addEventListener('click', function(){/* funtion to get the data here */; window.location = "./area"});
+btn_untrainMod.addEventListener('click', function(){/* funtion to get the data here */; window.location = "./trainData"});
 
 
 /**

@@ -1,49 +1,34 @@
 let navElement = document.getElementById('navbarTrain');
-let btn_label = document.getElementById('btn_label');
-let btn_klassenID = document.getElementById('btn_klassenID');
+let btn_trainData = document.getElementById('btn_trainData');
 let btn_save = document.getElementById('btn_save');
-let label = document.getElementById('label');
-let klassenID = document.getElementById('klassenID');
-let form_div_l = document.getElementById('form_div_l');
-let form_div_k = document.getElementById('form_div_k');
+let btn_digitalization = document.getElementById('btn_digitalization');
+let in_trainData = document.getElementById('training');
+let in_label = document.getElementById('label');
+let in_klassenID = document.getElementById('klassenID');
 
-btn_label.addEventListener('click', function() {changeActiveForm('label');});
-btn_klassenID.addEventListener('click', function() {changeActiveForm('klasse');});
-btn_save.addEventListener('click', function() {});
+btn_trainData.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"})
+btn_save.addEventListener('click', function(){/* add here the function to save the data */; activateDigitalization();});
+btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 
 navElement.classList.remove('disabled');
 navElement.classList.remove('text-white-50');
 navElement.classList.add('text-white');
 
+let counter = 0;
+
+// functions
+
 /**
- * Changes the active form, so the one that currently
- * needs to be filled is higlited and the others are 
- * disabled
- * @param {String} form 
+ * After the first train Data got digitialized
+ * the "Weiter" button should be activated
  */
-function changeActiveForm(form){
-    if(form === 'label'){
-        form_div_l.classList.remove('active-form');
-        btn_label.classList.remove('btn-primary');
-        btn_klassenID.classList.remove('disabled');
-        btn_klassenID.classList.remove('btn-secondary');
-        btn_klassenID.classList.add('btn-primary');
-        btn_label.classList.add('disabled');
-        btn_label.classList.add('btn-secondary');
-        form_div_k.classList.add('active-form');
-        label.disabled = true;
-        klassenID.disabled = false;
+function activateDigitalization(){
+    if(counter === 0){
+        btn_digitalization.classList.remove('btn-secondary');
+        btn_digitalization.classList.remove('disabled');
+        btn_digitalization.classList.add('btn-primary');
     }
-    else if (form === 'klasse'){
-        form_div_k.classList.remove('active-form');
-        btn_klassenID.classList.remove('btn-primary');
-        btn_save.classList.remove('disabled');
-        btn_save.classList.remove('btn-secondary');
-        btn_save.classList.add('btn-primary');
-        btn_klassenID.classList.add('disabled');
-        btn_klassenID.classList.add('btn-secondary');
-        klassenID.disabled = true;
-    }
+    counter++;
 }
 
 //Leaflet & Leaflet-Draw
