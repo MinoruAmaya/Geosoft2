@@ -10,7 +10,7 @@ library(mapview)
 
 # ANPASSEN:
 
-setwd("tif downloaden und als WD setzen")
+setwd("atlantGIS-app/public/data/demo/L1C_T19KFV_A036129_20220523T144523.tif")
 
 ################################################################################
 
