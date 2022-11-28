@@ -6,7 +6,7 @@ library('sf')
 library('sp')
 library('raster')
 
-setwd("Passendes WD finden")
+setwd("atlantGIS-app/public/data/demo")
 
 # Einladen des Vektordatensatzes
 Referenzdaten <- st_read("Classification.shp")
@@ -14,7 +14,7 @@ Referenzdaten <- st_read("Classification.shp")
 ###############################################################################
 
 # Working Directory ändern
-setwd("Passendes WD finden")
+setwd("atlantGIS-app/public/data/demo")
 
 # Bolivien einladen
 sentinel <- rast("L1C_T19KFV_A036129_20220523T144523.tif")
