@@ -7,11 +7,11 @@ block content
         .row.justify-content-md-center
             .col-md-3
             .col-md-6
-                div#form_div.active-form
+                div#form_div_sat.active-form
                     form
                         label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
                         input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept="image/tif" enctype="multipart/form-data")
-                        button.btn.btn-primary.mb-2 Weiter
+                    button#btn_satellite.btn.btn-primary.mb-2 Weiter
                 br
                 br
                 br
@@ -19,21 +19,21 @@ block content
         .row.justify-content-md-center
             .col-md-1 
             .col-md-4 
-                div#form_div
+                div#form_div_train
                     form
                         label.col-md-4.col-form-label.fw-bolder(for='trainModell') Trainiertes Modell
-                        input#training.form-control.form-control-lg(type='file' name="trainModell" accept=" " enctype="multipart/form-data" disabled=true)
-                        button.btn.btn-secondary.mb-2.disabled Weiter
+                        input#trainMod.form-control.form-control-lg(type='file' name="trainModell" accept=" " enctype="multipart/form-data" disabled=true)
+                        button#btn_trainMod.btn.btn-secondary.mb-2.disabled Weiter
             .col-md-2 
                 br
                 br
                 h3.text-center oder
             .col-md-4 
-                div#form_div
+                div#form_div_untrain
                     form
                         label.col-md-4.col-form-label.fw-bolder(for='untrainModell') Nicht-trainiertes Modell
-                        input#training.form-control.form-control-lg(type='file' name="untrainModell" accept=" " enctype="multipart/form-data" disabled=true)
-                        button.btn.btn-secondary.mb-2.disabled Weiter
+                        input#untrainMod.form-control.form-control-lg(type='file' name="untrainModell" accept=" " enctype="multipart/form-data" disabled=true)
+                        button#btn_untrainMod.btn.btn-secondary.mb-2.disabled Weiter
                 br
                 div#form_div
                     form
@@ -42,4 +42,4 @@ block content
             .col-md-1
 
 block scripts 
-  script(src="/javascripts/indexJS.js" defer)
+  script(src="/javascripts/workflowJS.js" defer)
