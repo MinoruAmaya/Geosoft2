@@ -5,9 +5,10 @@ let btn_digitalization = document.getElementById('btn_digitalization');
 let in_trainData = document.getElementById('training');
 let in_label = document.getElementById('label');
 let in_klassenID = document.getElementById('klassenID');
+let warning = document.getElementById('warning');
 
 btn_trainData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
-btn_save.addEventListener('click', function(){getNewTrainData(); activateDigitalization(); clearInputs();});
+btn_save.addEventListener('click', function(){getNewTrainData()});
 btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 
 navElement.classList.remove('disabled');
@@ -66,15 +67,15 @@ function addTrainData(){
         var reader = new FileReader();
         reader.onload = (event) => {
             trainData = JSON.parse(event.target.result);
-            L.geoJSON(trainData, {
-                style: style
-              }).addTo(map)
         };
         reader.readAsText(in_trainData.files[0]);
     }
     else{
         return;
     }
+    L.geoJSON(trainData, {
+        style: style
+      }).addTo(map)
 }
 
 /**
@@ -83,47 +84,58 @@ function addTrainData(){
  * added trainData to the given geoJSON
  */
 function getNewTrainData(){
-    currentLabel = in_label.value;
-    currentID = parseInt(in_klassenID.value);
-    var coordinates = [[[]]];
-    for(var i = 0; i < currentLayer._latlngs[0].length; i++){
-        coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
-    };
-
-    if (trainData === ''){
-        trainData = {
-            "type" : "FeatureCollection",
-            "features" : [{ 
-                "type" : "Feature", 
-                "properties" : {  
-                    "Label" : currentLabel, 
-                    "ClassID" : currentID
-                }, 
-                "geometry" : { 
-                    "type" : "MultiPolygon", 
-                    "coordinates" : coordinates
-                }
-            }]
-        }
+    if(in_label.value === ''|| in_klassenID.value === ''){
+        warning.innerHTML = 'Alle Felder müssen aufgefüllt sein!!!'
+    }
+    else if(currentLayer === undefined){
+        warning.innerHTML = 'Kein Polygon vorhanden!!!'
     }
     else{
-        var newSpot = trainData.features.length
-        trainData.features[newSpot] = {
-            "type" : "Feature", 
-                "properties" : {  
-                    "Label" : currentLabel, 
-                    "ClassID" : currentID
-                }, 
-                "geometry" : { 
-                    "type" : "MultiPolygon", 
-                    "coordinates" : coordinates
-                }
+        warning.innerHTML = '';
+        currentLabel = in_label.value;
+        currentID = parseInt(in_klassenID.value);
+        var coordinates = [[[]]];
+        for(var i = 0; i < currentLayer._latlngs[0].length; i++){
+            coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
+        };
+
+        if (trainData === ''){
+            trainData = {
+                "type" : "FeatureCollection",
+                "features" : [{ 
+                    "type" : "Feature", 
+                    "properties" : {  
+                        "Label" : currentLabel, 
+                        "ClassID" : currentID
+                    }, 
+                    "geometry" : { 
+                        "type" : "MultiPolygon", 
+                        "coordinates" : coordinates
+                    }
+                }]
+            }
         }
+        else{
+            var newSpot = trainData.features.length
+            trainData.features[newSpot] = {
+                "type" : "Feature", 
+                    "properties" : {  
+                        "Label" : currentLabel, 
+                        "ClassID" : currentID
+                    }, 
+                    "geometry" : { 
+                        "type" : "MultiPolygon", 
+                        "coordinates" : coordinates
+                    }
+            }
+        }
+        map.removeLayer(currentLayer)
+        L.geoJSON(trainData, {
+            style: style
+          }).addTo(map);
+        activateDigitalization();
+        clearInputs();
     }
-    map.removeLayer(currentLayer)
-    L.geoJSON(trainData, {
-        style: style
-      }).addTo(map)
 }
 
 /**
