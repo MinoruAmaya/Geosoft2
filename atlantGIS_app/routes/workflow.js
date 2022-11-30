@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.post("/uploadSatelliteimage", uploadDest.single("satellitenbildInput"), function (req, res, next) {
+router.post("/uploadSatelliteimage", uploadDest.single("satellitenbild"), function (req, res, next) {
   console.log(req.file);
   console.log(req.body);
 

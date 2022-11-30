@@ -10,7 +10,7 @@ block content
                 div#form_div_sat.active-form
                     form(action='/workflow/uploadSatelliteimage' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='satellitenbild') Satellitenbild
-                        input#satellitenbildInput.form-control.form-control-lg(type='file' name="satellitenbild" accept="image/png")
+                        input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept=".tif")
                         button#btn_satellite.btn.btn-primary.mb-2 Weiter
                 br
                 br
