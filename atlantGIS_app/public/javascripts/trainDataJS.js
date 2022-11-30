@@ -19,6 +19,28 @@ let currentLayer;
 let currentLabel;
 let currentID; 
 let trainData = '';
+let style = function (feature) {
+    switch (feature.properties.Label) {
+      case "See":
+        return { color: "#0a1cb1" };
+      case "Siedlung":
+        return { color: "#e57423" };
+      case "FLiessgewaesser":
+        return { color: "#23c3e5" };
+      case "Laubwald":
+        return { color: "#2aa43d" };
+      case "Mischwald":
+        return { color: "#11671e" };
+      case "Gruenland":
+        return { color: "#92e597" };
+      case "Industriegebiet":
+        return { color: "#696969" };
+      case "Acker_bepflanzt":
+        return { color: "#70843a" };
+      case "Offenboden":
+        return { color: "#472612" };
+    }
+  };
 
 // functions
 
@@ -44,7 +66,9 @@ function addTrainData(){
         var reader = new FileReader();
         reader.onload = (event) => {
             trainData = JSON.parse(event.target.result);
-            L.geoJSON(trainData).addTo(map);
+            L.geoJSON(trainData, {
+                style: style
+              }).addTo(map)
         };
         reader.readAsText(in_trainData.files[0]);
     }
@@ -60,7 +84,11 @@ function addTrainData(){
  */
 function getNewTrainData(){
     currentLabel = in_label.value;
-    currentID = parseInt(in_klassenID.value)
+    currentID = parseInt(in_klassenID.value);
+    var coordinates = [[[]]];
+    for(var i = 0; i < currentLayer._latlngs[0].length; i++){
+        coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
+    };
 
     if (trainData === ''){
         trainData = {
@@ -72,8 +100,8 @@ function getNewTrainData(){
                     "ClassID" : currentID
                 }, 
                 "geometry" : { 
-                    "type" : "Polygon", 
-                    "coordinates" : currentLayer._rings
+                    "type" : "MultiPolygon", 
+                    "coordinates" : coordinates
                 }
             }]
         }
@@ -87,11 +115,15 @@ function getNewTrainData(){
                     "ClassID" : currentID
                 }, 
                 "geometry" : { 
-                    "type" : "Polygon", 
-                    "coordinates" : currentLayer._rings
+                    "type" : "MultiPolygon", 
+                    "coordinates" : coordinates
                 }
         }
     }
+    map.removeLayer(currentLayer)
+    L.geoJSON(trainData, {
+        style: style
+      }).addTo(map)
 }
 
 /**
