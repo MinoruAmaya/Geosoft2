@@ -8,7 +8,7 @@ let in_klassenID = document.getElementById('klassenID');
 let warning = document.getElementById('warning');
 
 btn_trainData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
-btn_save.addEventListener('click', function(){getNewTrainData()});
+btn_save.addEventListener('click', function(){getNewTrainData();});
 btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 
 navElement.classList.remove('disabled');
@@ -67,15 +67,15 @@ function addTrainData(){
         var reader = new FileReader();
         reader.onload = (event) => {
             trainData = JSON.parse(event.target.result);
+            L.geoJSON(trainData, {
+                style: style
+              }).addTo(map);
         };
         reader.readAsText(in_trainData.files[0]);
     }
     else{
         return;
     }
-    L.geoJSON(trainData, {
-        style: style
-      }).addTo(map)
 }
 
 /**
