@@ -139,3 +139,77 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
            console.log(deletedLayers[layer]);
         }
      });
+
+
+
+/*
+
+Alternative um Trainingsdaten hinzuzufügen
+Link: https://gis.stackexchange.com/questions/211496/leaflet-draw-add-attributes-and-save-to-file
+
+
+In trainData.pug muss man noch folgendes hinzufügen:
+#export Export Features
+am besten in Zeile 30
+
+//Leaflet.draw
+
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+var drawnItems = L.featureGroup().addTo(map);
+var drawControl = new L.Control.Draw({
+ draw: {
+  circle: false,
+  rectangle: false,
+  polyline: false,
+  polygon: false
+ },
+ edit: {featureGroup: drawnItems}
+}).addTo(map);
+
+map.on('draw:created', function(e) {
+  var type = e.layerType;
+  var layer = e.layer;
+  var idIW = L.popup();
+  var content = '<span><b>Shape Name</b></span><br/><input id="shapeName" type="text"/><br/><br/><span><b>Shape Description<b/></span><br/><textarea id="shapeDesc" cols="25" rows="5"></textarea><br/><br/><input type="button" id="okBtn" value="Save" onclick="saveIdIW()"/>';
+  idIW.setContent(content);
+  idIW.setLatLng(layer.getLatLng());
+  idIW.openOn(map);
+  drawnItems.addLayer(layer)
+});
+
+map.on('draw:created', function (event) {
+    var layer = event.layer,
+        feature = layer.feature = layer.feature || {}; // Intialize layer.feature
+
+    feature.type = feature.type || "Feature"; // Intialize feature.type
+    var props = feature.properties = feature.properties || {}; // Intialize feature.properties
+    props.title = "my title";
+    props.content = "my content";
+    drawnItems.addLayer(layer);
+});
+
+function saveIdIW() {
+  var sName = $('#shapeName').val();
+  var sDesc = $('#shapeDesc').val();
+  var drawings = drawnItems.getLayers(); //drawnItems is a container for the drawn objects
+  drawings[drawings.length - 1].title = sName;
+  drawings[drawings.length - 1].content = sDesc;
+  map.closePopup();
+};
+
+//Export
+document.getElementById('export').onclick = function(e) {
+  // Extract GeoJson from featureGroup
+  var data = drawnItems.toGeoJSON();
+  // Stringify the GeoJson
+  var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+  // Create export
+  document.getElementById('export').setAttribute('href', 'data:' + convertedData);
+  document.getElementById('export').setAttribute('download', 'drawnItems.geojson');
+}
+
+*/
