@@ -5,7 +5,7 @@ const multer = require('multer')
 
 var storage = multer.diskStorage({
   destination: function (request, file, callback) {
-      callback(null, "./public/data/satelliteimage/");
+      callback(null, "./public/data/satelliteimagery/");
   },
   filename: function (request, file, callback) {
       fileName=file.originalname;
