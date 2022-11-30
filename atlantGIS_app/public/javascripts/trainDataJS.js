@@ -20,6 +20,7 @@ let currentLayer;
 let currentLabel;
 let currentID; 
 let trainData = '';
+let datei;
 let style = function (feature) {
     switch (feature.properties.Label) {
       case "See":
@@ -67,7 +68,7 @@ function addTrainData(){
         var reader = new FileReader();
         reader.onload = (event) => {
             trainData = JSON.parse(event.target.result);
-            L.geoJSON(trainData, {
+            datei = L.geoJSON(trainData, {
                 style: style
               }).addTo(map);
         };
@@ -129,8 +130,9 @@ function getNewTrainData(){
                     }
             }
         }
-        map.removeLayer(currentLayer)
-        L.geoJSON(trainData, {
+        map.removeLayer(currentLayer);
+        map.removeLayer(datei);
+        datei = L.geoJSON(trainData, {
             style: style
           }).addTo(map);
         activateDigitalization();
