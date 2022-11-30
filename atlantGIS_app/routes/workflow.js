@@ -8,7 +8,7 @@ var storage = multer.diskStorage({
       callback(null, "./public/data/satelliteimagery/");
   },
   filename: function (request, file, callback) {
-      fileName=file.originalname;
+      fileName="satelliteimage.tif";
       callback(null, file.originalname);
   }
 });
