@@ -15,7 +15,7 @@ block content
                     form
                         label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
                         input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                    button#btn_trainData.btn.btn-primary.mb-2 Weiter
+                    button#btn_trainData.btn.btn-primary.mb-2 Speichern
             .col-md-1
                 br
                 br
@@ -37,7 +37,9 @@ block content
                         input#klassenID.form-control.form-control-lg(type='number' name="klassenID")
                     div#form_div
                         button#btn_save.btn.btn-primary.mb-2.d-grid.gap-2.col-10.mx-auto Trainingsdaten speichern 
-                br
+        br
+        .row.justify-content-md-center
+            .col-md-4
                 div#form_div
                     button#btn_digitalization.btn.btn-secondary.mb-2.d-grid.gap-2.col-6.mx-auto.disabled Weiter 
 
