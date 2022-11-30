@@ -1,7 +1,7 @@
 let btn_satellite = document.getElementById('btn_satellite');
 let btn_trainMod = document.getElementById('btn_trainMod');
 let btn_untrainMod = document.getElementById('btn_untrainMod');
-let in_satellitenbild = document.getElementById('satellitenbild');
+//let in_satellitenbild = document.getElementById('satellitenbild');
 let in_trainMod = document.getElementById('trainMod');
 let in_untrainMod = document.getElementById('untrainMod');
 let formdiv_sat = document.getElementById('form_div_sat');
@@ -21,7 +21,7 @@ btn_untrainMod.addEventListener('click', function(){/* funtion to get the data h
  function changeActiveForm(){
     // change satellitenbild form to inactive
     formdiv_sat.classList.remove('active-form');
-    in_satellitenbild.disabled = true;
+    //in_satellitenbild.disabled = true;
     btn_satellite.classList.remove('btn-primary');
     btn_satellite.classList.add('disabled');
     btn_satellite.classList.add('btn-secondary');

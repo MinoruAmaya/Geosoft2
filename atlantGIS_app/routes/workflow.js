@@ -5,7 +5,7 @@ const multer = require('multer')
 
 var storage = multer.diskStorage({
   destination: function (request, file, callback) {
-      callback(null, "./public/data/satelliteimage/");
+      callback(null, "./public/data/satelliteimagery/");
   },
   filename: function (request, file, callback) {
       fileName=file.originalname;
@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.post("/uploadSatelliteimage", uploadDest.single("satellitenbildInput"), function (req, res, next) {
+router.post("/uploadSatelliteimage", uploadDest.single("satellitenbild"), function (req, res, next) {
   console.log(req.file);
   console.log(req.body);
 
