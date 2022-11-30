@@ -5,9 +5,10 @@ let btn_digitalization = document.getElementById('btn_digitalization');
 let in_trainData = document.getElementById('training');
 let in_label = document.getElementById('label');
 let in_klassenID = document.getElementById('klassenID');
+let warning = document.getElementById('warning');
 
 btn_trainData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
-btn_save.addEventListener('click', function(){getNewTrainData(); activateDigitalization(); clearInputs();});
+btn_save.addEventListener('click', function(){getNewTrainData();});
 btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 
 navElement.classList.remove('disabled');
@@ -19,6 +20,29 @@ let currentLayer;
 let currentLabel;
 let currentID; 
 let trainData = '';
+let datei;
+let style = function (feature) {
+    switch (feature.properties.Label) {
+      case "See":
+        return { color: "#0a1cb1" };
+      case "Siedlung":
+        return { color: "#e57423" };
+      case "FLiessgewaesser":
+        return { color: "#23c3e5" };
+      case "Laubwald":
+        return { color: "#2aa43d" };
+      case "Mischwald":
+        return { color: "#11671e" };
+      case "Gruenland":
+        return { color: "#92e597" };
+      case "Industriegebiet":
+        return { color: "#696969" };
+      case "Acker_bepflanzt":
+        return { color: "#70843a" };
+      case "Offenboden":
+        return { color: "#472612" };
+    }
+  };
 
 // functions
 
@@ -44,7 +68,9 @@ function addTrainData(){
         var reader = new FileReader();
         reader.onload = (event) => {
             trainData = JSON.parse(event.target.result);
-            L.geoJSON(trainData).addTo(map);
+            datei = L.geoJSON(trainData, {
+                style: style
+              }).addTo(map);
         };
         reader.readAsText(in_trainData.files[0]);
     }
@@ -59,38 +85,58 @@ function addTrainData(){
  * added trainData to the given geoJSON
  */
 function getNewTrainData(){
-    currentLabel = in_label.value;
-    currentID = parseInt(in_klassenID.value)
-
-    if (trainData === ''){
-        trainData = {
-            "type" : "FeatureCollection",
-            "features" : [{ 
-                "type" : "Feature", 
-                "properties" : {  
-                    "Label" : currentLabel, 
-                    "ClassID" : currentID
-                }, 
-                "geometry" : { 
-                    "type" : "Polygon", 
-                    "coordinates" : currentLayer._rings
-                }
-            }]
-        }
+    if(in_label.value === ''|| in_klassenID.value === ''){
+        warning.innerHTML = 'Alle Felder müssen aufgefüllt sein!!!'
+    }
+    else if(currentLayer === undefined){
+        warning.innerHTML = 'Kein Polygon vorhanden!!!'
     }
     else{
-        var newSpot = trainData.features.length
-        trainData.features[newSpot] = {
-            "type" : "Feature", 
-                "properties" : {  
-                    "Label" : currentLabel, 
-                    "ClassID" : currentID
-                }, 
-                "geometry" : { 
-                    "type" : "Polygon", 
-                    "coordinates" : currentLayer._rings
-                }
+        warning.innerHTML = '';
+        currentLabel = in_label.value;
+        currentID = parseInt(in_klassenID.value);
+        var coordinates = [[[]]];
+        for(var i = 0; i < currentLayer._latlngs[0].length; i++){
+            coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
+        };
+
+        if (trainData === ''){
+            trainData = {
+                "type" : "FeatureCollection",
+                "features" : [{ 
+                    "type" : "Feature", 
+                    "properties" : {  
+                        "Label" : currentLabel, 
+                        "ClassID" : currentID
+                    }, 
+                    "geometry" : { 
+                        "type" : "MultiPolygon", 
+                        "coordinates" : coordinates
+                    }
+                }]
+            }
         }
+        else{
+            var newSpot = trainData.features.length
+            trainData.features[newSpot] = {
+                "type" : "Feature", 
+                    "properties" : {  
+                        "Label" : currentLabel, 
+                        "ClassID" : currentID
+                    }, 
+                    "geometry" : { 
+                        "type" : "MultiPolygon", 
+                        "coordinates" : coordinates
+                    }
+            }
+        }
+        map.removeLayer(currentLayer);
+        map.removeLayer(datei);
+        datei = L.geoJSON(trainData, {
+            style: style
+          }).addTo(map);
+        activateDigitalization();
+        clearInputs();
     }
 }
 
