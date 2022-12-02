@@ -18,13 +18,13 @@ var ModellStorage = multer.diskStorage({
       callback(null, "./public/data/modell/");
   },
   filename: function (request, file, callback) {
-      fileName="satelliteimage.tif";
+      fileName="model.RDS";
       callback(null, file.originalname);
   }
 });
 
-const uploadSatelliteImage = multer({storage:satelliteImageStorage}).single("satellitenbild")
-const uploadModell = multer({storage:ModellStorage}).single("trainModell")
+const uploadSatelliteImage = multer({storage:satelliteImageStorage})
+const uploadModell = multer({storage:ModellStorage})
 
 
 router.get('/', function (req, res, next) {
@@ -33,15 +33,14 @@ router.get('/', function (req, res, next) {
 
 
 router.post("/uploadSatelliteimageTrainModell", function (req, res, next) {
-  uploadSatelliteImage();
-  uploadModell();
+  uploadSatelliteImage.single("satellitenbild")
+  uploadModell.single("trainModell")
 
   res.render('area');
 })
 
 router.post("/uploadSatelliteimageUntrainModell", function (req, res, next) {
-  uploadSatelliteImage();
-  uploadModell();
+  uploadSatelliteImage.single("satellitenbild")
 
   res.render('trainData');
 })

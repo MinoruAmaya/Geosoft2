@@ -22,8 +22,8 @@ block content
                 div#form_div_train
                     form(action='/workflow/uploadSatelliteimageTrainModell' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='trainModell') Trainiertes Modell
-                        input#trainMod.form-control.form-control-lg(type='file' name="trainModell" accept=" " enctype="multipart/form-data" disabled=true)
-                        button#btn_trainMod.btn.btn-secondary.mb-2.disabled Weiter
+                        input#trainModell.form-control.form-control-lg(type='file' name="trainModell" accept=".RDS" enctype="multipart/form-data" disabled=true)
+                        button#btn_trainModell.btn.btn-secondary.mb-2.disabled Weiter
             .col-md-2 
                 br
                 br
@@ -32,13 +32,8 @@ block content
                 div#form_div_untrain
                     form(action='/workflow/uploadSatelliteimageUntrainModell' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='untrainModell') Nicht-trainiertes Modell
-                        input#untrainMod.form-control.form-control-lg(type='file' name="untrainModell" accept=" " enctype="multipart/form-data" disabled=true)
-                        button#btn_untrainMod.btn.btn-secondary.mb-2.disabled Weiter
+                            button#btn_untrainModell.btn.btn-secondary.mb-2.disabled Weiter
                 br
-                div#form_div
-                    form
-                        input#testR.form-control(type='text' name="testR", disabled = '')
-                        button.btn.btn-secondary.mb-2(type='submit').disabled AOA berechnen
             .col-md-1
 
 block scripts 
