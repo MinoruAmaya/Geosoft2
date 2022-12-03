@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    br
+    br
+    .container
+        .row.justify-content-md-center
+            .col-md-1 
+            .col-md-4 
+                div#form_div_train
+                    form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
+                        label.col-md-4.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell
+                        input#trainMod.form-control.form-control-lg(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data")
+                        button#btn_trainMod.btn.btn-secondary.mb-2 Weiter
+            .col-md-2 
+                br
+                br
+                h3.text-center oder
+            .col-md-4 
+                div#form_div_untrain
+                    form(action='/model/uploadUntrainModell' method='post' enctype="multipart/form-data")
+                        label.col-md-4.col-form-label.fw-bolder(for='untrainMod') Modell muss noch trainiert werden
+                        button#btn_untrainMod.btn.btn-secondary.mb-2 Weiter
+                br
+            .col-md-1
+
+block scripts 

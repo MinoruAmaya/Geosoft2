@@ -1,18 +1,20 @@
 var createError = require('http-errors');
 var express = require('express');
+var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var analyseRouter = require('./routes/analyse');
-var workflowRouter = require('./routes/workflow');
-var impressumRouter = require('./routes/impressum');
+var satelliteimageRouter = require('./routes/satelliteimage');
+var modelRouter = require('./routes/model');
 var trainDataRouter = require('./routes/trainData');
-var demoRouter = require('./routes/demo');
 var areaRouter = require('./routes/area');
+var analyseRouter = require('./routes/analyse');
+var impressumRouter = require('./routes/impressum');
+var demoRouter = require('./routes/demo');
 
-var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,12 +27,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/analyse', analyseRouter);
-app.use('/workflow', workflowRouter);
-app.use('/impressum', impressumRouter);
+app.use('/satelliteimage', satelliteimageRouter);
+app.use('/model', modelRouter);
 app.use('/trainData', trainDataRouter);
-app.use('/demo', demoRouter);
 app.use('/area', areaRouter);
+app.use('/analyse', analyseRouter);
+app.use('/impressum', impressumRouter);
+app.use('/demo', demoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

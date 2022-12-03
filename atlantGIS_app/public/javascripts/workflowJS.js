@@ -1,16 +1,15 @@
-let btn_satellite = document.getElementById('btn_satellite');
-let btn_trainMod = document.getElementById('btn_trainModell');
-let btn_untrainMod = document.getElementById('btn_untrainModell');
+let btn_satellite = document.getElementById("btn_satellite");
+let btn_trainMod = document.getElementById('btn_trainMod');
+let btn_untrainMod = document.getElementById('btn_untrainMod');
 let in_satellitenbild = document.getElementById('satellitenbild');
-let in_trainMod = document.getElementById('trainModell');
-let in_untrainMod = document.getElementById('untrainModell');
+let in_trainMod = document.getElementById('trainMod');
 let formdiv_sat = document.getElementById('form_div_sat');
 let formdiv_train = document.getElementById('form_div_train');
 let formdiv_untrain = document.getElementById('form_div_untrain');
 
 btn_satellite.addEventListener('click', function(){changeActiveForm() /* funtion to get the data here */});
-btn_trainMod.addEventListener('click', function(){/* funtion to get the data here */; window.location = "./area"});
-btn_untrainMod.addEventListener('click', function(){/* funtion to get the data here */; window.location = "./trainData"});
+//btn_trainMod.addEventListener('click', function(){/* funtion to get the data here */; window.location = "./area"});
+//btn_untrainMod.addEventListener('click', function(){/* funtion to get the data here */; window.location = "./trainData"});
 
 
 /**
@@ -36,10 +35,9 @@ btn_untrainMod.addEventListener('click', function(){/* funtion to get the data h
     btn_untrainMod.classList.remove('disabled');
     btn_untrainMod.classList.remove('btn-secondary');
     btn_untrainMod.classList.add('btn-primary');
-    in_untrainMod.disabled = false;
 }
 
-
+/**
  // Dark-Mode:
 
  function addDarkmodeWidget() {
@@ -67,3 +65,5 @@ btn_untrainMod.addEventListener('click', function(){/* funtion to get the data h
   
   const darkmode = new Darkmode(options);
   darkmode.showWidget();
+
+   */
