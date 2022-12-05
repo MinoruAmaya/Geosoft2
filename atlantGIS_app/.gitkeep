@@ -1,4 +1,4 @@
-public/data/output/
-public/data/satelliteimagery/
-public/data/trainingdata/
-public/data/model/
+public/data/output
+public/data/satelliteimagery
+public/data/trainingdata
+public/data/model
