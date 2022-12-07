@@ -29,6 +29,11 @@ window.onload=function(){//  w w w  . j  ava  2 s  .c  o m
         map.on(L.Draw.Event.CREATED, function (event) {
             var layer = event.layer;
             drawnItems.addLayer(layer);
+
+            //Speichert Geometrieeigenschaften als JSON
+            var shape = layer.toGeoJSON()
+            var shape_for_db = JSON.stringify(shape);
+            console.log(shape_for_db)
         });
         map.on('draw:deleted    ', function (e) {
             var deletedLayers = e.layers._layers;
