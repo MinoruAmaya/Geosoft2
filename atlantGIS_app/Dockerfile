@@ -9,6 +9,8 @@ WORKDIR /app
 
 # Install app dependencies
 RUN npm install
+RUN r-base
+
 
 # Expose app on a given port
 EXPOSE 3000
