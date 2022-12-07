@@ -38,7 +38,9 @@ let style = function (feature) {
         return { color: "#472612" };
     }
   };
+
 // functions
+
 /**
  * After the first train Data got digitialized
  * the "Weiter" button should be activated
@@ -60,6 +62,7 @@ function addTrainData(){
         var reader = new FileReader();
         reader.onload = (event) => {
             trainData = JSON.parse(event.target.result);
+            L.geoJSON(trainData).addTo(map);
             L.geoJSON(trainData, {
                 style: style
               }).addTo(map)
@@ -77,11 +80,13 @@ function addTrainData(){
  */
 function getNewTrainData(){
     currentLabel = in_label.value;
+    currentID = parseInt(in_klassenID.value)
     currentID = parseInt(in_klassenID.value);
     var coordinates = [[[]]];
     for(var i = 0; i < currentLayer._latlngs[0].length; i++){
         coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
     };
+
     if (trainData === ''){
         trainData = {
             "type" : "FeatureCollection",
@@ -117,6 +122,7 @@ function getNewTrainData(){
         style: style
       }).addTo(map)
 }
+
 /**
  * Clear out the input fields,
  * so you can add a new data
@@ -125,8 +131,6 @@ function clearInputs(){
     in_label.value = '';
     in_klassenID.value = '';
 }
-
-/*
 //Leaflet & Leaflet-Draw
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -161,7 +165,43 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
            console.log(deletedLayers[layer]);
         }
      });
-   */  
+
+//Leaflet & Leaflet-Draw
+/*
+var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
+            map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 }),
+            drawnItems = L.featureGroup().addTo(map);
+    L.control.layers({
+        'osm': osm.addTo(map),
+        "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+            attribution: 'google'
+        })
+    }, { 'drawlayer': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
+    map.addControl(new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems
+        },
+        draw: {
+            polyline: false,
+            circle: false,
+            marker: false,
+            polygon: true,
+            rectangle: false
+        }
+    }));
+    map.on(L.Draw.Event.CREATED, function (event) {
+        currentLayer = event.layer;
+        drawnItems.addLayer(currentLayer);
+    });
+    map.on('draw:deleted', function (e) {
+        var deletedLayers = e.layers._layers;
+        for (var layer in deletedLayers) {
+           console.log(deletedLayers[layer]);
+        }
+     });
+    
 
 // Option 2
 
@@ -378,6 +418,7 @@ map.on(L.Draw.Event.CREATED, function(e) {
 //Option 4 
 
 /** Class containing all methods for handling the map display on page */
+/*
 class MapInterface {
     constructor(params) {
       //initialise the map view from the given coordinates
@@ -416,7 +457,7 @@ class MapInterface {
   
     /**
     * @desc function adds leaflet Draw draw controls to the map
-    */
+    
     addDrawControls() {
       this.drawControl = new L.Control.Draw({
         draw: {
@@ -435,7 +476,7 @@ class MapInterface {
   
     /**
     * @desc function adds leaflet Draw Events.
-    */
+    
    addDrawEvents() {
       let drawnItems = this.drawnItems;
       let mapInterface = this;
@@ -449,16 +490,19 @@ class MapInterface {
         console.log(shape_for_db)
       
 
+        // statt unsubmit button mit id erstellen 
+        // onclick daten auslesen und in currentlayer usw. speichern
+
         if (type === "polygon") {
           this.drawnItem = layer;
           drawnItems.addLayer(layer);
           console.log("created polygon");
           // Popup mit verschiedenen Eingabefeldern erstellen
           var popupString = `
-            <form name="createTrainData" onsubmit="return addTrainData()">
+            <form name="createTrainData">
               <input id="label" name="label" value="" placeholder="label">
               <input id="classID" name="classID" value="" placeholder="classID">
-              <input type="submit" value="Submit">
+              <button onClick="addTrainData"> Submit </button
             </form>
           `;
           layer.bindPopup(popupString).openPopup();
@@ -466,6 +510,70 @@ class MapInterface {
     
       });
       }
+
+      addTrainData(){
+        if(trainData === ''){
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                trainData = JSON.parse(event.target.result);
+                L.geoJSON(trainData, {
+                    style: style
+                  }).addTo(map)
+            };
+            reader.readAsText(in_trainData.files[0]);
+        }
+        else{
+            return;
+        }
+    }
+    /**
+     * Creates an geoJSON Object with the 
+     * given properties or adds the newly 
+     * added trainData to the given geoJSON
+     
+     getNewTrainData(){
+        currentLabel = in_label.value;
+        currentID = parseInt(in_klassenID.value);
+        var coordinates = [[[]]];
+        for(var i = 0; i < currentLayer._latlngs[0].length; i++){
+            coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
+        };
+        if (trainData === ''){
+            trainData = {
+                "type" : "FeatureCollection",
+                "features" : [{ 
+                    "type" : "Feature", 
+                    "properties" : {  
+                        "Label" : currentLabel, 
+                        "ClassID" : currentID
+                    }, 
+                    "geometry" : { 
+                        "type" : "MultiPolygon", 
+                        "coordinates" : coordinates
+                    }
+                }]
+            }
+        }
+        else{
+            var newSpot = trainData.features.length
+            trainData.features[newSpot] = {
+                "type" : "Feature", 
+                    "properties" : {  
+                        "Label" : currentLabel, 
+                        "ClassID" : currentID
+                    }, 
+                    "geometry" : { 
+                        "type" : "MultiPolygon", 
+                        "coordinates" : coordinates
+                    }
+            }
+        }
+        map.removeLayer(currentLayer)
+        L.geoJSON(trainData, {
+            style: style
+          }).addTo(map)
+    }
+
   }
 
   
@@ -481,3 +589,5 @@ class MapInterface {
       }
     }
   );
+
+  */
