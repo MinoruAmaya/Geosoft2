@@ -15,9 +15,8 @@ WORKDIR /app
 #RUN apt install -y libprotobuf-dev protobuf-compiler
 #RUN apt-get upgrade
 
-RUN pull rocker/r-base
-RUN -it --rm rocker/r-base
-RUN /rscrpits/install_packages.R
+FROM rocker/r-base:latest
+RUN Rscript /rscrpits/install_packages.R
 
 # Get all the code needed to run the app
 COPY . .
