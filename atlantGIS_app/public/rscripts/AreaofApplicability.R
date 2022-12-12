@@ -2,6 +2,13 @@ library(raster)
 library(caret)
 library(tmap)
 library(CAST)
+library(ggplot2)
+library(latticeExtra)
+
+# Optionel: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
+library(doParallel) 
+library(parallel)
+
 
 # Working Directory setzen
 setwd("C:/Users/Derya/OneDrive/Desktop/UNI/Semester/FEML/Osnabrück")
@@ -9,7 +16,6 @@ setwd("C:/Users/Derya/OneDrive/Desktop/UNI/Semester/FEML/Osnabrück")
 
 # Daten laden
 ################################################################################
-# labeltab <- read.csv("Gesamtdatensatz/Landnutzungsklassen.csv")
 
 # Sentinel einladen
 marburg_sen <- stack("Marburg/FEML_2021/FEML_2021/Sentinel_Marburg.grd")
@@ -19,23 +25,19 @@ model_osnabrueck <- get(load("Modelloptimierung/ffsmodel.RData"))
 
 
 # Eventuell Daten aggregieren (optional)
-
 marburg_sen <- aggregate(marburg_sen,5) # Aggregieren um hier Rechenzeit zu mininmieren
 
 
 # Predictions nochmal durchführen 
-
 pred_MR_OS <- predict(marburg_sen,model_osnabrueck)
 
 
-# AOA Berechnungen (das dauert zum Teil etwas...)
-
 # Optionel: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
-library(doParallel) 
-library(parallel)
 cl <- makeCluster(detectCores()-1)
 registerDoParallel(cl)
 
+
+# AOA Berechnungen (das dauert zum Teil etwas...)
 AOA_MR_OS <- aoa(marburg_sen,model_osnabrueck,cl=cl)
 writeRaster(AOA_MR_OS,"AreaOfApplicability/AOA_MR_OS.grd")
 plot(AOA_MR_OS$AOA)
@@ -45,9 +47,6 @@ plot(AOA_MR_OS$AOA)
 cols_s <- c("lightgreen","blue","green","grey","chartreuse",
             "forestgreen","beige","blue3","red","magenta","red")
 
-
-library(ggplot2)
-library(latticeExtra)
 
 
 # Schöne Kartendarstellung
