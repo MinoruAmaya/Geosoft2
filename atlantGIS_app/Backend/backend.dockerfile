@@ -1,5 +1,3 @@
-# Create image based on the official Node 6 image from the dockerhub
-#!/usr/bin/env Rscript
 FROM node:14
 
 
