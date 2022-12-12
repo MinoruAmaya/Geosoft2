@@ -1,2 +1,6 @@
 install.packages("caret")
 install.packages("cast")
+install.packages("randomForest")
+install.packages("latticeExtra")
+install.packages("gridExtra")
+install.packages("viridis")

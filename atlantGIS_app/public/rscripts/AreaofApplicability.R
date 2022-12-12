@@ -5,7 +5,7 @@ library(CAST)
 library(ggplot2)
 library(latticeExtra)
 
-# Optionel: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
+# Optional: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
 library(doParallel) 
 library(parallel)
 
@@ -32,7 +32,7 @@ marburg_sen <- aggregate(marburg_sen,5) # Aggregieren um hier Rechenzeit zu mini
 pred_MR_OS <- predict(marburg_sen,model_osnabrueck)
 
 
-# Optionel: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
+# Optional: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
 cl <- makeCluster(detectCores()-1)
 registerDoParallel(cl)
 
