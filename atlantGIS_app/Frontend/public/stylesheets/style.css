@@ -18,7 +18,7 @@ a {
 }
 
 #map{
-  height: 400px;
+  height: 470px;
   width: 100%;
 }
 
@@ -33,6 +33,11 @@ a {
 
 #form_div, #form_div_train, #form_div_untrain, #form_div_sat{
   padding: 10px;
+  border-radius: 15px;
+}
+
+#form_div_popup{
+  padding: 2px;
   border-radius: 15px;
 }
 

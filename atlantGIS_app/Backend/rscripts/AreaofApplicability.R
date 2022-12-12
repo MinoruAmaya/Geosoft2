@@ -11,25 +11,25 @@ library(parallel)
 
 
 # Working Directory setzen
-setwd("C:/Users/Derya/OneDrive/Desktop/UNI/Semester/FEML/Osnabrück")
+setwd("filepath")
 
 
 # Daten laden
 ################################################################################
 
 # Sentinel einladen
-marburg_sen <- stack("Marburg/FEML_2021/FEML_2021/Sentinel_Marburg.grd")
+sentinel <- stack("Marburg/FEML_2021/FEML_2021/Sentinel_Marburg.grd")
 
 # Model einladen
-model_osnabrueck <- get(load("Modelloptimierung/ffsmodel.RData"))
+trainedModel <- get(load("Modelloptimierung/ffsmodel.RData"))
 
 
 # Eventuell Daten aggregieren (optional)
-marburg_sen <- aggregate(marburg_sen,5) # Aggregieren um hier Rechenzeit zu mininmieren
+sentinel <- aggregate(sentinel,5) # Aggregieren um hier Rechenzeit zu mininmieren
 
 
 # Predictions nochmal durchführen 
-pred_MR_OS <- predict(marburg_sen,model_osnabrueck)
+pred_MR_OS <- predict(sentinel,model_osnabrueck)
 
 
 # Optional: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
