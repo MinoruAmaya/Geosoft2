@@ -4,13 +4,13 @@ services:
     frontend: 
         container_name: frontend
         build: .
-        #image: imagename
+        image: maschroder/atlantgisfrontend
         ports: 
             - '3000:3000'
           
     backend:
         container_name: backend 
-        #image: imagename
+        image: maschroder/atlantgisbackend
         ports:
             - "8080:8080"
         
