@@ -16,7 +16,9 @@ WORKDIR /app
 #RUN apt-get upgrade
 
 FROM rocker/r-base:latest
-RUN Rscript /rscrpits/install_packages.R
+RUN mkdir -p /rscripts
+COPY /rscripts/install_packages.R /rscripts/install_packages.R
+RUN Rscript /rscripts/install_packages.R
 
 # Get all the code needed to run the app
 COPY . .
