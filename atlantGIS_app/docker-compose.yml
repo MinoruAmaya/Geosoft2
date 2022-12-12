@@ -1,26 +1,16 @@
 # yml template to dockerise a node.js app
 version: '3'
 services: 
-    appservice: 
-        container_name: aoacontainer
+    frontend: 
+        container_name: frontend
         build: .
-        #image: 
+        #image: imagename
         ports: 
             - '3000:3000'
-        depends_on: 
-            - mongoservice
-    mongoservice:
-        container_name: mongo 
-        image: mongo # image retrieved from docker hub
+          
+    backend:
+        container_name: backend 
+        #image: imagename
         ports:
-            - '27017:27017'
-        volumes:
-            - ./mongo-init/:/docker-entrypoint-initdb.d/:ro
-            #- ./mongo-volume:/data/db
-    mongoexpressservice: 
-        image: mongo-express # image retrieved from docker hub
-        restart: always
-        ports: 
-            - '8081:8081'
-        depends_on: 
-            - mongoservice
+            - "8080:8080"
+        
