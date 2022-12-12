@@ -1,18 +1,16 @@
 # yml template to dockerise a node.js app
 version: '3'
 services: 
-    appservice: 
+    frontend: 
         container_name: frontend
         build: .
-        #image: 
+        #image: imagename
         ports: 
             - '3000:3000'
-        depends_on: 
-            - backend   
+          
     backend:
         container_name: backend 
-        image: 
+        #image: imagename
         ports:
-            - 
-        volumes:
-            - 
+            - "8080:8080"
+        
