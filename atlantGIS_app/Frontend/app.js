@@ -11,6 +11,7 @@ var modelRouter = require('./routes/model');
 var trainDataRouter = require('./routes/trainData');
 var areaRouter = require('./routes/area');
 var analyseRouter = require('./routes/analyse');
+var downloadRouter = require('./routes/download');
 var impressumRouter = require('./routes/impressum');
 var demoRouter = require('./routes/demo');
 
@@ -32,6 +33,7 @@ app.use('/model', modelRouter);
 app.use('/trainData', trainDataRouter);
 app.use('/area', areaRouter);
 app.use('/analyse', analyseRouter);
+app.use('/download', downloadRouter);
 app.use('/impressum', impressumRouter);
 app.use('/demo', demoRouter);
 
