@@ -13,7 +13,7 @@ var satelliteImageStorage = multer.diskStorage({
   },
   filename: function (request, file, callback) {
       fileName="satelliteimage.tif";
-      callback(null, file.originalname);
+      callback(null, fileName);
   }
 });
 
