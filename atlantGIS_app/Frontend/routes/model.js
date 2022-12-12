@@ -13,7 +13,7 @@ var modellStorage = multer.diskStorage({
   },
   filename: function (request, file, callback) {
       fileName="model.RDS";
-      callback(null, file.originalname);
+      callback(null, fileName);
   }
 });
 
