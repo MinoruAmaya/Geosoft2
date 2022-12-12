@@ -10,6 +10,7 @@ WORKDIR /app
 # Install app dependencies
 RUN npm install
 RUN r-base
+RUN Rscript install_packages.R
 
 
 # Expose app on a given port
