@@ -36,6 +36,11 @@ a {
   border-radius: 15px;
 }
 
+#form_div_popup{
+  padding: 2px;
+  border-radius: 15px;
+}
+
 .active-form{
   background-color: rgb(127, 179, 247);
 }

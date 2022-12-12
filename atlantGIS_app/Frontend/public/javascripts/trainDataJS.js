@@ -42,9 +42,9 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           // Popup mit verschiedenen Eingabefeldern erstellen
           var popupString = `
             <div class="active-form" id="form_div">
-              <div id="form_div"><label class="col-md-4 col-form-label fw-bolder" for="label">Label</label><input class="form-control form-control-lg" id="label" type="text" name="label" /></div>
-              <div id="form_div"><label class="col-md-4 col-form-label fw-bolder" for="klassenID">Klassen ID</label><input class="form-control form-control-lg" id="klassenID" type="number" name="klassenID" /></div>
-              <div id="form_div"><button class="btn btn-primary mb-2 d-grid gap-2 col-10 mx-auto" id="btn_save">Trainingsdaten speichern </button><span class="text-danger text-center" id="warning"></span></div>
+              <div id="form_div_popup"><label class="col-md-4 col-form-label fw-bolder" for="label">Label</label><input class="form-control" id="label" type="text" name="label" /></div>
+              <div id="form_div_popup"><label class="col-md-4 col-form-label fw-bolder" for="klassenID">Klassen ID</label><input class="form-control" id="klassenID" type="number" name="klassenID" /></div>
+              <div id="form_div_popup"><button class="btn btn-primary mb-2 d-grid gap-2 col-10 mx-auto" id="btn_save">Trainingsdaten speichern </button><span class="text-danger text-center" id="warning"></span></div>
             </div>
           `;
           currentLayer.bindPopup(popupString).openPopup();
