@@ -29,7 +29,7 @@ sentinel <- aggregate(sentinel,5) # Aggregieren um hier Rechenzeit zu mininmiere
 
 
 # Predictions nochmal durchführen 
-pred_MR_OS <- predict(sentinel,model_osnabrueck)
+prediction <- predict(sentinel,trainedModel)
 
 
 # Optional: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
@@ -38,9 +38,9 @@ registerDoParallel(cl)
 
 
 # AOA Berechnungen (das dauert zum Teil etwas...)
-AOA_MR_OS <- aoa(marburg_sen,model_osnabrueck,cl=cl)
-writeRaster(AOA_MR_OS,"AreaOfApplicability/AOA_MR_OS.grd")
-plot(AOA_MR_OS$AOA)
+AreaOfApplicability <- aoa(sentinel,trainedModel,cl=cl)
+writeRaster(AreaOfApplicability,"filepath/AreaOfApplicability.grd")
+plot(AreaOfApplicability$AOA)
 
 
 # Farben für Visualisierung
@@ -52,7 +52,7 @@ cols_s <- c("lightgreen","blue","green","grey","chartreuse",
 # Schöne Kartendarstellung
 ################################################################################
 
-pred_MR_OS[AOA_MR_OS$AOA == 0] <- NA
+prediction[AreaOfApplicability$AOA == 0] <- NA
 
 map <- tm_shape(deratify(pred_MR_OS),
                 raster.downsample = FALSE) +
@@ -69,5 +69,5 @@ map <- tm_shape(deratify(pred_MR_OS),
 
 map
 
-tmap_save(map, "AreaOfApplicability/AOA_MR_OS.png")
+tmap_save(map, "filepath/AreaOfApplicability.png")
 
