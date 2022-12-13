@@ -7,25 +7,24 @@ COPY . /app
 # Set the /app directory as working directory
 WORKDIR /app
 
-#RUN apt-get update && apt-get install -y \
- #   build-essential curl libcurl4-openssl-dev apt-utils libjq-dev systemctl\
-  #  r-base r-base-dev libssl-dev libprotobuf-dev protobuf-compiler\
-   # libudunits2-dev libproj-dev libgdal-dev libgeos-dev libssl-dev libv8-dev\
-    #&& rm -rf /var/lib/apt/lists/*
-#RUN apt install -y libprotobuf-dev protobuf-compiler
-#RUN apt-get upgrade
 
 FROM rocker/r-base:latest
 RUN mkdir -p /rscripts
 COPY /rscripts/install_packages.R /rscripts/install_packages.R
 RUN Rscript /rscripts/install_packages.R
+RUN chown -R node /app/node_modules
 
 # Get all the code needed to run the app
 COPY . .
 
+# Install app dependencies
+RUN npm install
 
-# Expose the port the app runs in
+# Expose app on a given port
 EXPOSE 8080
 
 # Serve the app
-CMD ["npm", "start"]
+ENTRYPOINT ["npm", "start"]
+
+# Skript ausführen
+CMD Rscript /rscripts/install_packages.R
