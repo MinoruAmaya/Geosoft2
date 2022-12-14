@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+FROM rocker/r-base:latest
+
+>>>>>>> 3d59de7aab8f963a8fb087f33e62edc3456a44c9
 
 FROM rocker/r-base:latest
 # Copy app code source from our local folder into the docker /app working directory
