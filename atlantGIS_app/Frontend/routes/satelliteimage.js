@@ -9,30 +9,30 @@ var router = express.Router();
 // satelliteImageStorage
 var satelliteImageStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-      callback(null, "../Backend/data/satelliteimagery/");
+    callback(null, "../Backend/data/satelliteimagery/");
   },
   filename: function (request, file, callback) {
-      fileName="satelliteimage.tif";
-      callback(null, fileName);
+    fileName = "satelliteimage.tif";
+    callback(null, fileName);
   }
 });
 
 
 // initalize multer
-const uploadSatelliteImage = multer({storage:satelliteImageStorage});
+const uploadSatelliteImage = multer({ storage: satelliteImageStorage });
 
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-    res.render('satelliteimage');
-  });
-  
-  
-  // satellite imagery and trained model
-  // route to area
-  router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
-    res.render('model');
-  })
+  res.render('satelliteimage');
+});
+
+
+// upload satellite imagery
+// route to model
+router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
+  res.render('model');
+})
 
 
 module.exports = router;
