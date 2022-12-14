@@ -12,7 +12,7 @@ RUN npm install
 
 
 # Expose app on a given port
-EXPOSE 3000
+EXPOSE 3001
 
 # Start app
 ENTRYPOINT  ["npm", "start"]
