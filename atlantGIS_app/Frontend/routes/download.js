@@ -22,7 +22,10 @@ router.post('/downloadData', function (req, res, next) {
         downloadArray.push({path: '../Backend/data/satelliteimagery/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
     if (req.body.model == "on")
         downloadArray.push({path: '../Backend/data/model/model_placeholder.txt', name: 'model_placeholder.txt'})
-    res.zip(downloadArray);
+    if(downloadArray.length!=0)
+        res.zip(downloadArray);
+    else    
+        res.send("Please select files!")
 });
 
 module.exports = router;
