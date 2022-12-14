@@ -6,7 +6,7 @@ services:
         build: .
         image: maschroder/atlantgisfrontend
         ports: 
-            - '3000:3001'
+            - '3000:3000'
           
     backend:
         container_name: backend 
