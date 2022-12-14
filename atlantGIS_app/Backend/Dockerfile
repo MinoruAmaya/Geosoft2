@@ -6,6 +6,8 @@ COPY . /app
 WORKDIR /app
 
 
+FROM node:latest
+
 RUN R -e "install.packages('caret', dependencies=TRUE, repos='http://cran.rstudio.com/')""
 RUN R -e "install.packages('cast', dependencies=TRUE, repos='http://cran.rstudio.com/')""
 RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='http://cran.rstudio.com/')""
@@ -14,7 +16,7 @@ RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rs
 RUN R -e "install.packages('viridis', dependencies=TRUE, repos='http://cran.rstudio.com/')""
 RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')""
 
-FROM node:latest
+
 
 # Get all the code needed to run the app
 COPY . .
