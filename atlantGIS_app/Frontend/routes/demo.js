@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('demo');
 });
 
-router.get('/trainModel', function(req, res, next) {
+router.get('/trainModell', function(req, res, next) {
   R.executeRScript("../backend/rscripts/trainModell.R").then((result) => {
     res.render('demo', message=result);
   }).catch((error) => {
