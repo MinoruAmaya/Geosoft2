@@ -1,5 +1,3 @@
-install.packages("caret")
-install.packages("terra")
 library(caret)
 library(terra)
 train_data <- rast("./public/data/demo/Münster_Demo_Training.gpkg");
