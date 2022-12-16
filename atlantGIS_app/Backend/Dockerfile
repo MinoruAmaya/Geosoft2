@@ -6,15 +6,15 @@ COPY . /app
 WORKDIR /app
 
 
-FROM node:latest
 
-RUN R -e "install.packages('caret', dependencies=TRUE, repos='http://cran.rstudio.com/')""
-RUN R -e "install.packages('cast', dependencies=TRUE, repos='http://cran.rstudio.com/')""
-RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='http://cran.rstudio.com/')""
-RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')""
-RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')""
-RUN R -e "install.packages('viridis', dependencies=TRUE, repos='http://cran.rstudio.com/')""
-RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')""
+RUN R -e "install.packages('Rserve', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('caret', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('cast', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('viridis', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
 
 
