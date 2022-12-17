@@ -26,3 +26,4 @@ COPY . .
 EXPOSE 4000
 
 
+ENTRYPOINT ["tail", "-f", "/dev/null"]
