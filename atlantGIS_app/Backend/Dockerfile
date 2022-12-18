@@ -21,8 +21,5 @@ RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstu
 # Get all the code needed to run the app
 COPY . .
 
-
 # Expose app on a given port
 EXPOSE 4000
-
-
