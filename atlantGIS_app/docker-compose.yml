@@ -10,7 +10,11 @@ services:
           
     backend:
         container_name: backend 
+<<<<<<< HEAD
         image: deryasen/atlantgisbackend
+=======
+        image: atlantgisbackend
+>>>>>>> 90b7a972df788edd5d3eacb4eb1c959a49bc5bad
         ports:
             - "4000:4000"
         

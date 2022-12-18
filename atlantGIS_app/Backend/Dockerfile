@@ -23,3 +23,9 @@ COPY . .
 
 # Expose app on a given port
 EXPOSE 4000
+<<<<<<< HEAD
+=======
+
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+>>>>>>> 90b7a972df788edd5d3eacb4eb1c959a49bc5bad
