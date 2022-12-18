@@ -1,10 +1,21 @@
-FROM rocker/r-base:latest
+FROM node:latest
 # Copy app code source from our local folder into the docker /app working directory
 COPY . /app
 
 # Set the /app directory as working directory
 WORKDIR /app
 
+COPY package.json /Backend
+
+RUN npm install
+
+RUN apt-get update && apt-get install -y \
+    build-essential curl libcurl4-openssl-dev apt-utils libjq-dev systemctl\
+    r-base r-base-dev libssl-dev libprotobuf-dev protobuf-compiler\
+    libudunits2-dev libproj-dev libgdal-dev libgeos-dev libssl-dev libv8-dev\
+    && rm -rf /var/lib/apt/lists/*
+RUN apt install -y libprotobuf-dev protobuf-compiler
+RUN apt-get upgrade
 
 
 RUN R -e "install.packages('Rserve', dependencies=TRUE, repos='http://cran.rstudio.com/')"
@@ -15,7 +26,10 @@ RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran
 RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('viridis', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-
+RUN R -e "install.packages('geojson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('rjson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
 
 # Get all the code needed to run the app
@@ -25,4 +39,4 @@ COPY . .
 EXPOSE 4000
 
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+CMD ["npm", "start"]
