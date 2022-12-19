@@ -10,7 +10,8 @@ services:
           
     backend:
         container_name: backend 
-        image: maschroder/agbackendneu
+        image: maschroder/atlantgisbackend
+        
         ports:
             - "4000:4000"
         

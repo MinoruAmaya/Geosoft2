@@ -1,11 +1,13 @@
 FROM node:latest
+
+RUN mkdir -p /usr/src/app
 # Copy app code source from our local folder into the docker /app working directory
-COPY . /app
+
 
 # Set the /app directory as working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json /Backend
+COPY package.json /usr/src/app
 
 RUN npm install
 
