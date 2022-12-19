@@ -59,11 +59,13 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         }
      });
 
+
+
 let navElement = document.getElementById('navbarTrain');
-let btn_trainData = document.getElementById('btn_trainData');
+let btn_addData = document.getElementById('btn_addData');
 let btn_digitalization = document.getElementById('btn_digitalization');
 let in_trainData = document.getElementById('training');
-btn_trainData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
+btn_addData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
 btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 navElement.classList.remove('disabled');
 navElement.classList.remove('text-white-50');
@@ -113,6 +115,7 @@ function activateDigitalization(){
     }
     counter++;
 }
+
 /**
  * Adds the trainData that was uploaded
  * to the Data and to the map
@@ -133,6 +136,7 @@ function addTrainData(){
         return;
     }
 }
+
 
 /**
  * Creates an geoJSON Object with the 
