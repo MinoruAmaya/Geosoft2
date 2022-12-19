@@ -12,10 +12,12 @@ block content
                 br
                 br
                 div#form_div.active-form
-                    form
+                    form(action='/trainData/uploadTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
                         input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                    button#btn_trainData.btn.btn-primary.mb-2 Speichern
+                    button#btn_safeData.btn.btn-primary.mb-2 Speichern
+                br
+                button#btn_addData.btn.btn-primary.mb-2 Hinzufügen
             .col-md-1
                 br
                 br
