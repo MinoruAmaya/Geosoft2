@@ -11,10 +11,6 @@ services:
     backend:
         container_name: backend 
         image: maschroder/atlantgisbackend
-<<<<<<< HEAD
-        
-=======
->>>>>>> f03318f4a0c00d3c976efa0c8813006db0b4562e
         ports:
             - "4000:4000"
         
