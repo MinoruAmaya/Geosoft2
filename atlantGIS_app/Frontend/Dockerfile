@@ -1,15 +1,15 @@
 FROM node:14
 
-
-# Copy app code source from our local folder into the docker /app working directory
-COPY . /app
-
-# Set the /app directory as working directory
 WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+# install and app dependencies
+COPY package.json /app/package.json
 
 # Install app dependencies
 RUN npm install
 
+COPY . /app
 
 # Expose app on a given port
 EXPOSE 3000

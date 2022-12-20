@@ -4,13 +4,14 @@ services:
     frontend: 
         container_name: frontend
         build: .
-        image: maschroder/atlantgisfrontend
+        image: maxi/frontend
         ports: 
             - '3000:3000'
           
     backend:
+        depends_on: [frontend]
         container_name: backend 
-        image: atlantgisbackend
+        image: maxi/backend
         ports:
             - "4000:4000"
         

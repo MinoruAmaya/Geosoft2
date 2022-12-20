@@ -1,10 +1,9 @@
-rm(list=ls())
 library(mapview)
 library(terra)
 library(caret)
-library('sf')
-library('sp')
-library('raster')
+library(sf)
+library(sp)
+library(raster)
 
 setwd("atlantGIS-app/public/data/demo")
 

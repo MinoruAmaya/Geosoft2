@@ -7,11 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/trainModell', function(req, res, next) {
-  /*R.executeRScript("http://localhost:4000/demo/trainModell").then((result) => {
+  R.executeRScript("public/rscripts/trainModell.R").then((result) => {
     res.render('demo', message=result);
   }).catch((error) => {
     res.render('demo', message=error);
-  });*/
+  });
 
 })
 module.exports = router;
