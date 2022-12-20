@@ -1,16 +1,11 @@
 # yml template to dockerise a node.js app
 version: '3'
 services: 
-    frontend: 
-        container_name: frontend
+    estimationtool: 
+        container_name: estimationtool
         build: .
-        image: maschroder/atlantgisfrontend
+        image: maschroder/estimationtool
         ports: 
             - '3000:3000'
-          
-    backend:
-        container_name: backend 
-        image: maschroder/atlantgisbackend
-        ports:
-            - "4000:4000"
+
         

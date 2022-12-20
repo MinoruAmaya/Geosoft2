@@ -1,4 +1,5 @@
 FROM node:latest
+USER root
 RUN apt-get update && apt-get install -y \
     build-essential curl libcurl4-openssl-dev apt-utils libjq-dev systemctl\
     r-base r-base-dev libssl-dev libprotobuf-dev protobuf-compiler\
@@ -24,14 +25,13 @@ RUN mkdir -p /usr/src/app
 # Copy app code source from our local folder into the docker /app working directory
 
 
+
 # Set the /app directory as working directory
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
 
 RUN npm install
-
-
 
 
 # Get all the code needed to run the app
