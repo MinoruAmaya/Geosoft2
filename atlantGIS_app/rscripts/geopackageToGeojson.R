@@ -14,5 +14,5 @@ convertGeoPackageToGeoJson <- function(filename, filepath) {
 
     geo_write(trainData_geojson, paste(filepath, paste(filename, ".geojson", sep=""), sep=""))
 
-    return("Successfully converted the training data from GeoPackage to GeoJSON")
+    return("Success")
 }
