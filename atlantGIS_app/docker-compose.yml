@@ -7,10 +7,20 @@ services:
         image: maschroder/atlantgisfrontend
         ports: 
             - '3000:3000'
+        volumes:
+            - type: bind
+              source: ./Backend/database/
+              target: /database
           
     backend:
         container_name: backend 
         image: maschroder/atlantgisbackend
         ports:
             - "4000:4000"
+        volumes:
+            - type: bind
+              source: ./Backend/database/
+              target: /database
+volumes:
+    database:
         
