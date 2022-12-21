@@ -20,6 +20,9 @@ RUN R -e "install.packages('geojson', dependencies=TRUE, repos='https://cran.uni
 RUN R -e "install.packages('rjson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('tmap', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('CAST', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('dplyr', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN mkdir -p /usr/src/app
 # Copy app code source from our local folder into the docker /app working directory
 

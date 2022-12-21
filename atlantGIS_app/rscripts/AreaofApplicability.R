@@ -1,7 +1,7 @@
 library(raster)
 library(caret)
 library(tmap)
-library(CAST)
+#library(cast)
 library(ggplot2)
 library(latticeExtra)
 
