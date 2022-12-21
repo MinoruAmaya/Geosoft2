@@ -1,38 +1,25 @@
 extends layout
 
 block content
-    main
-      h1 Demo
-      br
-      ul#paginated-list(data-current-page="1", aria-live="polite")
-        div#form_div_active-form
-          form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
-              label.col-md-4.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell
-              input#trainMod.form-control.form-control-lg(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" disabled=true)
-              button.btn.btn-secondary.primary.mb-2 Weiter
-        div#form_div.active-form
-          form(action='/trainData/uploadTrainingData' method='post' enctype="multipart/form-data")
-          label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
-          input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-          button#btn_safeData.btn.btn-primary.mb-2 Speichern
-          br
-          button#btn_addData.btn.btn-primary.mb-2 Hinzufügen
-        div#form_div_sat.active-form
-          form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
-          label.col-md-4.col-form-label.fw-bolder(for='trainMod') Satellitenbild
-          input#satellitenbildOne.form-control.form-control-lg(type='file' name="satellitenbildOne" accept=".tif" enctype="multipart/form-data")
-          button.btn.btn-primary.mb-2 Weiter
-      nav.pagination-container
-        button#prev-button.pagination-button(aria-label="Previous page", title="Previous page")
-          | &amp;lt;
-        #pagination-numbers
-        button#next-button.pagination-button(aria-label="Next page", title="Next page")
-          | &amp;gt;
-    button#next-button.pagination-button(aria-label="Next page", title="Next page")
-      | &amp;gt;
+
+  .container
+    br
+    br
+    .row.justify-content-md-center
+      .col-md-auto
+        button#demo_btn.btn.btn-primary Starte die Demo
+        br  
+        br
+      #map
 
 
-block scripts 
+
+
+
+
+
+block scripts
+  script(src="https://unpkg.com/georaster") 
+  script(src="https://unpkg.com/georaster-layer-for-leaflet") 
   script(src="/javascripts/demoJS.js" defer)
-
-
+  
