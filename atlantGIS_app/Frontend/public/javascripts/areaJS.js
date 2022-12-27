@@ -28,6 +28,7 @@ window.onload=function(){//  w w w  . j  ava  2 s  .c  o m
         }));
         map.on(L.Draw.Event.CREATED, function (event) {
             var layer = event.layer;
+            layer.setStyle({fillColor: '#FF00FF', color: '#FF00FF'});
             drawnItems.addLayer(layer);
 
             //Speichert Geometrieeigenschaften als JSON

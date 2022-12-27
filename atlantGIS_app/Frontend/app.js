@@ -12,8 +12,9 @@ var trainDataRouter = require('./routes/trainData');
 var areaRouter = require('./routes/area');
 var analyseRouter = require('./routes/analyse');
 var downloadRouter = require('./routes/download');
-var impressumRouter = require('./routes/impressum');
+var wikiRouter = require('./routes/wiki');
 var demoRouter = require('./routes/demo');
+var impressumRouter = require('./routes/impressum');
 
 
 
@@ -34,8 +35,10 @@ app.use('/trainData', trainDataRouter);
 app.use('/area', areaRouter);
 app.use('/analyse', analyseRouter);
 app.use('/download', downloadRouter);
-app.use('/impressum', impressumRouter);
 app.use('/demo', demoRouter);
+app.use('/wiki', wikiRouter);
+app.use('/impressum', impressumRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
