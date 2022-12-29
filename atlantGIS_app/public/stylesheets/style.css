@@ -1,6 +1,7 @@
 body {
   padding-bottom: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 a {
@@ -8,7 +9,7 @@ a {
 }
 
 .navbar{
-  background-color: rgb(127, 179, 247);
+  background-color: rgb(152, 206, 150);
 }
 
 
@@ -144,7 +145,7 @@ html {
   height: 5rem;
   float: left;
   margin: .5rem 1rem .5rem 0;
-  color: #353c4a;
+  color: #ffffff;
   border: .125rem solid #f3f3f3;
   box-shadow: 0 0 8px 0 rgba(50, 50, 50, 0.15);
   border-radius: 50%;
@@ -203,4 +204,43 @@ html {
     box-shadow: 0 0 24px 0 #dd4b39
   }
 }
+
+.card.text-bg.mb-3{
+  max-width: 25rem; 
+  background-color: rgb(229, 251, 228);
+  margin-top: 5pc;
+  color: rgb(0, 0, 0);
+  margin-left: 3pc;
+  height: 22pc;
+  width: 40pc;
+}
+
+.card-header{
+  text-align: center;
+}
+
+.buttonStyle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10pc;
+  position:absolute; 
+  margin-left:-80px;
+  left:50%;
+  width: 10pc;
+  bottom:10px;
+  color: white;
+  background-color: rgb(152, 206, 150);
+}
+
+.containerStyle{
+  background-color: rgb(152, 206, 150);
+}
+
+.containerStyle2{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+
 
