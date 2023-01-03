@@ -20,14 +20,17 @@ RUN apt install -y libprotobuf-dev protobuf-compiler
 RUN apt-get upgrade
 
 
+RUN R -e "install.packages('sp', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('Rserve', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('lattice', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('caret', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('cast', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('viridisLite', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('viridis', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('geojson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('rjson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"

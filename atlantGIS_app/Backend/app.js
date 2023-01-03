@@ -4,17 +4,6 @@ var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-/*
-var indexRouter = require('./routes/index');
-var satelliteimageRouter = require('./routes/satelliteimage');
-var modelRouter = require('./routes/model');
-var trainDataRouter = require('./routes/trainData');
-var areaRouter = require('./routes/area');
-var analyseRouter = require('./routes/analyse');
-var downloadRouter = require('./routes/download');
-var impressumRouter = require('./routes/impressum');
-var demoRouter = require('./routes/demo');
-**/
 
 
 // view engine setup
@@ -26,17 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/*
-app.use('/', indexRouter);
-app.use('/satelliteimage', satelliteimageRouter);
-app.use('/model', modelRouter);
-app.use('/trainData', trainDataRouter);
-app.use('/area', areaRouter);
-app.use('/analyse', analyseRouter);
-app.use('/download', downloadRouter);
-app.use('/impressum', impressumRouter);
-app.use('/demo', demoRouter);
-**/
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
