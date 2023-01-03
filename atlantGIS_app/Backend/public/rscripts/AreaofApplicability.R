@@ -1,12 +1,12 @@
 library(raster)
-library(caret)
 library(tmap)
 library(CAST)
+library(caret)
 library(ggplot2)
 library(latticeExtra)
 
 # Optional: Um Rechenzeit zu erhöhen: Parallel-rechnung starten
-library(doParallel) 
+library(doParallel)
 library(parallel)
 
 

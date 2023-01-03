@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/trainModell', function(req, res, next) {
-  R.executeRScript("public/rscripts/trainModell.R").then((result) => {
+  R.executeRScript("public/rscripts/AreaofApplicability.R").then((result) => {
     res.render('demo', message=result);
   }).catch((error) => {
     res.render('demo', message=error);
