@@ -9,7 +9,7 @@ var router = express.Router();
 // satelliteImageStorage
 var satelliteImageStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-    callback(null, "database/data/satelliteimagery/");
+    callback(null, "http://backend:4000/database/data/satelliteimagery/");
   },
   filename: function (request, file, callback) {
     fileName = "satelliteimage.tif";
