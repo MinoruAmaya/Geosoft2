@@ -8,7 +8,7 @@ block content
             img.float-start.img-fluid(src='./images/Münster_Karte_links.png')
         .col-md-6
             br
-            h1.text-center Über diese Projekt
+            h1.text-center Über dieses Projekt
             #accordionFlushExample.accordion.accordion-flush
                .accordion-item
                h2#flush-headingOne.accordion-header
@@ -16,7 +16,7 @@ block content
                      | Enstehungsrahmen
                #flush-collapseOne.accordion-collapse.collapse(aria-labelledby="flush-headingOne", data-bs-parent="#accordionFlushExample")
                   .accordion-body Das Projekt ist im Rahmen eines Geosoftware Kurses der 
-                        |  Westfälischen-Wilhelms-Universität Münster zustande gekommen, dass darauf abzielte,
+                        |  Westfälischen-Wilhelms-Universität Münster zustande gekommen, das darauf abzielt,
                         |  für räumliche Vorhersagemodelle ein Webtool zur interaktiven Sammlung von Trainingsdaten zu erstellen.
                         |  Um diese Funktion zu ermöglichen, wurde eine Methodik eingebaut, die den Anwendungsbereich eingrenzt.
                         |  Diese nennt sich "Area of Applicabilitiy (AOA)".
@@ -27,8 +27,6 @@ block content
                         |  Dennoch gibt es beim maschinellen Lernen wie auch bei anderen Verfahren Probleme.
                         |  Sie können nur aussagekräftige Vorhersagen machen, wenn sie auf Daten angewendet werden, die den Trainingsdaten ähneln.
                         |  Damit ist die Ähnlichkeit der Wertebereiche der Prädiktorvariablen gemeint. 
-                        |  Um es an einem Beispiel zu verdeutlichen, wurde ein Algorithmus in einem Gebiet trainiert, wo kein Schnee liegt, lässt sich
-                        |  das Modell zum Beispiel in der Arktis nicht anwenden. 
                         |  Es ist also unklar, ob ein trainierter Algorithmus auf ein neues Gebiet anwendbar ist, bzw. ob die Pixeleigenschaften in 
                         |  diesem Gebiet den Trainingsdaten ähnlich genug sind, um eine zuverlässige Klassifizierung zu ermöglichen.
                .accordion-item
@@ -38,17 +36,37 @@ block content
                #flush-collapseTwo.accordion-collapse.collapse(aria-labelledby="flush-headingTwo", data-bs-parent="#accordionFlushExample")
                   .accordion-body Die Area of Applicability ist eine von Meyer und Pebesma (2021) entwickelte Methode
                         |  Gebiete in räumlichen Daten (hier Fernerkundungsbildern) abzugrenzen, also Bereiche zu identifizieren,
-                        |  auf die das maschinelle Lernmodell zuverlässig angewendet werden kann, zum Beispeil bei der Klassifizierung von
+                        |  auf die das maschinelle Lernmodell zuverlässig angewendet werden kann, zum Beispiel bei der Klassifizierung von
                         |  Landnutzung/Landbedeckung (LULC-Klassifizierung). Neben der Abgrenzung eines solchen Bereichs
                         |  der Anwendbarkeit (AOA) kann dieses Tool auch verwendet werden, um auf Bereiche hinzuweisen, in denen die Sammlung
                         |  zusätzliche Trainingsdaten erforderlich sind, um ein besser anwendbares Modell zu trainieren.
                .accordion-item
                h2#flush-headingThree.accordion-header
                   button.accordion-button.collapsed(type="button", data-bs-toggle="collapse", data-bs-target="#flush-collapseThree", aria-expanded="false", aria-controls="flush-collapseThree")
-                     | Ziel des Projekts
+                     | Das Team
                #flush-collapseThree.accordion-collapse.collapse(aria-labelledby="flush-headingThree", data-bs-parent="#accordionFlushExample")
-                  .accordion-body Placeholder content for this accordion, which is intended to demonstrate the 
-                     code .accordion-flush
-                     | class. This is the third item&apos;s accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                  .accordion-body Die AtlantGIS GmbH ist ein junges Start-Up, das sich aus fünf Studierenden der Geoinformatik an der WWU zusammensetzt.
+                     br
+                     br
+                     | Maximilian Elfers:
+                     br
+                     img(src='./images/beispielfoto.jpeg')
+                     br
+                     | Lena Long: 
+                     br
+                     img(src='./images/beispielfoto.jpeg')
+                     br
+                     | Hendrik Lüning: 
+                     br
+                     img(src='./images/beispielfoto.jpeg')
+                     br
+                     | Maike Schröder: 
+                     br
+                     img(src='./images/beispielfoto.jpeg')
+                     br
+                     | Derya Sen: 
+                     br
+                     img(src='./images/beispielfoto.jpeg')
+               .accordion-item
         .col-md-3      
             img.float-end.img-fluid(src='./images/Münster_Karte_rechts.png') 
