@@ -1,16 +1,5 @@
 FROM node:latest
 
-RUN mkdir -p /usr/src/app
-# Copy app code source from our local folder into the docker /app working directory
-
-
-# Set the /app directory as working directory
-WORKDIR /usr/src/app
-
-COPY package.json /usr/src/app
-
-RUN npm install
-
 RUN apt-get update && apt-get install -y \
     build-essential curl libcurl4-openssl-dev apt-utils libjq-dev systemctl\
     r-base r-base-dev libssl-dev libprotobuf-dev protobuf-compiler\
@@ -36,9 +25,19 @@ RUN R -e "install.packages('rjson', dependencies=TRUE, repos='https://cran.uni-m
 RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
+RUN mkdir -p /usr/src/app
+# Copy app code source from our local folder into the docker /app working directory
+
+
+# Set the /app directory as working directory
+WORKDIR /usr/src/app
+
+COPY package.json /usr/src/app
+
+RUN npm install
 
 # Get all the code needed to run the app
-COPY . .
+COPY . /app
 
 
 # Expose app on a given port
