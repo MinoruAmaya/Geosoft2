@@ -15,7 +15,7 @@ var downloadRouter = require('./routes/download');
 var wikiRouter = require('./routes/wiki');
 var demoRouter = require('./routes/demo');
 var impressumRouter = require('./routes/impressum');
-
+var projektRouter = require('./routes/projekt');
 
 
 // view engine setup
@@ -38,7 +38,7 @@ app.use('/download', downloadRouter);
 app.use('/demo', demoRouter);
 app.use('/wiki', wikiRouter);
 app.use('/impressum', impressumRouter);
-
+app.use('/projekt', projektRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

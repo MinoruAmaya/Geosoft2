@@ -2,6 +2,7 @@ extends layout
 
 block content
   .container-fluid
+    .containerStyle2
       .row.justify-content-md-center
         .col-md-3
             img.float-start.img-fluid(src='./images/Münster_Karte_links.png')
@@ -16,15 +17,47 @@ block content
               p.fs-3.text-center Auf dieser Website können Sie Satelliten- und Trainigsdaten hochladen, 
                 |  diese mithilfe des "Random Forest"-Algorithmus klassifizieren
                 |  und außerdem die AOA ("Area of applicability") für das Modell berechnen lassen.
-            .col-md-1
+                .col-md-1
           br
           br
           .row.justify-content-md-center
             .col-md-auto
-              a.btn.btn-primary.btn-lg(href='/satelliteimage' role='button') Beginne jetzt
+              a.btn.btn-lg(href='/satelliteimage' role='button' style="background-color: rgb(127, 179, 247); color: white") Beginne jetzt
         .col-md-3      
           img.float-end.img-fluid(src='./images/Münster_Karte_rechts.png') 
-          
+
+  .container-fluid
+    .containerStyle
+      .row.align-items-start
+        .col 
+          .card.text-bg.mb-3
+            h5.card-header Erfahre mehr über das Projekt
+            .card-body
+              p.card-text Du besuchst unsere Seite das erste Mal und möchtest wissen, worum es eigentlich geht?
+              | Hier erklären wir dir, in welchem Zusammenhang die Website entstanden ist und was man auf dieser Website alles machen kann.
+              | Wir zeigen dir, welche Tools wir anbieten, was du damit machen kannst und noch vieles mehr?
+              | Für mehr Informationen klicke hier!
+              .buttonStyle
+                a.btn.btn(href="/projekt") Über das Projekt
+        .col
+          .card.text-bg.mb-3
+            h5.card-header Vorführung
+            .card-body
+              p.card-text Du weißt nicht, wie du vorgehen sollst oder wie das Ergebnis am Ende aussehen soll?
+              | Dann schaue dir unsere Demo an, bei der wir Schritt für Schritt den Prozess durchgehen und an
+              | einem Beispiel mögliche Ergebnisse vorstellen.
+              .buttonStyle
+                a.btn.btn(href="/demo") Demo
+        .col 
+          .card.text-bg.mb-3
+            h5.card-header Lexikon
+            .card-body
+              p.card-text Du weißt nichts mit den Begriffen auf dieser Seite anzufangen oder 
+              | möchtest dein Wissen nochmal auffrischen? 
+              | Hier haben wir die wichtigsten Begriffe mit ihren Erklärungen für dich festgehalten.
+              .buttonStyle
+                a.btn.btn(href="/wiki") Lexikon
+
       svg.svg--source(width='0' height='0' aria-hidden='true')
         symbol#svg--twitter(viewbox='0 -7 15 30')
           path(d='M15.36 3.434c-0.542 0.241-1.124 0.402-1.735 0.476 0.624-0.374 1.103-0.966 1.328-1.67-0.583 0.346-1.23 0.598-1.917 0.733-0.551-0.587-1.336-0.954-2.205-0.954-1.668 0-3.020 1.352-3.020 3.019 0 0.237 0.026 0.467 0.078 0.688-2.51-0.126-4.735-1.328-6.224-3.155-0.261 0.446-0.41 0.965-0.41 1.518 0 1.048 0.534 1.972 1.344 2.514-0.495-0.016-0.961-0.151-1.368-0.378 0 0.013 0 0.025 0 0.038 0 1.463 1.042 2.683 2.422 2.962-0.253 0.069-0.52 0.106-0.796 0.106-0.194 0-0.383-0.018-0.568-0.054 0.384 1.2 1.5 2.073 2.821 2.097-1.034 0.81-2.335 1.293-3.75 1.293-0.244 0-0.484-0.014-0.72-0.042 1.336 0.857 2.923 1.357 4.63 1.357 5.554 0 8.592-4.602 8.592-8.593 0-0.13-0.002-0.261-0.009-0.39 0.59-0.426 1.102-0.958 1.507-1.563z')
