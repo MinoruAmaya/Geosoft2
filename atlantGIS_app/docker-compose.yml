@@ -14,7 +14,7 @@ services:
         ports:
             - "4000:4000"
         volumes:
-            - database:/usr/src/app/database
+            - database:/app/database
             
 volumes:
     database:

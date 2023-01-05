@@ -1,6 +1,8 @@
 var express = require('express');
 const multer = require('multer');
 var router = express.Router();
+//import fetch from 'node-fetch'
+//const fetch = require('node-fetch');
 
 
 
@@ -36,7 +38,7 @@ router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild
 // upload satellite imagery
 // route to model
 router.post("/uploadSatelliteimage", function (req, res, next) {
-  fetch("http://backend:4000/upload/satelliteimage", {
+  const response = fetch("http://backend:4000/upload/satelliteimage", {
     method: "POST",
     body: satellitenbild,
   })

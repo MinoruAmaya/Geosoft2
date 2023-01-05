@@ -28,20 +28,18 @@ RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-m
 RUN mkdir -p /usr/src/app
 # Copy app code source from our local folder into the docker /app working directory
 
-
-# Set the /app directory as working directory
-WORKDIR /usr/src/app
-
-COPY package.json /usr/src/app
-
-RUN npm install
-
 # Get all the code needed to run the app
 COPY . /app
 
+# Set the /app directory as working directory
+WORKDIR /app
+
+# Install app dependencies
+RUN npm install
 
 # Expose app on a given port
 EXPOSE 4000
 
 
-CMD ["npm", "start"]
+# Start app
+ENTRYPOINT  ["npm", "start"]
