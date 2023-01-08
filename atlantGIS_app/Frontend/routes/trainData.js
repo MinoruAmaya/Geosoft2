@@ -5,7 +5,7 @@ var router = express.Router();
 
 // multer storage -------------------------------------------------------------------------------------------------------
 // ModellStorage
-let fileURL = "../Backend/data/trainingdata/"
+let fileURL = "./public/data/trainingdata/"
 var trainingDataStorage = multer.diskStorage({
   destination: function (request, file, callback) {
     callback(null, fileURL);
@@ -33,7 +33,7 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
   if (extension.toLowerCase() == 'gpkg') {
     R.callMethod("../Backend/rscripts/geopackageToGeojson.R", "convertGeoPackageToGeoJson", {filename: "fileName", filepath:"../Backend/data/trainingdata/"});
   }
-  res.render('area');
+  res.render('trainModel');
 })
 
 module.exports = router;
