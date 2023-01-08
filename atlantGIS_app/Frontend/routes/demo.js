@@ -6,9 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('demo');
 });
 
-router.post('/startDemo', function(req, res, next) {
-  R.executeRScript("./rscripts/trainModell.R").then((result) => {
+router.get('/startDemo', function(req, res, next) {
+  fetch("//localhost:4000/rscripts/trainModell").then((result) => {
     res.render('demo', message=result);
+    console.log(result)
   }).catch((error) => {
     res.render('demo', message=error);
   });
