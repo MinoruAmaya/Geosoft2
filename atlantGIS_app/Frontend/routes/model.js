@@ -9,7 +9,7 @@ var router = express.Router();
 // ModellStorage
 var modellStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-      callback(null, "./public/data/model/");
+      callback(null, "../Backend/data/model/");
   },
   filename: function (request, file, callback) {
       fileName="model.RDS";

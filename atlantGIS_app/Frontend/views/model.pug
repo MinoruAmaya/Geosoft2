@@ -6,34 +6,32 @@ block content
     .container
         .row.justify-content-md-center
             .col-md-4 
-                div#form_div_sat.active-form
+                div#form_div_sat
                     form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='trainMod') Satellitenbild
-                        input#satellitenbild.form-control.form-control-lg(type='file' name="satellitenbild" accept=".tif" enctype="multipart/form-data")
-                        button.btn.btn-primary.mb-2 Weiter
+                        input#satellitenbildOne.form-control.form-control-lg(type='file' name="satellitenbildOne" accept=".tif" enctype="multipart/form-data", disabled=true)
+                        button.btn.btn-secondary.disabled.mb-2 Weiter
         br
         br
         br
         .row.justify-content-md-center
             .col-md-1 
             .col-md-4 
-                div#form_div_train
+                div#form_div_train.active-form
                     form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell
-                        input#trainMod.form-control.form-control-lg(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" disabled=true)
-                        button.btn.btn-secondary.disabled.mb-2 Weiter
+                        input#trainMod.form-control.form-control-lg(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" )
+                        button.btn.btn-primary.mb-2 Weiter
             .col-md-2 
                 br
                 br
                 h3.text-center oder
             .col-md-4 
-                div#form_div_untrain
-                    br
+                br
+                #form_div_untrain.active-form 
                     form(action='/model/uploadUntrainModell' method='post' enctype="multipart/form-data")
                         p.col-md-8.col-form-label.fw-bolder Modell muss noch trainiert werden
-                        button#btn_untrainMod.btn.btn-secondary.disabled.mb-2 Weiter
-                br
+                        button#btn_untrainMod.btn.btn-primary.mb-2 Weiter
             .col-md-1
 
-block scripts
-  
+block scripts 

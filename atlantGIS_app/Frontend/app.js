@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var satelliteimageRouter = require('./routes/satelliteimage');
-var trainModelRouter = require('./routes/trainModel');
+var modelRouter = require('./routes/model');
 var trainDataRouter = require('./routes/trainData');
 var areaRouter = require('./routes/area');
 var analyseRouter = require('./routes/analyse');
@@ -16,7 +16,6 @@ var wikiRouter = require('./routes/wiki');
 var demoRouter = require('./routes/demo');
 var impressumRouter = require('./routes/impressum');
 var projektRouter = require('./routes/projekt');
-
 
 
 // view engine setup
@@ -31,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/satelliteimage', satelliteimageRouter);
-app.use('/trainModel', trainModelRouter);
+app.use('/model', modelRouter);
 app.use('/trainData', trainDataRouter);
 app.use('/area', areaRouter);
 app.use('/analyse', analyseRouter);
@@ -40,7 +39,6 @@ app.use('/demo', demoRouter);
 app.use('/wiki', wikiRouter);
 app.use('/impressum', impressumRouter);
 app.use('/projekt', projektRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
