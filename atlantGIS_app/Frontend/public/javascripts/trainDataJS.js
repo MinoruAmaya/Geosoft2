@@ -31,6 +31,7 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     }));
     map.on(L.Draw.Event.CREATED, function (event) {
         currentLayer = event.layer;
+        currentLayer.setStyle({fillColor: '#FF00FF', color: '#FF00FF'});
         drawnItems.addLayer(currentLayer);
         var type = event.layerType;
 

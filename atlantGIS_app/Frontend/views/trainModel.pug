@@ -12,7 +12,6 @@ block content
                     .row.justify-content-md-center
                         .col-md-4
                             div#form_div.active-form
-                                form(action='/satelliteimage' method='post')
                                 button#btn.btn.btn-secondary.disabled.mb-2.d-grid.gap-2.col-6.mx-auto Weiter 
             .col-md-1 
             br
@@ -22,17 +21,17 @@ block content
                     form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='trainMod') Satellitenbild
                         input#satellitenbildOne.form-control.form-control(type='file' name="satellitenbildOne" accept=".tif" enctype="multipart/form-data")
-                        button.btn.btn-primary.mb-2 Weiter
+                    button.btn.btn-secondary.disabled.mb-2 Weiter
                 br
-                div#form_div_trainData
-                    form(action='/trainData/uploadTrainingData' method='post' enctype="multipart/form-data")
+                div#form_div_trainData.active-form
+                    form(action='/addTrainData/uploadTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
                         input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                    button#btn_safeData.btn.btn-secondary.disabled.mb-2 Speichern
-                    br
-                    button#btn_addData.btn.btn-secondary.disabled.mb-2 Hinzufügen
+                        button#btn_safeData.btn.btn-secondary.disabled.mb-2 Speichern
+                        br
+                        button#btn_addData.btn.btn-secondary.disabled.mb-2 Hinzufügen
                 br
-                div#form_div.trainModel
+                div#form_div.trainModel.active-form
                     p.col-md-12.col-form-label.fw-bolder Haben Sie ein trainiertes Modell?
                         .row.justify-content-evenly
                             .col-4
@@ -44,16 +43,14 @@ block content
                                     input(type="radio", name="colorRadio", value="no")
                                     | Nein
                         .yes.box 
-                            div#form_div_trained
                                 form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
                                         label.col-md-12.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell hochladen!
                                         input#trainMod.form-control(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" )
-                                        button.btn.btn-secondary.disabled.mb-2 AOA berechnen
+                                        button.btn.btn-primary.mb-2 AOA berechnen
                         .no.box 
-                            div#form_div_untrained
                                 form(action='/model/uploadUntrainModell' method='post' enctype="multipart/form-data")
-                                    p.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
-                                    button#btn_untrainMod.btn.btn-secondary.disabled.mb-2 Trainiere Modell
+                                        label.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
+                                        button#btn_untrainMod.btn.btn-primary.mb-2 Trainiere Modell
                 
              
 block scripts 

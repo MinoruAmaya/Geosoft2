@@ -29,22 +29,24 @@ router.get('/', function (req, res, next) {
   res.render('satelliteimage');
 });
 
-/**
-router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
-  res.render('model');
-})
+/*Route muss an dieser Stelle nochmal überarbeitet werden.
+Nutzt man den code ab z.38 funktioniert es noch nicht.
 */
+router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
+  res.render('addTrainData');
+})
 
+/*
 // upload satellite imagery
-// route to model
+// route to trainData
 router.post("/uploadSatelliteimage", function (req, res, next) {
   const response = fetch("http://backend:4000/upload/satelliteimage", {
     method: "POST",
     body: satellitenbild,
   })
   .catch((err) => ("Error occured", err))
-  .then(res.render('model'));
+  .then(res.render('trainData'));
 })
-
+*/
 
 module.exports = router;
