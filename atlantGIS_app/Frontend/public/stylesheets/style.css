@@ -150,7 +150,7 @@ html {
   border-radius: 50%;
   transition: 250ms;
 
-  &:last-child {
+&:last-child {
     margin-right: 0
   }
   
