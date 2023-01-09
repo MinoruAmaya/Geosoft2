@@ -29,9 +29,9 @@ router.get('/', function (req, res, next) {
 
 
 // satellite imagery and trained model
-// route to area
+// route to aoa
 router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req, res, next) {
-  res.render('area');
+  res.render('aoa');
 })
 
 // satellite imagery and untrained model

@@ -5,19 +5,17 @@ block content
     br
     .container
         .row.justify-content-md-center
-            .col-md-3
-                br
-                br
-                br
-                br
-                br
+            h3 Neue Trainingsdaten hinzufügen
+            br
+            br
+            .col-md-8
                 div#form_div.active-form
-                    form(action='/trainData/uploadTrainingData' method='post' enctype="multipart/form-data")
-                        label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
-                        input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                    button#btn_safeData.btn.btn-primary.mb-2 Speichern
+                    p.col-md-12.col-form-label.fw-bolder Neue Trainingsdaten digitalisieren
+                    p.col-md-12.col-form-label.fw Zeichnen Sie die neuen Trainingsdaten in dieser Karte ein und 
+                        | initialisieren Sie diese mit einem entsprechenden Label und einer ID. 
+                    #map 
                 br
-                button#btn_addData.btn.btn-primary.mb-2 Hinzufügen
+                br 
             .col-md-1
                 br
                 br
@@ -25,15 +23,19 @@ block content
                 br
                 br
                 br
+                br 
+            .col-md-3 
+                div#form_div.active-form
+                    form(action='/createTrainData/uploadTrainingData' method='post' enctype="multipart/form-data")
+                        label.col-md-12.col-form-label.fw-bolder(for='training') Neue Trainingsdaten hochladen
+                        input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
+                        button#btn_safeData.btn.btn-primary.mb-2 Speichern
+                    button#btn_addData.btn.btn-primary.mb-2 Hinzufügen
                 br
-                h3 oder 
-            .col-md-8
-                #map
-        br
-        .row.justify-content-md-center
-            .col-md-4
-                div#form_div
-                    button#btn_digitalization.btn.btn-secondary.mb-2.d-grid.gap-2.col-6.mx-auto.disabled Weiter 
-
+                br
+                br
+                form(action='/createTrainData/newaoa' method='post')
+                    button#btn_digitalization.btn.btn-secondary.mb-2.d-grid.gap-2.col-6.mx-auto.disabled AOA erneut berechnen 
+    
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)

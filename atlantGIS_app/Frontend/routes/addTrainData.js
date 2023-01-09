@@ -25,8 +25,16 @@ router.get('/', function (req, res, next) {
 });
 
 
+
 // upload training data
 // route to trainModel
+
+// Mit dieser Funktion funktioniert der Workflow aber eigentlich müsste der unten auskommentierte code funktionieren. 
+router.post("/uploadTrainingData", function (req, res, next) {
+  res.render('trainModel');
+})
+
+/*
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   file = fileURL + fileName
   let extension = file.split('.').pop();
@@ -35,5 +43,7 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
   }
   res.render('trainModel');
 })
+*/
+
 
 module.exports = router;
