@@ -22,19 +22,19 @@ block content
                     p.col-md-12.col-form-label.fw-bolder Ergebnisse
                     form(action='/downloadData' method='post')
                         br
-                        input#prediction(type='radio' name="prediction")
+                        input#prediction(type='checkbox' name="prediction")
                         |  Prediction Map
                         br
                         br
-                        input#aoa(type='radio' name="aoa")
+                        input#aoa(type='checkbox' name="aoa")
                         |  Area of Applicability
                         br
                         br
-                        input#locations(type='radio' name="locations")
+                        input#locations(type='checkbox' name="locations")
                         |  Recommended locations for training data
                         br
                         br
-                        input#model(type='radio' name="model")
+                        input#model(type='checkbox' name="model")
                         |  Trained model
                         br
                         br
