@@ -17,6 +17,7 @@ var demoRouter = require('./routes/demo');
 var impressumRouter = require('./routes/impressum');
 var projektRouter = require('./routes/projekt');
 var addTrainDataRouter = require('./routes/addTrainData');
+var aoaRouter = require('./routes/aoa');
 
 
 // view engine setup
@@ -41,6 +42,7 @@ app.use('/wiki', wikiRouter);
 app.use('/impressum', impressumRouter);
 app.use('/projekt', projektRouter);
 app.use('/addTrainData', addTrainDataRouter);
+app.use('/aoa', aoaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

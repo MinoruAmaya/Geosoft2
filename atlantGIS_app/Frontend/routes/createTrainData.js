@@ -33,7 +33,11 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
   if (extension.toLowerCase() == 'gpkg') {
     R.callMethod("../Backend/rscripts/geopackageToGeojson.R", "convertGeoPackageToGeoJson", {filename: "fileName", filepath:"../Backend/data/trainingdata/"});
   }
-  res.render('trainModel');
+  res.render('createTrainData');
+})
+
+router.post("/newaoa", function (req, res, next) {
+  res.render('aoa');
 })
 
 module.exports = router;

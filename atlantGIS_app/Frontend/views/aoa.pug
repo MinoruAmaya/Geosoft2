@@ -1,0 +1,45 @@
+extends layout 
+
+block content
+    br
+    br
+    .container
+        .row.justify-content-md-center
+            .col-md-8
+                div#form_div.active-form
+                    #map 
+            .col-md-1 
+            br
+            br
+            .col-md-3
+                div#form_div.active-form
+                    form(action='/aoa/classification' method='post' enctype="multipart/form-data")
+                        button.btn.btn-primary.mb-2 Klassifikation durchführen
+                    form(action='/aoa/updateTrainData' method='post' enctype="multipart/form-data")
+                        button#btn_createData.btn.btn-primary.mb-2 Trainingsdaten hinzufügen
+                br
+                div#form_div.active-form
+                    p.col-md-12.col-form-label.fw-bolder Ergebnisse
+                    form(action='/downloadData' method='post')
+                        br
+                        input#prediction(type='checkbox' name="prediction")
+                        |  Prediction Map
+                        br
+                        br
+                        input#aoa(type='checkbox' name="aoa")
+                        |  Area of Applicability
+                        br
+                        br
+                        input#locations(type='checkbox' name="locations")
+                        |  Recommended locations for training data
+                        br
+                        br
+                        input#model(type='checkbox' name="model")
+                        |  Trained model
+                        br
+                        br
+                        button.btn.btn-primary.mb-2 Download
+                
+             
+block scripts 
+  script(src="/javascripts/ergebnisseJS.js" defer)
