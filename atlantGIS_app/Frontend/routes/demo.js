@@ -1,5 +1,4 @@
 var express = require('express');
-const R = require('r-integration');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -15,4 +14,5 @@ router.get('/startDemo', function(req, res, next) {
   });
 
 })
+
 module.exports = router;

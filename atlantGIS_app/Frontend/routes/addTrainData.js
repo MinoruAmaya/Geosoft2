@@ -1,23 +1,5 @@
 var express = require('express');
-const multer = require('multer');
 var router = express.Router();
-
-
-// multer storage -------------------------------------------------------------------------------------------------------
-// ModellStorage
-let fileURL = "../Backend/data/trainingdata/"
-var trainingDataStorage = multer.diskStorage({
-  destination: function (request, file, callback) {
-    callback(null, fileURL);
-  },
-  filename: function (request, file, callback) {
-    fileName = "trainingdata" + file.Type;
-    callback(null, fileName);
-  }
-});
-
-// initalize multer
-const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 
 router.get('/', function (req, res, next) {
