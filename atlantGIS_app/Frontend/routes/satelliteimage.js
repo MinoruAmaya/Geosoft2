@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+let fetch = require('node-fetch');
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
@@ -17,9 +17,9 @@ router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild
 
 // upload satellite imagery
 // route to trainData
-router.post("/uploadSatelliteimage", function (req, res, next) {
+router.get("/uploadSatelliteimage", function (req, res, next) {
   fetch("//localhost:4000/upload/uploadSatelliteimage", {
-    method: "POST",
+    method: 'POST',
     body: satellitenbildOne,
   })
   .catch((err) => ("Error occured", err))
