@@ -13,7 +13,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
   
     var btn = document.getElementById("demo_btn");
-    btn.addEventListener("click", function(){addPredictionAndAoaToMap("./data/output/Klassifikation_muenster.tif"/*, "/data/output/AOA_muenster.tiff"*/)});
+    //btn.addEventListener("click", function(){addPredictionAndAoaToMap("./data/output/Klassifikation_muenster.tif"/*, "/data/output/AOA_muenster.tiff"*/)});
   
     function addPredictionAndAoaToMap(predUrl, /*aoaUrl*/) {
       fetch(predUrl)

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 let fetch = require('node-fetch');
+let FormData = require('form-data');
+let formidable = require('formidable');
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
@@ -17,13 +19,19 @@ router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild
 
 // upload satellite imagery
 // route to trainData
-router.get("/uploadSatelliteimage", function (req, res, next) {
-  fetch("//localhost:4000/upload/uploadSatelliteimage", {
+router.post("/uploadSatelliteimage", function (req, res, next) {
+  const formData = FormData();
+  console.log(req.body.satellitenbildOne);
+  formData.append("file", req.body.satellitenbildOne);
+  fetch("http://localhost:4000/upload/uploadSatelliteimage", {
     method: 'POST',
-    body: satellitenbildOne,
+    body: formData,
   })
-  .catch((err) => ("Error occured", err))
-  .then(res.render('addTrainData'));
+    .then(res => {
+      console.log(res.statusText)
+    })
+    .then(res.render('addTrainData'))
+    .catch((err) => ("Error occured", err));
 })
 
 
