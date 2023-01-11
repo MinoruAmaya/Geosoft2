@@ -16,8 +16,10 @@ block content
                     #map 
                     br
                     .row.justify-content-md-center
-                        .col-md-4
-                            button#btn_digitalization.btn.btn-primary Trainingsdaten herunterladen 
+                        .col-md-3
+                            button#btn_digitalization.btn.btn-secondary.disabled Trainingsdaten speichern
+                        .col-md-3
+                            button#btn_downloadTrainData.btn.btn-secondary.disabled Trainingsdaten herunterladen 
         
                 br
                 br 
@@ -40,7 +42,7 @@ block content
                 br
                 br
                 form(action='/createTrainData/newaoa' method='post')
-                    button#btn_digitalization.btn.btn-secondary.mb-2.d-grid.gap-2.col-6.mx-auto.disabled AOA erneut berechnen 
+                    button#btn_newAoa.btn.btn-secondary.disabled AOA erneut berechnen 
     
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)
