@@ -1,5 +1,6 @@
 library(terra)
-train_data <- rast("./public/data/demo/Münster_Demo_Training.gpkg") # add the correct path here
+library(raster)
+train_data <- rast("./database/data/demo/Münster_Demo_Training.gpkg") # add the correct path here
 predictors <- c("B02", "B03", "B04", "B08", "B05", "B06", "B07", "B11",
             "B12", "B8A") # maybe we need to change these names
 model <- train(train_data[, predictors],
@@ -7,4 +8,4 @@ model <- train(train_data[, predictors],
            method = "rf",
            importance = TRUE,
            ntree = 500)
-saveRDS(model, file = "./public/data/model/RFModel.RDS")
+saveRDS(model, file = "./database/data/demo/RFModel.RDS")
