@@ -9,14 +9,14 @@ router.get('/', function (req, res, next) {
   res.render('satelliteimage');
 });
 
-/*Route muss an dieser Stelle nochmal überarbeitet werden.
-Nutzt man den code ab z.38 funktioniert es noch nicht.
-router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
+//Route muss an dieser Stelle nochmal überarbeitet werden.
+//Nutzt man den code ab z.38 funktioniert es noch nicht.
+router.post("/uploadSatelliteimage", function (req, res, next) {
   res.render('addTrainData');
 })
-*/
 
 
+/*
 // upload satellite imagery
 // route to trainData
 router.post("/uploadSatelliteimage", function (req, res, next) {
@@ -33,6 +33,6 @@ router.post("/uploadSatelliteimage", function (req, res, next) {
     .then(res.render('addTrainData'))
     .catch((err) => ("Error occured", err));
 })
-
+*/
 
 module.exports = router;
