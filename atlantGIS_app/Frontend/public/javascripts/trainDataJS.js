@@ -31,6 +31,7 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     }));
     map.on(L.Draw.Event.CREATED, function (event) {
         currentLayer = event.layer;
+        currentLayer.setStyle({fillColor: '#FF00FF', color: '#FF00FF'});
         drawnItems.addLayer(currentLayer);
         var type = event.layerType;
 
@@ -64,9 +65,15 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 let navElement = document.getElementById('navbarTrain');
 let btn_addData = document.getElementById('btn_addData');
 let btn_digitalization = document.getElementById('btn_digitalization');
+let btn_downloadTrainData = document.getElementById('btn_downloadTrainData');
+let btn_newAoa = document.getElementById('btn_newAoa');
 let in_trainData = document.getElementById('training');
+
 btn_addData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
 btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+btn_downloadTrainData.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+btn_newAoa.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+
 navElement.classList.remove('disabled');
 navElement.classList.remove('text-white-50');
 navElement.classList.add('text-white');
@@ -105,15 +112,32 @@ function formListenerErstellen(){
 
 /**
  * After the first train Data got digitialized
- * the "Weiter" button should be activated
+ * the "Trainingsdaten speichern" und "Trainingsdaten herunterladen" button should be activated.
  */
 function activateDigitalization(){
     if(counter === 0){
         btn_digitalization.classList.remove('btn-secondary');
         btn_digitalization.classList.remove('disabled');
         btn_digitalization.classList.add('btn-primary');
+        btn_downloadTrainData.classList.remove('btn-secondary');
+        btn_downloadTrainData.classList.remove('disabled');
+        btn_downloadTrainData.classList.add('btn-primary');
+        btn_digitalization.addEventListener('click', activateNewAoa());
     }
     counter++;
+}
+
+
+/**
+ * After the first train Data got saved
+ * the "Aoa erneut berechnen" button should be activated.
+ */
+function activateNewAoa(){
+  if(counter === 0){
+    btn_newAoa.classList.remove('btn-secondary');
+    btn_newAoa.classList.remove('disabled');
+    btn_newAoa.classList.add('btn-primary');
+  }
 }
 
 /**
@@ -135,6 +159,7 @@ function addTrainData(){
     else{
         return;
     }
+    btn_addData.addEventListener('click', activateNewAoa());
 }
 
 

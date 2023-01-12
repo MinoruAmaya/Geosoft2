@@ -3,11 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require("cors");
+
 
 var indexRouter = require('./routes/index');
+var uploadRouter = require('./routes/upload');
 var rscriptsRouter = require('./routes/rscripts');
 
 var app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,7 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
+app.use('/upload', uploadRouter);
 app.use('/rscripts', rscriptsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,7 @@
 body {
   padding-bottom: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 a {
@@ -31,19 +32,23 @@ a {
   margin-bottom: 3px;
 }
 
-#form_div, #form_div_train, #form_div_untrain, #form_div_sat{
+#form_div.active-form, #form_div_trainData.active-form, #form_div_untrained.active-form, #form_div_sat.active-form, #form_div_trainModel.active-form, #form_div_trained.active-form{
+  background-color: rgb(127, 179, 247);
+}
+
+#form_div, #form_div_trainData, #form_div_untrained, #form_div_sat, #form_div_trainModel, #form_div_trained{
   padding: 10px;
   border-radius: 15px;
+  background-color: rgb(184, 186, 190);
+
 }
 
 #form_div_popup{
   padding: 2px;
-  border-radius: 15px;
+  border-radius: 1px;
 }
 
-.active-form{
-  background-color: rgb(127, 179, 247);
-}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
@@ -90,7 +95,7 @@ h1 {
 
 .pagination-number.active {
   color: #fff;
-  background: #0085b6;
+  background: #62cd88;
 }
 
 html {
@@ -144,19 +149,19 @@ html {
   height: 5rem;
   float: left;
   margin: .5rem 1rem .5rem 0;
-  color: #353c4a;
+  color: #ffffff;
   border: .125rem solid #f3f3f3;
   box-shadow: 0 0 8px 0 rgba(50, 50, 50, 0.15);
   border-radius: 50%;
   transition: 250ms;
 
-&:last-child {
+  &:last-child {
     margin-right: 0
   }
   
   &:hover,
   &:focus {
-    background: #f1f1f1;
+    //background: #f1f1f1;
   }
   
   &:focus {
@@ -204,7 +209,6 @@ html {
   }
 }
 
-
 .card.text-bg.mb-3{
   max-width: 25rem; 
   background-color: rgb(189, 218, 255);
@@ -241,4 +245,11 @@ html {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
 }
+
+.box{
+        color: rgb(0, 0, 0);
+        display: none;
+        margin-top: 2px;
+        
+    }
 

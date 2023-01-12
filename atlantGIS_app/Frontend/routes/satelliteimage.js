@@ -1,50 +1,38 @@
 var express = require('express');
-const multer = require('multer');
 var router = express.Router();
-//import fetch from 'node-fetch'
-//const fetch = require('node-fetch');
-
-
-
-
-// multer storage -------------------------------------------------------------------------------------------------------
-// satelliteImageStorage
-var satelliteImageStorage = multer.diskStorage({
-  destination: function (request, file, callback) {
-    callback(null, "backend:4000/usr/src/app/database/data/satelliteimagery/");
-  },
-  filename: function (request, file, callback) {
-    fileName = "satelliteimage.tif";
-    callback(null, fileName);
-  }
-});
-
-
-// initalize multer
-const uploadSatelliteImage = multer({ storage: satelliteImageStorage });
-
+let fetch = require('node-fetch');
+let FormData = require('form-data');
+let formidable = require('formidable');
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
   res.render('satelliteimage');
 });
 
-/**
-router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
-  res.render('model');
+//Route muss an dieser Stelle nochmal überarbeitet werden.
+//Nutzt man den code ab z.38 funktioniert es noch nicht.
+router.post("/uploadSatelliteimage", function (req, res, next) {
+  res.render('addTrainData');
+})
+
+
+/*
+// upload satellite imagery
+// route to trainData
+router.post("/uploadSatelliteimage", function (req, res, next) {
+  const formData = FormData();
+  console.log(req.body.satellitenbildOne);
+  formData.append("file", req.body.satellitenbildOne);
+  fetch("http://localhost:4000/upload/uploadSatelliteimage", {
+    method: 'POST',
+    body: formData,
+  })
+    .then(res => {
+      console.log(res.statusText)
+    })
+    .then(res.render('addTrainData'))
+    .catch((err) => ("Error occured", err));
 })
 */
-
-// upload satellite imagery
-// route to model
-router.post("/uploadSatelliteimage", function (req, res, next) {
-  const response = fetch("http://backend:4000/upload/satelliteimage", {
-    method: "POST",
-    body: satellitenbild,
-  })
-  .catch((err) => ("Error occured", err))
-  .then(res.render('model'));
-})
-
 
 module.exports = router;

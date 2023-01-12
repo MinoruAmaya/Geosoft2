@@ -21,19 +21,23 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 
 router.get('/', function (req, res, next) {
-  res.render('trainData');
+  res.render('createTrainData');
 });
 
 
 // upload training data
-// route to area
+// route to trainModel
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   file = fileURL + fileName
   let extension = file.split('.').pop();
   if (extension.toLowerCase() == 'gpkg') {
     R.callMethod("../Backend/rscripts/geopackageToGeojson.R", "convertGeoPackageToGeoJson", {filename: "fileName", filepath:"../Backend/data/trainingdata/"});
   }
-  res.render('area');
+  res.render('createTrainData');
+})
+
+router.post("/newaoa", function (req, res, next) {
+  res.render('aoa');
 })
 
 module.exports = router;

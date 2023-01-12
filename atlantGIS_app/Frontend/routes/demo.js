@@ -1,13 +1,13 @@
 var express = require('express');
-const R = require('r-integration');
 var router = express.Router();
+let fetch = require('node-fetch');
 
 router.get('/', function(req, res, next) {
   res.render('demo');
 });
 
 router.get('/startDemo', function(req, res, next) {
-  fetch("//localhost:4000/rscripts/trainModell").then((result) => {
+  fetch("http://localhost:4000/rscripts/trainModell").then((result) => {
     res.render('demo', message=result);
     console.log(result)
   }).catch((error) => {
@@ -15,4 +15,5 @@ router.get('/startDemo', function(req, res, next) {
   });
 
 })
+
 module.exports = router;
