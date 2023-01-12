@@ -13,9 +13,4 @@ services:
         image: 2001310/backend
         ports:
             - "4000:4000"
-        volumes:
-            - database:/app/database
-            
-volumes:
-    database:
         
