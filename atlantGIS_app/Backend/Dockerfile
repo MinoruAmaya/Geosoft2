@@ -1,7 +1,7 @@
 FROM node:latest
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-RUN add-apt-repository 'deb https://cloud.r-project.org/bin/linux/*ubuntu UNSERE UBUNTU VERSION/*'
+RUN add-apt-repository 'deb https://cloud.r-project.org/bin/linux/*ubuntu focal-cran40/*'
 RUN apt update -q && DEBIAN_FRONTEND=noninteractive apt install -q -y r-base
 
 
@@ -17,9 +17,9 @@ RUN apt-get upgrade
 RUN R -e "install.packages('caret', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('cast', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('sp', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
-RUN R -e "install.packages('Rserve', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('lattice', dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('Rserve', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
