@@ -3,10 +3,11 @@ const R = require('r-integration');
 var router = express.Router();
 
 router.get('/trainModell', function(req, res, next) {
-    R.executeRScript("./database/rscripts/trainModell.R").then((result) => {
-      return result;
+    R.callMethod("./database/rscripts/trainModell.R", "trainModell").then((result) => {
+      console.log(result);
+      res.render('index', { title: resut });
     }).catch((error) => {
-      return error;
+      console.log(error);
     });
   
   })
