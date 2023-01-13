@@ -9,7 +9,7 @@ var router = express.Router();
 // satelliteImageStorage
 var satelliteImageStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-    callback(null, "database/data/satelliteimagery/");
+    callback(null, "../database/data/satelliteimagery/");
   },
   filename: function (request, file, callback) {
     fileName = "satelliteimage.tif";
@@ -18,7 +18,7 @@ var satelliteImageStorage = multer.diskStorage({
 });
 
 // TrainingdataStorage
-let fileURL = "database/data/trainingdata/"
+let fileURL = "../database/data/trainingdata/"
 var trainingDataStorage = multer.diskStorage({
   destination: function (request, file, callback) {
     callback(null, fileURL);
@@ -32,7 +32,7 @@ var trainingDataStorage = multer.diskStorage({
 // ModellStorage
 var modellStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-    callback(null, "database/data/model/");
+    callback(null, "../database/data/model/");
   },
   filename: function (request, file, callback) {
     fileName = "model.RDS";
