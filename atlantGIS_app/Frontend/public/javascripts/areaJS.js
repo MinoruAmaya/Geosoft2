@@ -64,6 +64,8 @@ map.on('draw:created', function(e) {
   var shape_for_db = JSON.stringify(shape);
   console.log(shape_for_db);
 
+  
+
   editableLayers.addLayer(layer);
   activateDigitalization();
      

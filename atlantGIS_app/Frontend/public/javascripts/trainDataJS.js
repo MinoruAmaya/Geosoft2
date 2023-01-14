@@ -55,9 +55,10 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
     map.on('draw:deleted', function (e) {
         var deletedLayers = e.layers._layers;
-        for (var layer in deletedLayers) {
-           console.log(deletedLayers[layer]);
+        for (var currentLayer in deletedLayers) {
+           console.log(deletedLayers[currentLayer]);
         }
+        
      });
 
 
@@ -122,10 +123,13 @@ function activateDigitalization(){
         btn_downloadTrainData.classList.remove('btn-secondary');
         btn_downloadTrainData.classList.remove('disabled');
         btn_downloadTrainData.classList.add('btn-primary');
-        btn_digitalization.addEventListener('click', activateNewAoa());
+        btn_digitalization.addEventListener('click', function(){activateNewAoa()});
+        btn_downloadTrainData.addEventListener('click', function(){saveToFile(trainData, 'test')});
+        
     }
     counter++;
 }
+
 
 
 /**
@@ -214,3 +218,14 @@ function getNewTrainData(in_label, in_klassenID){
         style: style
       }).addTo(map)
 };
+
+
+
+//Function to Download new trainData as GeoJSON File.
+//Problem: it returns to the page where the area is choosen.
+function saveToFile(content, filename) {
+  var file = filename + '.geojson';
+  saveAs(new File([JSON.stringify(content)], file, {
+    type: "text/plain;charset=utf-8"
+  }), file);
+}
