@@ -25,15 +25,13 @@ block content
                     form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='trainMod') Satellitenbild hochladen
                         input#satellitenbildOne.form-control.form-control(type='file' name="satellitenbildOne" accept=".tif" enctype="multipart/form-data")
-                        button.btn.btn-secondary.disabled.mb-2 Weiter
+                        button.btn.btn-secondary.disabled.mb-2 Speichern
                 br
                 div#form_div_trainData.active-form
                     form(action='/addTrainData/uploadTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='training') Trainingsdaten hochladen
                         input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
                         button#btn_safeData.btn.btn-primary.mb-2 Speichern
-                        br
-                        button#btn_addData.btn.btn-primary.mb-2 Hinzufügen
                         
                         
                     

@@ -1,88 +1,93 @@
+//code für area.pug
+
+// Variablen erstellen 
 let counter = 0;
 let layer;
-
-//Leaflet & Leaflet-Draw
-
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-                map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 }),
-                drawnItems = L.featureGroup().addTo(map);
-        L.control.layers({
-            'osm': osm.addTo(map),
-            "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
-                attribution: 'google'
-            })
-        }, { 'drawlayer': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
-        map.addControl(new L.Control.Draw({
-            edit: {
-                featureGroup: drawnItems
-            },
-            draw: {
-                polyline: false,
-                circle: false,
-                marker: false,
-                polygon: false,
-                rectangle: {
-                    showArea: true
-                }
-            }
-        }));
-        map.on(L.Draw.Event.CREATED, function (event) {
-            var layer = event.layer;
-            layer.setStyle({fillColor: '#FF00FF', color: '#FF00FF'});
-            drawnItems.addLayer(layer);
-            var type = event.layerType;
+let btn_weiter = document.getElementById('btn_weiter');
+let shape;
+let shape_for_db;
+let rectangle;
+var self = this;
 
 
-            if (type === "rectangle") {
-                drawnItem = layer;
-                drawnItems.addLayer(layer);
-                console.log("created rectangle");
-                // Popup mit verschiedenen Eingabefeldern erstellen
-                var popupString = `
-                  <div id="saveArea">
-                    <div id="form_div_popup"><button class="btn btn-primary mb-12 col-10 mx-auto" id="btn_save">Bereich speichern </button><span class="text-danger text-center" id="warning"></span></div>
-                  </div>
-                `;
-                layer.bindPopup(popupString).openPopup();
-                formListenerErstellen();
-            }
-            //Speichert Geometrieeigenschaften als JSON
-            var shape = layer.toGeoJSON()
-            var shape_for_db = JSON.stringify(shape);
-            console.log(shape_for_db)
-    
-            });
-                
+// center of the map
+var center = [49.845363, 9.905964];
+// Create the map
+var map = L.map('map').setView(center, 6);
 
-        map.on('draw:deleted    ', function (e) {
-            var deletedLayers = e.layers._layers;
-            for (var layer in deletedLayers) {
-               console.log(deletedLayers[layer]);
-            }
-         });
-        
+// Set up the OSM layer
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18
+  }).addTo(map);
+
+// Initialise the FeatureGroup to store editable layers
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+self.drawControlFull = new L.Control.Draw({
+  draw: {
+    polyline: false,
+    circle: false,
+    marker: false,
+    polygon: false,
+    rectangle: true
+}
+});
+
+self.drawControlEdit = new L.Control.Draw({
+  edit: {
+    featureGroup: editableLayers,
+    edit: false
+  },
+  draw: {
+    polyline: false,
+    circle: false,
+    marker: false,
+    polygon: false,
+    rectangle: false
+}
+});
+map.addControl(drawControlFull);
+
+map.on('draw:created', function(e) {
+  var type = e.layerType,
+  layer = e.layer;
+  layer.setStyle({fillColor: '#FF00FF', color: '#FF00FF'});
+
+  //Entfernt Toolbar nachdem ein Rechteck gezeichnet wurde 
+	self.drawControlFull.remove();
+	self.drawControlEdit.addTo(map);
+  
+  //Speichert Geometrieeigenschaften als JSON
+  var shape = layer.toGeoJSON();
+  var shape_for_db = JSON.stringify(shape);
+  console.log(shape_for_db);
+
+  editableLayers.addLayer(layer);
+  activateDigitalization();
+     
+});
 
 
-// add train Data to map (funktioniert noch nicht)
-let btn_addData = document.getElementById('btn_addData');
-let in_trainData = document.getElementById('training');
-let btn_weiter = document.getElementById('btn_weiter')
-btn_addData.addEventListener('click', function(){addTrainData();})
+map.on('draw:deleted', function (e) {
+    var deletedLayers = e.layers._layers;
+        for (var layer in deletedLayers) {
+           console.log(deletedLayers[layer]);
+        }
+  //Fügt Toolbar wieder hinzu, falls Rechteck gelöscht wird.
+	self.drawControlEdit.remove();
+	self.drawControlFull.addTo(map);
+  deactivateDigitalization();
+});
+
 
 
 /**
- * After area got digitialized
- * the "Weiter" button should be activated.
+ * After the area got digitialized
+ * the "weiter" button should be activated.
  */
-
-function formListenerErstellen(){
-    let btn_save = document.getElementById('btn_save');
-    btn_save.addEventListener('click', function(){activateWeiterButton();});
-  }
-
-function activateWeiterButton(){
+function activateDigitalization(){
     if(counter === 0){
         btn_weiter.classList.remove('btn-secondary');
         btn_weiter.classList.remove('disabled');
@@ -91,54 +96,22 @@ function activateWeiterButton(){
     counter++;
 }
 
-let style = function (feature) {
-    switch (feature.properties.Label) {
-        case "See":
-        return { color: "#0a1cb1" };
-        case "Siedlung":
-        return { color: "#e57423" };
-        case "FLiessgewaesser":
-        return { color: "#23c3e5" };
-        case "Laubwald":
-        return { color: "#2aa43d" };
-        case "Mischwald":
-        return { color: "#11671e" };
-        case "Gruenland":
-        return { color: "#92e597" };
-        case "Industriegebiet":
-        return { color: "#696969" };
-        case "Acker_bepflanzt":
-        return { color: "#70843a" };
-        case "Offenboden":
-        return { color: "#472612" };
-    }
-    };
-
-    
-
 /**
- * Adds the trainData that was uploaded
- * to the Data and to the map
+ * If the area gets deleted
+ * the "weiter" button should be deactivated
  */
-function addTrainData(){
-    if(trainData === ''){
-        var reader = new FileReader();
-        reader.onload = (event) => {
-            trainData = JSON.parse(event.target.result);
-            L.geoJSON(trainData).addTo(map);
-            L.geoJSON(trainData, {
-                style: style
-                }).addTo(map)
-        };
-        reader.readAsText(in_trainData.files[0]);
-    }
-    else{
-        return;
-    }
+function deactivateDigitalization(){
+  if(counter != 0){
+    btn_weiter.classList.remove('btn-primary');
+    btn_weiter.classList.add('btn-primary');
+    btn_weiter.classList.add('disabled');
 }
-        
+counter--;
+}
 
-// trainModell
+ 
+
+//code für trainModel.pug
 $(document).ready(function(){
     $('input[type="radio"]').click(function(){
         var inputValue = $(this).attr("value");
