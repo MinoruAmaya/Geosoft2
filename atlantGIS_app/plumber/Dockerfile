@@ -34,7 +34,7 @@ RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-
 RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
 # Get all the code needed to run the app
-COPY . /plumber/
+COPY . /plumber/plumber.R ./
 
 # Expose app on a given port
 EXPOSE 4000
