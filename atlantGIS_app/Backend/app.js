@@ -5,14 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
 
+var app = express();
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
 var rscriptsRouter = require('./routes/rscripts');
-
-var app = express();
-
-app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,9 +20,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
+//cors
+var corsOptions = {
+  Origin: "http://frontend:3000/",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
 app.use('/rscripts', rscriptsRouter);
+
+
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 
 // catch 404 and forward to error handler
