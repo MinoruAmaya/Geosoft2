@@ -1,7 +1,7 @@
 FROM rstudio/plumber
 
 # Set working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 RUN apt-get update -qq && apt-get install -y libcurl4-openssl-dev \
     libssl-dev \ 
@@ -33,8 +33,7 @@ RUN R -e "install.packages('rjson', dependencies=TRUE, repos='https://cran.uni-m
 RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
-# Get all the code needed to run the app
-COPY . /plumber.R ./
+COPY . /app 
 
 # Expose app on a given port
 EXPOSE 4000
