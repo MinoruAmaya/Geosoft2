@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-let fetch = require('node-fetch');
-let FormData = require('form-data');
-let formidable = require('formidable');
+let multer = require('multer');
 
 // multer storage -------------------------------------------------------------------------------------------------------
 // satelliteImageStorage
