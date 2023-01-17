@@ -4,14 +4,14 @@ var multer = require('multer');
 
 
 // multer storage -------------------------------------------------------------------------------------------------------
-// satelliteImageStorage
-fileUrl = "../database/data/trainingdata/"
+// trainingDataStorage
+let fileURL = "./database/data/trainingdata/"
 var trainingDataStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-    callback(null, fileUrl);
+    callback(null, fileURL);
   },
   filename: function (request, file, callback) {
-    fileName = "satelliteimage.tif";
+    fileName = "trainingdata" + file.Type;
     callback(null, fileName);
   }
 });
@@ -19,19 +19,22 @@ var trainingDataStorage = multer.diskStorage({
 // initalize multer
 const uploadTrainingData = multer({ storage: trainingDataStorage });
 
+
+
+//routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
   res.render('addTrainData');
 });
 
 
-
 // upload training data
 // route to trainModel
+// fetch not testet so not working ---------
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   file = fileURL + fileName
   let extension = file.split('.').pop();
   if (extension.toLowerCase() == 'gpkg') {
-    R.callMethod("../Backend/rscripts/geopackageToGeojson.R", "convertGeoPackageToGeoJson", {filename: "fileName", filepath:"../Backend/data/trainingdata/"});
+    fetch("http://backend:4000/geopackageToGeoJSON");
   }
   res.render('trainModel');
 })

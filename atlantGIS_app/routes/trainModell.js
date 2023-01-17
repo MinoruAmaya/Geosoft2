@@ -9,7 +9,7 @@ var router = express.Router();
 // ModellStorage
 var modellStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-      callback(null, "./Backend/data/model/");
+      callback(null, "./database/data/input/");
   },
   filename: function (request, file, callback) {
       fileName="model.RDS";
@@ -28,13 +28,13 @@ router.get('/', function (req, res, next) {
 });
 
 
-// satellite imagery and trained model
+// Upload trained model
 // route to aoa
 router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req, res, next) {
   res.render('aoa');
 })
 
-// satellite imagery and untrained model
+// model has to be trained
 // route to trainData
 router.post("/uploadUntrainModell", function (req, res, next) {
   res.render('trainData');

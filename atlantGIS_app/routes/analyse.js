@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+
+//routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function(req, res, next) {
   res.render('analyse', { title: 'Hier wird die analyse Seite entstehen wo die Ergebnisse visualisiert werden und die Daten gedownlaoded werden können' });
 });

@@ -1,5 +1,6 @@
 let counter = 0;
 let layer;
+var trainData;
 
 //Leaflet & Leaflet-Draw
 
@@ -39,7 +40,6 @@ let layer;
                 drawnItem = layer;
                 drawnItems.addLayer(layer);
                 console.log("created rectangle");
-                // Popup mit verschiedenen Eingabefeldern erstellen
                 var popupString = `
                   <div id="saveArea">
                     <div id="form_div_popup"><button class="btn btn-primary mb-12 col-10 mx-auto" id="btn_save">Bereich speichern </button><span class="text-danger text-center" id="warning"></span></div>
@@ -50,8 +50,8 @@ let layer;
             }
             //Speichert Geometrieeigenschaften als JSON
             var shape = layer.toGeoJSON()
-            var shape_for_db = JSON.stringify(shape);
-            console.log(shape_for_db)
+            trainData = JSON.stringify(shape);
+            console.log(trainData)
     
             });
                 
@@ -59,7 +59,7 @@ let layer;
         map.on('draw:deleted    ', function (e) {
             var deletedLayers = e.layers._layers;
             for (var layer in deletedLayers) {
-               console.log(deletedLayers[layer]);
+               console.log("test" + deletedLayers[layer]);
             }
          });
         
@@ -122,15 +122,15 @@ let style = function (feature) {
  */
 function addTrainData(){
     if(trainData === ''){
-        var reader = new FileReader();
-        reader.onload = (event) => {
+        var fs = new FileReader();
+        fs.onload = (event) => {
             trainData = JSON.parse(event.target.result);
             L.geoJSON(trainData).addTo(map);
             L.geoJSON(trainData, {
                 style: style
                 }).addTo(map)
         };
-        reader.readAsText(in_trainData.files[0]);
+        fs.readAsText(in_trainData.files[0]);
     }
     else{
         return;

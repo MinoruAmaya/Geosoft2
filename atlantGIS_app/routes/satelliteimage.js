@@ -6,7 +6,7 @@ let multer = require('multer');
 // satelliteImageStorage
 var satelliteImageStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-    callback(null, "../database/data/satelliteimagery/");
+    callback(null, "./database/data/input/");
   },
   filename: function (request, file, callback) {
     fileName = "satelliteimage.tif";
@@ -24,9 +24,9 @@ router.get('/', function (req, res, next) {
 });
 
 
-//Route muss an dieser Stelle nochmal überarbeitet werden.
-//Nutzt man den code ab z.38 funktioniert es noch nicht.
-router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbildOne"), function (req, res, next) {
+// Upload satelliteimagery
+// Route to addTrainData
+router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild"), function (req, res, next) {
   res.render('addTrainData');
 })
 

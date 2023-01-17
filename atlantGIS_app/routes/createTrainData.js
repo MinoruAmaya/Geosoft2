@@ -4,8 +4,8 @@ var router = express.Router();
 
 
 // multer storage -------------------------------------------------------------------------------------------------------
-// ModellStorage
-let fileURL = "../database/data/trainingdata/"
+// trainingDataStorage
+let fileURL = "./database/data/trainingdata/"
 var trainingDataStorage = multer.diskStorage({
   destination: function (request, file, callback) {
     callback(null, fileURL);
@@ -20,6 +20,8 @@ var trainingDataStorage = multer.diskStorage({
 const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 
+
+//routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
   res.render('createTrainData');
 });
@@ -31,7 +33,7 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
   file = fileURL + fileName
   let extension = file.split('.').pop();
   if (extension.toLowerCase() == 'gpkg') {
-    R.callMethod("../Backend/rscripts/geopackageToGeojson.R", "convertGeoPackageToGeoJson", {filename: "fileName", filepath:"../Backend/data/trainingdata/"});
+    R.callMethod("./Backend/rscripts/geopackageToGeojson.R", "convertGeoPackageToGeoJson", {filename: "fileName", filepath:"./Backend/data/trainingdata/"});
   }
   res.render('createTrainData');
 })

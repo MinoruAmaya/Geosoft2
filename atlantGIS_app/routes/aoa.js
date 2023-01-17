@@ -3,15 +3,18 @@ var router = express.Router();
 const fs = require('fs');
 const zip = require('express-zip')
 
+
+//routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function(req, res, next) {
   res.render('aoa');
 });
 
-
+// route to createTrainData to train more data for model
 router.post("/updateTrainData", function (req, res, next) {
   res.render('createTrainData');
 })
 
+// route to aoa to calculate it again
 router.post("/classification", function (req, res, next) {
   res.render('aoa');
 })
@@ -25,13 +28,13 @@ router.post("/classification", function (req, res, next) {
 router.post('/downloadData', function (req, res, next) {
   const downloadArray = Array();
   if (req.body.prediction == "on") {
-      downloadArray.push({path: '../Backend/data/output/output_placeholder.txt', name: 'output_placeholder.txt'})
+      downloadArray.push({path: './database/data/output/output_placeholder.txt', name: 'output_placeholder.txt'})
   } if (req.body.aoa == "on") 
-      downloadArray.push({path: '../Backend/data/trainingdata/trainingdata_placeholder.txt', name: 'trainingdata_placeholder.txt'})
+      downloadArray.push({path: './database/data/input/trainingdata_placeholder.txt', name: 'trainingdata_placeholder.txt'})
   if (req.body.location == "on")
-      downloadArray.push({path: '../Backend/data/satelliteimagery/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
+      downloadArray.push({path: './database/data/input/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
   if (req.body.model == "on")
-      downloadArray.push({path: '../Backend/data/model/model_placeholder.txt', name: 'model_placeholder.txt'})
+      downloadArray.push({path: './database/data/input/model_placeholder.txt', name: 'model_placeholder.txt'})
   if(downloadArray.length!=0)
       res.zip(downloadArray);
   else    
