@@ -137,10 +137,10 @@ train_modell <- function(area, algorithm) {
 
 
     # loading satelliteimagery 
-    sentinel <- rast("./data/satteliteimagery/processed_satelliteimage.tif")
+    sentinel <- rast("/database/data/input/processed_satelliteimage.tif")
 
     # loading reference data 
-    referencedata <- read_sf("./data/trainingData/train_data.gpkg")
+    referencedata <- read_sf("/database/data/input/train_data.gpkg")
 
     # Trainingsdaten auf die Bolivien Projektion umändern
     referencedata <- st_transform(referencedata, crs(sentinel))

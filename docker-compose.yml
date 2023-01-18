@@ -2,17 +2,18 @@
 version: '3'
 services: 
     frontend: 
-        container_name: frontend
-        build: 
-            dockerfile: ./atlantgis_app/Dockerfile
+        container_name: atlantigsfrontend
+        build: .
+        image: 2001310/frontend
         ports: 
             - '3000:3000'
           
     backend:
-        container_name: backend 
-        build: 
-            dockerfile: ./backend/Dockerfile
+        container_name: pumberbackend 
+        build: .
+        image: maschroder/plumberbackend
         restart: always
         ports:
             - "4000:4000"
-        
+    
+    
