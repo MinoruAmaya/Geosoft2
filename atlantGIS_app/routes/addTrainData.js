@@ -5,7 +5,7 @@ var multer = require('multer');
 
 // multer storage -------------------------------------------------------------------------------------------------------
 // trainingDataStorage
-let fileURL = "./database/data/trainingdata/"
+let fileURL = "database/trainingdata/"
 var trainingDataStorage = multer.diskStorage({
   destination: function (request, file, callback) {
     callback(null, fileURL);
