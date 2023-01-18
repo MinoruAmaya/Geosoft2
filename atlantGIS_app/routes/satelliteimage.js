@@ -6,7 +6,7 @@ let multer = require('multer');
 // satelliteImageStorage
 var satelliteImageStorage = multer.diskStorage({
   destination: function (request, file, callback) {
-    callback(null, "./database/data/input/");
+    callback(null, "database/input/");
   },
   filename: function (request, file, callback) {
     fileName = "satelliteimage.tif";

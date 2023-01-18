@@ -17,13 +17,13 @@ router.get('/', function (req, res, next) {
 router.post('/downloadData', function (req, res, next) {
     const downloadArray = Array();
     if (req.body.prediction == "on") {
-        downloadArray.push({path: './database/data/output/output_placeholder.txt', name: 'output_placeholder.txt'})
+        downloadArray.push({path: 'database/output/output_placeholder.txt', name: 'output_placeholder.txt'})
     } if (req.body.aoa == "on")
-        downloadArray.push({path: './database/data/trainingdata/trainingdata_placeholder.txt', name: 'trainingdata_placeholder.txt'})
+        downloadArray.push({path: 'database/trainingdata/trainingdata_placeholder.txt', name: 'trainingdata_placeholder.txt'})
     if (req.body.location == "on")
-        downloadArray.push({path: './database/data/satelliteimagery/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
+        downloadArray.push({path: 'database/satelliteimagery/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
     if (req.body.model == "on")
-        downloadArray.push({path: './database/data/model/model_placeholder.txt', name: 'model_placeholder.txt'})
+        downloadArray.push({path: 'database/model/model_placeholder.txt', name: 'model_placeholder.txt'})
     if(downloadArray.length!=0)
         res.zip(downloadArray);
     else    
