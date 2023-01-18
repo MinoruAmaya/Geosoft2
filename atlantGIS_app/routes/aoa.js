@@ -16,6 +16,10 @@ router.post("/updateTrainData", function (req, res, next) {
 
 // route to aoa to calculate it again
 router.post("/classification", function (req, res, next) {
+  /**
+  not tested
+  fetch("http://backend:4000/aoa");
+   */
   res.render('aoa');
 })
 

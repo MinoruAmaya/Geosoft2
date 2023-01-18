@@ -39,10 +39,14 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
   if (fileType.toLowerCase() == 'gpkg') {
     fetch("http://backend:4000/geopackageToGeoJSON");
   }
-  res.render('createTrainData');
+  res.render('trainModell');
 })
 
 router.post("/newaoa", function (req, res, next) {
+  /**
+  not tested
+  fetch("http://backend:4000/aoa");
+   */
   res.render('aoa');
 })
 

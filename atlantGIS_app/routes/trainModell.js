@@ -31,12 +31,20 @@ router.get('/', function (req, res, next) {
 // Upload trained model
 // route to aoa
 router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req, res, next) {
+  /**
+  not tested
+  fetch("http://backend:4000/aoa");
+   */
   res.render('aoa');
 })
 
 // model has to be trained
 // route to trainData
 router.post("/uploadUntrainModell", function (req, res, next) {
+  /**
+  not tested
+  fetch("http://backend:4000/trainModell");
+   */
   res.render('trainData');
 })
 
