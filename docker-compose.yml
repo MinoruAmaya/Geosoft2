@@ -3,16 +3,21 @@ version: '3'
 services: 
     frontend: 
         container_name: frontend
-        build: 
-            dockerfile: ./atlantgis_app/Dockerfile
+        image: atlantgis_app-frontend
         ports: 
             - '3000:3000'
+        volumes:
+            - database:/app/database
           
     backend:
         container_name: backend 
-        build: 
-            dockerfile: ./backend/Dockerfile
+        image: atlantgis_app-backend
         restart: always
         ports:
             - "4000:4000"
+        volumes:
+            - database:/app/database
+
+volumes:
+    database:
         
