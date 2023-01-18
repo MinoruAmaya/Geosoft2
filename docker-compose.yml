@@ -5,15 +5,22 @@ services:
         container_name: atlantigsfrontend
         build: .
         image: 2001310/frontend
+
         ports: 
             - '3000:3000'
+        volumes:
+            - database:/app/database
           
     backend:
-        container_name: pumberbackend 
+        container_name: backend 
         build: .
-        image: maschroder/plumberbackend
+        image: 2001310/backend
         restart: always
         ports:
             - "4000:4000"
-    
+        volumes:
+            - database:/app/database
+
+volumes:
+    database:
     
