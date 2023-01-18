@@ -1,15 +1,19 @@
 FROM node:14
 
 
-# Copy app code source from our local folder into the docker /app working directory
-COPY . /app
-
 # Set the /app directory as working directory
 WORKDIR /app
 
 # Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+# Install app dependencies
 RUN npm install
 
+# Bundle app source
+COPY . .
 
 # Expose app on a given port
 EXPOSE 3000
