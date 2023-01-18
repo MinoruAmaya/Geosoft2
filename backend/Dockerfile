@@ -1,7 +1,7 @@
 FROM rstudio/plumber
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 RUN apt-get update -qq && apt-get install -y libcurl4-openssl-dev \
     libssl-dev \ 
@@ -17,26 +17,26 @@ RUN apt-get update -qq && apt-get install -y libcurl4-openssl-dev \
     libv8-dev
     
 # Install r packages
-RUN R -e "install.packages('CAST', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
-RUN R -e "install.packages('caret', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('sp', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
-RUN R -e "install.packages('ggplot2', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('lattice', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('Rserve', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('gridExtra', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('viridisLite', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('viridis', dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('geojson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
-RUN R -e "install.packages('rjson', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
-RUN R -e "install.packages('raster', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
-RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+# RUN R -e "install.packages('CAST', dependencies=TRUE)"
+# RUN R -e "install.packages('caret', dependencies=TRUE)"
+# RUN R -e "install.packages('sp', dependencies=TRUE)"
+# RUN R -e "install.packages('ggplot2', dependencies=TRUE)"
+# RUN R -e "install.packages('lattice', dependencies=TRUE)"
+# RUN R -e "install.packages('Rserve', dependencies=TRUE)"
+# RUN R -e "install.packages('latticeExtra', dependencies=TRUE)"
+# RUN R -e "install.packages('randomForest', dependencies=TRUE)"
+# RUN R -e "install.packages('gridExtra', dependencies=TRUE)"
+# RUN R -e "install.packages('viridisLite', dependencies=TRUE)"
+# RUN R -e "install.packages('viridis', dependencies=TRUE)"
+# RUN R -e "install.packages('geojson', dependencies=TRUE)"
+# RUN R -e "install.packages('rjson', dependencies=TRUE)"
+# RUN R -e "install.packages('raster', dependencies=TRUE)"
+# RUN R -e "install.packages('terra', dependencies=TRUE)"
 
-COPY . /app 
+COPY ./backend/plumber.R ./
 
 # Expose app on a given port
-EXPOSE 4000
+EXPOSE 8000
 
 # Execute plumber.R
 CMD ["plumber.R"]
