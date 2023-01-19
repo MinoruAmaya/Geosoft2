@@ -1,17 +1,22 @@
 var express = require('express');
+const multer = require('multer');
 var router = express.Router();
-var multer = require('multer');
+
+// global attributes
+let fileURL = "database/input/"
+let fileName;
+let fileType
 
 
 // multer storage -------------------------------------------------------------------------------------------------------
 // trainingDataStorage
-let fileURL = "database/trainingdata/"
 var trainingDataStorage = multer.diskStorage({
-  destination: function (request, file, callback) {
+  destination: function (req, file, callback) {
     callback(null, fileURL);
   },
-  filename: function (request, file, callback) {
-    fileName = "trainingdata" + file.Type;
+  filename: function (req, file, callback) {
+    fileType = file.originalname.toString().split(".")[1];
+    fileName = "trainingdata." + fileType;
     callback(null, fileName);
   }
 });
@@ -23,7 +28,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('addTrainData');
+  res.render('createTrainData');
 });
 
 
@@ -31,14 +36,20 @@ router.get('/', function (req, res, next) {
 // route to trainModel
 // fetch not testet so not working ---------
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
-  file = fileURL + fileName
-  let extension = file.split('.').pop();
-  if (extension.toLowerCase() == 'gpkg') {
-    fetch("http://backend:4000/geopackageToGeoJSON");
+  if (fileType.toLowerCase() == 'gpkg') {
+    console.log("gpkgToGeoJSON")
+    fetch("http://http://127.0.0.1:8000/gpkgToGeojson");
   }
-  res.render('trainModel');
+  res.render('createTrainData');
 })
 
-
+//route to aoa
+router.post("/newaoa", function (req, res, next) {
+  /**
+  not tested
+  fetch("http://http://127.0.0.1:8000/classificationAoa");
+   */
+  res.render('aoa');
+})
 
 module.exports = router;

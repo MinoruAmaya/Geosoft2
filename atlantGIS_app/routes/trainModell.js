@@ -33,7 +33,7 @@ router.get('/', function (req, res, next) {
 router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req, res, next) {
   /**
   not tested
-  fetch("http://backend:4000/aoa");
+  fetch("http://http://127.0.0.1:8000/aoa");
    */
   res.render('aoa');
 })
@@ -43,7 +43,7 @@ router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req
 router.post("/uploadUntrainModell", function (req, res, next) {
   /**
   not tested
-  fetch("http://backend:4000/trainModell");
+  fetch("http://http://127.0.0.1:8000/trainModell");
    */
   res.render('trainData');
 })

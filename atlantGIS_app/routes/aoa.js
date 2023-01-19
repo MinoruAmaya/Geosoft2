@@ -18,7 +18,7 @@ router.post("/updateTrainData", function (req, res, next) {
 router.post("/classification", function (req, res, next) {
   /**
   not tested
-  fetch("http://backend:4000/aoa");
+  fetch("http://http://127.0.0.1:8000/classificationAoa");
    */
   res.render('aoa');
 })

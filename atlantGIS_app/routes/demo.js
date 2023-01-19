@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/startDemo', function(req, res, next) {
-  fetch("http://backend:4000/rscripts/trainModell").then((result) => {
+  fetch("http://http://127.0.0.1:8000/trainModell").then((result) => {
     res.render('demo', message=result);
     console.log(result)
   }).catch((error) => {

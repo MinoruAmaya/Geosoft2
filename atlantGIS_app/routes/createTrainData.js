@@ -3,7 +3,7 @@ const multer = require('multer');
 var router = express.Router();
 
 // global attributes
-let fileURL = "database/trainingdata/"
+let fileURL = "database/input/"
 let fileName;
 let fileType
 
@@ -16,7 +16,7 @@ var trainingDataStorage = multer.diskStorage({
   },
   filename: function (req, file, callback) {
     fileType = file.originalname.toString().split(".")[1];
-    fileName = "trainingdata" + fileType;
+    fileName = "trainingdata." + fileType;
     callback(null, fileName);
   }
 });
@@ -28,7 +28,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('createTrainData');
+  res.render('addTrainData');
 });
 
 
@@ -37,17 +37,11 @@ router.get('/', function (req, res, next) {
 // fetch not testet so not working ---------
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
-    fetch("http://backend:4000/geopackageToGeoJSON");
+    console.log("gpkgToGeoJSON")
+    fetch("http://http://127.0.0.1:8000/gpkgToGeojson");
   }
-  res.render('trainModell');
+  res.render('trainModel');
 })
 
-router.post("/newaoa", function (req, res, next) {
-  /**
-  not tested
-  fetch("http://backend:4000/aoa");
-   */
-  res.render('aoa');
-})
 
 module.exports = router;
