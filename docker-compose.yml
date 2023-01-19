@@ -2,8 +2,9 @@
 version: '3'
 services: 
     frontend: 
-        container_name: atlantigsfrontend
-        build:
+        container_name: atlantgisfrontend
+        build: 
+            context: .
             dockerfile: ./atlantGIS_app/Dockerfile
         ports: 
             - '3000:3000'
@@ -13,6 +14,7 @@ services:
     backend:
         container_name: atlantgisbackend 
         build:
+            context: .
             dockerfile: ./backend/Dockerfile
         restart: always
         ports:
