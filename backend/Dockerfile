@@ -35,6 +35,8 @@ RUN R -e "install.packages('terra', dependencies=TRUE)"
 
 COPY ./backend/plumber.R ./
 
+COPY ./backend/ ./
+
 # Expose app on a given port
 EXPOSE 8000
 
