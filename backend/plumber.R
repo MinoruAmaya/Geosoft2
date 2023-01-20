@@ -156,7 +156,7 @@ train_modell <- function(area, algorithm) {
      #predictors <- c("B02","B03","B04","B08","B05","B06","B07","B11",
      #           "B12","B8A","NDVI","NDVI_3x3_sd","NDVI_5x5_sd")
 
-     train_ids <- createDataPartition(extr$ID, p = 0.3, list = FALSE)
+     train_ids <- createDataPartition(extr$ID, p = 0.1, list = FALSE)
      train_data <- extr[train_ids, ]
 
      train_data <- train_data[complete.cases(train_data[, predictors]), ]
@@ -169,8 +169,5 @@ train_modell <- function(area, algorithm) {
                 ntree = 500)
 
      # save the model
-     saveRDS(model, file = "./database/input/RFModel.RDS", overwrite = TRUE)
-
-     # return
-     return(0)
- }
+     saveRDS(model, file = "./database/input/RFModel.RDS")
+}
