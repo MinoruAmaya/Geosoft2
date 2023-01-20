@@ -33,7 +33,13 @@ router.get('/', function (req, res, next) {
 router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req, res, next) {
   /**
   not tested
-  fetch("http://http://127.0.0.1:8000/aoa");
+  fetch("http://atlantgisbackend:8000/classificationAoa")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
    */
   res.render('aoa');
 })
@@ -43,7 +49,13 @@ router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req
 router.post("/uploadUntrainModell", function (req, res, next) {
   /**
   not tested
-  fetch("http://http://127.0.0.1:8000/trainModell");
+  fetch("http://atlantgisbackend:8000/trainModell")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
    */
   res.render('trainData');
 })

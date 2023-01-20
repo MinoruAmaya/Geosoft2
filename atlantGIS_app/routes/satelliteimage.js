@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 // Upload satelliteimagery
 // Route to addTrainData
 router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild"), function (req, res, next) {
-  res.render('addTrainData');
+  res.render('createTrainData');
 })
 
 

@@ -1,6 +1,7 @@
 var express = require('express');
 const multer = require('multer');
 var router = express.Router();
+var fetch = require('node-fetch');
 
 // global attributes
 let fileURL = "database/input/"
@@ -28,7 +29,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('createTrainData');
+  res.render('addTrainData');
 });
 
 
@@ -38,16 +39,28 @@ router.get('/', function (req, res, next) {
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
     console.log("gpkgToGeoJSON")
-    fetch("http://http://127.0.0.1:8000/gpkgToGeojson");
+    fetch("http://atlantgisbackend:8000/gpkgToGeojson")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
-  res.render('createTrainData');
+  res.render('addTrainData');
 })
 
 //route to aoa
 router.post("/newaoa", function (req, res, next) {
   /**
   not tested
-  fetch("http://http://127.0.0.1:8000/classificationAoa");
+  fetch("http://atlantgisbackend:8000/classificationAoa")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
    */
   res.render('aoa');
 })

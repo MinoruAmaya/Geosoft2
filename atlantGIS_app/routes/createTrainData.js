@@ -28,7 +28,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('addTrainData');
+  res.render('createTrainData');
 });
 
 
@@ -38,7 +38,13 @@ router.get('/', function (req, res, next) {
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
     console.log("gpkgToGeoJSON")
-    fetch("http://http://127.0.0.1:8000/gpkgToGeojson");
+    fetch("http://atlantgisbackend:8000/gpkgToGeojson")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   res.render('trainModel');
 })
