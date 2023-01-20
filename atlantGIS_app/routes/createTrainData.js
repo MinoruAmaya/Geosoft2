@@ -1,6 +1,7 @@
 var express = require('express');
 const multer = require('multer');
 var router = express.Router();
+var fetch = require('node-fetch');
 
 // global attributes
 let fileURL = "database/input/"

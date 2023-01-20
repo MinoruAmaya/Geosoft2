@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 
 var indexRouter = require('./routes/index');
 var satelliteimageRouter = require('./routes/satelliteimage');
-var trainModellRouter = require('./routes/trainModell');
+var trainModelRouter = require('./routes/trainModel');
 var createTrainDataRouter = require('./routes/createTrainData');
 var areaRouter = require('./routes/area');
 var analyseRouter = require('./routes/analyse');
@@ -38,7 +38,7 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/satelliteimage', satelliteimageRouter);
-app.use('/trainModell', trainModellRouter);
+app.use('/trainModel', trainModelRouter);
 app.use('/createTrainData', createTrainDataRouter);
 app.use('/area', areaRouter);
 app.use('/analyse', analyseRouter);

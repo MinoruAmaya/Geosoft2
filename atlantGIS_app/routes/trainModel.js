@@ -1,6 +1,7 @@
 var express = require('express');
 const multer = require('multer');
 var router = express.Router();
+var fetch = require('node-fetch');
 
 
 
@@ -57,7 +58,7 @@ router.post("/uploadUntrainModell", function (req, res, next) {
         console.log(error);
       });
    */
-  res.render('trainData');
+  res.render('aoa');
 })
 
 
