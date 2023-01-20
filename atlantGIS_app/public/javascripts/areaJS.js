@@ -71,17 +71,20 @@ map.on('draw:created', function(e) {
      
 });
 
+//Function to delete drawn Rectangle automatically
+L.EditToolbar.Delete.include({
+  enable: function () {
+    this.options.featureGroup.clearLayers()
+    enableDraw();
+  }
+})
 
-map.on('draw:deleted', function (e) {
-    var deletedLayers = e.layers._layers;
-        for (var layer in deletedLayers) {
-           console.log(deletedLayers[layer]);
-        }
-  //Fügt Toolbar wieder hinzu, falls Rechteck gelöscht wird.
-	self.drawControlEdit.remove();
+//Edit Toolbar gets activated after Rectangle is deleted
+function enableDraw(){
+  self.drawControlEdit.remove();
 	self.drawControlFull.addTo(map);
   deactivateDigitalization();
-});
+}
 
 
 
