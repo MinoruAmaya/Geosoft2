@@ -18,7 +18,13 @@ router.post("/updateTrainData", function (req, res, next) {
 router.post("/classification", function (req, res, next) {
   /**
   not tested
-  fetch("http://http://127.0.0.1:8000/classificationAoa");
+  fetch("http://atlantgisbackend:8000/classificationAoa")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
    */
   res.render('aoa');
 })
@@ -32,13 +38,13 @@ router.post("/classification", function (req, res, next) {
 router.post('/downloadData', function (req, res, next) {
   const downloadArray = Array();
   if (req.body.prediction == "on") {
-      downloadArray.push({path: 'database/output/output_placeholder.txt', name: 'output_placeholder.txt'})
+      downloadArray.push({path: 'database/output/classification.tif', name: 'classification.tif'})
   } if (req.body.aoa == "on") 
-      downloadArray.push({path: 'database/input/trainingdata_placeholder.txt', name: 'trainingdata_placeholder.txt'})
+      downloadArray.push({path: 'database/input/area_of_applicability.tif', name: 'area_of_applicability.tif'})
   if (req.body.location == "on")
       downloadArray.push({path: 'database/input/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
   if (req.body.model == "on")
-      downloadArray.push({path: 'database/input/model_placeholder.txt', name: 'model_placeholder.txt'})
+      downloadArray.push({path: 'database/input/model.RDS', name: 'model.RDS'})
   if(downloadArray.length!=0)
       res.zip(downloadArray);
   else    

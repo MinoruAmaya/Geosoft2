@@ -53,8 +53,8 @@ classification_and_aoa <- function() {
 
 
      # load all data required
-     sentinel <- stack("Pfad einsetzten")
-     trained_model <- get(load("./data/model/rf_model.RDS"))
+     sentinel <- stack("database/input/satelliteimage.tif")
+     trained_model <- get(load("database/input/model.RDS"))
      # Eventuell Daten aggregieren (optional)
      #sentinel <- aggregate(sentinel,5) # aggreagteto minimize time
      # calculate the classification
@@ -68,7 +68,7 @@ classification_and_aoa <- function() {
 
      # save classification
      writeRaster(prediction_terra,
-         "./data/output/classification.tif", overwrite = TRUE)
+         "database/output/classification.tif", overwrite = TRUE)
 
      # Optional: to start parallel calculation
      cl <- makeCluster(detectCores() - 1)
@@ -78,7 +78,7 @@ classification_and_aoa <- function() {
 
      area_of_applicability <- aoa(sentinel, trained_model, cl = cl)
      writeRaster(area_of_applicability,
-         "./data/output/area_of_applicability.tif")
+         "database/output/area_of_applicability.tif")
  }
 
  # Farben für Visualisierung
@@ -111,15 +111,15 @@ classification_and_aoa <- function() {
 
 
 #* function for converting a gpkg to geojson
-#* @param parameter
 #* @get /gpkgToGeojson
-#* @serializer png
-geopackage_to_geojson <- function(filepath, filename) {
-
-     train_data_sf <- read_sf(paste(filepath,
-         paste(filename, ".gpkg", sep = ""), sep = ""))
-     train_data_sf_4326 <- st_transform(train_data_sf, crs = st_crs("EPSG:4326"))
-     train_data_geojson <- sf_geojson(train_data_sf_4326)
+#* @serializer json
+geopackage_to_geojson <- function() {
+    filepath <- "database/input/"
+    filename <- "trainingdata"
+    train_data_sf <- read_sf(paste(filepath,
+        paste(filename, ".gpkg", sep = ""), sep = ""))
+    train_data_sf_4326 <- st_transform(train_data_sf, crs = st_crs("EPSG:4326"))
+    train_data_geojson <- sf_geojson(train_data_sf_4326)
      geo_write(train_data_geojson, paste(filepath,
          paste(filename, ".geojson", sep = ""), sep = ""))
  }
@@ -134,10 +134,10 @@ train_modell <- function(area, algorithm) {
 
 
      # loading satelliteimagery 
-     sentinel <- rast("./database/input/processed_satelliteimage.tif")
+     sentinel <- rast("database/input/processed_satelliteimage.tif")
 
      # loading reference data 
-     referencedata <- read_sf("./database/input/train_data.gpkg")
+     referencedata <- read_sf("database/input/train_data.gpkg")
 
      # Trainingsdaten auf die Bolivien Projektion umändern
      referencedata <- st_transform(referencedata, crs(sentinel))
@@ -156,7 +156,7 @@ train_modell <- function(area, algorithm) {
      #predictors <- c("B02","B03","B04","B08","B05","B06","B07","B11",
      #           "B12","B8A","NDVI","NDVI_3x3_sd","NDVI_5x5_sd")
 
-     train_ids <- createDataPartition(extr$ID, p = 0.3, list = FALSE)
+     train_ids <- createDataPartition(extr$ID, p = 0.1, list = FALSE)
      train_data <- extr[train_ids, ]
 
      train_data <- train_data[complete.cases(train_data[, predictors]), ]
@@ -169,8 +169,5 @@ train_modell <- function(area, algorithm) {
                 ntree = 500)
 
      # save the model
-     saveRDS(model, file = "./database/input/RFModel.RDS", overwrite = TRUE)
-
-     # return
-     return(0)
- }
+     saveRDS(model, file = "database/input/Model.RDS")
+}
