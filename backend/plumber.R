@@ -115,7 +115,7 @@ classification_and_aoa <- function() {
 #* @serializer json
 geopackage_to_geojson <- function() {
     filepath <- "database/input/"
-    filename <- "trainingdata"
+    filename <- "train_data"
     train_data_sf <- read_sf(paste(filepath,
         paste(filename, ".gpkg", sep = ""), sep = ""))
     train_data_sf_4326 <- st_transform(train_data_sf, crs = st_crs("EPSG:4326"))

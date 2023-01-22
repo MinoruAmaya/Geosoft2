@@ -1,30 +1,58 @@
+if(localStorage.getItem('theme') == 'dark'){
+  activateDarkMode();
+
+  if(document.getElementbyId('switchDark').checked){
+      localStorage.setItem('switchDark', true)
+  }
+}
+
+function activateDarkMode() {
+  let isDark = document.body.classList.toggle('darkMode');
+
+  if(isDark){
+      activateDarkMode.checked = true;
+      localStorage.setItem('theme','dark');
+      document.getElementById('switchDark').setAttribute('checked', 'checked');
+
+  }
+  else{
+      activateDarkMode.checked = false;
+      localStorage.removeItem('theme', 'dark')
+  }
+}
+
+
+
+// ######################################################################
 /**
- // Dark-Mode:
+* Darkmode version 2 inaktiv
+*/
 
- function addDarkmodeWidget() {
-    new Darkmode().showWidget();
-  }
-  window.addEventListener('load', addDarkmodeWidget);
+const darkSwitch = document.getElementById('darkSwitch');
+window.addEventListener('load', () => {
+if (darkSwitch) {
+  initTheme();
+  darkSwitch.addEventListener('change', () => {
+  resetTheme();
+  });
+}
+});
 
-  import Darkmode from 'darkmode-js';
+function initTheme() {
+const darkThemeSelected =
+  localStorage.getItem('darkSwitch') !== null &&
+  localStorage.getItem('darkSwitch') === 'dark';
+darkSwitch.checked = darkThemeSelected;
+darkThemeSelected ? document.body.setAttribute('data-theme', 'dark') :
+  document.body.removeAttribute('data-theme');
+}
 
-  new Darkmode().showWidget();
-
-  const options = {
-    bottom: '64px', // default: '32px'
-    right: 'unset', // default: '32px'
-    left: '32px', // default: 'unset'
-    time: '0.5s', // default: '0.3s'
-    mixColor: '#fff', // default: '#fff'
-    backgroundColor: '#fff',  // default: '#fff'
-    buttonColorDark: '#100f2c',  // default: '#100f2c'
-    buttonColorLight: '#fff', // default: '#fff'
-    saveInCookies: false, // default: true,
-    label: '🌓', // default: ''
-    autoMatchOsTheme: true // default: true
-  }
-  
-  const darkmode = new Darkmode(options);
-  darkmode.showWidget();
-
-   */
+function resetTheme() {
+if (darkSwitch.checked) {
+  document.body.setAttribute('data-theme', 'dark');
+  localStorage.setItem('darkSwitch', 'dark');
+} else {
+  document.body.removeAttribute('data-theme');
+  localStorage.removeItem('darkSwitch');
+}
+}
