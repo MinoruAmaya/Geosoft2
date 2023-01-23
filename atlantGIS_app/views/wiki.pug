@@ -2,39 +2,60 @@ extends layout
 
 block content
   main
-    h1 Wiki
+    h1 Wiki des AtlantGIS Webtools 
     br
     ul#paginated-list(data-current-page="1" aria-live="polite")
       div#form_div_active-form
         form
           label.col-md-4.col-form-label.fw-bolder(for='trainMod') Satellitenbild
           br
-          | Text
+          | Satellitenbilder stellen ein zentrales Instrument der Fernerkundung dar und bilden die Grundlage für Datenerfassung, Datenvisualisierung und Analyse. 
+          | Durch die Etablierung von hochqualitativer Satellitensensoren wird heutzutage eine Bildgebung mit sehr hoher Auflösung ermöglicht.
+          | Anwendung findet diese Technologie beispielsweise in der Erkennung von Landnutzungsänderungen, Landwirtschaft oder Katastrophenschutz.
+          | Auch das Webtool der AtlantGIS GmbH profitiert von den genauen, zuverlässigen und zeitnahen Daten, die von Sentinel-Satelliten aufgenommen werden.
       div#form_div_active-form
         form
-          label.col-md-4.col-form-label.fw-bolder(for='trainMod') Modell
+          label.col-md-4.col-form-label.fw-bolder(for='trainMod') Maschinelles Lernen
           br
-          | Text
+          | Maschinelles Lernen ist eine Unterkategorie der künstlichen Intelligenz. Ziel ist es, dass die ausdauernde und schnelle Maschine Muster erkennt und Wissen 
+          | erwirbt. Dafür arbeiten Entwickler mit Algorithmen und Technologien zur Mustererkennung und die Nutzung zusätzlicher Daten führt dazu,
+          | dass die Ergebnisse der Maschine immer präziser werden.
       div#form_div_active-form        
         form
           label.col-md-4.col-form-label.fw-bolder(for='training') Trainingsdaten
           br
-          | Text
+          | Im Gegensatz zum unüberwachten Lernen benötigt das Vorgehen des überwachten Lernens Datensätze mit Trainings-, Validierungs- und Testdaten.
+          | Damit das Modell des maschinellen Lernens möglichst präzise Ergebnisse liefert, muss dieses mit Trainingsdaten trainiert werden.
+          | Ein Trainingsdatensatz ist ein Datensatz, der Beispiele, die für das Lernen der Muster und Zusammenhänge in den Daten verwendet wird, enthält.
       div#form_div.active-form
         form
-          label.col-md-4.col-form-label.fw-bolder(for='training') Klassifikation
+          label.col-md-4.col-form-label.fw-bolder(for='training') Landnutzungsklassifikation
           br
-          | Text
-      div#form_div.active-form
-        form
-          label.col-md-4.col-form-label.fw-bolder(for='training') Klassifikation
-          br
-          | Text
+          | Landnutzung und -bedeckung sind wichtige Indikatoren für menschengemachte Umweltbelastung. Landnutzungsänderungen können Auswirkungen auf den Klimawandel oder Biodiversität haben.
+          | Landnutzngsklassifikation ist eine anspruchsvolle Bildbearbeitung der Fernerkundung, bei der durch eine schematische Klassifizierung die verschiedenen Nutzungsarten (z.B. Land-/Forstwirtschaft, Industrie, Siedlungsfläche, Gewässer, ...) auf einer Karte visualisiert werden können.
+          | 
       div#form_div.active-form
         form
           label.col-md-4.col-form-label.fw-bolder(for='training') Area of Applicability
           br
-          | Text
+          | Modelle des maschinellen Lernens werden in den Geowissenschaften vor allem auch für die Vorhersage von Ort und Räumen verwendet (s. Landnutzungsklassifikation).
+          | Trifft der Algorithmus Aussagen über unbekannt Orte, kann es schnell zu Fehlern kommen. Die Area od Applicability (AOA) bietet hierbei eine Unterstützung zur Beaurteilung,
+          | inwiefern die getroffenen Aussagen zuverlässig sind. Mithilfe von Schwellenwerten kann über die Güte der Informationen entschieden werden, ob das aktuelle Modell 
+          | verwendet werden sollte, oder ob es mit weiteren Trainingsdaten trainiert werden soll, das somit gegebenenfalls ein besseres Ergebnis erzielen könnte.
+      div#form_div.active-form
+        form
+          label.col-md-4.col-form-label.fw-bolder(for='training') Quellen
+          br
+          | Alle Quellen mithilfe denen die Texte des Wikis verfasst wurden: 
+          br
+          br
+          | https://eos.com/de/products/high-resolution-images/
+          br
+          | https://datasolut.com/wiki/trainingsdaten-und-testdaten-machine-learning/
+          br
+          | https://github.com/Geosoft2/geosoft2-2022
+          br
+          | https://www.umweltbundesamt.de/themen/boden-landwirtschaft/flaechensparen-boeden-landschaften-erhalten/corine-land-cover-clc
     nav.pagination-container
       button#prev-button.pagination-button(aria-label="Previous page" title="Previous page")
         | &amp;lt;
