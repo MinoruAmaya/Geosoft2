@@ -6,7 +6,7 @@ var fetch = require('node-fetch');
 // global attributes
 let fileURL = "database/input/"
 let fileName;
-let fileType
+let fileType;
 
 
 // multer storage -------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ var trainingDataStorage = multer.diskStorage({
   },
   filename: function (req, file, callback) {
     fileType = file.originalname.toString().split(".")[1];
-    fileName = "trainingdata." + fileType;
+    fileName = "train_data." + fileType;
     callback(null, fileName);
   }
 });

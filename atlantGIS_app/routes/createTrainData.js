@@ -17,7 +17,7 @@ var trainingDataStorage = multer.diskStorage({
   },
   filename: function (req, file, callback) {
     fileType = file.originalname.toString().split(".")[1];
-    fileName = "trainingdata." + fileType;
+    fileName = "train_data." + fileType;
     callback(null, fileName);
   }
 });
@@ -38,7 +38,6 @@ router.get('/', function (req, res, next) {
 // fetch not testet so not working ---------
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
-    console.log("gpkgToGeoJSON")
     fetch("http://atlantgisbackend:8000/gpkgToGeojson")
       .then(response => {
         console.log(response.text());
