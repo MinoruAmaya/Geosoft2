@@ -21,7 +21,7 @@ library(viridis)
 
 # plumber.R
 
-#* Echo the parameter that was sent in
+#* Funktion, um später die R Skripts zu testen
 #* @param msg The message to echo back.
 #* @get /echo
 function(msg=""){
