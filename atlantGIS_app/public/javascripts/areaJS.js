@@ -71,6 +71,8 @@ map.on('draw:created', function(e) {
      
 });
 
+
+
 //Function to delete drawn Rectangle automatically
 L.EditToolbar.Delete.include({
   enable: function () {
@@ -100,6 +102,7 @@ function activateDigitalization(){
         btn_weiter.classList.add('btn-primary');
     }
     counter++;
+  
   }
     
     

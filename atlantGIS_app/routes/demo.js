@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/startDemo', function(req, res, next) {
-  fetch("http://atlantgisbackend:8000/trainModell").then((result) => {
+  fetch("http://127.0.0.1:8000/classificationAoa").then((result) => {
     res.render('demo', message=result);
     console.log(result)
   }).catch((error) => {
