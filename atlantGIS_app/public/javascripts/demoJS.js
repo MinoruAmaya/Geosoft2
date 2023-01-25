@@ -13,7 +13,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
   
     var btn = document.getElementById("demo_btn");
-    btn.addEventListener("click", function(){addPredictionAndAoaToMap("http://localhost:3000/output/Klassifikation_muenster.tif"/*, "database/output/AOA_muenster.tif"*/)});
+    btn.addEventListener("click", function(){addPredictionAndAoaToMap("http://127.0.0.1:8000/classificationAoa"/*, "database/output/AOA_muenster.tif"*/)});
   
     function addPredictionAndAoaToMap(predUrl, /*aoaUrl*/) {
       fetch(predUrl)

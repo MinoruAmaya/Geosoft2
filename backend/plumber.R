@@ -69,17 +69,17 @@ classification_and_aoa <- function() {
      # save classification
      writeRaster(prediction_terra,
          "database/output/classification.tif", overwrite = TRUE)
-     #plot(prediction_terra, col = cols)
-
+     plot(prediction_terra, col = cols)
+}
       # Optional: to start parallel calculation
       #cl <- makeCluster(detectCores() - 1)
       #registerDoParallel(cl)
       # calculate AOA
-      area_of_applicability <- aoa(sentinel, model)
-      writeRaster(area_of_applicability,
-          "database/output/area_of_applicability.tif")
-      plot(area_of_applicability)
-  }
+     # area_of_applicability <- aoa(sentinel, model)
+     # writeRaster(area_of_applicability,
+       #   "database/output/area_of_applicability.tif")
+      #plot(area_of_applicability)
+  #}
 
  # Farben für Visualisierung
  #cols_s <- c("lightgreen","blue","green","grey","chartreuse",
