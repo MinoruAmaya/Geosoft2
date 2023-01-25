@@ -55,7 +55,7 @@ classification_and_aoa <- function() {
     
      # load all data required
      sentinel <- rast("database/input/satelliteimage.tif")
-     model <- readRDS("database/input/RFModel.RDS")
+     model <- readRDS("database/input/Model.RDS")
      
      prediction <- predict(as(sentinel, "Raster"), model)
      projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
@@ -130,7 +130,6 @@ geopackage_to_geojson <- function() {
 #* function for training the model
 #* @param parameter
 #* @get /trainModell
-#* @serializer png
 train_modell <- function(algorithm) {
 
      # loading satelliteimagery 
