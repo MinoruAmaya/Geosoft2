@@ -13,10 +13,10 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
   
     var btn = document.getElementById("demo_btn");
-    btn.addEventListener("click", function(){addPredictionAndAoaToMap("http://127.0.0.1:8000/classificationAoa"/*, "database/output/AOA_muenster.tif"*/)});
+    btn.addEventListener("click", function(){addPredictionAndAoaToMap("http://localhost:3000/output/AOA.tif", "AOA"); addPredictionAndAoaToMap("http://localhost:3000/output/classification.tif", "Klassifikation")});
   
-    function addPredictionAndAoaToMap(predUrl, /*aoaUrl*/) {
-      fetch(predUrl)
+    function addPredictionAndAoaToMap(aoaUrl, name) {
+      fetch(aoaUrl)
         .then(response => response.arrayBuffer())
         .then(parseGeoraster)
         .then(georaster => {
@@ -49,7 +49,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
           });
           layer.addTo(map);
   
-          layerCtrl.addOverlay(layer, "Klassifikation");
+          layerCtrl.addOverlay(layer, name);
   
           map.fitBounds(layer.getBounds());
         });
