@@ -8,16 +8,13 @@ block content
             .col-md-8
                 div#form_div.active-form
                     #map 
+                    br
+                    form(action='/aoa/updateTrainData' method='post' enctype="multipart/form-data")
+                        button#btn_createData.btn.btn-primary.mb-2 Trainingsdaten hinzufügen
             .col-md-1 
             br
             br
             .col-md-3
-                div#form_div.active-form
-                    form(action='/aoa/classification' method='post' enctype="multipart/form-data")
-                        button.btn.btn-primary.mb-2 Klassifikation durchführen
-                    form(action='/aoa/updateTrainData' method='post' enctype="multipart/form-data")
-                        button#btn_createData.btn.btn-primary.mb-2 Trainingsdaten hinzufügen
-                br
                 div#form_div.active-form
                     p.col-md-12.col-form-label.fw-bolder Ergebnisse
                     form(action='/downloadData' method='post')
@@ -36,6 +33,10 @@ block content
                         br
                         input#model(type='checkbox' name="model")
                         |  Trained model
+                        br
+                        br
+                        input#model(type='checkbox' name="traindata")
+                        |  Traindata
                         br
                         br
                         button.btn.btn-primary.mb-2 Download
