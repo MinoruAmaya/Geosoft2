@@ -93,13 +93,16 @@ function enableDraw(){
  * the "weiter" button should be activated.
  */
 function activateDigitalization(){
+  
     if(counter === 0){
         btn_weiter.classList.remove('btn-secondary');
         btn_weiter.classList.remove('disabled');
         btn_weiter.classList.add('btn-primary');
     }
     counter++;
-}
+  }
+    
+    
 
 /**
  * If the area gets deleted
