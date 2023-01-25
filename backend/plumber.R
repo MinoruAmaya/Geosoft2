@@ -70,7 +70,7 @@ classification_and_aoa <- function() {
      writeRaster(prediction_terra,
          "database/output/classification.tif", overwrite = TRUE)
      plot(prediction_terra, col = cols)
-}
+
       # Optional: to start parallel calculation
       #cl <- makeCluster(detectCores() - 1)
       #registerDoParallel(cl)
