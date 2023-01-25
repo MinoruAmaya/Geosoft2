@@ -54,9 +54,10 @@ classification_and_aoa <- function() {
     library(raster)
     
      # load all data required
-     sentinel <- rast("database/input/satelliteimage.tif")
-     model <- readRDS("database/input/RFModel.RDS")
+     sentinel <- rast("database/input/rasterdaten.tif")
+     model <- readRDS("database/output/model.RDS")
      
+
      prediction <- predict(as(sentinel, "Raster"), model)
      projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
@@ -64,23 +65,22 @@ classification_and_aoa <- function() {
      # make it visualy more appealing
      cols <- c("lightgreen", "blue", "green", "darkred", "forestgreen",
                "darkgreen", "beige", "darkblue", " firebrick1", "red", "yellow")
-     plot(prediction_terra, col = cols)
+     #plot(prediction_terra, col = cols)
 
      # save classification
      writeRaster(prediction_terra,
          "database/output/classification.tif", overwrite = TRUE)
+     #plot(prediction_terra, col = cols)
 
-}
-#      # Optional: to start parallel calculation
-#      cl <- makeCluster(detectCores() - 1)
-#      registerDoParallel(cl)
-
-#      # calculate AOA
-
-#      area_of_applicability <- aoa(sentinel, trained_model, cl = cl)
-#      writeRaster(area_of_applicability,
-#          "database/output/area_of_applicability.tif")
-#  }
+      # Optional: to start parallel calculation
+      #cl <- makeCluster(detectCores() - 1)
+      #registerDoParallel(cl)
+      # calculate AOA
+      area_of_applicability <- aoa(sentinel, model)
+      writeRaster(area_of_applicability,
+          "database/output/area_of_applicability.tif")
+      plot(area_of_applicability)
+  }
 
  # Farben für Visualisierung
  #cols_s <- c("lightgreen","blue","green","grey","chartreuse",
@@ -130,7 +130,6 @@ geopackage_to_geojson <- function() {
 #* function for training the model
 #* @param parameter
 #* @get /trainModell
-#* @serializer png
 train_modell <- function(algorithm) {
 
      # loading satelliteimagery 
@@ -169,5 +168,5 @@ train_modell <- function(algorithm) {
                 ntree = 50)
 
      # save the model
-     saveRDS(model, file = "database/input/model.RDS")
+     saveRDS(model, file = "database/output/model.RDS")
 }
