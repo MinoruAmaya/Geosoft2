@@ -21,7 +21,7 @@ library(viridis)
 
 # plumber.R
 
-#* Echo the parameter that was sent in
+#* Funktion, um später die R Skripts zu testen
 #* @param msg The message to echo back.
 #* @get /echo
 function(msg=""){
@@ -76,8 +76,10 @@ classification_and_aoa <- function() {
       #registerDoParallel(cl)
       # calculate AOA
       area_of_applicability <- aoa(sentinel, model)
-      writeRaster(c(area_of_applicability$DI,area_of_applicability$AOA),
+      writeRaster(c(area_of_applicability$AOA),
           "database/output/AOA.tif")
+      writeRaster(c(area_of_applicability$DI),
+          "database/output/AOADI.tif")
       #plot(area_of_applicability)
       #spplot(area_of_applicability$DI, col.regions=viridis(100),main="Dissimilarity Index")
       #plot predictions for the AOA only:
