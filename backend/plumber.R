@@ -14,6 +14,7 @@ library(sp)
 library(caret)
 library(CAST)
 library(latticeExtra)
+library(viridis)
 
 #* @apiTitle AtlantGIS
 #* @apiDescription Backend für die AtlantGIS_app
@@ -48,7 +49,6 @@ function(spec){
 #* function for classification and aoa
 #* @param parameter
 #* @get /classificationAoa
-#* @serializer png
 classification_and_aoa <- function() {
 
     library(raster)
@@ -76,9 +76,13 @@ classification_and_aoa <- function() {
       #registerDoParallel(cl)
       # calculate AOA
       area_of_applicability <- aoa(sentinel, model)
-      writeRaster(area_of_applicability,
-          "database/output/area_of_applicability.tif")
-      plot(area_of_applicability)
+      writeRaster(c(area_of_applicability$DI,area_of_applicability$AOA),
+          "database/output/AOA.tif")
+      #plot(area_of_applicability)
+      #spplot(area_of_applicability$DI, col.regions=viridis(100),main="Dissimilarity Index")
+      #plot predictions for the AOA only:
+      #spplot(prediction, col.regions=viridis(100),main="prediction for the AOA")+
+      #spplot(area_of_applicability$AOA,main="Area of Applicability")
   }
 
  # Farben für Visualisierung
