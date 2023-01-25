@@ -57,7 +57,6 @@ classification_and_aoa <- function() {
      sentinel <- rast("database/input/rasterdaten.tif")
      model <- readRDS("database/output/model.RDS")
      
-
      prediction <- predict(as(sentinel, "Raster"), model)
      projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
