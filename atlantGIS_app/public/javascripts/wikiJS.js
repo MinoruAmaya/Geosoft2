@@ -1,6 +1,6 @@
 const paginationNumbers = document.getElementById("pagination-numbers");
 const paginatedList = document.getElementById("paginated-list");
-const listItems = paginatedList.querySelectorAll("div");
+const listItems = paginatedList.querySelectorAll("div_card");
 const nextButton = document.getElementById("next-button");
 const prevButton = document.getElementById("prev-button");
 

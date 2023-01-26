@@ -70,10 +70,9 @@ h1 {
   width: calc(100% - 2rem);
   display: flex;
   align-items: center;
-  position: absolute;
-  bottom: 0;
-  padding: 1rem 0;
-  justify-content: center;
+  justify-content: left;
+  margin-top: 1cm;
+
 }
 
 .pagination-number,
@@ -84,7 +83,7 @@ h1 {
   margin: 0.25rem 0.25rem;
   cursor: pointer;
   height: 2.5rem;
-  width: 2.5rem;
+  width: 2rem;
   border-radius: .2rem;
 }
 
@@ -95,7 +94,7 @@ h1 {
 
 .pagination-number.active {
   color: #fff;
-  background: #62cd88;
+  background: rgb(127, 179, 247);
 }
 
 html {
@@ -300,3 +299,71 @@ html {
     [data-theme="dark"] .card .nav-link {
       color: #575757;
     }
+
+.card_publication{
+  position: relative;
+  height: 20rem;
+  overflow: hidden;
+}
+
+.card_publication img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s;
+}
+
+.card hover .card_publication img {
+  transform: scale(1.5);
+}
+
+
+.card_publication div{
+  /*
+  background: linear-gradient(to right bottom,
+  rgb(255, 119, 48, .8), rgb(255, 185, 0, .8));
+  */
+  font-size: 1rem;
+  color: rgb(201, 199, 199);
+  position: absolute;
+  inset: 0;
+  padding: 1rem;
+}
+
+
+.card_publication i {
+  margin-right: 1rem;
+}
+
+.card_publication span{
+  display: block;
+}
+
+.card_quelle{
+  margin-bottom: 0cm;
+}
+
+.card_info{
+  position: relative;
+  padding: 2rem 3rem;
+}
+
+.card_title{
+  font-size: 3rem;
+}
+
+/*
+.card_subtitle{
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #a2a2a2;
+  margin-bottom: 1rem;
+}
+*/
+
+
+
+
