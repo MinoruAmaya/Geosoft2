@@ -19,30 +19,28 @@ block content
                     p.col-md-12.col-form-label.fw-bolder Ergebnisse
                     form(action='/downloadData' method='post')
                         br
-                        input#prediction(type='checkbox' name="prediction")
-                        |  Prediction Map
+                        input#1.gaucher(type='checkbox' name="prediction" onchange="processCheck(this)")
+                        label(for="1") Prediction Map
                         br
                         br
-                        input#aoa(type='checkbox' name="aoa")
-                        |  Area of Applicability
+                        input#2.gaucher(type='checkbox' name="aoa" onchange="processCheck(this)")
+                        label(for="2") Area of Applicability
                         br
                         br
-                        input#locations(type='checkbox' name="locations")
-                        |  Recommended locations for training data
+                        input#3.gaucher(type='checkbox' name="locations" onchange="processCheck(this)")
+                        label(for="3") Recommended locations for training data
                         br
                         br
-                        input#model(type='checkbox' name="model")
-                        |  Trained model
+                        input#4.gaucher(type='checkbox' name="model" onchange="processCheck(this)")
+                        label(for="4") Trained model
                         br
                         br
-                        input#model(type='checkbox' name="traindata")
-                        |  Traindata
+                        input#5.gaucher(type='checkbox' name="traindata" onchange="processCheck(this)")
+                        label(for="5") Traindata
                         br
                         br
                         button.btn.btn-primary.mb-2 Download
                 
              
 block scripts
-    script(src="https://unpkg.com/georaster") 
-    script(src="https://unpkg.com/georaster-layer-for-leaflet") 
     script(src="/javascripts/ergebnisseJS.js" defer)
