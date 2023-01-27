@@ -19,11 +19,11 @@ router.get('/startDemo', function(req, res, next) {
       })
         .catch((error) => {
           res.render('demo', message=error);
-    });
+        });
   })
-      .catch((error) => {
-        console.log(error)
-  });
+    .catch((error) => {
+      console.log(error)
+    });
 })
 
 module.exports = router;

@@ -54,11 +54,11 @@ classification_and_aoa <- function() {
     library(raster)
     
      # load all data required
-     sentinel <- rast("database/input/rasterdaten.tif")
-     model <- readRDS("database/output/model.RDS")
+     sentinel <- rast("database/input/satellitenimage_demo.tif")
+     model <- readRDS("database/output/model_demo.RDS")
      
      prediction <- predict(as(sentinel, "Raster"), model)
-     projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+     #projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
 
      # make it visualy more appealing
@@ -138,10 +138,10 @@ geopackage_to_geojson <- function() {
 train_modell <- function(algorithm) {
 
      # loading satelliteimagery 
-     sentinel <- rast("database/input/rasterdaten.tif")
+     sentinel <- rast("database/input/satellitenimage_demo.tif")
 
      # loading reference data 
-     referencedata <- read_sf("database/input/trainingsdaten.gpkg")
+     referencedata <- read_sf("database/input/train_data_demo.gpkg")
 
      # Trainingsdaten auf die Bolivien Projektion umändern
      referencedata <- st_transform(referencedata, crs(sentinel))
@@ -158,7 +158,7 @@ train_modell <- function(algorithm) {
      predictors <- c("B02", "B03", "B04", "B08", "B05", "B06", "B07", "B11",
                  "B12", "B8A")
      #predictors <- c("B02","B03","B04","B08","B05","B06","B07","B11",
-     #           "B12","B8A","NDVI","NDVI_3x3_sd","NDVI_5x5_sd")
+      #          "B12","B8A","NDVI","NDVI_3x3_sd","NDVI_5x5_sd")
 
      train_ids <- createDataPartition(extr$ID, p = 0.1, list = FALSE)
      train_data <- extr[train_ids, ]
