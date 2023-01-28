@@ -29,7 +29,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('createTrainData');
+  res.render('updateTrainData');
 });
 
 
@@ -48,6 +48,23 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
   }
   res.render('trainModel');
 })
+
+//route to aoa
+router.post("/newaoa", function (req, res, next) {
+  /**
+  not tested
+  fetch("http://atlantgisbackend:8000/classificationAoa")
+      .then(response => {
+        console.log(response.text());
+      })
+      .catch(error => {
+        console.log(error);
+      });
+   */
+  res.render('aoa');
+})
+
+
 
 
 module.exports = router;
