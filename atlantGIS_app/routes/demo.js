@@ -5,25 +5,28 @@ let fetch = require('node-fetch');
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function(req, res, next) {
-  res.render('demo');
+  res.render('demo', message=["normal"]);
 });
 
-router.get('/startDemo', function(req, res, next) {
+router.get('/startAnalyse', function(req, res, next) {
   fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf")
     .then((result) => {
       console.log(result)
-      fetch("http://atlantgisbackend:8000/classificationAoa")
-        .then((result) => {
-          res.render('demo', message=result);
-          console.log(result)
+      fetch("http://atlantgisbackend:8000/classificationAoa?xmin=414882&xmax=417989&ymin=5758892&ymax=5760354")
+        .then(() => {
+          res.render('demo_ergebnisse', message=["ergebnisse"]);
       })
-        .catch((error) => {
-          res.render('demo', message=error);
+        .catch(() => {
+          res.render('demo_ergebnisse', message=["ergebnisse"]);
         });
   })
     .catch((error) => {
       console.log(error)
     });
+})
+
+router.get('/ergebnisse', function(req, res, next){
+  res.render('demo_ergebnisse', message=["normal"])
 })
 
 module.exports = router;

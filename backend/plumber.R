@@ -49,12 +49,16 @@ function(spec){
 #* function for classification and aoa
 #* @param parameter
 #* @get /classificationAoa
-classification_and_aoa <- function() {
+classification_and_aoa <- function(xmin, xmax, ymin, ymax) {
 
     library(raster)
+    library(terra)
     
      # load all data required
      sentinel <- rast("database/input/satellitenimage_demo.tif")
+     mask <- c(xmin,  xmax, ymin, ymax)
+     class(mask) <- "numeric"
+     sentinel <- crop(sentinel, ext(mask))
      model <- readRDS("database/output/model_demo.RDS")
      
      prediction <- predict(as(sentinel, "Raster"), model)
@@ -174,4 +178,15 @@ train_modell <- function(algorithm) {
 
      # save the model
      saveRDS(model, file = "database/output/model.RDS")
+}
+
+#* function fto display the satelliteimage
+#* @param parameter
+#* @get /trainModell
+show_satelliteimage <- function(){
+  # loading satelliteimagery 
+  sentinel <- rast("database/input/satellitenimage_demo.tif")
+  rgbsentinel <- RGB(sentinel)
+
+  writeRaster(rgbsentinel, "database/input/RGB.tif")
 }

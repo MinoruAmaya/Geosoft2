@@ -2,15 +2,95 @@ extends layout
 
 block content
 
-  .container
-    br
-    br
-    .row.justify-content-md-center
-      .col-md-auto
-        a#demo_btn.btn.btn-lg(role='button' style="background-color: rgb(127, 179, 247); color: white") Starte die Demo
-        br  
-        br
-      #map
+  .container-fluid#site_demo
+      .row
+        .col-4(style="background-color: rgb(189, 218, 255)")
+          br
+          h2 Demo des AtlantGIS Webtools 
+          br
+          a#demo_info
+            label.col-form-label.fw-bolder Einleitung
+            br
+            | Willkommen zu der Demo des AlantGIS Webtools.
+            br
+            br
+            br
+            | Im Folgenden werden Sie durch den Ablauf und die Funktionen
+            | des Systems geführt. Es wird Ihnen zum einen vorgeführt, 
+            | welche Daten gefordert sind, zum anderen wird Ihnen die 
+            | Ausgabe gezeigt.
+            br
+            br
+            | Drücken Sie um weiter in der Demo zu kommen immer auf den 
+            | Button unten.
+            br
+            br
+            | Hier auf der linken Seite können Sie dann immer Informationen 
+            | über den aktuellen Schritt lesen.
+            br
+            br
+            br
+          .row.justify-content-center
+            .col-6
+              button#btn_start.btn.btn-lg(style="background-color: rgb(127, 179, 247); color: white") Legen Sie los!
+              button#btn_satellite.btn.btn-lg.visually-hidden(style="background-color: rgb(127, 179, 247); color: white") Weiter
+              button#btn_area.btn.btn-lg.visually-hidden(style="background-color: rgb(127, 179, 247); color: white") Weiter
+              button#btn_trainData.btn.btn-lg.visually-hidden(style="background-color: rgb(127, 179, 247); color: white") Weiter
+              button#btn_trainModell.btn.btn-lg.visually-hidden(style="background-color: rgb(127, 179, 247); color: white") Weiter
+          br
+        .col-8
+          .row.justify-content-md-center#workflow_demo
+            .col-md-3
+                div#form_div_sat
+                    form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
+                        label.col-md-12.col-form-label.fw-bolder(for='trainMod') Satellitenbild hochladen
+                        input#satellitenbildOne.form-control.form-control(type='file' name="satellitenbildOne" accept=".tif" enctype="multipart/form-data" disabled)
+                        br
+                        br
+                br
+                div#form_div_trainData
+                    form(action='/trainData/uploadTrainingData' method='post' enctype="multipart/form-data")
+                        label.col-md-12.col-form-label.fw-bolder(for='training') Trainingsdaten hochladen
+                        input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data" disabled)
+                        br
+                        br
+                br
+                div#form_div_trainModel.trainModel
+                    p.col-md-12.col-form-label.fw-bolder Haben Sie ein trainiertes Modell?
+                        .row.justify-content-evenly
+                            .col-4
+                                label
+                                    input(type="radio", name="colorRadio", value="yes" disabled)
+                                    | Ja
+                            .col-4
+                                label
+                                    input(type="radio", name="colorRadio", value="no" disabled)
+                                    | Nein
+                        .yes.box 
+                            div#form_div_trained
+                                form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
+                                    label.col-md-12.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell hochladen!
+                                    input#trainMod.form-control(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" )
+                                    button.btn.btn-secondary.disabled.mb-2 AOA berechnen
+                        .no.box 
+                            div#form_div_untrained
+                                form(action='/model/uploadUntrainModell' method='post' enctype="multipart/form-data")
+                                    p.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
+                                    button#btn_untrainMod.btn.btn-secondary.disabled.mb-2 Trainiere Modell
+            
+            .col-md-8
+                div#form_div
+                    p.col-md-12.col-form-label.fw-bolder Wählen Sie die Region aus, für die Sie die AOA berechnen möchten.
+                    p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte und klicken anschließend auf weiter.
+                    #map
+                    br
+
+          div#messageDiv.visually-hidden= message
+
+  .container.visually-hidden#loading
+    .ring Loading 
+      mspan
+        
 
 
 
