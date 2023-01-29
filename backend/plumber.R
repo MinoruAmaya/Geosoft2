@@ -80,10 +80,12 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax) {
       #registerDoParallel(cl)
       # calculate AOA
       area_of_applicability <- aoa(sentinel, model)
+      dataRecom <- selectHighest(area_of_applicability$DI, 2000)
+      crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
       writeRaster(c(area_of_applicability$AOA),
-          "database/output/AOA.tif")
-      writeRaster(c(area_of_applicability$DI),
-          "database/output/AOADI.tif")
+          "database/output/AOA.tif", overwrite = TRUE)
+      writeRaster(c(dataRecom),
+          "database/output/DI.tif", overwrite = TRUE)
       #plot(area_of_applicability)
       #spplot(area_of_applicability$DI, col.regions=viridis(100),main="Dissimilarity Index")
       #plot predictions for the AOA only:
