@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 var indexRouter = require('./routes/index');
 var satelliteimageRouter = require('./routes/satelliteimage');
 var trainModelRouter = require('./routes/trainModel');
-var createTrainDataRouter = require('./routes/createTrainData');
+var addTrainDataRouter = require('./routes/addTrainData');
 var areaRouter = require('./routes/area');
 var analyseRouter = require('./routes/analyse');
 var downloadRouter = require('./routes/download');
@@ -21,7 +21,7 @@ var wikiRouter = require('./routes/wiki');
 var demoRouter = require('./routes/demo');
 var impressumRouter = require('./routes/impressum');
 var projektRouter = require('./routes/projekt');
-var addTrainDataRouter = require('./routes/addTrainData');
+var updateTrainDataRouter = require('./routes/updateTrainData');
 var aoaRouter = require('./routes/aoa');
 
 
@@ -40,7 +40,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/satelliteimage', satelliteimageRouter);
 app.use('/trainModel', trainModelRouter);
-app.use('/createTrainData', createTrainDataRouter);
+app.use('/createTrainData', updateTrainDataRouter);
 app.use('/area', areaRouter);
 app.use('/analyse', analyseRouter);
 app.use('/download', downloadRouter);
