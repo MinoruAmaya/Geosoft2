@@ -68,7 +68,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
               return `rgb(${Math.round(((values[0]-mins[0])/ranges[0])*255)},
                           ${Math.round(((values[1]-mins[1])/ranges[1])*255)},
                           ${Math.round(((values[2]-mins[2])/ranges[2])*255)})`
-          },
+          }
         });
         layer.addTo(map);
 
