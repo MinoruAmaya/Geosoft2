@@ -45,23 +45,32 @@ window.onload = function () {
         var count = georaster.maxs - georaster.mins;
         console.log(count)
         let colorArray = Array();
-        // Fill array with colors. Every color has to be unique.
-        for(i=0;i<count;i++){
-          randomColor = getRandomColor();
-          if(!(colorArray.includes(randomColor))){
-            colorArray[i] = randomColor;
-          }else{
-            i--;
+        if(name=="Klassifikation"){ // Klassifikation
+          // Fill array with colors. Every color has to be unique.
+          for(i=0;i<count;i++){
+            randomColor = getRandomColor();
+            if(!(colorArray.includes(randomColor))){
+              colorArray[i] = randomColor;
+            }else{
+              i--;
+            }
           }
+          console.log(colorArray);
+          // Georaster
+          var layer = new GeoRasterLayer({
+            georaster: georaster,
+            resolution: 256 ,
+            pixelValuesToColorFn: values => {
+              return colorArray[values[0]-georaster.mins[0]]
+            }
+          });
+        }else if(name=="AOA"){ // AOA
+          // Georaster
+          var layer = new GeoRasterLayer({
+            georaster: georaster,
+            resolution: 256
+          });
         }
-        console.log(colorArray);
-        var layer = new GeoRasterLayer({
-          georaster: georaster,
-          resolution: 256 ,
-          pixelValuesToColorFn: values => {
-            return colorArray[values[0]-georaster.mins[0]]
-          }
-        });
         layer.addTo(map);
 
         layerCtrl.addOverlay(layer, name);
