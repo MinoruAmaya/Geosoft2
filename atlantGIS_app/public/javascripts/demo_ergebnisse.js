@@ -65,7 +65,7 @@ window.onload = function () {
               return colorArray[values[0]-georaster.mins[0]]
             }
           });
-        }else if(name=="AOA"){ // AOA
+        }else if(name=="AOA" || name=="Trainigsempfelung"){ // AOA
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,

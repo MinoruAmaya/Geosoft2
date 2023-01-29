@@ -81,7 +81,8 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax) {
       # calculate AOA
       area_of_applicability <- aoa(sentinel, model)
       dataRecom <- selectHighest(area_of_applicability$DI, 2000)
-      crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+      dataRecom[is.nan(dataRecom)] <- 0
+      crs(dataRecom) <- project(dataRecom, crs(area_of_applicability$AOA))
       writeRaster(c(area_of_applicability$AOA),
           "database/output/AOA.tif", overwrite = TRUE)
       writeRaster(c(dataRecom),
