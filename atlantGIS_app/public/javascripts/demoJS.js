@@ -57,14 +57,14 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       .then(response => response.arrayBuffer())
       .then(parseGeoraster)
       .then(georaster => {
-        console.log("georaster:", georaster);
-
+        
+        let ranges = georaster.ranges;
+        let mins = georaster.mins;
         var layer = new GeoRasterLayer({
           georaster: georaster,
           resolution: 256 ,
           // Source: https://github.com/GeoTIFF/georaster-layer-for-leaflet/issues/16
             pixelValuesToColorFn: values => {
-              console.log(Math.round(((values[0]-mins[0])/ranges[0])*255) + ", " + Math.round(((values[1]-mins[1])/ranges[1])*255) + ", " + Math.round(((values[2]-mins[2])/ranges[2])*255))
               return `rgb(${Math.round(((values[0]-mins[0])/ranges[0])*255)},
                           ${Math.round(((values[1]-mins[1])/ranges[1])*255)},
                           ${Math.round(((values[2]-mins[2])/ranges[2])*255)})`
