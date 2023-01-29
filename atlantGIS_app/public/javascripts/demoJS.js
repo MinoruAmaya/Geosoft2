@@ -57,39 +57,18 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       .then(response => response.arrayBuffer())
       .then(parseGeoraster)
       .then(georaster => {
-        console.log("georaster:", georaster);
-
+        
+        let ranges = georaster.ranges;
+        let mins = georaster.mins;
         var layer = new GeoRasterLayer({
           georaster: georaster,
-          resolution: 256 ,/**
+          resolution: 256 ,
           // Source: https://github.com/GeoTIFF/georaster-layer-for-leaflet/issues/16
-          pixelValuesToColorFn: values => values[0] === 255 ? null : `rgb(${values[0]},${values[1]},${values[2]})`
-          */
-          pixelValuesToColorFn: (values) => {
-            let maxs = georaster.maxs;
-            let mins = georaster.mins;
-
-            values[0] = Math.round(
-              (255 / (4000 - mins[0])) * (values[0] - mins[0])
-            );
-            values[1] = Math.round(
-              (255 / (4000 - mins[1])) * (values[1] - mins[1])
-            );
-            values[2] = Math.round(
-              (255 / (4000 - mins[2])) * (values[2] - mins[2])
-            );
-
-            // make sure no values exceed 255
-            values[0] = Math.min(values[0], 255);
-            values[1] = Math.min(values[1], 255);
-            values[2] = Math.min(values[2], 255);
-
-            // treat all black as no data
-            if (values[0] === 0 && values[1] === 0 && values[2] === 0)
-              return null;
-
-            return `rgb(${values[2]}, ${values[1]}, ${values[0]})`;
-          },
+            pixelValuesToColorFn: values => {
+              return `rgb(${Math.round(((values[0]-mins[0])/ranges[0])*255)},
+                          ${Math.round(((values[1]-mins[1])/ranges[1])*255)},
+                          ${Math.round(((values[2]-mins[2])/ranges[2])*255)})`
+          }
         });
         layer.addTo(map);
 

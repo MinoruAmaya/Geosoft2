@@ -42,39 +42,26 @@ window.onload = function () {
       .then(response => response.arrayBuffer())
       .then(parseGeoraster)
       .then(georaster => {
-        console.log("georaster:", georaster);
-
+        // Calculate count of classification classes. Initalize array.
+        var count = georaster.maxs - georaster.mins;
+        console.log(count)
+        let colorArray = Array();
+        // Fill array with colors. Every color has to be unique.
+        for(i=0;i<count;i++){
+          randomColor = getRandomColor();
+          if(!(colorArray.includes(randomColor))){
+            colorArray[i] = randomColor;
+          }else{
+            i--;
+          }
+        }
+        console.log(colorArray);
         var layer = new GeoRasterLayer({
           georaster: georaster,
-          resolution: 256 ,/**
-          // Source: https://github.com/GeoTIFF/georaster-layer-for-leaflet/issues/16
-          pixelValuesToColorFn: values => values[0] === 255 ? null : `rgb(${values[0]},${values[1]},${values[2]})`
-          */
-          //pixelValuesToColorFn: (values) => {
-          //  let maxs = georaster.maxs;
-          //  let mins = georaster.mins;
-//
-          //  values[0] = Math.round(
-          //    (255 / (4000 - mins[0])) * (values[0] - mins[0])
-          //  );
-          //  values[1] = Math.round(
-          //    (255 / (4000 - mins[1])) * (values[1] - mins[1])
-          //  );
-          //  values[2] = Math.round(
-          //    (255 / (4000 - mins[2])) * (values[2] - mins[2])
-          //  );
-//
-          //  // make sure no values exceed 255
-          //  values[0] = Math.min(values[0], 255);
-          //  values[1] = Math.min(values[1], 255);
-          //  values[2] = Math.min(values[2], 255);
-//
-          //  // treat all black as no data
-          //  if (values[0] === 0 && values[1] === 0 && values[2] === 0)
-          //    return null;
-//
-          //  return `rgb(${values[2]}, ${values[1]}, ${values[0]})`;
-          //},
+          resolution: 256 ,
+          pixelValuesToColorFn: values => {
+            return colorArray[values[0]-georaster.mins[0]]
+          }
         });
         layer.addTo(map);
 
@@ -90,4 +77,18 @@ window.onload = function () {
     });
   }
 
+}
+
+/**
+ * Returns a random color
+ * Source: https://stackoverflow.com/questions/1484506/random-color-generator?noredirect=1&lq=1
+ * @returns 
+ */
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
