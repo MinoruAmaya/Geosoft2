@@ -13,21 +13,28 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
   
     var btn = document.getElementById("demo_btn");
-    btn.addEventListener("click", function(){addPredictionAndAoaToMap("http://localhost:3000/output/AOA.tif", "AOA"); addPredictionAndAoaToMap("http://localhost:3000/output/classification.tif", "Klassifikation")});
+    btn.addEventListener("click", function(){addGeoTIFFToMap("http://localhost:3000/input/satellitenimage_demo.tif", "AOA");/** addGeoTIFFToMap("http://localhost:3000/output/classification.tif", "Klassifikation") */});
   
-    function addPredictionAndAoaToMap(aoaUrl, name) {
-      fetch(aoaUrl)
+    function addGeoTIFFToMap(url, name) {
+      fetch(url)
         .then(response => response.arrayBuffer())
         .then(parseGeoraster)
         .then(georaster => {
           console.log("georaster:", georaster);
-  
+
+          let ranges = georaster.ranges;
+          let mins = georaster.mins;
           var layer = new GeoRasterLayer({
             georaster: georaster,
-            resolution: 256 /**,
+            resolution: 256 ,
             // Source: https://github.com/GeoTIFF/georaster-layer-for-leaflet/issues/16
-            pixelValuesToColorFn: values => values[0] === 255 ? null : `rgb(${values[0]},${values[1]},${values[2]})`
-            */
+            pixelValuesToColorFn: values => {
+              console.log(Math.round(((values[0]-mins[0])/ranges[0])*255) + ", " + Math.round(((values[1]-mins[1])/ranges[1])*255) + ", " + Math.round(((values[2]-mins[2])/ranges[2])*255))
+              return `rgb(${Math.round(((values[0]-mins[0])/ranges[0])*255)},
+                          ${Math.round(((values[1]-mins[1])/ranges[1])*255)},
+                          ${Math.round(((values[2]-mins[2])/ranges[2])*255)})`
+              
+          }
           });
           layer.addTo(map);
   
@@ -38,3 +45,4 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     };
   
   };
+  
