@@ -76,7 +76,7 @@ window.onload = function () {
               }
             }
           });
-        }else if(name=="Trainigsempfelung"){ // AOA
+        }else if(name=="AOA" || name=="Trainigsempfehlung"){ // AOA
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
@@ -104,13 +104,15 @@ window.onload = function () {
       });
   }
 
+  
+
 }
 
 /**
  * Returns a random color
  * Source: https://stackoverflow.com/questions/1484506/random-color-generator?noredirect=1&lq=1
  * @returns 
- */
+ 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -119,15 +121,19 @@ function getRandomColor() {
   }
   return color;
 }
+*/
+// Farben für Legende
+function getRandomColor(d) {
+  return d === 'See' ? '#0a1cb1' :
+         d === 'Siedlung' ? '#e57423' :
+         d === 'Fliessgewaesser' ? '#23c3e5' :
+         d === 'Laubwald' ? '#2aa43d' :
+         d === 'Mischwald' ? '#11671e' :
+         d === 'Greuenland' ? '#92e597' :
+         d === 'Industriegebiet' ? '#696969' :
+         d === 'Acker_bepflanzt' ? '#70843a' :
+         d === 'Offenboden' ? '#472612' :
+         '#FFEDA0';
+}
 
 
-//Legende
-var legend = L.control({ position: "bottomleft" });
-
-legend.onAdd = function (map) {
-  var div = L.DomUtil.create("div", "legend");
-  
-  return div;
-};
-
-legend.addTo(map);
