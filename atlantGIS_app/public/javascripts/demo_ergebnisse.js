@@ -1,34 +1,34 @@
 window.onload = function () {
 
-    let messageDiv = document.getElementById("messageDiv");
-    let loading = document.getElementById("loading");
-    let message = messageDiv.innerHTML.split(',')
+  let messageDiv = document.getElementById("messageDiv");
+  let loading = document.getElementById("loading");
+  let message = messageDiv.innerHTML.split(',')
 
-    let load = false
+  let load = false
 
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
     map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 });
-    let layerCtrl = L.control.layers({
+  let layerCtrl = L.control.layers({
     'osm': osm.addTo(map),
     "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
       attribution: 'google'
     })
   })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
- 
-  function loadingFun(){
-    if(!load){
+
+  function loadingFun() {
+    if (!load) {
       loading.classList.add("visually-hidden");
       site_demo.style.opacity = "100%";
     }
-    else if(load){
+    else if (load) {
       loading.classList.remove("visually-hidden");
       site_demo.style.opacity = "0.15";
     }
   }
   loadingFun();
-  if(message[0] === "ergebnisse"){
+  if (message[0] === "ergebnisse") {
     addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation", "demo", "nochÄndern")
     addDataToMap("http://localhost:3000/output/AOA.tif", "AOA", "demo", "nochÄndern")
     addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfelung", "demo", "nochÄndern")
@@ -42,34 +42,52 @@ window.onload = function () {
       .then(response => response.arrayBuffer())
       .then(parseGeoraster)
       .then(georaster => {
-        // Calculate count of classification classes. Initalize array.
-        var count = georaster.maxs - georaster.mins;
-        console.log(count)
-        let colorArray = Array();
-        if(name=="Klassifikation"){ // Klassifikation
+        if (name == "Klassifikation") { // Klassifikation
+          // Calculate count of classification classes. Initalize array.
+          var count = georaster.maxs - georaster.mins;
+          let colorArray = Array();
           // Fill array with colors. Every color has to be unique.
-          for(i=0;i<count;i++){
+          for (i = 0; i < count; i++) {
             randomColor = getRandomColor();
-            if(!(colorArray.includes(randomColor))){
+            if (!(colorArray.includes(randomColor))) {
               colorArray[i] = randomColor;
-            }else{
+            } else {
               i--;
             }
           }
-          console.log(colorArray);
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
-            resolution: 256 ,
+            resolution: 256,
             pixelValuesToColorFn: values => {
-              return colorArray[values[0]-georaster.mins[0]]
+              return colorArray[values[0] - georaster.mins[0]]
+            }
+          });
+        }else if(name=="AOA"){ // AOA
+          // Georaster
+          var layer = new GeoRasterLayer({
+            georaster: georaster,
+            resolution: 256,
+            pixelValuesToColorFn: values => {
+              if(values[0]==0){
+                return `rgb(0,0,0)`; // black
+              }else{
+                return `rgb(255,255,255)`; // white
+              }
             }
           });
         }else if(name=="AOA" || name=="Trainigsempfehlung"){ // AOA
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
-            resolution: 256
+            resolution: 256,
+            pixelValuesToColorFn: values => {
+              if(values[0]==0){
+                return null; // no color
+              }else{
+                return `rgb(230,0,230)`; // pink
+              }
+            }
           });
         }
         layer.addTo(map);
@@ -78,12 +96,12 @@ window.onload = function () {
 
         map.fitBounds(layer.getBounds());
 
-        if(call === "demo"){
+        if (call === "demo") {
           //handleDOMChange(type);
           load = false
           loadingFun();
         }
-    });
+      });
   }
 
   
