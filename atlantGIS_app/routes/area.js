@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 // route to satelliteimage if area is saved in @areaJS.js
-router.post("/addSatelliteimage", function (req, res, next) {
-  res.render('satelliteimage');
+router.post("/addData", function (req, res, next) {
+  res.render('addTrainData');
 })
 
 module.exports = router;
