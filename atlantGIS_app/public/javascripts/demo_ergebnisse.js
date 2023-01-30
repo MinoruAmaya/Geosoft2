@@ -31,7 +31,7 @@ window.onload = function () {
   if (message[0] === "ergebnisse") {
     addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation", "demo", "nochÄndern")
     addDataToMap("http://localhost:3000/output/AOA.tif", "AOA", "demo", "nochÄndern")
-    addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfehlung", "demo", "nochÄndern")
+    //addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfehlung", "demo", "nochÄndern")
   }
 
 
