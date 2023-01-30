@@ -53,6 +53,7 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
 
     library(raster)
     library(terra)
+    library(rgdal)
     
      # load all data required
      if(type == "demo"){
@@ -87,18 +88,15 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
       #registerDoParallel(cl)
       # calculate AOA
       area_of_applicability <- aoa(sentinel, model)
-      dataRecom <- selectHighest(area_of_applicability$DI, 2000)
-      dataRecom[is.nan(dataRecom)] <- 0
-      crs(dataRecom) <- project(dataRecom, crs(area_of_applicability$AOA))
       writeRaster(c(area_of_applicability$AOA),
           "database/output/AOA.tif", overwrite = TRUE)
-      writeRaster(c(dataRecom),
-          "database/output/DI.tif", overwrite = TRUE)
-      #plot(area_of_applicability)
-      #spplot(area_of_applicability$DI, col.regions=viridis(100),main="Dissimilarity Index")
-      #plot predictions for the AOA only:
-      #spplot(prediction, col.regions=viridis(100),main="prediction for the AOA")+
-      #spplot(area_of_applicability$AOA,main="Area of Applicability")
+      dataRecom <- selectHighest(area_of_applicability$DI, 2000)
+      #dataRecom[is.nan(dataRecom)] <- 0
+      crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+      dataRecomVec <- as.polygons(dataRecom)
+      #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+      terra::writeVector(dataRecomVec,
+          "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
   }
 
  # Farben für Visualisierung
