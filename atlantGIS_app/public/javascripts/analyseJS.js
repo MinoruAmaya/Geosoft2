@@ -1,1 +1,0 @@
-document.getElementById('navbarAna').classList.add('active');

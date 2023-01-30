@@ -63,7 +63,7 @@ window.onload = function () {
               return colorArray[values[0] - georaster.mins[0]]
             }
           });
-        } else if (name == "AOA") { // AOA
+        }else if(name=="AOA" || name=="Trainigsempfelung"){ // AOA
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
@@ -106,3 +106,15 @@ function getRandomColor() {
   }
   return color;
 }
+
+
+//Legende
+var legend = L.control({ position: "bottomleft" });
+
+legend.onAdd = function (map) {
+  var div = L.DomUtil.create("div", "legend");
+  
+  return div;
+};
+
+legend.addTo(map);

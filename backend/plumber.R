@@ -49,18 +49,25 @@ function(spec){
 #* function for classification and aoa
 #* @param parameter
 #* @get /classificationAoa
-classification_and_aoa <- function(xmin, xmax, ymin, ymax) {
+classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
 
     library(raster)
     library(terra)
     
      # load all data required
-     sentinel <- rast("database/input/satellitenimage_demo.tif")
+     if(type == "demo"){
+      sentinel <- rast("database/input/satellitenimage_demo.tif")
+      model <- readRDS("database/output/model_demo.RDS")
+     }
+     else{
+      sentinel <- rast("database/input/satellitenimage.tif")
+      model <- readRDS("database/output/model.RDS")
+     }
+     
+
      mask <- c(xmin,  xmax, ymin, ymax)
      class(mask) <- "numeric"
      sentinel <- crop(sentinel, ext(mask))
-     model <- readRDS("database/output/model_demo.RDS")
-     
      prediction <- predict(as(sentinel, "Raster"), model)
      #projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
@@ -81,7 +88,8 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax) {
       # calculate AOA
       area_of_applicability <- aoa(sentinel, model)
       dataRecom <- selectHighest(area_of_applicability$DI, 2000)
-      crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+      dataRecom[is.nan(dataRecom)] <- 0
+      crs(dataRecom) <- project(dataRecom, crs(area_of_applicability$AOA))
       writeRaster(c(area_of_applicability$AOA),
           "database/output/AOA.tif", overwrite = TRUE)
       writeRaster(c(dataRecom),
@@ -141,13 +149,22 @@ geopackage_to_geojson <- function() {
 #* function for training the model
 #* @param parameter
 #* @get /trainModell
-train_modell <- function(algorithm) {
+train_modell <- function(algorithm, type) {
 
-     # loading satelliteimagery 
-     sentinel <- rast("database/input/satellitenimage_demo.tif")
-
-     # loading reference data 
-     referencedata <- read_sf("database/input/train_data_demo.gpkg")
+     if(type == "demo"){
+      # loading satelliteimagery 
+      sentinel <- rast("database/input/satellitenimage_demo.tif")
+ 
+      # loading reference data 
+      referencedata <- read_sf("database/input/train_data_demo.gpkg")
+     }
+     else{
+      # loading satelliteimagery 
+      sentinel <- rast("database/input/satellitenimage.tif")
+ 
+      # loading reference data 
+      referencedata <- read_sf("database/input/train_data.gpkg")
+     }
 
      # Trainingsdaten auf die Bolivien Projektion umändern
      referencedata <- st_transform(referencedata, crs(sentinel))
@@ -163,8 +180,6 @@ train_modell <- function(algorithm) {
      # creating all predictors from the satelliteimagery
      predictors <- c("B02", "B03", "B04", "B08", "B05", "B06", "B07", "B11",
                  "B12", "B8A")
-     #predictors <- c("B02","B03","B04","B08","B05","B06","B07","B11",
-      #          "B12","B8A","NDVI","NDVI_3x3_sd","NDVI_5x5_sd")
 
      train_ids <- createDataPartition(extr$ID, p = 0.1, list = FALSE)
      train_data <- extr[train_ids, ]
@@ -180,15 +195,4 @@ train_modell <- function(algorithm) {
 
      # save the model
      saveRDS(model, file = "database/output/model.RDS")
-}
-
-#* function fto display the satelliteimage
-#* @param parameter
-#* @get /trainModell
-show_satelliteimage <- function(){
-  # loading satelliteimagery 
-  sentinel <- rast("database/input/satellitenimage_demo.tif")
-  rgbsentinel <- RGB(sentinel)
-
-  writeRaster(rgbsentinel, "database/input/RGB.tif")
 }
