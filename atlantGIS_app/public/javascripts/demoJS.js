@@ -92,7 +92,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       demo_info.innerHTML = '<label class="col-form-label fw-bolder">Satelliten Bild </label><br />In diesem Schritt müssen Sie ihr Satelliten Bild hochladen. '
         + '<br /><br /><br />Dieses soll das Format ".tif" haben. Außerdem sollten die Kanäle '
         + '"B02", "B03", "B04", "B08", "B05", "B06", "B07", "B11", "B12", "B8A" '
-        + 'vorhanden sein (Diese Reinfolge muss gegeben sein).<br /><br />Sobald Sie dieses hochgeladen haben (und gespeichert haben) '
+        + 'vorhanden sein (Diese Reihenfolge muss gegeben sein).<br /><br />Sobald Sie dieses hochgeladen haben (und gespeichert haben) '
         + 'wird das Satellitenbild auf der Karte als RGB angezeigt. <br /><br /><br /><br /><br /><br />';
     }
     else if(type === "satellite"){
