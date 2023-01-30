@@ -46,11 +46,12 @@ window.onload = function () {
           // Calculate count of classification classes. Initalize array.
           //var count = georaster.maxs - georaster.mins;
           let colorArray = ['#0a1cb1', '#e57423', '#23c3e5', '#2aa43d', '#696969', '#70843a','#472612'];
+          // let randomColorArray = Array();
           // Fill array with colors. Every color has to be unique.
           //for (i = 0; i < count; i++) {
             //randomColor = getRandomColor();
-            //if (!(colorArray.includes(randomColor))) {
-             // colorArray[i] = randomColor;
+            //if (!(randomColorArray.includes(randomColor))) {
+             // randomColorArray[i] = randomColor;
             //} else {
              // i--;
             //}
