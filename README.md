@@ -2,10 +2,8 @@
 
 Hier entsteht in Zusammenarbeit von den vier Studierenden Maximilian Elfers, Hendrik Lüning, Maike Schröder und Derya Sen das Projekt für den Kurs Geosoftware 2 an der Westfälischen Wilhelms-Universität Münster.
 
-Projektbeschreibung und Installationsanleitung folgen.
 
-
-# Estimation Tool for Spatial Prediction Models
+# Applicability Estimation Tool for Spatial Prediction Models
 
 ## Inhaltsverzeichnis
   - [Autoren](#autoren)
@@ -13,66 +11,142 @@ Projektbeschreibung und Installationsanleitung folgen.
   - [Ziel der Anwendung](#ziel)
   - [Zielgruppe](#zielgruppe)
   - [Funktionen](#funktionen)
+    - [Upload](#upload)
+    - [Machine-Learning Algorithmen](#machine-learning-algorithmen)
+    - [AOA](#aoa)
+    - [Download](#download)
   - [Installation](#installation)
   - [Demo](#demo)
   - [Testen der Anwendung](#test)
-  - [Abhängigkeiten](#dependencies)
+  - [Abhängigkeiten](#abhängigkeiten)
     - [Frontend](#frontend)
     - [Backend](#backend)
-    - [R](#r)
-  - [Further documentation](#further-documentation)
+  - [Weitere Informationen](#weitere-informationen)
     - [nodeJS](#nodeJS)
     - [express](#express)
   - [License](#license)
 
 ## Autoren
-[Maximilian Elfers](https://github.com/jakobdanel),
-[Hendrik Lüning](https://github.com/jakobdanel),
-[Maike Schröder](https://github.com/jakobdanel),
-[Derya Sen](https://github.com/jakobdanel),
+[Maximilian Elfers](https://github.com/MaxiElfers),
+[Hendrik Lüning](https://github.com/luening),
+[Maike Schröder](https://github.com/maschroder),
+[Derya Sen](https://github.com/derya-sen),
 
 
 
 ## Abstract
 
+Machine learning Methoden werden für räumliche Vorhersagen immer beliebter. Dadurch können die immer komplexer werdenden Klassifikationsaufgaben gelöst werden. Ein Problem dabei ist, dass machine learning Algorithmen nur gute Vorhersagen berechnen, wenn die neuen Daten ähnlich zu den trainierten Daten verwendet werden. Sobald ein trainiertes Modell in einem neuen unbekannten geographischen Gebiet angewendet wird, ist nicht klar, ob die Vorhersage valide ist oder nicht. Um das Problem zu lösen, wird die Area of Applicability angewendet. Hier werden Bereiche hervorgehoben, die zusätzliche Trainingsdaten benötigen für eine zuverlässige Klassifikation. 
 
-## Ziel der Anwendung
+Das Projekt stellt eine einfache Webumgebung bereit, um die Area of Applicability für ein übergebenes Modell. 
 
+## Ziel
+
+Die AnwenderInnen bekommen eine Bewertungsmöglichkeit für ihre durchgeführten Klassifikationen. Ziel
+ist es, anhand der AOA die Übereinstimmung/Anwendbarkeit eines Modells in Bezug auf die
+Klassifikation auf eine bestimmte Region zu überprüfen. Falls die Bewertung durch die AOA schlecht
+ausfällt, werden neue Orte vorgeschlagen, an denen es sinnvoll ist, noch einmal Trainingsdaten zu
+sammeln. Die Anwendung der AOA wird für die AnwenderInnen erleichtert, indem sie nur mit einem
+Klick auf einen Button die Berechnung ausführen lassen, ohne sich Gedanken um die Funktionsweise
+zu machen
 
 ## Zielgruppe
 
+Zielgruppe(n) sind Forscher oder Praktikanten im Bereich der Fernerkundung/räumlichen
+Modellierung, die mit Hilfe vom Maschinellen Lernen Landnutzungsklassifikationen durchführen möchten. Vorwissen in den Bereichen Klassifikation und Area of Aplicability sind nützlich, aber nicht notwendig.
 
 ## Funktionen
 
+### Upload
+Das Produkt unterstützt den Upload von Trainingsdaten auf den Server, indem über einen Button auf der Website der Datei-Upload ermöglicht wird. Dabei handelt es sich um Trainingsdaten und Satellitenbilder.
+Für diese Uploads werden die folgenden Dateiformate erlaubt sein: GeoJSON, GeoPackage (für
+Vektordaten) und GeoTIFF (für Rasterdaten).
+
+### Machine-Learning Algorithmen
+Das Produkt wird einen überwachte Klassifikationsalgorithmen zur Verfügung stellen. Bei diesem wird es sich um den “random forest”-Algorithmus handeln.  
+
+### AOA
+Zu jeder Klassifikation wird außerdem die AOA berechnet und ausgegeben.
+
+### Download
+Für alle erstellten und berechneten Daten gibt es eine Downloadoption in Form eines
+Downloadbuttons. Die Vorhersagekarte und die AOA kann man als GeoTIFF herunterladen. Möchte man weitere Trainingsdaten nach Empfehlung der AOA
+sammeln, kann man die empfohlenen Standorte durch die AOA als Standard-Vektordatenformat
+herunterladen. Man hat auch die Option das Modell, mit dem man das Training durchgeführt hat,
+über einen Button herunterzuladen.
 
 ## Installation
 
+Die Webanwendung kann ganz einfach durch den Befehl
+```
+docker compose up 
+```
+im root-Verzeichnis des Projekts gestartet werden. Das erstmalige Starten kann einige Minuten in Anspruch nehmen, da alle benötigten Abhängigkeiten und Pakete installiert werden müssen. Dafür muss eine Internetverbindung vorhanden sein. 
 
 ## Demo
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ## Testen der Anwendung
 
-
-### Abhängigkeiten
-
-
-## Frontend
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+noch nicht implementiert
 
 
-## Backend
+## Abhängigkeiten
 
 
-## R
+### Frontend
+npm-packages:
+- @ngageoint/leaflet-geopackage: ^4.1.3
+- bootstrap: ^5.2.2
+- bootstrap-icons: ^1.10.2
+- cookie-parser: ~1.4.4
+- cors: ^2.8.5
+- darkmode-js: ^1.5.7
+- debug: ~2.6.9
+- express: ~4.16.1
+- express-zip: ^3.0.0
+- form-data: ^4.0.0
+- formidable: ^2.1.1
+- http-errors: ~1.6.3
+- leaflet: ^1.9.2
+- leaflet-draw: ^1.0.4
+- morgan: "~1.9.1
+- multer: ^1.4.5-lts.1
+- node-fetch: ^2.6.7
+- pug: ^3.0.2
+- r-integration: ^2.4.0
 
 
-### Further documentation
+### Backend
+r-packages:
+- plumber
+- rjson
+- geojson
+- geojsonsf
+- ggplot2
+- dplyr
+- lubridate
+- hms
+- terra
+- mapview
+- raster
+- sf
+- sp
+- caret
+- CAST
+- latticeExtra
+- viridis
+
+## Weitere Information
 
 
-## nodeJS
+### nodeJS
+[NodeJS](#https://nodejs.org/en/) ist eine plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung, die JavaScript-Code außerhalb eines Webbrowsers ausführen kann. 
 
-## express
-
+### express
+ Express ist ein einfaches und flexibles Node.js-Framework von Webanwendungen, das zahlreiche leistungsfähige Features und Funktionen für Webanwendungen und mobile Anwendungen bereitstellt. (2023 [Express](#http://expressjs.com/de/))
 
 ## License
 Copyright (C) 2022  Maximilian Elfers, Hendrik Lüning, Maike Schröder, Derya Sen
