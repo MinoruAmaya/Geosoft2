@@ -31,7 +31,7 @@ window.onload = function () {
   if (message[0] === "ergebnisse") {
     addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation", "demo", "nochÄndern")
     addDataToMap("http://localhost:3000/output/AOA.tif", "AOA", "demo", "nochÄndern")
-    addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfelung", "demo", "nochÄndern")
+    addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfehlung", "demo", "nochÄndern")
   }
 
 
@@ -44,18 +44,19 @@ window.onload = function () {
       .then(georaster => {
         if (name == "Klassifikation") { // Klassifikation
           // Calculate count of classification classes. Initalize array.
-          var count = georaster.maxs - georaster.mins;
-          let colorArray = Array();
+          //var count = georaster.maxs - georaster.mins;
+          let colorArray = ['#0a1cb1', '#e57423', '#23c3e5', '#2aa43d', '#696969', '#70843a','#472612'];
+          // let randomColorArray = Array();
           // Fill array with colors. Every color has to be unique.
-          for (i = 0; i < count; i++) {
-            randomColor = getRandomColor();
-            if (!(colorArray.includes(randomColor))) {
-              colorArray[i] = randomColor;
-            } else {
-              i--;
-            }
-          }
-          // Georaster
+          //for (i = 0; i < count; i++) {
+            //randomColor = getRandomColor();
+            //if (!(randomColorArray.includes(randomColor))) {
+             // randomColorArray[i] = randomColor;
+            //} else {
+             // i--;
+            //}
+          //}
+        
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
@@ -104,26 +105,50 @@ window.onload = function () {
       });
   }
 
+// Legende für Klassifikation  
+  var legendClass = L.control({position: 'bottomleft'});
+  legendClass.onAdd = function (map) {
   
+  var div = L.DomUtil.create('div', 'legend');
+  labels = ['<strong>Klassifikation</strong>'];
+  categories = ['See','Siedlung','Fliessgewaesser','Laubwald','Mischwald', 'Gruenland', 'Industriegebiet', 'Acker_bepflanzt', 'Offenboden'];
+  
+  for (var i = 0; i < categories.length; i++) {
+  
+          div.innerHTML += 
+          labels.push(
+              '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+          (categories[i] ? categories[i] : '+'));
+  
+      }
+      div.innerHTML = labels.join('<br>');
+  return div;
+  };
+  legendClass.addTo(map);
 
-}
+// Legende für AOA
+  var legendAOA = L.control({position: 'bottomleft'});
+  legendAOA.onAdd = function (map) {
+  
+  var div = L.DomUtil.create('div', 'legend');
+  labels = ['<strong>AOA</strong>'];
+  categories = ['Geeignet','Ungeeignet'];
+  
+  for (var i = 0; i < categories.length; i++) {
+  
+          div.innerHTML += 
+          labels.push(
+              '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+          (categories[i] ? categories[i] : '+'));
+  
+      }
+      div.innerHTML = labels.join('<br>');
+  return div;
+  };
+  legendAOA.addTo(map);  
 
-/**
- * Returns a random color
- * Source: https://stackoverflow.com/questions/1484506/random-color-generator?noredirect=1&lq=1
- * @returns 
- 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-*/
 // Farben für Legende
-function getRandomColor(d) {
+function getColor(d) {
   return d === 'See' ? '#0a1cb1' :
          d === 'Siedlung' ? '#e57423' :
          d === 'Fliessgewaesser' ? '#23c3e5' :
@@ -133,7 +158,38 @@ function getRandomColor(d) {
          d === 'Industriegebiet' ? '#696969' :
          d === 'Acker_bepflanzt' ? '#70843a' :
          d === 'Offenboden' ? '#472612' :
+         d === 'Geeignet' ? '#fff' :
+         d === 'Ungeeignet' ? '#010101' :
          '#FFEDA0';
+} 
+map.on('overlayadd', function (eventLayer) {
+  // Switch to the classification legend...
+  if (eventLayer.name === 'Klassifikation') {
+      this.removeControl(legendAOA);
+      legendClass.addTo(this);
+}
+  else if (eventLayer.name === 'AOA') {
+    this.removeControl(legendClass);
+    legendAOA.addTo(this);
+  } else { // Or switch to the aoa legend...
+      this.removeControl(legendClass);
+      this.removeControl(legendAOA);
+  }
+});
+}
+
+/**
+ * Returns a random color
+ * Source: https://stackoverflow.com/questions/1484506/random-color-generator?noredirect=1&lq=1
+ * @returns 
+ */
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 
