@@ -63,16 +63,29 @@ window.onload = function () {
               return colorArray[values[0] - georaster.mins[0]]
             }
           });
-        }else if(name=="AOA" || name=="Trainigsempfelung"){ // AOA
+        }else if(name=="AOA"){ // AOA
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
             pixelValuesToColorFn: values => {
               if(values[0]==0){
-                return 1;
+                return `rgb(0,0,0)`; // black
               }else{
-                return 0;
+                return `rgb(255,255,255)`; // white
+              }
+            }
+          });
+        }else if(name=="Trainigsempfelung"){ // AOA
+          // Georaster
+          var layer = new GeoRasterLayer({
+            georaster: georaster,
+            resolution: 256,
+            pixelValuesToColorFn: values => {
+              if(values[0]==0){
+                return null; // no color
+              }else{
+                return `rgb(230,0,230)`; // pink
               }
             }
           });
