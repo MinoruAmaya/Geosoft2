@@ -44,18 +44,18 @@ window.onload = function () {
       .then(georaster => {
         if (name == "Klassifikation") { // Klassifikation
           // Calculate count of classification classes. Initalize array.
-          var count = georaster.maxs - georaster.mins;
-          let colorArray = Array();
+          //var count = georaster.maxs - georaster.mins;
+          let colorArray = ['#0a1cb1', '#e57423', '#23c3e5', '#2aa43d', '#696969', '#70843a','#472612'];
           // Fill array with colors. Every color has to be unique.
-          for (i = 0; i < count; i++) {
-            randomColor = getRandomColor();
-            if (!(colorArray.includes(randomColor))) {
-              colorArray[i] = randomColor;
-            } else {
-              i--;
-            }
-          }
-          // Georaster
+          //for (i = 0; i < count; i++) {
+            //randomColor = getRandomColor();
+            //if (!(colorArray.includes(randomColor))) {
+             // colorArray[i] = randomColor;
+            //} else {
+             // i--;
+            //}
+          //}
+        
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
@@ -123,7 +123,7 @@ window.onload = function () {
       div.innerHTML = labels.join('<br>');
   return div;
   };
-  //legendClass.addTo(map);
+  legendClass.addTo(map);
 
 // Legende für AOA
   var legendAOA = L.control({position: 'bottomleft'});
@@ -144,7 +144,7 @@ window.onload = function () {
       div.innerHTML = labels.join('<br>');
   return div;
   };
-  //legendAOA.addTo(map);  
+  legendAOA.addTo(map);  
 
 // Farben für Legende
 function getColor(d) {
@@ -167,7 +167,7 @@ map.on('overlayadd', function (eventLayer) {
       this.removeControl(legendAOA);
       legendClass.addTo(this);
 }
-  if (eventLayer.name === 'AOA') {
+  else if (eventLayer.name === 'AOA') {
     this.removeControl(legendClass);
     legendAOA.addTo(this);
   } else { // Or switch to the aoa legend...
