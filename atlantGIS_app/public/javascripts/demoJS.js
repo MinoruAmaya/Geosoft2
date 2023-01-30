@@ -83,7 +83,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
         }
       });
   };
-  
+
   function handleDOMChange(type){
     if(type === "start"){
       form_div_sat.classList.add("active-form");
@@ -92,7 +92,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       demo_info.innerHTML = '<label class="col-form-label fw-bolder">Satelliten Bild </label><br />In diesem Schritt müssen Sie ihr Satelliten Bild hochladen. '
         + '<br /><br /><br />Dieses soll das Format ".tif" haben. Außerdem sollten die Kanäle '
         + '"B02", "B03", "B04", "B08", "B05", "B06", "B07", "B11", "B12", "B8A" '
-        + 'vorhanden sein (Diese Reinfolge muss gegeben sein).<br /><br />Sobald Sie dieses hochgeladen haben (und gespeichert haben) '
+        + 'vorhanden sein (Diese Reihenfolge muss gegeben sein).<br /><br />Sobald Sie dieses hochgeladen haben (und gespeichert haben) '
         + 'wird das Satellitenbild auf der Karte als RGB angezeigt. <br /><br /><br /><br /><br /><br />';
     }
     else if(type === "satellite"){
@@ -101,8 +101,8 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       btn_satellite.classList.add("visually-hidden");
       btn_area.classList.remove("visually-hidden")
       demo_info.innerHTML = '<label class="col-form-label fw-bolder">Bereich auswählen </label><br />In diesem Schritt müssen Sie den Bereich auswählen, für den die Klassifikation durchgeführt werden soll. '
-      + '<br /><br /><br />Beachten Sie hierbei das der Bereich sich innerhalb des Satellitenbild befinden muss. '
-      + '<br /><br />Sobald Sie einen Bereich ausgewähl (und gespeichert haben) '
+      + '<br /><br /><br />Beachten Sie hierbei, dass sich der Bereich innerhalb des Satellitenbild befinden muss. '
+      + '<br /><br />Sobald Sie einen Bereich ausgewählt (und gespeichert haben), '
       + 'werden Sie zu dem nächsten Schritt weitergeleitet. <br /><br /><br /><br /><br /><br />';
     }
     else if(type === "area"){
@@ -124,9 +124,9 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       btn_trainModell.classList.remove("visually-hidden")
       demo_info.innerHTML = '<label class="col-form-label fw-bolder">(Un-)Trainiertes Modell </label><br />In diesem Schritt haben Sie zwei Optionen. Zum einen '
       + 'können Sie ein trainiertes Modell hochladen, zum anderen können Sie angeben, dass Sie kein trainiertes Modell haben.'
-      + '<br /><br /><br />Haben Sie ein trainiertes Modell, so wir nachdem Sie dies hochgeladen (und gespeichert) haben direkt die Klassifikation (und AOA) berechnet. '
+      + '<br /><br /><br />Haben Sie ein trainiertes Modell, so wird nachdem Sie dies hochgeladen (und gespeichert) haben, direkt die Klassifikation (und AOA) berechnet. '
       + 'Dies führt dazu, dass der Prozess etwas schneller durchgeführt werden kann.'
-      + '<br /><br />Haben Sie kein trainiertes Modell, so wird nachdem Sie dies bestätigt haben noch zunächst ein trainiertes Modell erstellt. '
+      + '<br /><br />Haben Sie kein trainiertes Modell, so wird nachdem Sie dies bestätigt haben, noch zunächst ein trainiertes Modell erstellt. '
       + '<br /><br /><br />';
     }
   }

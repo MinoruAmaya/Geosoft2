@@ -1,25 +1,75 @@
 //code für area.pug
 
 // Variablen erstellen 
+let helpvar = document.getElementById('helpvar')
 let counter = 0;
 let layer;
 let btn_weiter = document.getElementById('btn_weiter');
+let loading = document.getElementById('loading');
+let site = document.getElementById('site');
+let load = false;
 let shape;
 let shape_for_db;
 let rectangle;
 var self = this;
 
+if(helpvar.innerHTML === "1"){
+  addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild")
+}
 
-// center of the map
-var center = [49.845363, 9.905964];
+function addDataToMap(URL, name) {
+  load = true;
+  loadingFun();
+  fetch(URL)
+    .then(response => response.arrayBuffer())
+    .then(parseGeoraster)
+    .then(georaster => {
+      
+      let ranges = georaster.ranges;
+      let mins = georaster.mins;
+      var layer = new GeoRasterLayer({
+        georaster: georaster,
+        resolution: 256 ,
+        // Source: https://github.com/GeoTIFF/georaster-layer-for-leaflet/issues/16
+          pixelValuesToColorFn: values => {
+            return `rgb(${Math.round(((values[0]-mins[0])/ranges[0])*255)},
+                        ${Math.round(((values[1]-mins[1])/ranges[1])*255)},
+                        ${Math.round(((values[2]-mins[2])/ranges[2])*255)})`
+        }
+      });
+      layer.addTo(map);
+
+      layerCtrl.addOverlay(layer, name);
+
+      map.fitBounds(layer.getBounds());
+
+      load = false
+      loadingFun();
+    });
+};
+
+function loadingFun() {
+  if (!load) {
+    loading.classList.add("visually-hidden");
+    site.style.opacity = "100%";
+  }
+  else if (load) {
+    loading.classList.remove("visually-hidden");
+    site.style.opacity = "0.15";
+  }
+}
+
 // Create the map
-var map = L.map('map').setView(center, 6);
-
-// Set up the OSM layer
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18
-  }).addTo(map);
+var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
+    map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 });
+    let layerCtrl = L.control.layers({
+    'osm': osm.addTo(map),
+    "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+      attribution: 'google'
+    })
+  })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
 
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();

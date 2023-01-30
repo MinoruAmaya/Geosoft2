@@ -9,7 +9,7 @@ var satelliteImageStorage = multer.diskStorage({
     callback(null, "database/input/");
   },
   filename: function (request, file, callback) {
-    fileName = "satelliteimageNEU.tif";
+    fileName = "satelliteimage.tif";
     callback(null, fileName);
   }
 });
@@ -20,14 +20,14 @@ const uploadSatelliteImage = multer({ storage: satelliteImageStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('satelliteimage');
+  res.render('satelliteimage', {help: [0]});
 });
 
 
 // Upload satelliteimagery
 // Route to addTrainData
 router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild"), function (req, res, next) {
-  res.render('addTrainData');
+  res.render('area', {help: [1]});
 })
 
 
