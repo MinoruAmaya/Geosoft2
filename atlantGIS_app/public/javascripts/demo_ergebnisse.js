@@ -31,7 +31,7 @@ window.onload = function () {
   if (message[0] === "ergebnisse") {
     addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation", "demo", "nochÄndern")
     addDataToMap("http://localhost:3000/output/AOA.tif", "AOA", "demo", "nochÄndern")
-    addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfelung", "demo", "nochÄndern")
+    addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfehlung", "demo", "nochÄndern")
   }
 
 
@@ -104,26 +104,28 @@ window.onload = function () {
       });
   }
 
+  var legend = L.control({position: 'bottomleft'});
+  legend.onAdd = function (map) {
   
+  var div = L.DomUtil.create('div', 'info legend');
+  labels = ['<strong>Klassifikation</strong>'];
+  categories = ['See','Siedlung','Fliessgewaesser','Laubwald','Mischwald', 'Gruenland', 'Industriegebiet', 'Acker_bepflanzt', 'Offenboden'];
+  
+  for (var i = 0; i < categories.length; i++) {
+  
+          div.innerHTML += 
+          labels.push(
+              '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+          (categories[i] ? categories[i] : '+'));
+  
+      }
+      div.innerHTML = labels.join('<br>');
+  return div;
+  };
+  legend.addTo(map);
 
-}
-
-/**
- * Returns a random color
- * Source: https://stackoverflow.com/questions/1484506/random-color-generator?noredirect=1&lq=1
- * @returns 
- 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-*/
 // Farben für Legende
-function getRandomColor(d) {
+function getColor(d) {
   return d === 'See' ? '#0a1cb1' :
          d === 'Siedlung' ? '#e57423' :
          d === 'Fliessgewaesser' ? '#23c3e5' :
@@ -134,6 +136,23 @@ function getRandomColor(d) {
          d === 'Acker_bepflanzt' ? '#70843a' :
          d === 'Offenboden' ? '#472612' :
          '#FFEDA0';
+}  
+
+
+}
+
+/**
+ * Returns a random color
+ * Source: https://stackoverflow.com/questions/1484506/random-color-generator?noredirect=1&lq=1
+ * @returns 
+ */
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 
