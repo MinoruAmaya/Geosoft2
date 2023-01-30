@@ -104,10 +104,11 @@ window.onload = function () {
       });
   }
 
-  var legend = L.control({position: 'bottomleft'});
-  legend.onAdd = function (map) {
+// Legende für Klassifikation  
+  var legendClass = L.control({position: 'bottomleft'});
+  legendClass.onAdd = function (map) {
   
-  var div = L.DomUtil.create('div', 'info legend');
+  var div = L.DomUtil.create('div', 'legend');
   labels = ['<strong>Klassifikation</strong>'];
   categories = ['See','Siedlung','Fliessgewaesser','Laubwald','Mischwald', 'Gruenland', 'Industriegebiet', 'Acker_bepflanzt', 'Offenboden'];
   
@@ -122,7 +123,28 @@ window.onload = function () {
       div.innerHTML = labels.join('<br>');
   return div;
   };
-  legend.addTo(map);
+  //legendClass.addTo(map);
+
+// Legende für AOA
+  var legendAOA = L.control({position: 'bottomleft'});
+  legendAOA.onAdd = function (map) {
+  
+  var div = L.DomUtil.create('div', 'legend');
+  labels = ['<strong>AOA</strong>'];
+  categories = ['Geeignet','Ungeeignet'];
+  
+  for (var i = 0; i < categories.length; i++) {
+  
+          div.innerHTML += 
+          labels.push(
+              '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+          (categories[i] ? categories[i] : '+'));
+  
+      }
+      div.innerHTML = labels.join('<br>');
+  return div;
+  };
+  //legendAOA.addTo(map);  
 
 // Farben für Legende
 function getColor(d) {
@@ -135,10 +157,24 @@ function getColor(d) {
          d === 'Industriegebiet' ? '#696969' :
          d === 'Acker_bepflanzt' ? '#70843a' :
          d === 'Offenboden' ? '#472612' :
+         d === 'Geeignet' ? '#fff' :
+         d === 'Ungeeignet' ? '#010101' :
          '#FFEDA0';
-}  
-
-
+} 
+map.on('overlayadd', function (eventLayer) {
+  // Switch to the classification legend...
+  if (eventLayer.name === 'Klassifikation') {
+      this.removeControl(legendAOA);
+      legendClass.addTo(this);
+}
+  if (eventLayer.name === 'AOA') {
+    this.removeControl(legendClass);
+    legendAOA.addTo(this);
+  } else { // Or switch to the aoa legend...
+      this.removeControl(legendClass);
+      this.removeControl(legendAOA);
+  }
+});
 }
 
 /**

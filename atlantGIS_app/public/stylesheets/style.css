@@ -89,7 +89,7 @@ h1 {
 
 .pagination-number:hover,
 .pagination-button:not(.disabled):hover {
-  background: #fff;
+  background: #ffffff;
 }
 
 .pagination-number.active {
@@ -388,7 +388,7 @@ html {
   letter-spacing:4px;
   text-transform:uppercase;
   text-shadow:0 0 10px rgb(189, 218, 255);
-  box-shadow:0 0 20px rgba(0,0,0,.5);
+  box-shadow:0 0 20px #00000080;
 }
 .ring:before
 {
@@ -471,13 +471,13 @@ mspan:before
   /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
   /*border-radius: 5px;*/
   line-height: 24px;
-  color: #555;
+  color: rgb(145, 137, 137);
 }
 .legend h4 {
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   margin: 2px 12px 8px;
-  color: #777;
+  color: rgb(182, 174, 174);
 }
 
 .legend span {
@@ -486,15 +486,15 @@ mspan:before
 }
 
 .legend i {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   float: left;
   margin: 0 8px 0 0;
   opacity: 0.7;
 }
 
 .legend i.icon {
-  background-size: 18px;
+  background-size: 14px;
   background-color: rgba(255, 255, 255, 1);
 }
 
