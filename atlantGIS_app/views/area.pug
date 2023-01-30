@@ -2,7 +2,7 @@ extends layout
 
 block content
     br
-    .container
+    .container#site
         .row.justify-content-md-center
             .col-md-3
                 div#form_div_sat
@@ -50,8 +50,15 @@ block content
                             form(action='/area/addData' method='post')
                                 button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled.mb-2.d-grid.gap-2.col-6.mx-auto Weiter    
                     #map
+    
+    .container.visually-hidden#loading
+        .ring Loading 
+            mspan
+        #helpvar.visually-hidden= help
                 
              
 block scripts 
+    script(src="https://unpkg.com/georaster") 
+    script(src="https://unpkg.com/georaster-layer-for-leaflet")
     script(src="/javascripts/areaJS.js" defer)
     script(src="https://unpkg.com/node-fs")

@@ -25,7 +25,7 @@ const uploadModell = multer({storage:modellStorage});
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('trainModel');
+  res.render('trainModel', {help: [1]});
 });
 
 

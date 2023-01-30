@@ -2,7 +2,7 @@ extends layout
 
 block content
     br
-    .container
+    .container#site
         .row.justify-content-md-center
             .col-md-3
                 div#form_div_sat
@@ -33,12 +33,12 @@ block content
                                 form(action='/trainModel/uploadTrainModell' method='post' enctype="multipart/form-data")
                                     label.col-md-12.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell hochladen!
                                     input#trainMod.form-control(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" )
-                                    button.btn.btn-primary.mb-2 AOA berechnen
+                                    button.btn.btn-primary.mb-2 Starte Berechnung
                         .no.box 
                             div#form_div_untrained.active-form
                                 form(action='/trainModel/uploadUntrainModell' method='post' enctype="multipart/form-data")
                                     p.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
-                                    button#btn_untrainMod.btn.btn-primary.mb-2 Trainiere Modell
+                                    button#btn_untrainMod.btn.btn-primary.mb-2 Starte Berechnung
             .col-md-8
                 .row.justify-content-md-center#form_div
                     .col-9 
@@ -50,7 +50,14 @@ block content
                             form(action='/area/addData' method='post')
                                 button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled.mb-2.d-grid.gap-2.col-6.mx-auto Weiter    
                     #map
+
+    .container.visually-hidden#loading
+        .ring Loading 
+            mspan
+        p#helpvar.visually-hidden= help
                 
              
 block scripts 
+  script(src="https://unpkg.com/georaster") 
+  script(src="https://unpkg.com/georaster-layer-for-leaflet")
   script(src="/javascripts/areaJS.js" defer)
