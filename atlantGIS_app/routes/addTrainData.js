@@ -67,7 +67,6 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
                 element.geometry.coordinates[0][0][0][1] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][1]) {
         res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Koordinaten!");
       }
-      console.log(element + " checked")
     })
     res.render('trainModel', { help: "2" });
   });
