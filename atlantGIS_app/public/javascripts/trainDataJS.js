@@ -9,7 +9,7 @@ let trainData = '';
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-            map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 }),
+            map = new L.Map('mapTrain', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 }),
             drawnItems = L.featureGroup().addTo(map);
     L.control.layers({
         'osm': osm.addTo(map),
@@ -71,8 +71,8 @@ let in_trainData = document.getElementById('training');
 
 btn_addData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
 btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
-btn_downloadTrainData.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
-btn_newAoa.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+//btn_downloadTrainData.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+//btn_newAoa.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 
 navElement.classList.remove('disabled');
 navElement.classList.remove('text-white-50');
@@ -214,3 +214,9 @@ function getNewTrainData(in_label, in_klassenID){
         style: style
       }).addTo(map)
 };
+
+
+fetch("http://localhost:3000/input/train_data.geojson")
+  .then(result => result.json())
+  .then(data =>
+    L.geoJSON(data).addTo(map));

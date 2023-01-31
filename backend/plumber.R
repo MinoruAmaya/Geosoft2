@@ -66,6 +66,7 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
      else if(type == "second"){
       sentinel <- rast("database/input/satelliteimage.tif")
       model <- readRDS("database/output/model.RDS")
+      #mask_data <- 
       aoa_alt <- rast("database/output/AOA.tif")
      }
      else{
@@ -89,7 +90,22 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
 
 
       if(type == "second"){
-
+        # calculate AOA
+        area_of_applicability <- aoa(sentinel, model)
+        writeRaster(c(area_of_applicability$AOA),
+            "database/output/AOA.tif", overwrite = TRUE)
+        dataRecom <- selectHighest(area_of_applicability$DI, 2000)
+        #dataRecom[is.nan(dataRecom)] <- 0
+        crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        dataRecomVec <- as.polygons(dataRecom)
+        crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        terra::writeVector(dataRecomVec,
+            "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
+        
+        aoa_vergleich <- aoa - area_of_applicability$AOA
+        crs(aoa_vergleich) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        writeRaster(c(aoa_vergleich),
+            "database/output/AOA_Vergleich.tif", overwrite = TRUE)
       }
       else{
         # calculate AOA
@@ -100,7 +116,7 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
         #dataRecom[is.nan(dataRecom)] <- 0
         crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         dataRecomVec <- as.polygons(dataRecom)
-        #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         terra::writeVector(dataRecomVec,
             "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
       }
