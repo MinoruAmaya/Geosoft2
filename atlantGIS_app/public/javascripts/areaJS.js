@@ -15,8 +15,8 @@ let rectangle;
 var self = this;
 
 
-btn_trainMod.addEventListener("click", function(){load = true; loadingFun();})
-btn_untrainMod.addEventListener("click", function(){load = true; loadingFun();})
+btn_trainMod.addEventListener("click", function () { load = true; loadingFun(); })
+btn_untrainMod.addEventListener("click", function () { load = true; loadingFun(); })
 
 
 switch (Number(helpvar.innerHTML)) {
@@ -73,9 +73,11 @@ function addDataToMap(URL, name) {
 function addGeoJSONToMap(URL, name) {
   fetch(URL)
     .then(response => response.json())
-    .then(data => 
-      L.geoJSON(data).addTo(map)
-      )
+    .then(data => {
+      var layer = L.geoJSON().addTo(map);
+      layer.addData(data);
+      layerCtrl.addOverlay(layer, name);
+    })
 }
 
 
