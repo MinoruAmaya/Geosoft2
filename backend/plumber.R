@@ -59,16 +59,15 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
      if(type == "demo"){
       sentinel <- rast("database/input/satellitenimage_demo.tif")
       model <- readRDS("database/output/model_demo.RDS")
+      mask <- c(xmin,  xmax, ymin, ymax)
+      class(mask) <- "numeric"
+      sentinel <- crop(sentinel, ext(mask))
      }
      else{
-      sentinel <- rast("database/input/satellitenimage.tif")
+      sentinel <- rast("database/input/satelliteimage.tif")
       model <- readRDS("database/output/model.RDS")
      }
      
-
-     mask <- c(xmin,  xmax, ymin, ymax)
-     class(mask) <- "numeric"
-     sentinel <- crop(sentinel, ext(mask))
      prediction <- predict(as(sentinel, "Raster"), model)
      #projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
@@ -158,7 +157,7 @@ train_modell <- function(algorithm, type) {
      }
      else{
       # loading satelliteimagery 
-      sentinel <- rast("database/input/satellitenimage.tif")
+      sentinel <- rast("database/input/satelliteimage.tif")
  
       # loading reference data 
       referencedata <- read_sf("database/input/train_data.gpkg")

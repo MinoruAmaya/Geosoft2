@@ -9,7 +9,7 @@ block content
                     form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='satelliteimage') Satellitenbild hochladen
                         input#satellitenbild.form-control.form-control(type='file' name="satellitenbild" accept=".tif" enctype="multipart/form-data" disabled)
-                        button.btn.btn-secondary.disabled.mb-2 Weiter
+                        button#btn_trainMod.btn.btn-secondary.disabled.mb-2 Weiter
                 br
                 div#form_div_trainData
                     form(action='/trainData/uploadTrainingData' method='post' enctype="multipart/form-data")

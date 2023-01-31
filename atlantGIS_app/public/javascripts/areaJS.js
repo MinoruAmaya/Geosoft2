@@ -7,11 +7,16 @@ let layer;
 let btn_weiter = document.getElementById('btn_weiter');
 let loading = document.getElementById('loading');
 let site = document.getElementById('site');
+let btn_trainMod = document.getElementById("btn_trainMod")
+let btn_untrainMod = document.getElementById("btn_untrainMod")
 let load = false;
 let shape;
 let shape_for_db;
 let rectangle;
 var self = this;
+
+btn_trainMod.addEventListener("click", function(){load = true; loadingFun();})
+btn_untrainMod.addEventListener("click", function(){load = true; loadingFun();})
 
 if(helpvar.innerHTML === "1"){
   addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild")

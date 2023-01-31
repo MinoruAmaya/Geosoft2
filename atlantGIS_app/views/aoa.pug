@@ -2,7 +2,7 @@ extends layout
 
 block content
     br
-    .container
+    .container#site
         .row.justify-content-md-center
             .col-md-8
                 div#form_div.active-form.form_dis
@@ -39,9 +39,12 @@ block content
                         br
                         br
                         button.btn.btn-primary.mb-2 Download
-    br
-    br                    
+    .container.visually-hidden#loading
+        .ring Loading 
+            mspan                   
                 
              
 block scripts
+    script(src="https://unpkg.com/georaster") 
+    script(src="https://unpkg.com/georaster-layer-for-leaflet")
     script(src="/javascripts/ergebnisseJS.js" defer)
