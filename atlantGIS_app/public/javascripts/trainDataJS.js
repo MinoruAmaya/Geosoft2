@@ -9,7 +9,7 @@ let trainData = '';
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-            map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 }),
+            map = new L.Map('mapTrain', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 }),
             drawnItems = L.featureGroup().addTo(map);
     L.control.layers({
         'osm': osm.addTo(map),
@@ -63,16 +63,13 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 
 let navElement = document.getElementById('navbarTrain');
-let btn_addData = document.getElementById('btn_addData');
 let btn_digitalization = document.getElementById('btn_digitalization');
-let btn_downloadTrainData = document.getElementById('btn_downloadTrainData');
 let btn_newAoa = document.getElementById('btn_newAoa');
 let in_trainData = document.getElementById('training');
+let btn_saveTrainData = document.getElementById('btn_saveTrainData');
 
-btn_addData.addEventListener('click', function(){addTrainData(); activateDigitalization();})
-btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
-btn_downloadTrainData.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
-btn_newAoa.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+//btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
+//btn_newAoa.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
 
 navElement.classList.remove('disabled');
 navElement.classList.remove('text-white-50');
@@ -116,13 +113,10 @@ function formListenerErstellen(){
  */
 function activateDigitalization(){
     if(counter === 0){
-        btn_digitalization.classList.remove('btn-secondary');
-        btn_digitalization.classList.remove('disabled');
-        btn_digitalization.classList.add('btn-primary');
-        btn_downloadTrainData.classList.remove('btn-secondary');
-        btn_downloadTrainData.classList.remove('disabled');
-        btn_downloadTrainData.classList.add('btn-primary');
-        btn_digitalization.addEventListener('click', activateNewAoa());
+      btn_saveTrainData.classList.remove('btn-secondary');
+      btn_saveTrainData.classList.remove('disabled');
+      btn_saveTrainData.classList.add('btn-primary');
+      btn_saveTrainData.addEventListener('click', function() {activateNewAoa()});
     }
     counter++;
 }
@@ -133,7 +127,7 @@ function activateDigitalization(){
  * the "Aoa erneut berechnen" button should be activated.
  */
 function activateNewAoa(){
-  if(counter === 0){
+  if(counter === 1){
     btn_newAoa.classList.remove('btn-secondary');
     btn_newAoa.classList.remove('disabled');
     btn_newAoa.classList.add('btn-primary');
@@ -159,7 +153,6 @@ function addTrainData(){
     else{
         return;
     }
-    btn_addData.addEventListener('click', activateNewAoa());
 }
 
 
@@ -214,3 +207,9 @@ function getNewTrainData(in_label, in_klassenID){
         style: style
       }).addTo(map)
 };
+
+
+fetch("http://localhost:3000/input/train_data.geojson")
+  .then(result => result.json())
+  .then(data =>
+    L.geoJSON(data, {style: style}).addTo(map));

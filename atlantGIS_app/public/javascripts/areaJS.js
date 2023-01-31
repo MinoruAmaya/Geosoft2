@@ -59,6 +59,7 @@ function addDataToMap(URL, name) {
       layerCtrl.addOverlay(layer, name);
 
       map.fitBounds(layer.getBounds());
+      map.addControl(drawControlFull);
 
       load = false
       loadingFun();
@@ -131,7 +132,7 @@ self.drawControlEdit = new L.Control.Draw({
     rectangle: false
   }
 });
-map.addControl(drawControlFull);
+
 
 map.on('draw:created', function (e) {
   var type = e.layerType,
