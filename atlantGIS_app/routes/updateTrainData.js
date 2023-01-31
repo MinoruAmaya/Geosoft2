@@ -46,7 +46,7 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
         console.log(error);
       });
   }
-  res.render('trainModel');
+  res.render('updateTrainData');
 })
 
 //route to aoa
