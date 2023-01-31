@@ -89,7 +89,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       form_div_sat.classList.add("active-form");
       btn_start.classList.add("visually-hidden");
       btn_satellite.classList.remove("visually-hidden")
-      demo_info.innerHTML = '<label class="col-form-label fw-bolder">Satelliten Bild </label><br />In diesem Schritt müssen Sie ihr Satelliten Bild hochladen. '
+      demo_info.innerHTML = '<label class="col-form-label fw-bolder">Satelliten Bild </label><br />In diesem Schritt müssen Sie Ihr Satelliten Bild hochladen. '
         + '<br /><br /><br />Dieses soll das Format ".tif" haben. Außerdem sollten die Kanäle '
         + '"B02", "B03", "B04", "B08", "B05", "B06", "B07", "B11", "B12", "B8A" '
         + 'vorhanden sein (Diese Reihenfolge muss gegeben sein).<br /><br />Sobald Sie dieses hochgeladen haben (und gespeichert haben) '
@@ -113,8 +113,8 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       demo_info.innerHTML = '<label class="col-form-label fw-bolder">Trainingsdaten </label><br />In diesem Schritt müssen Sie Trainingsdaten hochladen. '
       + '<br /><br /><br />Die Trainingsdaten müssen das Format ".geojson" oder ".gpkg" haben. Die Daten müssen nicht unbedingt innerhalb des angegebenen '
       + 'Bereichs sein, jedoch führt dies zu besseren Ergebnissen. '
-      + '<br />Nachdem die erste Klassifikation erstellt wurde bekommen Sie die Chance neue Trainingsdaten hochzuladen oder direkt auf der Website welche zu erstellen. '
-      + '<br /><br />Sobald Sie die Trainigsdaten hochgeladen (und gespeichert haben) '
+      + '<br />Nachdem die erste Klassifikation erstellt wurde, bekommen Sie die Möglichkeit, neue Trainingsdaten hochzuladen oder direkt auf der Website welche zu erstellen. '
+      + '<br /><br />Sobald Sie die Trainigsdaten hochgeladen (und gespeichert haben), '
       + 'werden Sie zu dem nächsten Schritt weitergeleitet. <br /><br />';
     }
     else if(type === "traindata"){
