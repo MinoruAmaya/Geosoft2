@@ -81,7 +81,7 @@ let style = function (feature) {
         return { color: "#0a1cb1" };
       case "Siedlung":
         return { color: "#e57423" };
-      case "FLiessgewaesser":
+      case "Fliessgewaesser":
         return { color: "#23c3e5" };
       case "Laubwald":
         return { color: "#2aa43d" };
