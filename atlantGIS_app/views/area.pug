@@ -48,6 +48,7 @@ block content
                     .col-3 
                         div
                             form(action='/area/addData' method='post')
+                                input#area(type='hidden' name='area')
                                 button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled.mb-2.d-grid.gap-2.col-6.mx-auto Weiter    
                     #map
     
@@ -61,4 +62,7 @@ block scripts
     script(src="https://unpkg.com/georaster") 
     script(src="https://unpkg.com/georaster-layer-for-leaflet")
     script(src="/javascripts/areaJS.js" defer)
-    script(src="https://unpkg.com/node-fs")
+
+
+
+    

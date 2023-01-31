@@ -29,7 +29,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('addTrainData', {help: "1"});
+  res.render('addTrainData', {help: "2"});
 });
 
 
@@ -47,7 +47,7 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
         console.log(error);
       });
   }
-  res.render('trainModel', {help: "1"});
+  res.render('trainModel', {help: "2"});
 })
 
 module.exports = router;

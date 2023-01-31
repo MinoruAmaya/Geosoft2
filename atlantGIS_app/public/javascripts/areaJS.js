@@ -7,16 +7,29 @@ let layer;
 let btn_weiter = document.getElementById('btn_weiter');
 let loading = document.getElementById('loading');
 let site = document.getElementById('site');
+let area = document.getElementById('area');
 let load = false;
 let shape;
 let shape_for_db;
 let rectangle;
 var self = this;
 
-if(helpvar.innerHTML === "1"){
-  addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild")
+
+switch (Number(helpvar.innerHTML)) {
+  case 1:
+    addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild");
+    break;
+  case 2:
+    addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild")
+    addGeoJSONToMap("http://localhost:3000/input/area.geojson", "Area")
+    break;
 }
 
+/**
+ * add Tiff to Leaflet
+ * @param {*} URL 
+ * @param {*} name 
+ */
 function addDataToMap(URL, name) {
   load = true;
   loadingFun();
@@ -24,17 +37,17 @@ function addDataToMap(URL, name) {
     .then(response => response.arrayBuffer())
     .then(parseGeoraster)
     .then(georaster => {
-      
+
       let ranges = georaster.ranges;
       let mins = georaster.mins;
       var layer = new GeoRasterLayer({
         georaster: georaster,
-        resolution: 256 ,
+        resolution: 256,
         // Source: https://github.com/GeoTIFF/georaster-layer-for-leaflet/issues/16
-          pixelValuesToColorFn: values => {
-            return `rgb(${Math.round(((values[0]-mins[0])/ranges[0])*255)},
-                        ${Math.round(((values[1]-mins[1])/ranges[1])*255)},
-                        ${Math.round(((values[2]-mins[2])/ranges[2])*255)})`
+        pixelValuesToColorFn: values => {
+          return `rgb(${Math.round(((values[0] - mins[0]) / ranges[0]) * 255)},
+                        ${Math.round(((values[1] - mins[1]) / ranges[1]) * 255)},
+                        ${Math.round(((values[2] - mins[2]) / ranges[2]) * 255)})`
         }
       });
       layer.addTo(map);
@@ -47,6 +60,20 @@ function addDataToMap(URL, name) {
       loadingFun();
     });
 };
+
+/**
+ * add geoJSON to Leaflet
+ * @param {*} URL 
+ * @param {*} name 
+ */
+function addGeoJSONToMap(URL, name) {
+  fetch(URL)
+    .then(response => response.json())
+    .then(data => 
+      L.geoJSON(data).addTo(map)
+      )
+}
+
 
 function loadingFun() {
   if (!load) {
@@ -61,15 +88,15 @@ function loadingFun() {
 
 // Create the map
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-    map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 });
-    let layerCtrl = L.control.layers({
-    'osm': osm.addTo(map),
-    "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
-      attribution: 'google'
-    })
-  })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
+  osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
+  map = new L.Map('map', { center: new L.LatLng(49.845363, 9.905964), zoom: 5 });
+let layerCtrl = L.control.layers({
+  'osm': osm.addTo(map),
+  "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+    attribution: 'google'
+  })
+})/*, { position: 'topleft', collapsed: false })*/.addTo(map);
 
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();
@@ -82,7 +109,7 @@ self.drawControlFull = new L.Control.Draw({
     marker: false,
     polygon: false,
     rectangle: true
-}
+  }
 });
 
 self.drawControlEdit = new L.Control.Draw({
@@ -96,29 +123,30 @@ self.drawControlEdit = new L.Control.Draw({
     marker: false,
     polygon: false,
     rectangle: false
-}
+  }
 });
 map.addControl(drawControlFull);
 
-map.on('draw:created', function(e) {
+map.on('draw:created', function (e) {
   var type = e.layerType,
-  layer = e.layer;
-  layer.setStyle({fillColor: '#FF00FF', color: '#FF00FF'});
+    layer = e.layer;
+  layer.setStyle({ fillColor: '#FF00FF', color: '#FF00FF' });
 
   //Entfernt Toolbar nachdem ein Rechteck gezeichnet wurde 
-	self.drawControlFull.remove();
-	self.drawControlEdit.addTo(map);
-  
+  self.drawControlFull.remove();
+  self.drawControlEdit.addTo(map);
+
   //Speichert Geometrieeigenschaften als JSON
   var shape = layer.toGeoJSON();
   var shape_for_db = JSON.stringify(shape);
-  console.log(shape_for_db);
 
-  
+  // save area data in textfield for frontend
+  area.value = shape_for_db;
+
 
   editableLayers.addLayer(layer);
   activateDigitalization();
-     
+
 });
 
 
@@ -132,9 +160,9 @@ L.EditToolbar.Delete.include({
 })
 
 //Edit Toolbar gets activated after Rectangle is deleted
-function enableDraw(){
+function enableDraw() {
   self.drawControlEdit.remove();
-	self.drawControlFull.addTo(map);
+  self.drawControlFull.addTo(map);
   deactivateDigitalization();
 }
 
@@ -144,40 +172,40 @@ function enableDraw(){
  * After the area got digitialized
  * the "weiter" button should be activated.
  */
-function activateDigitalization(){
-  
-    if(counter === 0){
-        btn_weiter.classList.remove('btn-secondary');
-        btn_weiter.classList.remove('disabled');
-        btn_weiter.classList.add('btn-primary');
-    }
-    counter++;
-  
+function activateDigitalization() {
+
+  if (counter === 0) {
+    btn_weiter.classList.remove('btn-secondary');
+    btn_weiter.classList.remove('disabled');
+    btn_weiter.classList.add('btn-primary');
   }
-    
-    
+  counter++;
+
+}
+
+
 
 /**
  * If the area gets deleted
  * the "weiter" button should be deactivated
  */
-function deactivateDigitalization(){
-  if(counter != 0){
+function deactivateDigitalization() {
+  if (counter != 0) {
     btn_weiter.classList.remove('btn-primary');
     btn_weiter.classList.add('btn-primary');
     btn_weiter.classList.add('disabled');
-}
-counter--;
+  }
+  counter--;
 }
 
- 
+
 
 //code für trainModel.pug
-$(document).ready(function(){
-    $('input[type="radio"]').click(function(){
-        var inputValue = $(this).attr("value");
-        var targetBox = $("." + inputValue);
-        $(".box").not(targetBox).hide();
-        $(targetBox).show();
-    });
+$(document).ready(function () {
+  $('input[type="radio"]').click(function () {
+    var inputValue = $(this).attr("value");
+    var targetBox = $("." + inputValue);
+    $(".box").not(targetBox).hide();
+    $(targetBox).show();
+  });
 });
