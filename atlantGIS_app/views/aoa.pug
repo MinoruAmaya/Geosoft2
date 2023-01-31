@@ -12,8 +12,9 @@ block content
             .col-md-3
                 br
                 #form_div.active-form.form_dis
-                    p.col-md-12.col-form-label.fw-bolder Neue Trainigsdaten digitaliseiren 
-                    .btn.btn-secondary.disabled Start
+                    form(action='/aoa/updateTrainData' method='post')
+                        p.col-md-12.col-form-label.fw-bolder Neue Trainigsdaten digitaliseiren 
+                        button.btn.btn-primary Start
                 #form_div.active-form
                     p.col-md-12.col-form-label.fw-bolder Ergebnisse
                     form(action='/downloadData' method='post')
