@@ -39,38 +39,40 @@ router.get('/', function (req, res, next) {
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
     fetch("http://atlantgisbackend:8000/gpkgToGeojson")
+      .then(() => {
+        fs.readFile("database/input/train_data.geojson", "utf8", function (err, data) {
+          // try parsing of input text
+          try {
+            JSON.parse(data);
+          }
+          catch (err) {
+            res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Syntax!");
+          }
+      
+          let trainingdata = JSON.parse(data);
+      
+          trainingdata.features.forEach(element => {
+            if (element.properties == null) {
+              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe Properties!");
+            } else if (element.properties.Label == null || element.properties.Label == "") {
+              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe das Label!");
+            } else if (element.properties.ClassID == null || element.properties.ClassID == "") {
+              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die ClassID!");
+            } else if (element.geometry == null || element.geometry == "") {
+              res.send("Trainingsdaten konnten nicht geladen werden. Keine Koordinaten vorhanden.");
+            }else if (element.geometry.coordinates[0][0][0][0] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][0] &&
+                      element.geometry.coordinates[0][0][0][1] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][1]) {
+              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Koordinaten!");
+            }
+          })
+          res.render('trainModel', { help: "2" });
+        })
+      })
       .catch(error => {
         console.log(error);
       });
   }
-  fs.readFile("database/input/train_data.geojson", "utf8", function (err, data) {
-    // try parsing of input text
-    try {
-      JSON.parse(data);
-    }
-    catch (err) {
-      res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Syntax!");
-    }
-
-    let trainingdata = JSON.parse(data);
-
-    trainingdata.features.forEach(element => {
-      if (element.properties == null) {
-        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe Properties!");
-      } else if (element.properties.Label == null || element.properties.Label == "") {
-        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe das Label!");
-      } else if (element.properties.ClassID == null || element.properties.ClassID == "") {
-        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die ClassID!");
-      } else if (element.geometry == null || element.geometry == "") {
-        res.send("Trainingsdaten konnten nicht geladen werden. Keine Koordinaten vorhanden.");
-      }else if (element.geometry.coordinates[0][0][0][0] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][0] &&
-                element.geometry.coordinates[0][0][0][1] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][1]) {
-        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Koordinaten!");
-      }
-    })
-    res.render('trainModel', { help: "2" });
-  });
-})
+    });
 
 
 module.exports = router;
