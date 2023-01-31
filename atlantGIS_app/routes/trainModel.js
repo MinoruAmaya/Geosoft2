@@ -32,33 +32,33 @@ router.get('/', function (req, res, next) {
 // Upload trained model
 // route to aoa
 router.post("/uploadTrainModell", uploadModell.single("trainMod"), function (req, res, next) {
-  /**
-  not tested
-  fetch("http://atlantgisbackend:8000/classificationAoa")
-      .then(response => {
-        console.log(response.text());
+  fetch("http://atlantgisbackend:8000/classificationAoa?xmin=111111&xmax=222222ymin=3333333ymax=44444444&type=normal")
+      .then((result) => {
+        console.log(result)
+        res.render('aoa');
       })
       .catch(error => {
         console.log(error);
       });
-   */
-  res.render('aoa');
 })
 
 // model has to be trained
 // route to trainData
 router.post("/uploadUntrainModell", function (req, res, next) {
-  /**
-  not tested
-  fetch("http://atlantgisbackend:8000/trainModell")
-      .then(response => {
-        console.log(response.text());
+  fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=normal")
+      .then((result) => {
+        console.log(result)
+        fetch("http://atlantgisbackend:8000/classificationAoa?xmin=111111&xmax=222222ymin=3333333ymax=44444444&type=normal")
+          .then(() => {
+            res.render('aoa');
+        })
+          .catch(() => {
+            res.render('aoa');
+          });
       })
       .catch(error => {
         console.log(error);
       });
-   */
-  res.render('aoa');
 })
 
 

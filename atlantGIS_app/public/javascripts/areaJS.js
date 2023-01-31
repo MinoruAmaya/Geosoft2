@@ -15,6 +15,10 @@ let rectangle;
 var self = this;
 
 
+btn_trainMod.addEventListener("click", function(){load = true; loadingFun();})
+btn_untrainMod.addEventListener("click", function(){load = true; loadingFun();})
+
+
 switch (Number(helpvar.innerHTML)) {
   case 1:
     addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild");

@@ -59,16 +59,20 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
      if(type == "demo"){
       sentinel <- rast("database/input/satellitenimage_demo.tif")
       model <- readRDS("database/output/model_demo.RDS")
+      mask <- c(xmin,  xmax, ymin, ymax)
+      class(mask) <- "numeric"
+      sentinel <- crop(sentinel, ext(mask))
+     }
+     else if(type == "second"){
+      sentinel <- rast("database/input/satelliteimage.tif")
+      model <- readRDS("database/output/model.RDS")
+      aoa_alt <- rast("database/output/AOA.tif")
      }
      else{
-      sentinel <- rast("database/input/satellitenimage.tif")
+      sentinel <- rast("database/input/satelliteimage.tif")
       model <- readRDS("database/output/model.RDS")
      }
      
-
-     mask <- c(xmin,  xmax, ymin, ymax)
-     class(mask) <- "numeric"
-     sentinel <- crop(sentinel, ext(mask))
      prediction <- predict(as(sentinel, "Raster"), model)
      #projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
@@ -83,20 +87,23 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
          "database/output/classification.tif", overwrite = TRUE)
      plot(prediction_terra, col = cols)
 
-      # Optional: to start parallel calculation
-      #cl <- makeCluster(detectCores() - 1)
-      #registerDoParallel(cl)
-      # calculate AOA
-      area_of_applicability <- aoa(sentinel, model)
-      writeRaster(c(area_of_applicability$AOA),
-          "database/output/AOA.tif", overwrite = TRUE)
-      dataRecom <- selectHighest(area_of_applicability$DI, 2000)
-      #dataRecom[is.nan(dataRecom)] <- 0
-      crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
-      dataRecomVec <- as.polygons(dataRecom)
-      #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
-      terra::writeVector(dataRecomVec,
-          "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
+
+      if(type == "second"){
+
+      }
+      else{
+        # calculate AOA
+        area_of_applicability <- aoa(sentinel, model)
+        writeRaster(c(area_of_applicability$AOA),
+            "database/output/AOA.tif", overwrite = TRUE)
+        dataRecom <- selectHighest(area_of_applicability$DI, 2000)
+        #dataRecom[is.nan(dataRecom)] <- 0
+        crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        dataRecomVec <- as.polygons(dataRecom)
+        #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        terra::writeVector(dataRecomVec,
+            "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
+      }
   }
 
  # Farben für Visualisierung
@@ -158,7 +165,7 @@ train_modell <- function(algorithm, type) {
      }
      else{
       # loading satelliteimagery 
-      sentinel <- rast("database/input/satellitenimage.tif")
+      sentinel <- rast("database/input/satelliteimage.tif")
  
       # loading reference data 
       referencedata <- read_sf("database/input/train_data.gpkg")
