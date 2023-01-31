@@ -59,21 +59,19 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
      if(type == "demo"){
       sentinel <- rast("database/input/satellitenimage_demo.tif")
       model <- readRDS("database/output/model_demo.RDS")
-      mask <- c(xmin,  xmax, ymin, ymax)
-      class(mask) <- "numeric"
-      sentinel <- crop(sentinel, ext(mask))
-     }
-     else if(type == "second"){
-      sentinel <- rast("database/input/satelliteimage.tif")
-      model <- readRDS("database/output/model.RDS")
-      #mask_data <- 
-      aoa_alt <- rast("database/output/AOA.tif")
      }
      else{
       sentinel <- rast("database/input/satelliteimage.tif")
       model <- readRDS("database/output/model.RDS")
+      if(type == "second"){
+        aoa_alt <- rast("database/output/AOA.tif")
+      }
      }
      
+     mask <- c(xmin,  xmax, ymin, ymax)
+     class(mask) <- "numeric"
+     sentinel <- crop(sentinel, ext(mask))
+
      prediction <- predict(as(sentinel, "Raster"), model)
      #projection(prediction) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
      prediction_terra <- as(prediction, "SpatRaster")
@@ -114,9 +112,9 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
             "database/output/AOA.tif", overwrite = TRUE)
         dataRecom <- selectHighest(area_of_applicability$DI, 2000)
         #dataRecom[is.nan(dataRecom)] <- 0
-        crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        #crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         dataRecomVec <- as.polygons(dataRecom)
-        crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         terra::writeVector(dataRecomVec,
             "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
       }
