@@ -16,6 +16,7 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
   let loading = document.getElementById('loading');
   let site = document.getElementById('site');
+  let message = document.getElementById('message');
 
 selId = null;
 
@@ -169,9 +170,17 @@ map.on('overlayadd', function (eventLayer) {
   }
 });
 
-
 addDataToMap("http://localhost:3000/output/AOA.tif", "AOA")
 addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation")
+fetch("http://localhost:3000/output/DI.geojson")
+  .then(result => result.json())
+  .then(data => {
+    var diLayer = L.geoJSON(data);
+    diLayer.addTo(map);
+    layerCtrl.addOverlay(diLayer, "Vorschläge")})
+if(message.innerHTML === "0"){
+  addDataToMap("http://localhost:3000/output/AOA_vergleich.tif", "AOA-Vergleich")
+}
 
 
 

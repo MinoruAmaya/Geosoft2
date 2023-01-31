@@ -2,25 +2,20 @@ extends layout
 
 block content
     br
-    br
     .container
         .row.justify-content-md-center
-            br
-            br
             .col-md-8
                 div#form_div.active-form
-                    p.col-md-12.col-form-label.fw-bolder Neue Trainingsdaten digitalisieren
+                    h3.col-md-12.col-form-label.fw-bolder Neue Trainingsdaten digitalisieren
                     p.col-md-12.col-form-label.fw Zeichnen Sie die neuen Trainingsdaten in dieser Karte ein und 
                         | initialisieren Sie diese mit einem entsprechenden Label und einer ID. 
-                    #map 
-                    br
-                    .row.justify-content-md-center
-                        .col-md-3
-                            button#btn_digitalization.btn.btn-secondary.disabled Trainingsdaten speichern
-        
-                br
-                br 
+                    #mapTrain 
+                    .row.justify-content-md-center(style="margin-top: 10px; margin-bottom: 5px")
+                        .col-md-4
+                            button#btn_digitalization.btn.btn-secondary.btn-lg.disabled Trainingsdaten speichern
             .col-md-3 
+                br
+                br
                 div#form_div.active-form
                     form(action='/createTrainData/uploadTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='training') Neue Trainingsdaten hochladen
@@ -28,10 +23,14 @@ block content
                         button#btn_safeData.btn.btn-primary.mb-2 Speichern
                     button#btn_addData.btn.btn-primary.mb-2 Hinzufügen
                 br
-                br
-                br
-                form(action='/createTrainData/newaoa' method='post')
-                    button#btn_newAoa.btn.btn-secondary.disabled AOA erneut berechnen 
+                div#form_div.active-form
+                    form(action='/createTrainData/newaoa' method='post')
+                        label.col-md-12.col-form-label.fw-bolder Neue Klassifikation erstellen
+                        p.col-md-12.col-form-label.fw Sobald Sie alle Trainnigsdaten hochgeladen oder Digitalisiert haben
+                        | können Sie eine neue Klassifikation erstellen lassen und die neue AOA mit der alten AOA vergleichen
+                        br
+                        br
+                        button#btn_newAoa.btn.btn-secondary.disabled AOA erneut berechnen 
     
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)

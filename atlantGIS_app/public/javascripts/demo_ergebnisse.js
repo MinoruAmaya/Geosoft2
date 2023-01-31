@@ -27,15 +27,22 @@ window.onload = function () {
       site_demo.style.opacity = "0.15";
     }
   }
+
   loadingFun();
+
   if (message[0] === "ergebnisse") {
+    fetch("http://localhost:3000/output/DI.geojson")
+      .then(result => result.json())
+      .then(data => {
+        var diLayer = L.geoJSON(data);
+        diLayer.addTo(map);
+        layerCtrl.addOverlay(diLayer, "Vorschläge")})
     addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation", "demo", "nochÄndern")
     addDataToMap("http://localhost:3000/output/AOA.tif", "AOA", "demo", "nochÄndern")
-    //addDataToMap("http://localhost:3000/output/DI.tif", "Trainigsempfehlung", "demo", "nochÄndern")
+
   }
 
-
-  function addDataToMap(URL, name, call, type) {
+  function addDataToMap(URL, name, call) {
     load = true;
     loadingFun();
     fetch(URL)

@@ -51,17 +51,14 @@ router.post("/uploadTrainingData", uploadTrainingData.single("training"), functi
 
 //route to aoa
 router.post("/newaoa", function (req, res, next) {
-  /**
-  not tested
-  fetch("http://atlantgisbackend:8000/classificationAoa")
+  fetch("http://atlantgisbackend:8000/classificationAoa?xmin=111111&xmax=222222ymin=3333333ymax=44444444&type=second")
       .then(response => {
         console.log(response.text());
+        res.render('aoa', {message : [0]});
       })
       .catch(error => {
         console.log(error);
       });
-   */
-  res.render('aoa');
 })
 
 
