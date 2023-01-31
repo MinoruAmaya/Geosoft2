@@ -115,7 +115,7 @@ router.post("/uploadUntrainModell", function (req, res, next) {
         fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=normal")
           .then((result) => {
             console.log(result)
-            fetch("http://atlantgisbackend:8000/classificationAoa?xmin=111111&xmax=222222ymin=3333333ymax=44444444&type=normal")
+            fetch("http://atlantgisbackend:8000/classificationAoa?xmin=" + xmin + "&xmax=" + xmax + "&ymin=" + ymin + "&ymax=" + ymax + "&type=normal")
               .then(() => {
                 res.render('aoa', {message: [1]});
             })

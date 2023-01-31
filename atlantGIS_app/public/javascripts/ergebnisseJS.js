@@ -170,8 +170,8 @@ map.on('overlayadd', function (eventLayer) {
   }
 });
 
-addDataToMap("http://localhost:3000/output/AOA.tif", "AOA")
 addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation")
+addDataToMap("http://localhost:3000/output/AOA.tif", "AOA")
 fetch("http://localhost:3000/output/DI.geojson")
   .then(result => result.json())
   .then(data => {

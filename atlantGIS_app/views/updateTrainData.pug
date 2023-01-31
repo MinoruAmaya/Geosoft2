@@ -12,7 +12,9 @@ block content
                     #mapTrain 
                     .row.justify-content-md-center(style="margin-top: 10px; margin-bottom: 5px")
                         .col-md-4
-                            button#btn_saveTrainData.btn.btn-secondary.btn-lg.disabled Trainingsdaten speichern
+                            form(action='/createTrainData/uploadTrainingData' method='post')
+                                input#traindata(type='hidden' name='traindata')
+                                button#btn_saveTrainData.btn.btn-secondary.btn-lg.disabled Trainingsdaten speichern
             .col-md-3 
                 br
                 br
@@ -24,6 +26,7 @@ block content
                         br
                         br
                         button#btn_newAoa.btn.btn-secondary.disabled AOA erneut berechnen 
+        p#helpTrainData.visually-hidden= message
     
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)

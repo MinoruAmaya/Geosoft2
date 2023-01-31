@@ -120,35 +120,6 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
       }
   }
 
- # Farben für Visualisierung
- #cols_s <- c("lightgreen","blue","green","grey","chartreuse",
-            #"forestgreen","beige","blue3","red","magenta","red")
-
- # Schöne Kartendarstellung
- ################################################################################
-
- #prediction[AreaOfApplicability$AOA == 0] <- NA
-
- #map <- tm_shape(deratify(pred_MR_OS),
-   #              raster.downsample = FALSE) +
-  #tm_raster(palette = cols_s,title = "LUC")+
-   #tm_scale_bar(bg.color="white")+
-   #tm_grid(n.x=4,n.y=4,projection="+proj=longlat
-   # +ellps=WGS84 +datum=WGS84 +no_defs")+
-   #tm_layout(legend.position = c("left","bottom"),
-   #          legend.bg.color = "white",
-   #          bg.color="black",
-
-   #          legend.bg.alpha = 0.8)+
-   #tm_add_legend(type = "fill",
- #                col="black",
- #                labels = "Outside AOA")
- #
- #map
- #
- #tmap_save(map, "filepath/AreaOfApplicability.png")
-
-
 #* function for converting a gpkg to geojson
 #* @get /gpkgToGeojson
 #* @serializer json
@@ -182,7 +153,7 @@ train_modell <- function(algorithm, type) {
       sentinel <- rast("database/input/satelliteimage.tif")
  
       # loading reference data 
-      referencedata <- read_sf("database/input/train_data.gpkg")
+      referencedata <- read_sf("database/input/train_data.geojson")
      }
 
      # Trainingsdaten auf die Bolivien Projektion umändern

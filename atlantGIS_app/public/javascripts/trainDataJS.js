@@ -4,6 +4,15 @@ let currentLayer;
 let currentLabel;
 let currentID; 
 let trainData = '';
+let btn_newAoa = document.getElementById('btn_newAoa');
+let btn_saveTrainData = document.getElementById('btn_saveTrainData');
+let traindataSend = document.getElementById('traindata');
+let help = document.getElementById('helpTrainData');
+
+if(help.innerHTML[0] = "1"){
+  activateNewAoa();
+}
+
 
 // Leaflet 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -60,21 +69,6 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         }
      });
 
-
-
-let navElement = document.getElementById('navbarTrain');
-let btn_digitalization = document.getElementById('btn_digitalization');
-let btn_newAoa = document.getElementById('btn_newAoa');
-let in_trainData = document.getElementById('training');
-let btn_saveTrainData = document.getElementById('btn_saveTrainData');
-
-//btn_digitalization.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
-//btn_newAoa.addEventListener('click', function(){/* add here the function to save the data */; window.location="./area"});
-
-navElement.classList.remove('disabled');
-navElement.classList.remove('text-white-50');
-navElement.classList.add('text-white');
-
 let style = function (feature) {
     switch (feature.properties.Label) {
       case "See":
@@ -116,7 +110,6 @@ function activateDigitalization(){
       btn_saveTrainData.classList.remove('btn-secondary');
       btn_saveTrainData.classList.remove('disabled');
       btn_saveTrainData.classList.add('btn-primary');
-      btn_saveTrainData.addEventListener('click', function() {activateNewAoa()});
     }
     counter++;
 }
@@ -127,11 +120,9 @@ function activateDigitalization(){
  * the "Aoa erneut berechnen" button should be activated.
  */
 function activateNewAoa(){
-  if(counter === 1){
-    btn_newAoa.classList.remove('btn-secondary');
-    btn_newAoa.classList.remove('disabled');
-    btn_newAoa.classList.add('btn-primary');
-  }
+  btn_newAoa.classList.remove('btn-secondary');
+  btn_newAoa.classList.remove('disabled');
+  btn_newAoa.classList.add('btn-primary');
 }
 
 /**
@@ -166,7 +157,6 @@ function addTrainData(){
 function getNewTrainData(in_label, in_klassenID){
     currentLabel = in_label.value;
     currentID = parseInt(in_klassenID.value)
-    currentID = parseInt(in_klassenID.value);
     var coordinates = [[[]]];
     for(var i = 0; i < currentLayer._latlngs[0].length; i++){
         coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
@@ -206,10 +196,19 @@ function getNewTrainData(in_label, in_klassenID){
     L.geoJSON(trainData, {
         style: style
       }).addTo(map)
+    //Speichert Geometrieeigenschaften als JSON
+    //var shape = trainData.toGeoJSON();
+    var shape_for_db = JSON.stringify(trainData);
+
+    // save area data in textfield for frontend
+    traindataSend.value = shape_for_db;
+    console.log("got clicked")
 };
 
 
 fetch("http://localhost:3000/input/train_data.geojson")
   .then(result => result.json())
-  .then(data =>
-    L.geoJSON(data, {style: style}).addTo(map));
+  .then(data => {
+    trainData = data
+    L.geoJSON(data, {style: style}).addTo(map)
+  });
