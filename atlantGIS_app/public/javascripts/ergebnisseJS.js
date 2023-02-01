@@ -83,10 +83,10 @@ function loadingFun() {
                 return null // leer
               }
               else if(values[0]==-1){
-                return `rgb(123,90,130)` // yellow (better)
+                return `rgb(123,90,130)` // yellow (better) Das ist lila
               }
               else{
-                return `rgb(253,231,37)`; // purple (worse)
+                return `rgb(240,240,37)`; // purple (worse) Das ist gelb
               }
             }
           });
@@ -144,6 +144,27 @@ function loadingFun() {
   };
   legendAOA.addTo(map);  
 
+// Legende für AOA Verbesserung
+var legendAOAbetter = L.control({position: 'bottomleft'});
+legendAOAbetter.onAdd = function (map) {
+
+var div = L.DomUtil.create('div', 'legend');
+labels = ['<strong>AOA Verbersserung</strong>'];
+categories = ['Verbessert','Verschlechtert'];
+
+for (var i = 0; i < categories.length; i++) {
+
+        div.innerHTML += 
+        labels.push(
+            '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+        (categories[i] ? categories[i] : '+'));
+
+    }
+    div.innerHTML = labels.join('<br>');
+return div;
+};
+legendAOAbetter.addTo(map);    
+
 // Farben für Legende
 function getColor(d) {
   return d === 'Siedlung' ? '#fde725' :
@@ -155,6 +176,8 @@ function getColor(d) {
          d === 'Industriegebiet' ? '#59157e' :
          d === 'Geeignet' ? '#fff' :
          d === 'Ungeeignet' ? '#010101' :
+         d === 'Verbessert' ? '#F0F082' :
+         d === 'Verschlechert' ? '#7B5A82' :
          '#FFEDA0';
 } 
 map.on('overlayadd', function (eventLayer) {
