@@ -83,10 +83,10 @@ function loadingFun() {
                 return null // leer
               }
               else if(values[0]==-1){
-                return `rgb(123,90,130)` // yellow (better) Das ist lila
+                return `rgb(123,90,130)` // purple (better) 
               }
               else{
-                return `rgb(240,240,37)`; // purple (worse) Das ist gelb
+                return `rgb(240,240,37)`; // yellow (worse)
               }
             }
           });
@@ -176,8 +176,8 @@ function getColor(d) {
          d === 'Industriegebiet' ? '#59157e' :
          d === 'Geeignet' ? '#fff' :
          d === 'Ungeeignet' ? '#010101' :
-         d === 'Verbessert' ? '#F0F082' :
-         d === 'Verschlechert' ? '#7B5A82' :
+         d === 'Verbessert' ? '#A020F0' :
+         d === 'Verschlechert' ? '#FFFF00' :
          '#FFEDA0';
 } 
 map.on('overlayadd', function (eventLayer) {
