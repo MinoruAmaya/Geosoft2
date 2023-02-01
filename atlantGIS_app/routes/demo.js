@@ -12,7 +12,7 @@ router.get('/startAnalyse', function(req, res, next) {
   fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=demo")
     .then((result) => {
       console.log(result)
-      fetch("http://atlantgisbackend:8000/classificationAoa?xmin=414882&xmax=417989&ymin=5758892&ymax=5760354&type=demo")
+      fetch("http://atlantgisbackend:8000/classificationAoa?xmin=414882&xmax=417989&ymin=5756370&ymax=5760354&type=demo")
         .then(() => {
           res.render('demo_ergebnisse', message=["ergebnisse"]);
       })

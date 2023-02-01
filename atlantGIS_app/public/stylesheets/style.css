@@ -22,10 +22,6 @@ a {
   height: 470px;
   width: 100%;
 }
-#mapTrain{
-  height: 400px;
-  width: 100%;
-}
 
 #logo{
   width: 51px;
@@ -93,7 +89,7 @@ h1 {
 
 .pagination-number:hover,
 .pagination-button:not(.disabled):hover {
-  background: #ffffff;
+  background: #fefdfd;
 }
 
 .pagination-number.active {

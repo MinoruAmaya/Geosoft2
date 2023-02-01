@@ -52,7 +52,7 @@ window.onload = function () {
         if (name == "Klassifikation") { // Klassifikation
           // Calculate count of classification classes. Initalize array.
           //var count = georaster.maxs - georaster.mins;
-          let colorArray = ['#0a1cb1', '#e57423', '#23c3e5', '#2aa43d', '#696969', '#70843a','#472612'];
+          let colorArray = ['#28ae80','#addc30','#3b528b','#59157e', '#fde725','#21918c', '#5ec962'];
           // let randomColorArray = Array();
           // Fill array with colors. Every color has to be unique.
           //for (i = 0; i < count; i++) {
@@ -63,7 +63,7 @@ window.onload = function () {
              // i--;
             //}
           //}
-        
+      
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
@@ -118,7 +118,7 @@ window.onload = function () {
   
   var div = L.DomUtil.create('div', 'legend');
   labels = ['<strong>Klassifikation</strong>'];
-  categories = ['See','Siedlung','Fliessgewaesser','Laubwald','Mischwald', 'Gruenland', 'Industriegebiet', 'Acker_bepflanzt', 'Offenboden'];
+  categories = ['Gruenland','Siedlung', 'Acker_bepflanzt','Laubwald','Mischwald', 'Fliessgewaesser','Industriegebiet'];
   
   for (var i = 0; i < categories.length; i++) {
   
@@ -156,15 +156,13 @@ window.onload = function () {
 
 // Farben für Legende
 function getColor(d) {
-  return d === 'See' ? '#0a1cb1' :
-         d === 'Siedlung' ? '#e57423' :
-         d === 'Fliessgewaesser' ? '#23c3e5' :
-         d === 'Laubwald' ? '#2aa43d' :
-         d === 'Mischwald' ? '#11671e' :
-         d === 'Greuenland' ? '#92e597' :
-         d === 'Industriegebiet' ? '#696969' :
-         d === 'Acker_bepflanzt' ? '#70843a' :
-         d === 'Offenboden' ? '#472612' :
+  return d === 'Siedlung' ? '#fde725' :
+         d === 'Acker_bepflanzt' ? '#addc30' :
+         d === 'Greuenland' ? '#5ec962' :
+         d === 'Laubwald' ? '#28ae80' :
+         d === 'Mischwald' ? '#21918c' :
+         d === 'Fliessgewaesser' ? '#3b528b' :
+         d === 'Industriegebiet' ? '#59157e' :
          d === 'Geeignet' ? '#fff' :
          d === 'Ungeeignet' ? '#010101' :
          '#FFEDA0';
