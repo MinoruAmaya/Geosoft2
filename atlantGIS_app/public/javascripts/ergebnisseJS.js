@@ -73,7 +73,7 @@ function loadingFun() {
               }
             }
           });
-        }else if(name=="AOA" || name=="Trainigsempfehlung"){ // AOA
+        }else if(name=="AOA" || name=="AOA-Vergleich"){ // AOA
           // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
@@ -178,8 +178,9 @@ fetch("http://localhost:3000/output/DI.geojson")
     var diLayer = L.geoJSON(data);
     diLayer.addTo(map);
     layerCtrl.addOverlay(diLayer, "Vorschläge")})
-if(message.innerHTML === "0"){
-  addDataToMap("http://localhost:3000/output/AOA_vergleich.tif", "AOA-Vergleich")
+if(message.innerHTML[0] === "0"){
+  console.log("jup")
+  addDataToMap("http://localhost:3000/output/AOA_Vergleich.tif", "AOA-Vergleich")
 }
 
 

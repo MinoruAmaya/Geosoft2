@@ -29,7 +29,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
   loadingFun();
 
   btn_start.addEventListener("click", function(){handleDOMChange("start")});
-  btn_satellite.addEventListener("click", function(){message = []; loadingFun();addDataToMap("http://localhost:3000/input/satellitenimage_demo.tif", "Satellitenbild", "demo", "satellite")});
+  btn_satellite.addEventListener("click", function(){message = []; loadingFun();addDataToMap("http://localhost:3000/input/RGB_demo.tif", "Satellitenbild", "demo", "satellite")});
   btn_area.addEventListener("click", function(){handleDOMChange("area"); addArea();});
   btn_trainData.addEventListener("click", function(){handleDOMChange("traindata")});
   btn_trainModell.addEventListener("click", function(){message = []; loadingFun();window.location = "/demo/startAnalyse";});
