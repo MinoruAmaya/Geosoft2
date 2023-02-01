@@ -52,7 +52,7 @@ window.onload = function () {
         if (name == "Klassifikation") { // Klassifikation
           // Calculate count of classification classes. Initalize array.
           //var count = georaster.maxs - georaster.mins;
-          let colorArray = ['#fde725','#addc30','#3b528b','#59157e', '#28ae80','#21918c', '#5ec962'];
+          let colorArray = ['#28ae80','#addc30','#3b528b','#59157e', '#fde725','#21918c', '#5ec962'];
           // let randomColorArray = Array();
           // Fill array with colors. Every color has to be unique.
           //for (i = 0; i < count; i++) {
@@ -118,7 +118,7 @@ window.onload = function () {
   
   var div = L.DomUtil.create('div', 'legend');
   labels = ['<strong>Klassifikation</strong>'];
-  categories = ['Laubwald', 'Acker_bepflanzt','Fliessgewaesser','Industriegebiet','Siedlung','Mischwald', 'Gruenland'];
+  categories = ['Gruenland','Siedlung', 'Acker_bepflanzt','Laubwald','Mischwald', 'Fliessgewaesser','Industriegebiet'];
   
   for (var i = 0; i < categories.length; i++) {
   
