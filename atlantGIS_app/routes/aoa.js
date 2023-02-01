@@ -23,6 +23,7 @@ router.post('/downloadData', function (req, res, next) {
   const downloadArray = Array();
   if (req.body.prediction == "on") {
     downloadArray.push({ path: 'database/output/classification.tif', name: 'classification.tif' })
+    downloadArray.push({ path: 'database/output/classification.tif.aux.xml', name: 'classification.tif.aux.xml' })
   } if (req.body.aoa == "on") {
     downloadArray.push({ path: 'database/output/AOA.tif', name: 'AOA.tif' })
   } if (req.body.location == "on") {
