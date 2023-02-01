@@ -45,7 +45,7 @@ router.post('/downloadData', function (req, res, next) {
   if (req.body.model == "on")
     downloadArray.push({ path: 'database/output/model.RDS', name: 'model.RDS' })
   if (req.body.traindata == "on")
-    downloadArray.push({ path: 'database/output/train_data.geojson', name: 'train_data.geojson' })
+    downloadArray.push({ path: 'database/input/train_data.geojson', name: 'train_data.geojson' })
   if (downloadArray.length != 0)
     res.zip(downloadArray);
   else
