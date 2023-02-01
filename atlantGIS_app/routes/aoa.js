@@ -4,7 +4,7 @@ var fetch = require('node-fetch');
 
 
 //routes ---------------------------------------------------------------------------------------------------------------
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('aoa');
 });
 
@@ -37,17 +37,19 @@ router.post("/classification", function (req, res, next) {
 router.post('/downloadData', function (req, res, next) {
   const downloadArray = Array();
   if (req.body.prediction == "on") {
-      downloadArray.push({path: 'database/output/classification.tif', name: 'classification.tif'})
-  } if (req.body.aoa == "on") 
-      downloadArray.push({path: 'database/input/area_of_applicability.tif', name: 'area_of_applicability.tif'})
+    downloadArray.push({ path: 'database/output/classification.tif', name: 'classification.tif' })
+  } if (req.body.aoa == "on")
+    downloadArray.push({ path: 'database/output/AOA.tif', name: 'aoa.tif' })
   if (req.body.location == "on")
-      downloadArray.push({path: 'database/input/satelliteimagery_placeholder.txt', name: 'satelliteimagery_placeholder.txt'})
+    downloadArray.push({ path: 'database/output/DI.geojson', name: 'DI.geojson' })
   if (req.body.model == "on")
-      downloadArray.push({path: 'database/input/model.RDS', name: 'model.RDS'})
-  if(downloadArray.length!=0)
-      res.zip(downloadArray);
-  else    
-      res.send("Please select files!")
+    downloadArray.push({ path: 'database/output/model.RDS', name: 'model.RDS' })
+  if (req.body.traindata == "on")
+    downloadArray.push({ path: 'database/output/train_data.geojson', name: 'train_data.geojson' })
+  if (downloadArray.length != 0)
+    res.zip(downloadArray);
+  else
+    res.send("Please select files!")
 });
 
 
