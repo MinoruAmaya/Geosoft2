@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fetch = require('node-fetch');
+var zip = require('express-zip');
 
 
 //routes ---------------------------------------------------------------------------------------------------------------
@@ -22,18 +23,19 @@ router.post('/downloadData', function (req, res, next) {
   const downloadArray = Array();
   if (req.body.prediction == "on") {
     downloadArray.push({ path: 'database/output/classification.tif', name: 'classification.tif' })
-  } if (req.body.aoa == "on")
-    downloadArray.push({ path: 'database/output/AOA.tif', name: 'aoa.tif' })
-  if (req.body.location == "on")
+  } if (req.body.aoa == "on") {
+    downloadArray.push({ path: 'database/output/AOA.tif', name: 'AOA.tif' })
+  } if (req.body.location == "on") {
     downloadArray.push({ path: 'database/output/DI.geojson', name: 'DI.geojson' })
-  if (req.body.model == "on")
+  } if (req.body.model == "on") {
     downloadArray.push({ path: 'database/output/model.RDS', name: 'model.RDS' })
-  if (req.body.traindata == "on")
+  } if (req.body.traindata == "on") {
     downloadArray.push({ path: 'database/input/train_data.geojson', name: 'train_data.geojson' })
-  if (downloadArray.length != 0)
+  } if (downloadArray.length != 0) {
     res.zip(downloadArray);
-  else
+  } else {
     res.send("Please select files!")
+  }
 });
 
 

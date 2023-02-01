@@ -17,7 +17,7 @@ block content
                         button.btn.btn-primary Start
                 #form_div.active-form
                     p.col-md-12.col-form-label.fw-bolder Ergebnisse
-                    form(action='/downloadData' method='post')
+                    form(action='/aoa/downloadData' method='post')
                         br
                         input#1.gaucher(type='checkbox' name="prediction" onchange="processCheck(this)")
                         label(for="1") Klassifikation
@@ -47,6 +47,6 @@ block content
                 
              
 block scripts
-    script(src="https://unpkg.com/georaster")
-    script(src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js")
+    script(src="https://unpkg.com/georaster") 
+    script(src="https://unpkg.com/georaster-layer-for-leaflet")
     script(src="/javascripts/ergebnisseJS.js" defer)
