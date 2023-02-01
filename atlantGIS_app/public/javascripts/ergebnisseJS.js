@@ -184,12 +184,19 @@ map.on('overlayadd', function (eventLayer) {
   // Switch to the classification legend...
   if (eventLayer.name === 'Klassifikation') {
       this.removeControl(legendAOA);
+      this.removeControl(legendAOAbetter);
       legendClass.addTo(this);
 }
   else if (eventLayer.name === 'AOA') {
     this.removeControl(legendClass);
+    this.removeControl(legendAOAbetter);
     legendAOA.addTo(this);
-  } else { // Or switch to the aoa legend...
+  } 
+  else if (eventLayer.name === 'AOA-Vergleich') {
+    this.removeControl(legendClass);
+    this.removeControl(legendAOA);
+    legendAOAbetter.addTo(this);
+  }else { // Or switch to the aoa legend...
       this.removeControl(legendClass);
       this.removeControl(legendAOA);
   }
