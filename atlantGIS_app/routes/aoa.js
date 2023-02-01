@@ -13,22 +13,6 @@ router.post("/updateTrainData", function (req, res, next) {
   res.render('updateTrainData');
 })
 
-// route to aoa to calculate it again
-router.post("/classification", function (req, res, next) {
-  /**
-  not tested
-  fetch("http://atlantgisbackend:8000/classificationAoa")
-      .then(response => {
-        console.log(response.text());
-      })
-      .catch(error => {
-        console.log(error);
-      });
-   */
-  res.render('aoa');
-})
-
-
 
 /**
 * download route

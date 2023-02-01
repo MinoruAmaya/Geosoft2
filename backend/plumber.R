@@ -90,8 +90,6 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
       if(type == "second"){
         # calculate AOA
         area_of_applicability <- aoa(sentinel, model)
-        writeRaster(c(area_of_applicability$AOA),
-            "database/output/AOA.tif", overwrite = TRUE)
         dataRecom <- selectHighest(area_of_applicability$DI, 2000)
         #dataRecom[is.nan(dataRecom)] <- 0
         crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
@@ -103,9 +101,10 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
         aoa_alt <- crop(aoa_alt, ext(mask))
         area_of_applicability$AOA <- crop(area_of_applicability$AOA, ext(mask))
         aoa_vergleich <- area_of_applicability$AOA - aoa_alt
-        aoa_vergleich <- st_transform(aoa_vergleich, crs(sentinel))
-        writeRaster(aoa_vergleich,
+        terra::writeRaster(aoa_vergleich,
             "database/output/AOA_Vergleich.tif", overwrite = TRUE)
+        terra::writeRaster(area_of_applicability$AOA,
+            "database/output/AOA.tif", overwrite = TRUE)
       }
       else{
         # calculate AOA
@@ -114,10 +113,10 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
             "database/output/AOA.tif", overwrite = TRUE)
         dataRecom <- selectHighest(area_of_applicability$DI, 2000)
         #dataRecom[is.nan(dataRecom)] <- 0
-        #crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         dataRecomVec <- as.polygons(dataRecom)
-        dataRecomVec <- project(dataRecomVec, "+proj=longlat +datum=WGS84 +no_defs +type=crs")
-        #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        #dataRecomVec <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         terra::writeVector(dataRecomVec,
             "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
       }
@@ -144,12 +143,21 @@ geopackage_to_geojson <- function() {
 #* @get /trainModell
 train_modell <- function(algorithm, type) {
 
+  library(terra)
+  library(sf)
+  library(caret)
+  library(raster)
+  library(CAST)
+
      if(type == "demo"){
       # loading satelliteimagery 
       sentinel <- rast("database/input/satellitenimage_demo.tif")
  
       # loading reference data 
       referencedata <- read_sf("database/input/train_data_demo.gpkg")
+
+      # Trainingsdaten auf die Bolivien Projektion umändern
+      #referencedata <- st_transform(referencedata, crs(sentinel))
      }
      else{
       # loading satelliteimagery 
@@ -157,16 +165,19 @@ train_modell <- function(algorithm, type) {
  
       # loading reference data 
       referencedata <- read_sf("database/input/train_data.geojson")
+
+      # Trainingsdaten auf die Bolivien Projektion umändern
+      #referencedata <- spTransform(referencedata, crs(sentinel))
      }
 
      # Trainingsdaten auf die Bolivien Projektion umändern
      referencedata <- st_transform(referencedata, crs(sentinel))
 
-     extr <- extract(sentinel, referencedata)
+     extr <<- extract(sentinel, referencedata)
 
      referencedata$PolyID <- 1:nrow(referencedata)
 
-     extr <- merge(extr, referencedata, by.x = "ID", by.y = "PolyID")
+     extr <<- merge(extr, referencedata, by.x = "ID", by.y = "PolyID")
 
      extr_subset <- extr[createDataPartition(extr$ID, p = 0.2)$Resample1, ]
 

@@ -73,16 +73,20 @@ function loadingFun() {
               }
             }
           });
-        }else if(name=="AOA" || name=="AOA-Vergleich"){ // AOA
-          // Georaster
+        }
+        else if(name=="AOA-Vergleich"){
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
             pixelValuesToColorFn: values => {
               if(values[0]==0){
-                return null; // no color
-              }else{
-                return `rgb(230,0,230)`; // pink
+                return null // leer
+              }
+              else if(values[0]==-1){
+                return `rgb(123,90,130)` // yellow (better)
+              }
+              else{
+                return `rgb(253,231,37)`; // purple (worse)
               }
             }
           });
