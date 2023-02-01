@@ -175,7 +175,7 @@ function getNewTrainData(in_label, in_klassenID){
     currentID = parseInt(in_klassenID.value)
     var coordinates = [[[]]];
     for(var i = 0; i < currentLayer._latlngs[0].length; i++){
-        coordinates[0][0].push([currentLayer._latlngs[0][i].lng , currentLayer._latlngs[0][i].lat])
+        coordinates[0][0].push([(currentLayer._latlngs[0][i].lng).toFixed(4) , (currentLayer._latlngs[0][i].lat).toFixed(4)])
     };
 
     if (trainData === ''){
@@ -185,7 +185,7 @@ function getNewTrainData(in_label, in_klassenID){
                 "type" : "Feature", 
                 "properties" : {  
                     "Label" : currentLabel, 
-                    "ClassID" : currentID
+                    "ClassID" : currentID 
                 }, 
                 "geometry" : { 
                     "type" : "MultiPolygon", 
@@ -200,7 +200,8 @@ function getNewTrainData(in_label, in_klassenID){
             "type" : "Feature", 
                 "properties" : {  
                     "Label" : currentLabel, 
-                    "ClassID" : currentID
+                    "ClassID" : currentID,
+                    "id" : newSpot+1
                 }, 
                 "geometry" : { 
                     "type" : "MultiPolygon", 
