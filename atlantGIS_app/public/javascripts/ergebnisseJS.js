@@ -41,7 +41,7 @@ function loadingFun() {
         if (name == "Klassifikation") { // Klassifikation
           // Calculate count of classification classes. Initalize array.
           //var count = georaster.maxs - georaster.mins;
-          let colorArray = ['#3b528b', '#440154', '#2c728e', '#28ae80', '#21918c', '#5ec962','#472d7b', '#addc30', '#fde725'];
+          let colorArray = ['#28ae80','#addc30','#3b528b','#59157e', '#fde725','#21918c', '#5ec962'];
           // let randomColorArray = Array();
           // Fill array with colors. Every color has to be unique.
           //for (i = 0; i < count; i++) {
@@ -104,7 +104,7 @@ function loadingFun() {
   
   var div = L.DomUtil.create('div', 'legend');
   labels = ['<strong>Klassifikation</strong>'];
-  categories = ['See','Siedlung','Fliessgewaesser','Laubwald','Mischwald', 'Gruenland', 'Industriegebiet', 'Acker_bepflanzt', 'Offenboden'];
+  categories = ['Gruenland','Siedlung', 'Acker_bepflanzt','Laubwald','Mischwald', 'Fliessgewaesser','Industriegebiet'];
   
   for (var i = 0; i < categories.length; i++) {
   
@@ -142,15 +142,13 @@ function loadingFun() {
 
 // Farben für Legende
 function getColor(d) {
-  return d === 'See' ? '#3b528b' :
-         d === 'Siedlung' ? '#440154' :
-         d === 'Fliessgewaesser' ? '#2c728e' :
+  return d === 'Siedlung' ? '#fde725' :
+         d === 'Acker_bepflanzt' ? '#addc30' :
+         d === 'Greuenland' ? '#5ec962' :
          d === 'Laubwald' ? '#28ae80' :
          d === 'Mischwald' ? '#21918c' :
-         d === 'Greuenland' ? '#5ec962' :
-         d === 'Industriegebiet' ? '#472d7b' :
-         d === 'Acker_bepflanzt' ? '#addc30' :
-         d === 'Offenboden' ? '#fde725' :
+         d === 'Fliessgewaesser' ? '#3b528b' :
+         d === 'Industriegebiet' ? '#59157e' :
          d === 'Geeignet' ? '#fff' :
          d === 'Ungeeignet' ? '#010101' :
          '#FFEDA0';
