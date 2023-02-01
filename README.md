@@ -10,6 +10,13 @@ Hier entsteht in Zusammenarbeit von den vier Studierenden Maximilian Elfers, Hen
   - [Abstract](#abstract)
   - [Ziel der Anwendung](#ziel)
   - [Zielgruppe](#zielgruppe)
+  - [Lexikon](#lexikon)
+    - [Satellitenbilder](#satellitenbilder)
+    - [Maschinelles Lernen](#maschinelles-Lernen)
+    - [Trainingsdaten](#trainingsdaten)
+    - [Landnutzungsklassifikation](#landnutzungsklassifikation)
+    - [Area of Applicability](#area-of-applicability)
+    - [Quellen](#quellen]
   - [Funktionen](#funktionen)
     - [Upload](#upload)
     - [Machine-Learning Algorithmen](#machine-learning-algorithmen)
@@ -54,6 +61,35 @@ zu machen
 
 Zielgruppe(n) sind Forscher oder Praktikanten im Bereich der Fernerkundung/räumlichen
 Modellierung, die mit Hilfe vom Maschinellen Lernen Landnutzungsklassifikationen durchführen möchten. Vorwissen in den Bereichen Klassifikation und Area of Aplicability sind nützlich, aber nicht notwendig.
+
+## Lexikon
+
+### Satellitenbilder
+
+Satellitenbilder stellen ein zentrales Instrument der Fernerkundung dar und bilden die Grundlage für Datenerfassung, Datenvisualisierung und Analyse. Durch die Etablierung von hochqualitativer Satellitensensoren wird heutzutage eine Bildgebung mit sehr hoher Auflösung ermöglicht. Anwendung findet diese Technologie beispielsweise in der Erkennung von Landnutzungsänderungen, Landwirtschaft oder Katastrophenschutz. Auch das Webtool der AtlantGIS GmbH profitiert von den genauen, zuverlässigen und zeitnahen Daten, die von Sentinel-Satelliten aufgenommen werden.
+
+### Maschinelles Lernen
+
+Maschinelles Lernen ist eine Unterkategorie der künstlichen Intelligenz. Ziel ist es, dass die ausdauernde und schnelle Maschine Muster erkennt und Wissen erwirbt. Dafür arbeiten Entwickler mit Algorithmen und Technologien zur Mustererkennung und die Nutzung zusätzlicher Daten führt dazu, dass die Ergebnisse der Maschine immer präziser werden.
+
+### Trainingsdaten
+
+Im Gegensatz zum unüberwachten Lernen benötigt das Vorgehen des überwachten Lernens Datensätze mit Trainings-, Validierungs- und Testdaten. Damit das Modell des maschinellen Lernens möglichst präzise Ergebnisse liefert, muss dieses mit Trainingsdaten trainiert werden. Ein Trainingsdatensatz ist ein Datensatz, der Beispiele, die für das Lernen der Muster und Zusammenhänge in den Daten verwendet wird, enthält.
+
+### Landnutzungsklassifikation
+
+Landnutzung und -bedeckung sind wichtige Indikatoren für menschengemachte Umweltbelastung. Landnutzungsänderungen können Auswirkungen auf den Klimawandel oder Biodiversität haben. Landnutzngsklassifikation ist eine anspruchsvolle Bildbearbeitung der Fernerkundung, bei der durch eine schematische Klassifizierung die verschiedenen Nutzungsarten (z.B. Land-/Forstwirtschaft, Industrie, Siedlungsfläche, Gewässer, ...) auf einer Karte visualisiert werden können.
+
+### Area of Applicability
+
+Modelle des maschinellen Lernens werden in den Geowissenschaften vor allem auch für die Vorhersage von Ort und Räumen verwendet (s. Landnutzungsklassifikation). Trifft der Algorithmus Aussagen über unbekannt Orte, kann es schnell zu Fehlern kommen. Die Area od Applicability (AOA) bietet hierbei eine Unterstützung zur Beaurteilung, inwiefern die getroffenen Aussagen zuverlässig sind. Mithilfe von Schwellenwerten kann über die Güte der Informationen entschieden werden, ob das aktuelle Modell verwendet werden sollte, oder ob es mit weiteren Trainingsdaten trainiert werden soll, das somit gegebenenfalls ein besseres Ergebnis erzielen könnte. Neben der Abgrenzung eines solchen Bereichs der Anwendbarkeit (AOA) kann dieses Tool auch verwendet werden, um auf Bereiche hinzuweisen, in denen die Sammlung zusätzliche Trainingsdaten erforderlich sind, um ein besser anwendbares Modell zu trainieren.
+
+### Quellen
+
+https://eos.com/de/products/high-resolution-images/ <br>
+https://datasolut.com/wiki/trainingsdaten-und-testdaten-machine-learning/ <br>
+https://github.com/Geosoft2/geosoft2-2022 <br>
+https://www.umweltbundesamt.de/themen/boden-landwirtschaft/flaechensparen-boeden-landschaften-erhalten/corine-land-cover-clc
 
 ## Funktionen
 
