@@ -1,4 +1,4 @@
-//Das sind Beispieldaten um Layer hinzuzufügen 
+2//Das sind Beispieldaten um Layer hinzuzufügen 
 //Müssen anhand der AOA, Klassifikation,.... ersetzt werden sobald sie berechnet wurden.
 //Für Traindata liegt kein Beispieldatensatz vor weshalb nichts passiert.
 
@@ -41,7 +41,7 @@ function loadingFun() {
         if (name == "Klassifikation") { // Klassifikation
           // Calculate count of classification classes. Initalize array.
           //var count = georaster.maxs - georaster.mins;
-          let colorArray = ['#0a1cb1', '#e57423', '#23c3e5', '#2aa43d', '#696969', '#70843a','#472612'];
+          let colorArray = ['#3b528b', '#440154', '#2c728e', '#28ae80', '#21918c', '#5ec962','#472d7b', '#addc30', '#fde725'];
           // let randomColorArray = Array();
           // Fill array with colors. Every color has to be unique.
           //for (i = 0; i < count; i++) {
@@ -142,15 +142,15 @@ function loadingFun() {
 
 // Farben für Legende
 function getColor(d) {
-  return d === 'See' ? '#0a1cb1' :
-         d === 'Siedlung' ? '#e57423' :
-         d === 'Fliessgewaesser' ? '#23c3e5' :
-         d === 'Laubwald' ? '#2aa43d' :
-         d === 'Mischwald' ? '#11671e' :
-         d === 'Greuenland' ? '#92e597' :
-         d === 'Industriegebiet' ? '#696969' :
-         d === 'Acker_bepflanzt' ? '#70843a' :
-         d === 'Offenboden' ? '#472612' :
+  return d === 'See' ? '#3b528b' :
+         d === 'Siedlung' ? '#440154' :
+         d === 'Fliessgewaesser' ? '#2c728e' :
+         d === 'Laubwald' ? '#28ae80' :
+         d === 'Mischwald' ? '#21918c' :
+         d === 'Greuenland' ? '#5ec962' :
+         d === 'Industriegebiet' ? '#472d7b' :
+         d === 'Acker_bepflanzt' ? '#addc30' :
+         d === 'Offenboden' ? '#fde725' :
          d === 'Geeignet' ? '#fff' :
          d === 'Ungeeignet' ? '#010101' :
          '#FFEDA0';

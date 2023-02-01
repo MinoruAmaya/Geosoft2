@@ -46,7 +46,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
   })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
 
   function addArea(){
-    var latlngs = [[51.98732690226854, 7.760461205936437], [51.97465210773462, 7.806045063875838]];
+    var latlngs = [[51.98732690226854, 7.760461205936437], [51.97265353, 7.806045063875838]];
     var rectOptions = {color: '#FF00FF', weight: 1};
     var rectangle = L.rectangle(latlngs, rectOptions);
     rectangle.addTo(map);

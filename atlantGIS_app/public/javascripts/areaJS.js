@@ -149,7 +149,8 @@ map.on('draw:created', function (e) {
 
   // save area data in textfield for frontend
   area.value = shape_for_db;
-
+ 
+ 
 
   editableLayers.addLayer(layer);
   activateDigitalization();
