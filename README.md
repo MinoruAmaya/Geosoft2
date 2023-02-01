@@ -14,3 +14,6 @@ Zielgruppe(n) sind ForscherInnen oder PraktikantInnen im Bereich der Fernerkundu
 ### Funktionsweise der App (Demo Bilder einfügen und paar Sätze)
 
 ### Installation der App
+Um unser Tool zu nutzen, wurde eine möglichst unkomplizierte Bereitstellung des nötigen Codes über Docker und seine docker-compose Umgebung verwendet.
+Die einzig notwendigen Schritte sind, dieses Repository herunterzuladen mit git clone "link" und dann den Befehl docker-compose up --build in das Terminal einzugeben. 
+Dadurch werden die images für das backend und das frontend erstellt, was einige Sekunden dauern kann, das alle benötigten Abhängigkeiten, wie zahlreiche R-packages installiert werden. Um das Tool nun auch aufrufen zu können, kann es über http://localhost:3000 angesteuert werden.
