@@ -84,15 +84,15 @@ router.post("/newaoa", function (req, res, next) {
         ymin = Math.round(mins.Northing);
         xmax = Math.round(maxs.Easting);
         ymax = Math.round(maxs.Northing);
-        fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=normal")
+        fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=second")
           .then((result) => {
             console.log(result)
-            fetch("http://atlantgisbackend:8000/classificationAoa?xmin=" + xmin + "&xmax=" + xmax + "&ymin=" + ymin + "&ymax=" + ymax + "&type=normal")
+            fetch("http://atlantgisbackend:8000/classificationAoa?xmin=" + xmin + "&xmax=" + xmax + "&ymin=" + ymin + "&ymax=" + ymax + "&type=second")
               .then(() => {
-                res.render('aoa', {message: [1]});
+                res.render('aoa', {message: [0]});
             })
               .catch(() => {
-                res.render('aoa', {message: [1]});
+                res.render('aoa', {message: [0]});
               });
           })
           .catch(error => {

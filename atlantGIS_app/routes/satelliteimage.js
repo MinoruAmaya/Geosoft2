@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 let multer = require('multer');
+let fetch = require('node-fetch');
 
 // multer storage -------------------------------------------------------------------------------------------------------
 // satelliteImageStorage
@@ -27,7 +28,12 @@ router.get('/', function (req, res, next) {
 // Upload satelliteimagery
 // Route to addTrainData
 router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild"), function (req, res, next) {
-  res.render('area', {help: [1]});
+  //fetch("http://atlantgisbackend:8000/show_satelliteimage?type=normal")
+  //  .then((result) => {
+  //    console.log(result)
+      res.render('area', {help: [1]});
+  //  })
+  //  .catch(error => console.log(error))
 })
 
 

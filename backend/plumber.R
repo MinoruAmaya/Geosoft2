@@ -100,9 +100,11 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
         terra::writeVector(dataRecomVec,
             "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
         
-        aoa_vergleich <- aoa - area_of_applicability$AOA
-        crs(aoa_vergleich) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
-        writeRaster(c(aoa_vergleich),
+        aoa_alt <- crop(aoa_alt, ext(mask))
+        area_of_applicability$AOA <- crop(area_of_applicability$AOA, ext(mask))
+        aoa_vergleich <- area_of_applicability$AOA - aoa_alt
+        aoa_vergleich <- st_transform(aoa_vergleich, crs(sentinel))
+        writeRaster(aoa_vergleich,
             "database/output/AOA_Vergleich.tif", overwrite = TRUE)
       }
       else{
@@ -114,6 +116,7 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
         #dataRecom[is.nan(dataRecom)] <- 0
         #crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         dataRecomVec <- as.polygons(dataRecom)
+        dataRecomVec <- project(dataRecomVec, "+proj=longlat +datum=WGS84 +no_defs +type=crs")
         #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
         terra::writeVector(dataRecomVec,
             "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
@@ -185,4 +188,20 @@ train_modell <- function(algorithm, type) {
 
      # save the model
      saveRDS(model, file = "database/output/model.RDS")
+}
+
+#* function to display the satelliteimage
+#* @param parameter
+#* @get /show_satelliteimage
+show_satelliteimage <- function(type){
+  library(terra)
+  library(raster)
+  if(type == "normal"){
+    sentinel <- rast("database/input/satelliteimage.tif")
+  }
+  else{
+    sentinel <- rast("database/input/satellitenimage_demo.tif")
+  }
+  rgbsentinel <- RGB(sentinel)
+  writeRaster(rgbsentinel , "database/input/RGB.tif", overwrite  = TRUE)
 }

@@ -8,9 +8,25 @@ let btn_newAoa = document.getElementById('btn_newAoa');
 let btn_saveTrainData = document.getElementById('btn_saveTrainData');
 let traindataSend = document.getElementById('traindata');
 let help = document.getElementById('helpTrainData');
+let loading = document.getElementById('loading');
+let site = document.getElementById('site');
+let load = false
 
 if(help.innerHTML[0] = "1"){
   activateNewAoa();
+}
+
+btn_newAoa.addEventListener("click", function(){load = true; loadingFun();})
+
+function loadingFun() {
+  if (!load) {
+    loading.classList.add("visually-hidden");
+    site.style.opacity = "100%";
+  }
+  else if (load) {
+    loading.classList.remove("visually-hidden");
+    site.style.opacity = "0.15";
+  }
 }
 
 

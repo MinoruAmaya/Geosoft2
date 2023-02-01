@@ -27,6 +27,8 @@ block content
                         br
                         button#btn_newAoa.btn.btn-secondary.disabled AOA erneut berechnen 
         p#helpTrainData.visually-hidden= message
-    
+    .container.visually-hidden#loading
+        .ring Loading 
+            mspan
 block scripts 
   script(src="/javascripts/trainDataJS.js" defer)
