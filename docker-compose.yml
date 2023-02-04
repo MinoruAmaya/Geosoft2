@@ -1,0 +1,27 @@
+# yml template to dockerise a node.js app
+version: '3'
+services: 
+    frontend: 
+        container_name: atlantgisfrontend
+        build: 
+            context: .
+            dockerfile: ./atlantGIS_app/Dockerfile
+        ports: 
+            - '3000:3000'
+        volumes:
+            - database:/usr/src/app/database
+          
+    backend:
+        container_name: atlantgisbackend 
+        build:
+            context: .
+            dockerfile: ./backend/Dockerfile
+        restart: always
+        ports:
+            - "8000:8000"
+        volumes:
+            - database:/usr/src/app/database
+
+volumes:
+    database:
+    

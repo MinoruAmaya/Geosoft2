@@ -1,0 +1,31 @@
+extends layout 
+
+block content 
+    br
+    br
+    .container
+        .row.justify-content-md-center
+            .col-md-1 
+            .col-md-4 
+                div#form_div_train
+                    form(action='/download/downloadData' method='post')
+                        br
+                        input#prediction(type='radio' name="prediction")
+                        |  Prediction Map
+                        br
+                        br
+                        input#aoa(type='radio' name="aoa")
+                        |  Area of Applicability
+                        br
+                        br
+                        input#locations(type='radio' name="locations")
+                        |  Recommended locations for training data
+                        br
+                        br
+                        input#model(type='radio' name="model")
+                        |  Trained model
+                        br
+                        br
+                        button.btn.btn-secondary.mb-2 Download
+
+

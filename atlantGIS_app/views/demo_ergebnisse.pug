@@ -1,0 +1,78 @@
+extends layout
+
+block content
+
+    .container-fluid#site_demo
+      .row
+        .col-4(style="background-color: rgb(189, 218, 255)")
+          br
+          h2 Demo des AtlantGIS Webtools
+          br
+          a#demo_info
+            label.col-form-label.fw-bolder Ergebnisse
+            br
+            | Sie sind nun auf der Ergebnisseite angekommen.
+            br
+            br
+            br
+            | Hier können Sie die Ergebnisse ihrer Daten einsehen.
+            | Diese Ergebnisse beinhalten eine Klassifikation, die AOA 
+            | und vorgeschlagenen Bereiche, in denen noch Trainigsdaten gesammelt werden 
+            | sollten. 
+            br
+            | Um neue Trainigsdaten hinzuzufügen, können Sie den Button in dem dazugehörigen Feld 
+            | drücken. 
+            br
+            br
+            | Sie können außerdem alle Daten, die rechts neben der Karte angezeigt werden, herunterladen.
+            | Wählen Sie dafür die gewünschten Daten aus und betätigen Sie den Button.
+            br
+        .col-8
+          .row.justify-content-md-center#workflow_demo
+            .col-md-8
+                div#form_div.active-form.form_dis
+                    br
+                    br
+                    #map
+                    br
+                    br
+            .col-md-3
+              br
+              br
+              br
+              #form_div.active-form.form_dis
+                  p.col-md-12.col-form-label.fw-bolder Neue Trainigsdaten digitaliseiren 
+                  .btn.btn-secondary.disabled Start
+              #form_div.active-form.form_dis
+                  p.col-md-12.col-form-label.fw-bolder Ergebnisse
+                  form
+                      input#1.gaucher(type='checkbox' disabled)
+                      label(for="1") Klassifikation
+                      br
+                      input#2.gaucher(type='checkbox' disabled)
+                      label(for="2") Area of Applicability
+                      br
+                      input#3.gaucher(type='checkbox' disabled)
+                      label(for="3") Trainingsvorschläge
+                      br
+                      input#4.gaucher(type='checkbox' disabled)
+                      label(for="4") Trainiertes Modell
+                      br
+                      input#5.gaucher(type='checkbox' disabled)
+                      label(for="5") Trainingsdaten
+                      br
+                      br
+                      button.btn.btn-secondary.mb-2.disabled Download
+                  
+  
+            div#messageDiv.visually-hidden= message
+    
+    .container.visually-hidden#loading
+      .ring Loading 
+        mspan
+
+
+block scripts
+  script(src="https://unpkg.com/georaster")
+  script(src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js")
+  script(src="/javascripts/demo_ergebnisse.js" defer)

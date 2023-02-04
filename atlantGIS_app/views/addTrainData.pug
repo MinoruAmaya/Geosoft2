@@ -1,0 +1,63 @@
+extends layout 
+
+block content
+    br
+    .container#site
+        .row.justify-content-md-center
+            .col-md-3
+                div#form_div_sat
+                    form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
+                        label.col-md-12.col-form-label.fw-bolder(for='satelliteimage') Satellitenbild hochladen
+                        input#satellitenbild.form-control.form-control(type='file' name="satellitenbild" accept=".tif" enctype="multipart/form-data" disabled)
+                        button#btn_trainMod.btn.btn-secondary.disabled.mb-2 Weiter
+                br
+                div#form_div_trainData.active-form
+                    form(action='/addTrainData/uploadTrainingData' method='post' enctype="multipart/form-data")
+                        label.col-md-12.col-form-label.fw-bolder(for='training') Trainingsdaten hochladen
+                        input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
+                        button#btn_safeData.btn.btn-primary.mb-2 Speichern
+                br
+                div#form_div.trainModel
+                    p.col-md-12.col-form-label.fw-bolder Haben Sie ein trainiertes Modell?
+                        .row.justify-content-evenly
+                            .col-4
+                                label
+                                    input(type="radio", name="colorRadio", value="yes" disabled)
+                                    | Ja
+                            .col-4
+                                label
+                                    input(type="radio", name="colorRadio", value="no" disabled)
+                                    | Nein
+                        .yes.box 
+                            div#form_div_trained
+                                form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
+                                    label.col-md-12.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell hochladen!
+                                    input#trainMod.form-control(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" )
+                                    button.btn.btn-secondary.disabled.mb-2 AOA berechnen
+                        .no.box 
+                            div#form_div_untrained
+                                form(action='/model/uploadUntrainModell' method='post' enctype="multipart/form-data")
+                                    p.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
+                                    button#btn_untrainMod.btn.btn-secondary.disabled.mb-2 Trainiere Modell
+            .col-md-8
+                .row.justify-content-md-center#form_div
+                    .col-9 
+                        div
+                            p.col-md-12.col-form-label.fw-bolder Wählen Sie die Region aus, für die Sie die AOA berechnen möchten.
+                            p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte und klicken anschließend auf weiter.
+                    .col-3 
+                        div
+                            form(action='/area/addData' method='post')
+                                button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled.mb-2.d-grid.gap-2.col-6.mx-auto Weiter    
+                    #map
+
+    .container.visually-hidden#loading
+        .ring Loading 
+            mspan
+        p#helpvar.visually-hidden= help
+                
+             
+block scripts 
+    script(src="https://unpkg.com/georaster")
+    script(src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js")
+    script(src="/javascripts/areaJS.js" defer)
