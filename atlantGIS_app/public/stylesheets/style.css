@@ -23,6 +23,11 @@ a {
   width: 100%;
 }
 
+#mapTrain{
+  height: 470px;
+  width: 100%;
+}
+
 #logo{
   width: 51px;
   height: 30px;
