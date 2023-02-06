@@ -4,6 +4,7 @@ let currentLayer;
 let currentLabel;
 let currentID; 
 let trainData = '';
+let trainDataUpdate = '';
 let btn_newAoa = document.getElementById('btn_newAoa');
 let btn_saveTrainData = document.getElementById('btn_saveTrainData');
 let traindataSend = document.getElementById('traindata');
@@ -146,12 +147,12 @@ function activateNewAoa(){
  * to the Data and to the map
  */
 function addTrainData(){
-    if(trainData === ''){
+    if(trainDataUpdate === ''){
         var reader = new FileReader();
         reader.onload = (event) => {
-            trainData = JSON.parse(event.target.result);
-            L.geoJSON(trainData).addTo(map);
-            L.geoJSON(trainData, {
+          trainDataUpdate = JSON.parse(event.target.result);
+            L.geoJSON(trainDataUpdate).addTo(map);
+            L.geoJSON(trainDataUpdate, {
                 style: style
               }).addTo(map)
         };
@@ -178,8 +179,8 @@ function getNewTrainData(in_label, in_klassenID){
         coordinates[0][0].push([(currentLayer._latlngs[0][i].lng).toFixed(4) , (currentLayer._latlngs[0][i].lat).toFixed(4)])
     };
 
-    if (trainData === ''){
-        trainData = {
+    if (trainDataUpdate === ''){
+        trainDataUpdate = {
             "type" : "FeatureCollection",
             "features" : [{ 
                 "type" : "Feature", 
@@ -195,8 +196,8 @@ function getNewTrainData(in_label, in_klassenID){
         }
     }
     else{
-        var newSpot = trainData.features.length
-        trainData.features[newSpot] = {
+        var newSpot = trainDataUpdate.features.length
+        trainDattrainDataUpdatea.features[newSpot] = {
             "type" : "Feature", 
                 "properties" : {  
                     "Label" : currentLabel, 
@@ -213,6 +214,8 @@ function getNewTrainData(in_label, in_klassenID){
     L.geoJSON(trainData, {
         style: style
       }).addTo(map)
+
+
     //Speichert Geometrieeigenschaften als JSON
     //var shape = trainData.toGeoJSON();
     var shape_for_db = JSON.stringify(trainData);
