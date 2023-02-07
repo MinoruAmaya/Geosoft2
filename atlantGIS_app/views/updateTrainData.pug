@@ -15,7 +15,12 @@ block content
                             form(action='/createTrainData/uploadTrainingData' method='post')
                                 input#traindata(type='hidden' name='traindata')
                                 button#btn_saveTrainData.btn.btn-secondary.btn-lg.disabled Trainingsdaten speichern
-            .col-md-3 
+            .col-md-3
+                div#form_div_trainData.active-form
+                    form(action='/createTrainData/uploadNewTrainingData' method='post' enctype="multipart/form-data")
+                        label.col-md-12.col-form-label.fw-bolder(for='trainingUpdate') Trainingsdaten hochladen
+                        input#training.form-control(type='file' name="trainingUpdate" accept=".gpkg, .geojson" enctype="multipart/form-data")
+                        button#btn_loadNewData.btn.btn-primary.mb-2 Speichern 
                 br
                 br
                 div#form_div.active-form
