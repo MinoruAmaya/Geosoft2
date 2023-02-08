@@ -2,8 +2,10 @@
   "name": "atlantgis-app-frontend",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "@ngageoint/leaflet-geopackage": "^4.1.3",
@@ -23,5 +25,9 @@
     "node-fetch": "^2.6.7",
     "pug": "^3.0.2",
     "utm-latlng": "^1.0.7"
+  },
+  "devDependencies": {
+    "jest": "^29.4.2",
+    "supertest": "^6.3.3"
   }
 }

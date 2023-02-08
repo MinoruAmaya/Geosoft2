@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 });
 
 // route to createTrainData to train more data for model
-router.post("/updateTrainData", function (req, res, next) {
+router.get("/updateTrainData", function (req, res, next) {
   res.render('updateTrainData');
 })
 

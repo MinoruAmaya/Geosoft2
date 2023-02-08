@@ -4,7 +4,7 @@ var router = express.Router();
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get("/", function (req, res, next) {
-  res.render("projekt", { title: "Über das Projekt" });
+  res.render("project", { title: "Über das Projekt" });
 });
 
 

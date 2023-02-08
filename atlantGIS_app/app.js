@@ -15,11 +15,10 @@ var satelliteimageRouter = require('./routes/satelliteimage');
 var trainModelRouter = require('./routes/trainModel');
 var addTrainDataRouter = require('./routes/addTrainData');
 var areaRouter = require('./routes/area');
-var downloadRouter = require('./routes/download');
 var wikiRouter = require('./routes/wiki');
 var demoRouter = require('./routes/demo');
 var impressumRouter = require('./routes/impressum');
-var projektRouter = require('./routes/projekt');
+var projectRouter = require('./routes/project');
 var updateTrainDataRouter = require('./routes/updateTrainData');
 var aoaRouter = require('./routes/aoa');
 
@@ -31,6 +30,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'tests')));
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'database')));
 
@@ -42,11 +42,10 @@ app.use('/satelliteimage', satelliteimageRouter);
 app.use('/trainModel', trainModelRouter);
 app.use('/createTrainData', updateTrainDataRouter);
 app.use('/area', areaRouter);
-app.use('/download', downloadRouter);
 app.use('/demo', demoRouter);
 app.use('/wiki', wikiRouter);
 app.use('/impressum', impressumRouter);
-app.use('/projekt', projektRouter);
+app.use('/project', projectRouter);
 app.use('/addTrainData', addTrainDataRouter);
 app.use('/aoa', aoaRouter);
 
