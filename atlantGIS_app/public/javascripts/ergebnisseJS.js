@@ -189,7 +189,7 @@ map.on('overlayadd', function (eventLayer) {
 }
   else if (eventLayer.name === 'AOA') {
     this.removeControl(legendClass);
-    this.removeControl(legendAOAbetter);
+    this.removeControl(legendAOAbetter );
     legendAOA.addTo(this);
   } 
   else if (eventLayer.name === 'AOA-Vergleich') {
