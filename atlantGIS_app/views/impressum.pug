@@ -1,24 +1,30 @@
 extends layout 
 
-
-
 block content 
   h1= message
+  .container-fluid
+    .containerStyle2
+      .row.justify-content-md-center
+        .col-md-3
+            img.float-start.img-fluid(src='./images/Münster_Karte_links.png')
+        .col-md-6
+          div#impressum
+            h1 Impressum 
+            br 
+            span AtlantGIS GmbH 
+            br
+            span Institut für Geoinformatik
+            br
+            span Geo1 Gebäude 
+            br
+            span Heisenbergstr. 2, 48149 Münster
+            p 
+            br
+            span Projektleiter: Hendrik Lüning
+            br 
+            span Crew: Maxi Elfers, Hendrik Lüning, Maike Schröder, Derya Sen
+        .col-md-3      
+          img.float-end.img-fluid(src='./images/Münster_Karte_rechts.png') 
+  
 
-  h1 Impressum 
-
-  div
-    span AtlantGIS GmbH 
-    br
-    span Institut für Geoinformatik
-    br
-    span Geo1 Gebäude 
-    br
-    span Heisenbergstr. 2, 48149 Münster
-    p 
-    br
-    span Projektleiter: Hendrik Lüning
-    br 
-    span Crew: Maxi Elfers, Hendrik Lüning, Maike Schröder, Derya Sen
-   
-   
+  

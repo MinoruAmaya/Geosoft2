@@ -319,16 +319,7 @@ html {
   transition: transform .5s;
 }
 
-.card hover .card_publication img {
-  transform: scale(1.5);
-}
-
-
 .card_publication div{
-  /*
-  background: linear-gradient(to right bottom,
-  rgb(255, 119, 48, .8), rgb(255, 185, 0, .8));
-  */
   font-size: 1rem;
   color: rgb(201, 199, 199);
   position: absolute;
@@ -456,17 +447,6 @@ mspan:before
   }
 }
 
-/*
-.card_subtitle{
-  display: inline-block;
-  font-size: 1.4rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: #a2a2a2;
-  margin-bottom: 1rem;
-}
-*/
-
 /*Legend specific*/
 .legend {
   padding: 6px 8px;
@@ -501,4 +481,10 @@ mspan:before
 .legend i.icon {
   background-size: 14px;
   background-color: rgba(255, 255, 255, 1);
+}
+
+#impressum {
+  justify-content: center;
+  padding-top: 50px;
+  text-align: center;
 }
