@@ -26,12 +26,15 @@ block content
                 div#form_div.active-form
                     form(action='/createTrainData/newaoa' method='post')
                         label.col-md-12.col-form-label.fw-bolder Neue Klassifikation erstellen
-                        p.col-md-12.col-form-label.fw Sobald Sie alle Trainnigsdaten hochgeladen oder Digitalisiert haben
-                        | können Sie eine neue Klassifikation erstellen lassen und die neue AOA mit der alten AOA vergleichen
+                        p.col-md-12.col-form-label.fw Sobald Sie alle Trainnigsdaten hochgeladen oder digitalisiert haben,
+                        | können Sie eine neue Klassifikation erstellen lassen und die neue AOA mit der alten AOA vergleichen.
                         br
                         br
-                        button#btn_newAoa.btn.btn-secondary.disabled AOA erneut berechnen 
-        p#helpTrainData.visually-hidden= message
+                        button#btn_newAoa.btn.btn-secondary.disabled.mb-2 AOA erneut berechnen 
+    br
+    br
+    br
+    p#helpTrainData.visually-hidden= message
     .container.visually-hidden#loading
         .ring Loading 
             mspan
