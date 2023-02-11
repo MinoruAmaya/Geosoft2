@@ -3,15 +3,20 @@ let counter = 0;
 let currentLayer;
 let currentLabel;
 let currentID; 
-let trainData = '';
-let trainDataUpdate = '';
+let classArray = [];
+let trainDataUpdate = {
+  "type" : "FeatureCollection",
+  "features" : []
+}
 let btn_newAoa = document.getElementById('btn_newAoa');
 let btn_saveTrainData = document.getElementById('btn_saveTrainData');
 let traindataSend = document.getElementById('traindata');
 let help = document.getElementById('helpTrainData');
 let loading = document.getElementById('loading');
 let site = document.getElementById('site');
-let load = false
+let klassenTabelle = document.getElementById('KlassenTabelle');
+let load = false;
+let classDict = {};
 
 if(help.innerHTML[0] = "1"){
   activateNewAoa();
@@ -115,6 +120,22 @@ function formListenerErstellen(){
   let label = document.getElementById('label');
   let klassenID = document.getElementById('klassenID');
   let btn_save = document.getElementById('btn_save');
+  label.addEventListener('change', function(){
+    klassenID.value = '';
+    classArray.forEach(cl => {
+      if(label.value === classDict[cl]){
+        klassenID.value = cl;
+      }
+    })
+  })
+  klassenID.addEventListener('change', function(){
+    label.value = '';
+    classArray.forEach(cl => {
+      if(parseInt(klassenID.value) === cl){
+        label.value = classDict[cl];
+      }
+    })
+  })
   btn_save.addEventListener('click', function(){getNewTrainData(label, klassenID); activateDigitalization();});
 }
 
@@ -179,46 +200,28 @@ function getNewTrainData(in_label, in_klassenID){
         coordinates[0][0].push([(currentLayer._latlngs[0][i].lng).toFixed(4) , (currentLayer._latlngs[0][i].lat).toFixed(4)])
     };
 
-    if (trainDataUpdate === ''){
-        trainDataUpdate = {
-            "type" : "FeatureCollection",
-            "features" : [{ 
-                "type" : "Feature", 
-                "properties" : {  
-                    "Label" : currentLabel, 
-                    "ClassID" : currentID 
-                }, 
-                "geometry" : { 
-                    "type" : "MultiPolygon", 
-                    "coordinates" : coordinates
-                }
-            }]
-        }
-    }
-    else{
-        var newSpot = trainDataUpdate.features.length
-        trainDattrainDataUpdatea.features[newSpot] = {
-            "type" : "Feature", 
-                "properties" : {  
-                    "Label" : currentLabel, 
-                    "ClassID" : currentID,
-                    "id" : newSpot+1
-                }, 
-                "geometry" : { 
-                    "type" : "MultiPolygon", 
-                    "coordinates" : coordinates
-                }
-        }
+    var newSpot = trainDataUpdate.features.length
+    trainDataUpdate.features[newSpot] = {
+        "type" : "Feature", 
+            "properties" : {  
+                "Label" : currentLabel, 
+                "ClassID" : currentID,
+                "id" : newSpot+1
+            }, 
+            "geometry" : { 
+                "type" : "MultiPolygon", 
+                "coordinates" : coordinates
+            }
     }
     map.removeLayer(currentLayer)
-    L.geoJSON(trainData, {
+    L.geoJSON(trainDataUpdate, {
         style: style
       }).addTo(map)
 
 
     //Speichert Geometrieeigenschaften als JSON
     //var shape = trainData.toGeoJSON();
-    var shape_for_db = JSON.stringify(trainData);
+    var shape_for_db = JSON.stringify(trainDataUpdate);
 
     // save area data in textfield for frontend
     traindataSend.value = shape_for_db;
@@ -229,6 +232,42 @@ function getNewTrainData(in_label, in_klassenID){
 fetch("http://localhost:3000/input/train_data.geojson")
   .then(result => result.json())
   .then(data => {
-    trainData = data
-    L.geoJSON(data, {style: style}).addTo(map)
+    data.features.forEach(feat => {
+      if(classDict[feat.properties.ClassID] === undefined){
+        classDict[feat.properties.ClassID] = feat.properties.Label;
+        classDict[feat.properties.Label] = feat.properties.ClassID;
+        classArray.push(feat.properties.ClassID);
+      }
+      if(classDict.length > 22){
+        console.log("zu viele Klassen Angegeben")
+      }
+      else{
+        var newSpot = trainDataUpdate.features.length
+        if(trainDataUpdate.features.length === 0){
+          newSport = 0;
+        }
+        trainDataUpdate.features[newSpot] = {
+            "type" : "Feature", 
+                "properties" : {  
+                    "Label" : feat.properties.Label, 
+                    "ClassID" : feat.properties.ClassID,
+                    "id" : newSpot+1
+                }, 
+                "geometry" : { 
+                    "type" : "MultiPolygon", 
+                    "coordinates" : feat.geometry.coordinates
+                }
+        }
+        L.geoJSON(feat, {style: style}).addTo(map);
+      }
+    })
+    let classList = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">ClassID</th></tr></thead><tbody>';
+    classArray.sort(function(a, b){return a - b});
+    classArray.forEach((cl, index) => {
+      classList += '<tr><th scope="row">' + classDict[classDict[classArray[index]]] + '</th><td>' + classDict[classArray[index]] + '</td></tr>';
+    })
+    classList += '</tbody></table>'
+    klassenTabelle.innerHTML = classList;
+    console.log(trainDataUpdate)
+    console.log(classDict);
   });
