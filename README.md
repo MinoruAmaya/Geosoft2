@@ -16,7 +16,7 @@ Hier entsteht in Zusammenarbeit von den vier Studierenden Maximilian Elfers, Hen
     - [Trainingsdaten](#trainingsdaten)
     - [Landnutzungsklassifikation](#landnutzungsklassifikation)
     - [Area of Applicability](#area-of-applicability)
-    - [Quellen](#quellen]
+    - [Quellen](#quellen)
   - [Funktionen](#funktionen)
     - [Upload](#upload)
     - [Machine-Learning Algorithmen](#machine-learning-algorithmen)
