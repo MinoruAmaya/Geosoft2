@@ -33,6 +33,8 @@ RUN R -e "install.packages('rjson', dependencies=TRUE)"
 RUN R -e "install.packages('raster', dependencies=TRUE)"
 RUN R -e "install.packages('terra', dependencies=TRUE)"
 RUN R -e "install.packages('geojsonsf', dependencies=TRUE)"
+RUN R -e "install.packages('testthat', dependencies=TRUE)"
+
 
 COPY ./backend/plumber.R ./
 
