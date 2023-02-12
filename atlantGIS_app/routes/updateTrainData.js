@@ -4,7 +4,7 @@ var router = express.Router();
 var fetch = require('node-fetch');
 var fs = require('fs');
 var utmObj = require('utm-latlng');
-var utm=new utmObj();
+var utm = new utmObj();
 
 
 // global attributes
@@ -21,7 +21,7 @@ var trainingDataStorage = multer.diskStorage({
   },
   filename: function (req, file, callback) {
     fileType = file.originalname.toString().split(".")[1];
-    fileName = "train_data." + fileType;
+    fileName = "train_data_update." + fileType;
     callback(null, fileName);
   }
 });
@@ -33,7 +33,7 @@ const uploadTrainingData = multer({ storage: trainingDataStorage });
 
 //routes ---------------------------------------------------------------------------------------------------------------
 router.get('/', function (req, res, next) {
-  res.render('updateTrainData', {message: [0]});
+  res.render('updateTrainData', { message: [0] });
 });
 
 
@@ -41,13 +41,13 @@ router.get('/', function (req, res, next) {
 // route to trainModel
 router.post("/uploadTrainingData", function (req, res, next) {
   try {
-    fs.writeFileSync("database/input/train_data.geojson", req.body.traindata);
+    fs.writeFileSync("database/input/train_data_update.geojson", req.body.traindata);
   }
   catch (err) {
     console.log(err);
   }
   console.log("train_data written to files")
-  res.render('updateTrainData', {message: [1]});
+  res.render('updateTrainData', { message: [1] });
 })
 
 // upload new training data
@@ -56,39 +56,15 @@ router.post("/uploadNewTrainingData", uploadTrainingData.single("trainingUpdate"
   if (fileType.toLowerCase() == 'gpkg') {
     fetch("http://atlantgisbackend:8000/gpkgToGeojson?type=update")
       .then(() => {
-        fs.readFile("database/input/train_data_update.geojson", "utf8", function (err, data) {
-          // try parsing of input text
-          try {
-            JSON.parse(data);
-          }
-          catch (err) {
-            res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Syntax!");
-          }
-      
-          let trainingdataupdate = JSON.parse(data);
-      
-          trainingdataupdate.features.forEach(element => {
-            if (element.properties == null) {
-              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe Properties!");
-            } else if (element.properties.Label == null || element.properties.Label == "") {
-              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe das Label!");
-            } else if (element.properties.ClassID == null || element.properties.ClassID == "") {
-              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die ClassID!");
-            } else if (element.geometry == null || element.geometry == "") {
-              res.send("Trainingsdaten konnten nicht geladen werden. Keine Koordinaten vorhanden.");
-            }else if (element.geometry.coordinates[0][0][0][0] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][0] &&
-                      element.geometry.coordinates[0][0][0][1] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length-1][1]) {
-              res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Koordinaten!");
-            }
-          })
-          res.render('updateTrainData', { help: "2" });
-        })
+        validateTraindata(res);
       })
       .catch(error => {
         console.log(error);
       });
+  } else {
+    validateTraindata(res);
   }
-    });
+})
 
 //route to aoa
 router.post("/newaoa", function (req, res, next) {
@@ -98,51 +74,84 @@ router.post("/newaoa", function (req, res, next) {
   var ymax = 0;
   fetch("http://localhost:3000/input/area.geojson")
     .then(result => result.json())
-      .then(data => {
-        var coords = data.geometry.coordinates[0];
-        xmin = coords[0][1];
-        xmax = coords[0][1];
-        ymin = coords[0][0];
-        ymax = coords[0][0];
-        coords.forEach(feat => {
-          if(feat[0] < ymin){
-            ymin = feat[0]
-          }
-          else if(feat[0] > ymax){
-            ymax = feat[0]
-          }
-          if(feat[1] < xmin){
-            xmin = feat[1]
-          }
-          else if(feat[1] > xmax){
-            xmax = feat[1]
-          }
-        });
-        var mins = utm.convertLatLngToUtm(xmin, ymin, 1);
-        var maxs = utm.convertLatLngToUtm(xmax, ymax, 1);
-        xmin = Math.round(mins.Easting);
-        ymin = Math.round(mins.Northing);
-        xmax = Math.round(maxs.Easting);
-        ymax = Math.round(maxs.Northing);
-        fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=second")
-          .then((result) => {
-            console.log(result)
-            fetch("http://atlantgisbackend:8000/classificationAoa?xmin=" + xmin + "&xmax=" + xmax + "&ymin=" + ymin + "&ymax=" + ymax + "&type=second")
-              .then(() => {
-                res.render('aoa', {message: [0]});
+    .then(data => {
+      var coords = data.geometry.coordinates[0];
+      xmin = coords[0][1];
+      xmax = coords[0][1];
+      ymin = coords[0][0];
+      ymax = coords[0][0];
+      coords.forEach(feat => {
+        if (feat[0] < ymin) {
+          ymin = feat[0]
+        }
+        else if (feat[0] > ymax) {
+          ymax = feat[0]
+        }
+        if (feat[1] < xmin) {
+          xmin = feat[1]
+        }
+        else if (feat[1] > xmax) {
+          xmax = feat[1]
+        }
+      });
+      var mins = utm.convertLatLngToUtm(xmin, ymin, 1);
+      var maxs = utm.convertLatLngToUtm(xmax, ymax, 1);
+      xmin = Math.round(mins.Easting);
+      ymin = Math.round(mins.Northing);
+      xmax = Math.round(maxs.Easting);
+      ymax = Math.round(maxs.Northing);
+      fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=second")
+        .then((result) => {
+          console.log(result)
+          fetch("http://atlantgisbackend:8000/classificationAoa?xmin=" + xmin + "&xmax=" + xmax + "&ymin=" + ymin + "&ymax=" + ymax + "&type=second")
+            .then(() => {
+              res.render('aoa', { message: [0] });
             })
-              .catch(() => {
-                res.render('aoa', {message: [0]});
-              });
-          })
-          .catch(error => {
-            console.log(error);
+            .catch(() => {
+              res.render('aoa', { message: [0] });
+            });
+        })
+        .catch(error => {
+          console.log(error);
         });
-      })
+    })
     .catch(error => console.log(error))
 })
 
 
+/**
+ * valdidate train_data.geojson file 
+ * @param {*} req 
+ * @param {*} res 
+ */
+function validateTraindata(res) {
+  fs.readFile("database/input/train_data_update.geojson", "utf8", function (err, data) {
+    // try parsing of input text
+    try {
+      JSON.parse(data);
+    }
+    catch (err) {
+      res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Syntax!");
+    }
 
+    let trainingdata = JSON.parse(data);
+
+    trainingdata.features.forEach(element => {
+      if (element.properties == null) {
+        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe Properties!");
+      } else if (element.properties.Label == null || element.properties.Label == "") {
+        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe das Label!");
+      } else if (element.properties.ClassID == null || element.properties.ClassID == "") {
+        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die ClassID!");
+      } else if (element.geometry == null || element.geometry == "") {
+        res.send("Trainingsdaten konnten nicht geladen werden. Keine Koordinaten vorhanden.");
+      } else if (element.geometry.coordinates[0][0][0][0] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length - 1][0] &&
+        element.geometry.coordinates[0][0][0][1] != element.geometry.coordinates[0][0][element.geometry.coordinates[0][0].length - 1][1]) {
+        res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Koordinaten!");
+      }
+    })
+    res.render('updateTrainData', { help: "2" });
+  })
+}
 
 module.exports = router;
