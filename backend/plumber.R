@@ -125,9 +125,14 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
 #* function for converting a gpkg to geojson
 #* @get /gpkgToGeojson
 #* @serializer json
-geopackage_to_geojson <- function() {
+geopackage_to_geojson <- function(type) {
     filepath <- "database/input/"
-    filename <- "train_data"
+    if(type = "update"){
+      filename <- "train_data"
+    }
+    else{
+      filename <- "train_data_update"
+    }
     train_data_sf <- read_sf(paste(filepath,
         paste(filename, ".gpkg", sep = ""), sep = ""))
     train_data_sf_4326 <- st_transform(train_data_sf, crs = st_crs("EPSG:4326"))

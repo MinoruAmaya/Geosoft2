@@ -228,6 +228,11 @@ function getNewTrainData(in_label, in_klassenID){
     console.log("got clicked")
 };
 
+let newDataUpload = undefined;
+fetch("http://localhost:3000/input/train_data.geojson")
+  .then(result => result.json())
+  .then(data => newDataUpload = data)
+  .error(error => {console.log(error); newDataUpload = undefined;});
 
 fetch("http://localhost:3000/input/train_data.geojson")
   .then(result => result.json())
@@ -261,6 +266,37 @@ fetch("http://localhost:3000/input/train_data.geojson")
         L.geoJSON(feat, {style: style}).addTo(map);
       }
     })
+    if(newDataUpload != undefined){
+      newDataUpload.features.forEach(feat => {
+        if(classDict[feat.properties.ClassID] === undefined){
+          classDict[feat.properties.ClassID] = feat.properties.Label;
+          classDict[feat.properties.Label] = feat.properties.ClassID;
+          classArray.push(feat.properties.ClassID);
+        }
+        if(classDict.length > 22){
+          console.log("zu viele Klassen Angegeben")
+        }
+        else{
+          var newSpot = trainDataUpdate.features.length
+          if(trainDataUpdate.features.length === 0){
+            newSport = 0;
+          }
+          trainDataUpdate.features[newSpot] = {
+              "type" : "Feature", 
+                  "properties" : {  
+                      "Label" : feat.properties.Label, 
+                      "ClassID" : feat.properties.ClassID,
+                      "id" : newSpot+1
+                  }, 
+                  "geometry" : { 
+                      "type" : "MultiPolygon", 
+                      "coordinates" : feat.geometry.coordinates
+                  }
+          }
+          L.geoJSON(feat, {style: style}).addTo(map);
+        }
+      })
+    }
     let classList = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">ClassID</th></tr></thead><tbody>';
     classArray.sort(function(a, b){return a - b});
     classArray.forEach((cl, index) => {
