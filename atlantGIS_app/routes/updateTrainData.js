@@ -53,17 +53,19 @@ router.post("/uploadTrainingData", function (req, res, next) {
 // upload new training data
 // route to updateTrainData
 router.post("/uploadNewTrainingData", uploadTrainingData.single("trainingUpdate"), function (req, res, next) {
-  if (fileType.toLowerCase() == 'gpkg') {
-    fetch("http://atlantgisbackend:8000/gpkgToGeojson?type=update")
-      .then(() => {
-        validateTraindata(res);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  } else {
-    validateTraindata(res);
-  }
+  setTimeout(function(){
+    if (fileType.toLowerCase() == 'gpkg') {
+      fetch("http://atlantgisbackend:8000/gpkgToGeojson?type=update")
+        .then(() => {
+          validateTraindata(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      validateTraindata(res);
+    }
+  },2000)
 })
 
 //route to aoa

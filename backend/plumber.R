@@ -127,11 +127,11 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
 #* @serializer json
 geopackage_to_geojson <- function(type) {
     filepath <- "database/input/"
-    if(type = "update"){
-      filename <- "train_data"
+    if(type == "update"){
+      filename <- "train_data_update"
     }
     else{
-      filename <- "train_data_update"
+      filename <- "train_data"
     }
     train_data_sf <- read_sf(paste(filepath,
         paste(filename, ".gpkg", sep = ""), sep = ""))

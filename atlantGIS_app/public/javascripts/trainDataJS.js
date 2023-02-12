@@ -232,7 +232,7 @@ let newDataUpload = undefined;
 fetch("http://localhost:3000/input/train_data.geojson")
   .then(result => result.json())
   .then(data => newDataUpload = data)
-  .error(error => {console.log(error); newDataUpload = undefined;});
+  .catch(error => {console.log(error); newDataUpload = undefined;});
 
 fetch("http://localhost:3000/input/train_data.geojson")
   .then(result => result.json())
