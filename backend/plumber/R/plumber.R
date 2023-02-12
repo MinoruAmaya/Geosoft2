@@ -18,7 +18,7 @@ library(viridis)
 
 # plumber.R File, das alle zu testenden Funktionen aus der Plumber API im Backend enthält
 
-#Dummy-Funktion, um später die R Skripts zu testen
+#Dummy-Funktion, um später die Tests der R Skripts zu unterstützen
 minmax <- function(x){
   c(Min = min(x), Max = max(x))
 }
