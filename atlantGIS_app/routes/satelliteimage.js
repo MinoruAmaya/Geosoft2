@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-let multer = require('multer');
-let fetch = require('node-fetch');
+const multer = require('multer');
+var fetch = require('node-fetch');
 
 // multer storage -------------------------------------------------------------------------------------------------------
 // satelliteImageStorage

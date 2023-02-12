@@ -40,15 +40,22 @@ block content
                                     p.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
                                     button#btn_untrainMod.btn.btn-primary.mb-2 Starte Berechnung
             .col-md-8
-                .row.justify-content-md-center#form_div
-                    .col-9 
-                        div
+                .row.justify-content-md-center#form_div.active-form
+                    .col-md-6
                             p.col-md-12.col-form-label.fw-bolder Wählen Sie die Region aus, für die Sie die AOA berechnen möchten.
-                            p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte und klicken anschließend auf weiter.
-                    .col-3 
-                        div
-                            form(action='/area/addData' method='post')
-                                button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled.mb-2.d-grid.gap-2.col-6.mx-auto Weiter    
+                            p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte oder laden Sie eine geoJSON-Datei mit entsprechendem Rechteck hoch. Klicken Sie anschließend auf Weiter.
+                    .col-md-6
+                        .col
+                            div#form_div_areaFileUpload
+                                form.form-control(action='/area/addArea' method='post' enctype="multipart/form-data")
+                                    input#in_areaFile.form-control(type='file' name="in_areaFile" accept=".geojson, .gpkg" enctype="multipart/form-data")
+                                    button#btn_upload.btn.btn-secondary.btn-lg.disabled Hochladen
+                            br
+                        .col
+                            div#form_div_areaLeaflet
+                                form.form-control(action='/area/addData' method='post')
+                                    input#in_area.form-control(type='hidden' name='in_area')
+                                    button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled Weiter       
                     #map
 
     .container.visually-hidden#loading

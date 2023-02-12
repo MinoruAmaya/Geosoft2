@@ -5,15 +5,16 @@ let helpvar = document.getElementById('helpvar')
 let counter = 0;
 let layer;
 let btn_weiter = document.getElementById('btn_weiter');
+let btn_upload = document.getElementById('btn_upload');
+let in_areaFile = document.getElementById('in_areaFile');
 let loading = document.getElementById('loading');
 let site = document.getElementById('site');
-let area = document.getElementById('area');
+let in_area = document.getElementById('in_area');
 let load = false;
 let shape;
 let shape_for_db;
 let rectangle;
 var self = this;
-
 
 btn_trainMod.addEventListener("click", function () { load = true; loadingFun(); })
 btn_untrainMod.addEventListener("click", function () { load = true; loadingFun(); })
@@ -22,12 +23,19 @@ btn_untrainMod.addEventListener("click", function () { load = true; loadingFun()
 switch (Number(helpvar.innerHTML)) {
   case 1:
     addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild");
+    // Upload Button
+    btn_upload.classList.remove('disabled');
+    btn_upload.classList.remove('btn-secondry');
+    btn_upload.classList.add('btn-primary');
+    // areaFile Input
+    in_areaFile.classList.remove('disabled');
     break;
   case 2:
     addDataToMap("http://localhost:3000/input/satelliteimage.tif", "Satellitenbild")
     addGeoJSONToMap("http://localhost:3000/input/area.geojson", "Area")
     break;
 }
+
 
 /**
  * add Tiff to Leaflet
@@ -148,7 +156,7 @@ map.on('draw:created', function (e) {
   var shape_for_db = JSON.stringify(shape);
 
   // save area data in textfield for frontend
-  area.value = shape_for_db;
+  in_area.value = shape_for_db;
  
  
 
@@ -156,8 +164,6 @@ map.on('draw:created', function (e) {
   activateDigitalization();
 
 });
-
-
 
 //Function to delete drawn Rectangle automatically
 L.EditToolbar.Delete.include({
@@ -175,7 +181,6 @@ function enableDraw() {
 }
 
 
-
 /**
  * After the area got digitialized
  * the "weiter" button should be activated.
@@ -183,9 +188,16 @@ function enableDraw() {
 function activateDigitalization() {
 
   if (counter === 0) {
+    // Weiter Button
     btn_weiter.classList.remove('btn-secondary');
     btn_weiter.classList.remove('disabled');
     btn_weiter.classList.add('btn-primary');
+    // Upload Button
+    btn_upload.classList.remove('btn-primary');
+    btn_upload.classList.add('btn-secondary');
+    btn_upload.classList.add('disabled');
+    // areaFile Input
+    in_areaFile.classList.add('disabled');
   }
   counter++;
 
@@ -199,9 +211,16 @@ function activateDigitalization() {
  */
 function deactivateDigitalization() {
   if (counter != 0) {
+    // Weiter Button
     btn_weiter.classList.remove('btn-primary');
-    btn_weiter.classList.add('btn-primary');
     btn_weiter.classList.add('disabled');
+    btn_weiter.classList.add('btn-secondary');
+    // Upload Button
+    btn_upload.classList.remove('disabled');
+    btn_upload.classList.remove('btn-secondry');
+    btn_upload.classList.add('btn-primary');
+    // areaFile Input
+    in_areaFile.classList.remove('disabled');
   }
   counter--;
 }

@@ -37,7 +37,7 @@ a {
   margin-bottom: 3px;
 }
 
-#form_div.active-form, #form_div_trainData.active-form, #form_div_untrained.active-form, #form_div_sat.active-form, #form_div_trainModel.active-form, #form_div_trained.active-form{
+#form_div.active-form, #form_div_trainData.active-form, #form_div_untrained.active-form, #form_div_sat.active-form, #form_div_trainModel.active-form, #form_div_trained.active-form, #form_div_areaFileUpload, #form_div_areaLeaflet{
   background-color: rgb(127, 179, 247);
 }
 

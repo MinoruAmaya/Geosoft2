@@ -2,9 +2,12 @@ extends layout
 
 block content
     br
-    .container#site
+    .container.trainDataSite#site
         .row.justify-content-md-center
-            .col-md-8
+            .col-md-2
+                div#form_div.active-form
+                    p.col-md-12.col-form-label.fw#KlassenTabelle
+            .col-md-7
                 div#form_div.active-form
                     h3.col-md-12.col-form-label.fw-bolder Neue Trainingsdaten digitalisieren
                     p.col-md-12.col-form-label.fw Zeichnen Sie die neuen Trainingsdaten in dieser Karte ein und 
@@ -14,7 +17,7 @@ block content
                         .col-md-4
                             form(action='/createTrainData/uploadTrainingData' method='post')
                                 input#traindata(type='hidden' name='traindata')
-                                button#btn_saveTrainData.btn.btn-secondary.btn-lg.disabled Trainingsdaten speichern
+                                button#btn_saveTrainData.btn.btn-secondary.disabled Trainingsdaten speichern
             .col-md-3
                 div#form_div_trainData.active-form
                     form(action='/createTrainData/uploadNewTrainingData' method='post' enctype="multipart/form-data")
