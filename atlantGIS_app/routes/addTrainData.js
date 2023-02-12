@@ -38,7 +38,7 @@ router.get('/', function (req, res, next) {
 // route to trainModel
 router.post("/uploadTrainingData", uploadTrainingData.single("training"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
-    fetch("http://atlantgisbackend:8000/gpkgToGeojson")
+    fetch("http://atlantgisbackend:8000/gpkgToGeojson?type=new")
       .then(() => {
         validateTraindata(res);
       })

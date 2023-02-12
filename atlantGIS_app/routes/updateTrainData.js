@@ -54,7 +54,7 @@ router.post("/uploadTrainingData", function (req, res, next) {
 // route to updateTrainData
 router.post("/uploadNewTrainingData", uploadTrainingData.single("trainingUpdate"), function (req, res, next) {
   if (fileType.toLowerCase() == 'gpkg') {
-    fetch("http://atlantgisbackend:8000/gpkgToGeojson")
+    fetch("http://atlantgisbackend:8000/gpkgToGeojson?type=update")
       .then(() => {
         fs.readFile("database/input/train_data_update.geojson", "utf8", function (err, data) {
           // try parsing of input text
