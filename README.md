@@ -129,7 +129,7 @@ im root-Verzeichnis des Projekts gestartet werden. Das erstmalige Starten kann e
 noch nicht implementiert
 
 Testen des Backends:
-```
+
 Die Testumgebung für das Backend wurde mithilfe von RStudio und dem testthat package aufgesetzt und die R-Funktionen wurden so getestet. Dazu müssen die sich im Backend unter plumber befindliche plumber.R und test-plumber.R in RStudio geöffnet werden. Unter Build -> More -> Load All oder mit dem Befehl devtools::load_all(".") werden die Funktionen aus dem Skript eingeladen. Im Anschluss können unter Build -> More -> Test Package die Tests durchgeführt und deren Ergebnisse angezeigt werden.
 
 
