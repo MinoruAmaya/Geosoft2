@@ -22,6 +22,7 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   let loading = document.getElementById('loading');
   let site = document.getElementById('site');
   let message = document.getElementById('message');
+  let noData = document.getElementById('noData');
 
 selId = null;
 
@@ -96,6 +97,20 @@ function loadingFun() {
             }
           });
         }
+        else if(name=="Vorschläge"){
+          var layer = new GeoRasterLayer({
+            georaster: georaster,
+            resolution: 256,
+            pixelValuesToColorFn: values => {
+              if(values[0]==0){
+                return null // leer
+              }
+              else if(values[0]==1){
+                return `rgb(123,90,130)` // purple (better) 
+              }
+            }
+          });
+        }
         layer.addTo(map);
 
         layerCtrl.addOverlay(layer, name);
@@ -127,6 +142,27 @@ function loadingFun() {
   return div;
   };
   legendClass.addTo(map);
+
+// Legende für Vorschläge  
+var legendVorschläge = L.control({position: 'bottomleft'});
+legendVorschläge.onAdd = function (map) {
+
+var div = L.DomUtil.create('div', 'legend');
+labels = ['<strong>Vorschläge</strong>'];
+categories = ['Trainigs Vorschläge'];
+
+for (var i = 0; i < categories.length; i++) {
+
+        div.innerHTML += 
+        labels.push(
+            '<i class="circle" style="background:' + getColor(categories[i]) + '"></i> ' +
+        (categories[i] ? categories[i] : '+'));
+
+    }
+    div.innerHTML = labels.join('<br>');
+return div;
+};
+legendVorschläge.addTo(map);
 
 // Legende für AOA
   var legendAOA = L.control({position: 'bottomleft'});
@@ -190,35 +226,59 @@ map.on('overlayadd', function (eventLayer) {
   if (eventLayer.name === 'Klassifikation') {
       this.removeControl(legendAOA);
       this.removeControl(legendAOAbetter);
+      this.removeControl(legendVorschläge);
       legendClass.addTo(this);
 }
   else if (eventLayer.name === 'AOA') {
     this.removeControl(legendClass);
     this.removeControl(legendAOAbetter );
+    this.removeControl(legendVorschläge);
     legendAOA.addTo(this);
   } 
   else if (eventLayer.name === 'AOA-Vergleich') {
     this.removeControl(legendClass);
     this.removeControl(legendAOA);
+    this.removeControl(legendVorschläge);
     legendAOAbetter.addTo(this);
+  }
+  else if (eventLayer.name === 'Vorschläge') {
+    this.removeControl(legendClass);
+    this.removeControl(legendAOAbetter );
+    this.removeControl(legendAOA);
+    legendVorschläge.addTo(this);
   }else { // Or switch to the aoa legend...
       this.removeControl(legendClass);
       this.removeControl(legendAOA);
+      this.removeControl(legendVorschläge);
   }
 });
 
-addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation")
-addDataToMap("http://localhost:3000/output/AOA.tif", "AOA")
-fetch("http://localhost:3000/output/DI.geojson")
-  .then(result => result.json())
+var fileClass;
+load = true;
+loadingFun();
+fetch("http://localhost:3000/output/AOA.tif")
   .then(data => {
-    var diLayer = L.geoJSON(data);
-    diLayer.addTo(map);
-    layerCtrl.addOverlay(diLayer, "Vorschläge")})
-if(message.innerHTML[0] === "0"){
-  addDataToMap("http://localhost:3000/output/AOA_Vergleich.tif", "AOA-Vergleich")
-}
-
+    if(data.status === 200){
+      addDataToMap("http://localhost:3000/output/classification.tif", "Klassifikation")
+      addDataToMap("http://localhost:3000/output/AOA.tif", "AOA")
+      addDataToMap("http://localhost:3000/output/DI.tif", "Vorschläge")
+      //fetch("http://localhost:3000/output/DI.geojson")
+      //  .then(result => result.json())
+      //  .then(data => {
+      //    var diLayer = L.geoJSON(data);
+      //    diLayer.addTo(map);
+      //    layerCtrl.addOverlay(diLayer, "Vorschläge")})
+      if(message.innerHTML[0] === "0"){
+        addDataToMap("http://localhost:3000/output/AOA_Vergleich.tif", "AOA-Vergleich")
+      }
+    }
+    else{
+      load = false;
+      loadingFun();
+      site.style.opacity = "0.15";
+      noData.classList.remove('visually-hidden')
+    }
+  });
 
 
 function processCheck(checkbox) {

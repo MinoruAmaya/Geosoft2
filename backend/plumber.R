@@ -50,7 +50,7 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
       }
      }
      
-     mask <- c(xmin,  xmax, ymin, ymax)
+     mask <- c(xmin, xmax, ymin, ymax)
      class(mask) <- "numeric"
      sentinel <- crop(sentinel, ext(mask))
 
@@ -94,13 +94,12 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
         writeRaster(c(area_of_applicability$AOA),
             "database/output/AOA.tif", overwrite = TRUE)
         dataRecom <- selectHighest(area_of_applicability$DI, 2000)
-        #dataRecom[is.nan(dataRecom)] <- 0
-        crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
-        dataRecomVec <- as.polygons(dataRecom)
-        #dataRecomVec <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
-        crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
-        terra::writeVector(dataRecomVec,
-            "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
+        dataRecom[is.nan(dataRecom)] <- 0
+        #crs(dataRecom) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        #dataRecomVec <- as.polygons(dataRecom)
+        #crs(dataRecomVec) <- "+proj=longlat +datum=WGS84 +no_defs +type=crs"
+        terra::writeRaster(dataRecom,
+            "database/output/DI.tif", overwrite = TRUE)
       }
       return("The classification and computation of the AOA were successful")
   }

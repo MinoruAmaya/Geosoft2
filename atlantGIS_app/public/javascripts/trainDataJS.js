@@ -233,12 +233,22 @@ function getNewTrainData(in_label, in_klassenID){
 };
 
 let newDataUpload = undefined;
+let vorhanden = true;
 fetch("http://localhost:3000/input/train_data_update.geojson")
-  .then(result => result.json())
-  .then(data => {
-    newDataUpload = data;
-    console.log(newDataUpload);
-    fetch("http://localhost:3000/input/train_data.geojson")
+  .then(result => {
+    if(result.status === 200){
+      collectDataComplete();
+    }
+    else{
+      collectDataLone();
+    }
+  })
+
+/**
+ * loads only the trainingdata from the previously uploaded
+ */
+function collectDataLone(){
+  fetch("http://localhost:3000/input/train_data.geojson")
     .then(result => result.json())
     .then(data => {
       data.features.forEach(feat => {
@@ -270,8 +280,33 @@ fetch("http://localhost:3000/input/train_data_update.geojson")
           L.geoJSON(feat, {style: style}).addTo(map);
         }
       })
-      if(newDataUpload != undefined){
-        newDataUpload.features.forEach(feat => {
+      let classList = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">ClassID</th></tr></thead><tbody>';
+      classArray.sort(function(a, b){return a - b});
+      classArray.forEach((cl, index) => {
+        classList += '<tr><th scope="row">' + classDict[classDict[classArray[index]]] + '</th><td>' + classDict[classArray[index]] + '</td></tr>';
+      })
+      classList += '</tbody></table>'
+      klassenTabelle.innerHTML = classList;
+      console.log(trainDataUpdate)
+      console.log(classDict);
+    })
+    .catch(error => {console.log(error);});
+}
+
+/**
+ * loads the complete train data. The previous and the new
+ */
+function collectDataComplete(){
+  fetch("http://localhost:3000/input/train_data_update.geojson")
+  .then(result => result.json())
+  .then(data => {
+    console.log(data)
+    newDataUpload = data;
+    console.log(newDataUpload);
+    fetch("http://localhost:3000/input/train_data.geojson")
+      .then(result => result.json())
+      .then(data => {
+        data.features.forEach(feat => {
           if(classDict[feat.properties.ClassID] === undefined){
             classDict[feat.properties.ClassID] = feat.properties.Label;
             classDict[feat.properties.Label] = feat.properties.ClassID;
@@ -300,16 +335,47 @@ fetch("http://localhost:3000/input/train_data_update.geojson")
             L.geoJSON(feat, {style: style}).addTo(map);
           }
         })
-      }
-      let classList = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">ClassID</th></tr></thead><tbody>';
-      classArray.sort(function(a, b){return a - b});
-      classArray.forEach((cl, index) => {
-        classList += '<tr><th scope="row">' + classDict[classDict[classArray[index]]] + '</th><td>' + classDict[classArray[index]] + '</td></tr>';
-      })
-      classList += '</tbody></table>'
-      klassenTabelle.innerHTML = classList;
-      console.log(trainDataUpdate)
-      console.log(classDict);
-    });
+        if(newDataUpload != undefined){
+          newDataUpload.features.forEach(feat => {
+            if(classDict[feat.properties.ClassID] === undefined){
+              classDict[feat.properties.ClassID] = feat.properties.Label;
+              classDict[feat.properties.Label] = feat.properties.ClassID;
+              classArray.push(feat.properties.ClassID);
+            }
+            if(classDict.length > 22){
+              console.log("zu viele Klassen Angegeben")
+            }
+            else{
+              var newSpot = trainDataUpdate.features.length
+              if(trainDataUpdate.features.length === 0){
+                newSport = 0;
+              }
+              trainDataUpdate.features[newSpot] = {
+                  "type" : "Feature", 
+                      "properties" : {  
+                          "Label" : feat.properties.Label, 
+                          "ClassID" : feat.properties.ClassID,
+                          "id" : newSpot+1
+                      }, 
+                      "geometry" : { 
+                          "type" : "MultiPolygon", 
+                          "coordinates" : feat.geometry.coordinates
+                      }
+              }
+              L.geoJSON(feat, {style: style}).addTo(map);
+            }
+          })
+        }
+        let classList = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">ClassID</th></tr></thead><tbody>';
+        classArray.sort(function(a, b){return a - b});
+        classArray.forEach((cl, index) => {
+          classList += '<tr><th scope="row">' + classDict[classDict[classArray[index]]] + '</th><td>' + classDict[classArray[index]] + '</td></tr>';
+        })
+        classList += '</tbody></table>'
+        klassenTabelle.innerHTML = classList;
+        console.log(trainDataUpdate)
+        console.log(classDict);
+      });
   })
   .catch(error => {console.log(error);});
+}

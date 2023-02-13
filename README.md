@@ -119,9 +119,31 @@ docker compose up
 ```
 im root-Verzeichnis des Projekts gestartet werden. Das erstmalige Starten kann einige Minuten in Anspruch nehmen, da alle benötigten Abhängigkeiten und Pakete installiert werden müssen. Dafür muss eine Internetverbindung vorhanden sein. 
 
-## Demo
+## Hauptkomponenten unserer App
+Unsere App ist in drei Abschnitte gegliedert. Einer Upload-Seite, einer Ergebnis-Seite und einer Bearbeitungsseite. 
+<br>
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Auf der ersten Seite müssen die nötigen Dateien wie Satellitenbild und Trainingsdaten hochgeladen werden. Ebenfalls muss der Bereich für die Klassifikation ausgewählt werden, den man entweder per Datei-Upload oder durch Einzeichnen in der Karte festlegen kann. Desweiteren braucht man noch ein trainiertes Modell. Hat man ein eigenes trainiertes Modell kann man es wie bei den anderen Daten einfach hochladen, ansonsten wird ein Modell automatisch von der Anwendung trainiert. Anschließend kann die Aoa und Klassifikation berechnet werden. 
+
+<img width="623" alt="start1" src="https://user-images.githubusercontent.com/82390935/218565452-9439e726-02dc-465b-9181-523dfb699535.png">
+
+Auf der Ergebnisseite werden die berechnete AOA, die Klassifikation sowie weitere Vorschläge zur Sammlung von Trainingsdaten mit ihren entsprechenden Legenden angezeigt. Ist man bereits an dieser Stelle zufrieden von seiner Klassifikation, besteht die Möglichkeit alle Dateien in ihrem entsprechenden Format herunterzuladen. Möchte man jedoch Verbesserungen vornehmen, kann man diese auf der Bearbeitungsseite durchführen. 
+
+<img width="617" alt="ergebnis1" src="https://user-images.githubusercontent.com/82390935/218565498-253471b6-d60f-4e4a-919d-1d09257b0231.png">
+
+Auf der Bearbeitungsseite besteht die Möglichkeit entweder neue Trainingsdaten hochzuladen oder zu den vorher geladenen Trainingsdaten neue durch Einzeichnen auf der Karte hinzuzufügen. Dabei kann man sich an dem Layer für Vorschläge von weiteren Trainingsdaten orientieren. Ist man mit der Bearbeitung fertig kann man sich erneut die Aoa und Klassifikation berechnen lassen und auf der Ergebnisseite anschauen. 
+Dieser Prozess ist iterativ aufgebaut und lässt sich solange wiederholen, bis man mit seiner Aoa und Klassifikation zufrieden ist. Sobald man mehr als einmal die Aoa berechnet hat wird der Vergleich der letzten beiden Aoa-Berechnung zur Karte hinzugefügt. 
+
+<img width="671" alt="bearbeitung" src="https://user-images.githubusercontent.com/82390935/218592755-6ad22da0-d454-4e5e-8031-bc1250f4694c.png">
+
+## Demo
+Die Demo-Seite dient als Schritt-für-Schritt Anweisung, für Leute ohne Erfahrung bzw. mit wenig Vorkenntnissen oder falls man sich mit der App noch nicht auskennt. Es wurden von uns erstellte Daten hochgeladen, so dass der User nichts weiter machen muss, als den Legen Sie Los - Button zu betätigen. Alle Schritte werden mit den Beispieldaten durchlaufen und beinhalten Informationen und Tipps zum durchlesen auf der linken Seite, die bei der Ausführung wichtig sind.
+
+<img width="941" alt="demo1" src="https://user-images.githubusercontent.com/82390935/218587159-c7e87e68-b551-457e-9682-c2143e457dae.png">
+<img width="935" alt="demo2" src="https://user-images.githubusercontent.com/82390935/218588223-0072d20b-9a96-450f-843a-fa1330a5306b.png">
+
+
+
 
 ## Testen der Anwendung
 
