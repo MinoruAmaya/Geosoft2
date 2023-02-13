@@ -28,24 +28,6 @@ function(msg=""){
   list(msg = paste0("The message is: '", msg, "'"))
 }
 
-#* Plot out data from the iris dataset
-#* @param spec If provided, filter the data to only this species (e.g. 'setosa')
-#* @get /plot
-#* @serializer png
-function(spec){
-  myData <- iris
-  title <- "All Species"
-
-  # Filter if the species was specified
-  if (!missing(spec)){
-    title <- paste0("Only the '", spec, "' Species")
-    myData <- subset(iris, Species == spec)
-  }
-
-  plot(myData$Sepal.Length, myData$Petal.Length,
-       main=title, xlab="Sepal Length", ylab="Petal Length")
-}
-
 #* function for classification and aoa
 #* @param parameter
 #* @get /classificationAoa
@@ -120,6 +102,7 @@ classification_and_aoa <- function(xmin, xmax, ymin, ymax, type) {
         terra::writeVector(dataRecomVec,
             "database/output/DI.geojson", filetype="geojson" , overwrite = TRUE)
       }
+      return("The classification and computation of the AOA were successful")
   }
 
 #* function for converting a gpkg to geojson
@@ -139,6 +122,8 @@ geopackage_to_geojson <- function(type) {
     train_data_geojson <- sf_geojson(train_data_sf_4326)
      geo_write(train_data_geojson, paste(filepath,
          paste(filename, ".geojson", sep = ""), sep = ""))
+
+    return("Successfully converted the data from GeoPackage to GeoJSON")     
  }
 
 
@@ -204,6 +189,7 @@ train_modell <- function(algorithm, type) {
 
      # save the model
      saveRDS(model, file = "database/output/model.RDS")
+     return("Successfully trained the model")
 }
 
 #* function to display the satelliteimage
@@ -220,4 +206,5 @@ show_satelliteimage <- function(type){
   }
   rgbsentinel <- RGB(sentinel)
   writeRaster(rgbsentinel , "database/input/RGB.tif", overwrite  = TRUE)
+  return("Satellite image is displayed correctly")
 }
