@@ -447,6 +447,16 @@ mspan:before
   }
 }
 
+#noData{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:50%;
+  height:20%;
+  background:transparent;
+}
+
 /*Legend specific*/
 .legend {
   padding: 6px 8px;
