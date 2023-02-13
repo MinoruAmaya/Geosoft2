@@ -134,7 +134,7 @@ Auf der Ergebnisseite werden die berechnete AOA, die Klassifikation sowie weiter
 Auf der Bearbeitungsseite besteht die Möglichkeit entweder neue Trainingsdaten hochzuladen oder zu den vorher geladenen Trainingsdaten neue durch Einzeichnen auf der Karte hinzuzufügen. Dabei kann man sich an dem Layer für Vorschläge von weiteren Trainingsdaten orientieren. Ist man mit der Bearbeitung fertig kann man sich erneut die Aoa und Klassifikation berechnen lassen und auf der Ergebnisseite anschauen. 
 Dieser Prozess ist iterativ aufgebaut und lässt sich solange wiederholen, bis man mit seiner Aoa und Klassifikation zufrieden ist. Sobald man mehr als einmal die Aoa berechnet hat wird der Vergleich der letzten beiden Aoa-Berechnung zur Karte hinzugefügt. 
 
-!!!!! Foto wird noch hinzugefügt.
+<img width="671" alt="bearbeitung" src="https://user-images.githubusercontent.com/82390935/218592755-6ad22da0-d454-4e5e-8031-bc1250f4694c.png">
 
 ## Demo
 Die Demo-Seite dient als Schritt-für-Schritt Anweisung, für Leute ohne Erfahrung bzw. mit wenig Vorkenntnissen oder falls man sich mit der App noch nicht auskennt. Es wurden von uns erstellte Daten hochgeladen, so dass der User nichts weiter machen muss, als den Legen Sie Los - Button zu betätigen. Alle Schritte werden mit den Beispieldaten durchlaufen und beinhalten Informationen und Tipps zum durchlesen auf der linken Seite, die bei der Ausführung wichtig sind.
