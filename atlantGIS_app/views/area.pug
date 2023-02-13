@@ -41,21 +41,23 @@ block content
                                     button#btn_untrainMod.btn.btn-secondary.disabled.mb-2 Trainiere Modell
             .col-md-8
                 .row.justify-content-md-center#form_div.active-form
-                    .col-md-6
-                            p.col-md-12.col-form-label.fw-bolder Wählen Sie die Region aus, für die Sie die AOA berechnen möchten.
-                            p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte oder laden Sie eine geoJSON-Datei mit entsprechendem Rechteck hoch. Klicken Sie anschließend auf Weiter.
-                    .col-md-6
-                        .col
-                            div#form_div_areaFileUpload
-                                form.form-control(action='/area/addArea' method='post' enctype="multipart/form-data")
-                                    input#in_areaFile.form-control(type='file' name="in_areaFile" accept=".geojson, .gpkg" enctype="multipart/form-data")
-                                    button#btn_upload.btn.btn-secondary.btn-lg.disabled Hochladen
-                            br
-                        .col
-                            div#form_div_areaLeaflet
-                                form.form-control(action='/area/addData' method='post')
-                                    input#in_area.form-control(type='hidden' name='in_area')
-                                    button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled Weiter       
+                    .col-md-7
+                        p.col-md-12.col-form-label.fw-bolder Wählen Sie die Region aus, für die Sie die AOA berechnen möchten.
+                        p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte oder laden Sie eine geoJSON-Datei mit entsprechendem Rechteck hoch. Klicken Sie anschließend auf Weiter.
+                    .col-md-5
+                        br
+                        .row.justify-content-md-center#form_div.active-form
+                            .col-8
+                                div#form_div_areaFileUpload.active-form
+                                    form(action='/area/addArea' method='post' enctype="multipart/form-data")
+                                        input#in_areaFile.form-control(type='file' name="in_areaFile" accept=".geojson, .gpkg" enctype="multipart/form-data")
+                                        button#btn_upload.btn.btn-primary Hochladen
+                                br
+                            .col-4
+                                div#form_div_areaLeaflet.active-form
+                                    form(action='/area/addData' method='post')
+                                        input#in_area.form-control(type='hidden' name='in_area')
+                                        button#btn_weiter.map_btn.btn.btn-primary.btn-lg Weiter       
                     #map
     
     .container.visually-hidden#loading

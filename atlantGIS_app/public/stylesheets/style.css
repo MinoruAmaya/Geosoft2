@@ -37,11 +37,11 @@ a {
   margin-bottom: 3px;
 }
 
-#form_div.active-form, #form_div_trainData.active-form, #form_div_untrained.active-form, #form_div_sat.active-form, #form_div_trainModel.active-form, #form_div_trained.active-form, #form_div_areaFileUpload, #form_div_areaLeaflet{
+#form_div.active-form, #form_div_trainData.active-form, #form_div_untrained.active-form, #form_div_sat.active-form, #form_div_trainModel.active-form, #form_div_trained.active-form, #form_div_areaFileUpload.active-form, #form_div_areaLeaflet.active-form{
   background-color: rgb(127, 179, 247);
 }
 
-#form_div, #form_div_trainData, #form_div_untrained, #form_div_sat, #form_div_trainModel, #form_div_trained{
+#form_div, #form_div_trainData, #form_div_untrained, #form_div_sat, #form_div_trainModel, #form_div_trained, #form_div_areaFileUpload, #form_div_areaLeaflet{
   padding: 10px;
   border-radius: 15px;
   background-color: rgb(184, 186, 190);
