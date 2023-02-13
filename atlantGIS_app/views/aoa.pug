@@ -15,6 +15,7 @@ block content
                     form(action='/aoa/updateTrainData' method='get')
                         p.col-md-12.col-form-label.fw-bolder Neue Trainigsdaten digitaliseiren 
                         button.btn.btn-primary Start
+                        button.btn.btn-outline-primary(type='button' data-bs-toggle='popover' data-bs-title='Neue Trainingsdaten' data-bs-content="Falls Sie mit ihrer Klassifikation nicht zufrieden sind und/oder die AOA Verbesserungen vorschlägt, können Sie hier neue Trainingsdaten digitalisieren, zu dieser Seite zurückkehren und Verbesserungen bestaunen. Dadurch starten Sie einen iterativen Prozess, der Sie zu einem Ergebnis leitet, mit welchem Sie auch zufrieden sind.  ") Hilfe
                 #form_div.active-form
                     p.col-md-12.col-form-label.fw-bolder Ergebnisse
                     form(action='/aoa/downloadData' method='post')

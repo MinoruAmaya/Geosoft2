@@ -1,11 +1,17 @@
 //code für area.pug
 
+//popovers
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+
 // Variablen erstellen 
 let helpvar = document.getElementById('helpvar')
 let counter = 0;
 let layer;
 let btn_weiter = document.getElementById('btn_weiter');
 let btn_upload = document.getElementById('btn_upload');
+let btn_upload_help = document.getElementById('btn_upload_help');
 let in_areaFile = document.getElementById('in_areaFile');
 let loading = document.getElementById('loading');
 let site = document.getElementById('site');
@@ -27,6 +33,10 @@ switch (Number(helpvar.innerHTML)) {
     btn_upload.classList.remove('disabled');
     btn_upload.classList.remove('btn-secondry');
     btn_upload.classList.add('btn-primary');
+    // Upload Help Button
+    btn_upload_help.classList.remove('disabled');
+    btn_upload_help.classList.remove('btn-outline-secondry');
+    btn_upload_help.classList.add('btn-outline-primary');
     // areaFile Input
     in_areaFile.classList.remove('disabled');
     break;

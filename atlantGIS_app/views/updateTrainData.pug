@@ -23,7 +23,8 @@ block content
                     form(action='/createTrainData/uploadNewTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='trainingUpdate') Trainingsdaten hochladen
                         input#training.form-control(type='file' name="trainingUpdate" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                        button#btn_loadNewData.btn.btn-primary.mb-2 Speichern 
+                        button#btn_loadNewData.btn.btn-primary.mb-2 Speichern
+                        button#btn_safeData_help.btn.btn-outline-primary.mb-2(type='button' data-bs-toggle='popover' data-bs-title='Trainingsdaten' data-bs-content="Hier laden Sie ihre Trainingsdaten in die Anwendung. Achten Sie dabei auf die richtige Syntax des Datentypes. Ebenso auf die properties ClassID und Label und auf die richtige Zuweisung dieser. Es können maximal 11 verschiedene Klassen verarbeitet werden. ") Hilfe
                 br
                 br
                 div#form_div.active-form

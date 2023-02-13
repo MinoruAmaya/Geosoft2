@@ -2,6 +2,11 @@
 //Müssen anhand der AOA, Klassifikation,.... ersetzt werden sobald sie berechnet wurden.
 //Für Traindata liegt kein Beispieldatensatz vor weshalb nichts passiert.
 
+//popovers
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),

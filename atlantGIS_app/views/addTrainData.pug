@@ -9,13 +9,16 @@ block content
                     form(action='/satelliteimage/uploadSatelliteimage' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='satelliteimage') Satellitenbild hochladen
                         input#satellitenbild.form-control.form-control(type='file' name="satellitenbild" accept=".tif" enctype="multipart/form-data" disabled)
-                        button#btn_trainMod.btn.btn-secondary.disabled.mb-2 Weiter
+                        button#btn_sat.btn.btn-secondary.mb-2.disabled Weiter
+                        button#btn_sat_help.btn.btn-outline-secondary.mb-2.disabled(type='button' data-bs-toggle='popover' data-bs-title='Satellitenbild' data-bs-content="Hier laden Sie ihr gewünschtes Satellitenbild in die Anwendung. Bitte achten Sie hierbei auf eine maximale Größe von 500MB des Satellitenbildes. Außerdem achten Sie bitte auf diese Reihenfolge der Bänder:\n B02, B03, B04, B08, B05, B06, B07, B11,B12, B8A \n \n Kontrollieren Sie ihr Satellitenbild nach dem Upload.") Hilfe
+
                 br
                 div#form_div_trainData.active-form
                     form(action='/addTrainData/uploadTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='training') Trainingsdaten hochladen
                         input#training.form-control(type='file' name="training" accept=".gpkg, .geojson" enctype="multipart/form-data")
-                        button#btn_safeData.btn.btn-primary.mb-2 Speichern
+                        button#btn_safeData.btn.btn-primary.mb-2 Weiter
+                        button#btn_safeData_help.btn.btn-outline-primary.mb-2(type='button' data-bs-toggle='popover' data-bs-title='Trainingsdaten' data-bs-content="Hier laden Sie ihre Trainingsdaten in die Anwendung. Achten Sie dabei auf die richtige Syntax des Datentypes. Ebenso auf die properties ClassID und Label und auf die richtige Zuweisung dieser. Es können maximal 11 verschiedene Klassen verarbeitet werden. ") Hilfe
                 br
                 div#form_div.trainModel
                     p.col-md-12.col-form-label.fw-bolder Haben Sie ein trainiertes Modell?
@@ -30,41 +33,43 @@ block content
                                     | Nein
                         .yes.box 
                             div#form_div_trained
-                                form(action='/model/uploadTrainModell' method='post' enctype="multipart/form-data")
+                                form(action='/trainModel/uploadTrainModell' method='post' enctype="multipart/form-data")
                                     label.col-md-12.col-form-label.fw-bolder(for='trainMod') Trainiertes Modell hochladen!
-                                    input#trainMod.form-control(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" )
-                                    button.btn.btn-secondary.disabled.mb-2 AOA berechnen
+                                    input#trainMod.form-control(type='file' name="trainMod" accept=".RDS" enctype="multipart/form-data" disabled)
+                                    button#btn_trainMod.btn.btn-secondary.disabled.mb-2 AOA berechnen
                         .no.box 
                             div#form_div_untrained
-                                form(action='/model/uploadUntrainModell' method='post' enctype="multipart/form-data")
+                                form(action='/trainModel/uploadUntrainModell' method='post' enctype="multipart/form-data" disabled)
                                     p.col-md-12.col-form-label.fw-bolder Modell muss noch trainiert werden!
                                     button#btn_untrainMod.btn.btn-secondary.disabled.mb-2 Trainiere Modell
             .col-md-8
-                .row.justify-content-md-center#form_div
+                .row.justify-content-center#form_div
                     .col-md-7
                         p.col-md-12.col-form-label.fw-bolder Wählen Sie die Region aus, für die Sie die AOA berechnen möchten.
                         p.col-md-12.col-form-label.fw Zeichnen Sie dafür ein Rechteck in die Karte oder laden Sie eine geoJSON-Datei mit entsprechendem Rechteck hoch. Klicken Sie anschließend auf Weiter.
                     .col-md-5
                         br
-                        .row.justify-content-md-center#form_div
-                            .col-8
+                        .row.justify-content-left#form_div
+                            .col-6
                                 div#form_div_areaFileUpload
                                     form(action='/area/addArea' method='post' enctype="multipart/form-data")
-                                        input#in_areaFile.form-control(type='file' name="in_areaFile" accept=".geojson, .gpkg" enctype="multipart/form-data")
+                                        input#in_areaFile.form-control(type='file' name="in_areaFile" accept=".geojson, .gpkg" enctype="multipart/form-data" disabled)
                                         button#btn_upload.btn.btn-secondary.disabled Hochladen
-                                br
-                            .col-4
+                                        button#btn_upload_help.btn.btn-outline-secondary.disabled(type='button' data-bs-toggle='popover' data-bs-title='Area' data-bs-content="Hier laden Sie ihre Area of Interest in die Anwendung. In diesem Bereich wird später die Klassifikation und die AOA berechnet. Benutzen Sie das Schema wie in diesem Beispiel: \"type\": \"Feature\",\n\"properties\": {},\n\"geometry\": {\n\"coordinates\": [\n[\n[\n7.774392512713462,\n51.98525296040171\n],\n[\n7.774392512713462,\n51.97908230391835\n],\n[\n7.802445200182859,\n51.97908230391835\n],\n[\n7.802445200182859,\n51.98525296040171\n],\n[\n7.774392512713462,\n51.98525296040171\n]\n]\n],\n\"type\": \"Polygon\"\n}\n}") Hilfe
+                            br
+                            .col-2
                                 div#form_div_areaLeaflet
                                     form(action='/area/addData' method='post')
                                         input#in_area.form-control(type='hidden' name='in_area')
-                                        button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled Weiter     
+                                        button#btn_weiter.map_btn.btn.btn-secondary.btn-lg.disabled Weiter       
                     #map
-                    
+                
     .container.visually-hidden#loading
         .ring Loading 
             mspan
-        p#helpvar.visually-hidden= help
-                
+        p#helpvar.visually-hidden= help 
+
+    
              
 block scripts 
     script(src="https://unpkg.com/georaster")

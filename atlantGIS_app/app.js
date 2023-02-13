@@ -40,7 +40,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/satelliteimage', satelliteimageRouter);
 app.use('/trainModel', trainModelRouter);
-app.use('/createTrainData', updateTrainDataRouter);
+app.use('/updateTrainData', updateTrainDataRouter);
 app.use('/area', areaRouter);
 app.use('/demo', demoRouter);
 app.use('/wiki', wikiRouter);
