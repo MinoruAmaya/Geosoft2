@@ -211,7 +211,6 @@ fetch("http://localhost:3000/output/DI.geojson")
     diLayer.addTo(map);
     layerCtrl.addOverlay(diLayer, "Vorschläge")})
 if(message.innerHTML[0] === "0"){
-  console.log("jup")
   addDataToMap("http://localhost:3000/output/AOA_Vergleich.tif", "AOA-Vergleich")
 }
 
