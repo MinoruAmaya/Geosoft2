@@ -15,12 +15,12 @@ block content
                     #mapTrain 
                     .row.justify-content-md-center(style="margin-top: 10px; margin-bottom: 5px")
                         .col-md-4
-                            form(action='/createTrainData/uploadTrainingData' method='post')
+                            form(action='/updateTrainData/uploadTrainingData' method='post')
                                 input#traindata(type='hidden' name='traindata')
                                 button#btn_saveTrainData.btn.btn-secondary.disabled Trainingsdaten speichern
             .col-md-3
                 div#form_div_trainData.active-form
-                    form(action='/createTrainData/uploadNewTrainingData' method='post' enctype="multipart/form-data")
+                    form(action='/updateTrainData/uploadNewTrainingData' method='post' enctype="multipart/form-data")
                         label.col-md-12.col-form-label.fw-bolder(for='trainingUpdate') Trainingsdaten hochladen
                         input#training.form-control(type='file' name="trainingUpdate" accept=".gpkg, .geojson" enctype="multipart/form-data")
                         button#btn_loadNewData.btn.btn-primary.mb-2 Speichern
@@ -28,7 +28,7 @@ block content
                 br
                 br
                 div#form_div.active-form
-                    form(action='/createTrainData/newaoa' method='post')
+                    form(action='/updateTrainData/newaoa' method='post')
                         label.col-md-12.col-form-label.fw-bolder Neue Klassifikation erstellen
                         p.col-md-12.col-form-label.fw Sobald Sie alle Trainnigsdaten hochgeladen oder digitalisiert haben,
                         | können Sie eine neue Klassifikation erstellen lassen und die neue AOA mit der alten AOA vergleichen.
