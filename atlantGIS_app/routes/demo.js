@@ -8,6 +8,8 @@ router.get('/', function(req, res, next) {
   res.render('demo', message=["normal"]);
 });
 
+// route to demo_ergebnisse
+// calculate the model, classification and aoa
 router.get('/startAnalyse', function(req, res, next) {
   fetch("http://atlantgisbackend:8000/trainModell?algorithm=rf&type=demo")
     .then((result) => {
@@ -25,6 +27,7 @@ router.get('/startAnalyse', function(req, res, next) {
     });
 })
 
+// route to demo_ergebnisse
 router.get('/ergebnisse', function(req, res, next){
   res.render('demo_ergebnisse', message=["normal"])
 })

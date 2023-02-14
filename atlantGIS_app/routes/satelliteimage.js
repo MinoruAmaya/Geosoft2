@@ -28,12 +28,7 @@ router.get('/', function (req, res, next) {
 // Upload satelliteimagery
 // Route to addTrainData
 router.post("/uploadSatelliteimage", uploadSatelliteImage.single("satellitenbild"), function (req, res, next) {
-  //fetch("http://atlantgisbackend:8000/show_satelliteimage?type=normal")
-  //  .then((result) => {
-  //    console.log(result)
       res.render('area', {help: [1]});
-  //  })
-  //  .catch(error => console.log(error))
 })
 
 

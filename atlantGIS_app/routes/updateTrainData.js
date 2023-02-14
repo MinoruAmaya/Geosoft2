@@ -138,6 +138,7 @@ function validateTraindata(res) {
 
     let trainingdata = JSON.parse(data);
 
+    // check properties and coordinates
     trainingdata.features.forEach(element => {
       if (element.properties == null) {
         res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe Properties!");
@@ -152,6 +153,7 @@ function validateTraindata(res) {
         res.send("Trainingsdaten konnten nicht geladen werden. Überprüfe die Koordinaten!");
       }
     })
+    // if everything is ok 
     res.render('updateTrainData', { help: "2" });
   })
 }
