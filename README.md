@@ -25,6 +25,8 @@ Hier entsteht in Zusammenarbeit von den vier Studierenden Maximilian Elfers, Hen
   - [Installation](#installation)
   - [Demo](#demo)
   - [Testen der Anwendung](#test)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
   - [Abhängigkeiten](#abhängigkeiten)
     - [Frontend](#frontend)
     - [Backend](#backend)
@@ -147,19 +149,32 @@ Die Demo-Seite dient als Schritt-für-Schritt Anweisung, für Leute ohne Erfahru
 
 ## Testen der Anwendung
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-noch nicht implementiert
+### Frontend:
 
-Testen des Backends:
+Die Testumgebung für das Frontend wurde mit dem Test-Framework [Jest](#https://jestjs.io/) umgesetzt. Um die Tests auszuführen, müssen Sie mit 
+```
+cd atlantGIS_app
+``` 
+in das Frontend Verzeichnis navigieren und mit 
+```
+npm test
+``` 
+werden Sie ausgeführt.
 
-Die Testumgebung für das Backend wurde mithilfe von RStudio und dem testthat package aufgesetzt. Um die Funktionen zu testen, müssen die sich im Backend unter plumber befindliche plumber.R und test-plumber.R in RStudio geöffnet werden. Unter Build -> More -> Load All oder mit dem Befehl devtools::load_all(".") werden die Funktionen aus dem Skript eingeladen. Im Anschluss können unter Build -> More -> Test Package die Tests durchgeführt und deren Ergebnisse angezeigt werden.
+### Backend:
+
+Die Testumgebung für das Backend wurde mithilfe von RStudio und dem testthat package aufgesetzt. Um die Funktionen zu testen, müssen die sich im Backend unter plumber befindliche plumber.R und test-plumber.R in RStudio geöffnet werden. Unter Build -> More -> Load All oder mit dem Befehl 
+```
+devtools::load_all(".") 
+```
+werden die Funktionen aus dem Skript eingeladen. Im Anschluss können unter Build -> More -> Test Package die Tests durchgeführt und deren Ergebnisse angezeigt werden.
 
 
 ## Abhängigkeiten
 
 
 ### Frontend
-npm-packages:
+dependencies:
 - @ngageoint/leaflet-geopackage: ^4.1.3
 - bootstrap: ^5.2.2
 - bootstrap-icons: ^1.10.2
@@ -169,8 +184,6 @@ npm-packages:
 - debug: ~2.6.9
 - express: ~4.16.1
 - express-zip: ^3.0.0
-- form-data: ^4.0.0
-- formidable: ^2.1.1
 - http-errors: ~1.6.3
 - leaflet: ^1.9.2
 - leaflet-draw: ^1.0.4
@@ -178,7 +191,11 @@ npm-packages:
 - multer: ^1.4.5-lts.1
 - node-fetch: ^2.6.7
 - pug: ^3.0.2
-- r-integration: ^2.4.0
+- utm-latlng: ^1.0.7
+
+devDependencies:
+- jest: ^29.4.2,
+- supertest: ^6.3.3
 
 
 ### Backend
