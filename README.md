@@ -116,7 +116,7 @@ In der IDE ihrer Wahl können Sie dieses GitHub repository ganz einfach mit dies
 ```
 git clone https://github.com/MinoruAmaya/Geosoft2
 ```
-Sie benötigen außerdem [Docker](#https://www.docker.com/products/docker-desktop/) und [NodeJS](#https://nodejs.org/en/download/).<br>
+Sie benötigen außerdem [Docker](https://www.docker.com/products/docker-desktop/) und [NodeJS](https://nodejs.org/en/download/).<br>
 Die Webanwendung kann dann ganz einfach durch den Befehl
 ```
 docker compose up 
@@ -124,8 +124,8 @@ docker compose up
 im root-Verzeichnis des Projekts gestartet werden. Achten Sie darauf, dass Docker Desktop ebenfalls gestartet ist. Das erstmalige Starten kann einige Minuten in Anspruch nehmen, da alle benötigten Images sowie Abhängigkeiten und Pakete von Docker Hub gepullt werden müssen. Dafür muss eine Internetverbindung vorhanden sein.
 
 Falls Sie Die Images einzeln verwenden möchten, finden Sie sie hier (nicht zu empfehlen):
-- [Frontend](#https://hub.docker.com/repository/docker/luening/geosoft2-frontend/general)
-- [Backend](#https://hub.docker.com/repository/docker/luening/geosoft2-backend/general)
+- [Frontend](https://hub.docker.com/repository/docker/luening/geosoft2-frontend/general)
+- [Backend](https://hub.docker.com/repository/docker/luening/geosoft2-backend/general)
 
 Die Images werden dann durch den "docker compose up" Befehl zu einem Network.
 
@@ -159,7 +159,7 @@ Die Demo-Seite dient als Schritt-für-Schritt Anweisung, für Leute ohne Erfahru
 
 ### Frontend:
 
-Die Testumgebung für das Frontend wurde mit dem Test-Framework [Jest](#https://jestjs.io/) umgesetzt. Um die Tests auszuführen, müssen Sie mit 
+Die Testumgebung für das Frontend wurde mit dem Test-Framework [Jest](https://jestjs.io/) umgesetzt. Um die Tests auszuführen, müssen Sie mit 
 ```
 cd atlantGIS_app
 ``` 
@@ -230,10 +230,10 @@ r-packages:
 
 
 ### nodeJS
-[NodeJS](#https://nodejs.org/en/) ist eine plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung, die JavaScript-Code außerhalb eines Webbrowsers ausführen kann. 
+[NodeJS](https://nodejs.org/en/) ist eine plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung, die JavaScript-Code außerhalb eines Webbrowsers ausführen kann. 
 
 ### express
- Express ist ein einfaches und flexibles Node.js-Framework von Webanwendungen, das zahlreiche leistungsfähige Features und Funktionen für Webanwendungen und mobile Anwendungen bereitstellt. (2023 [Express](#http://expressjs.com/de/))
+ Express ist ein einfaches und flexibles Node.js-Framework von Webanwendungen, das zahlreiche leistungsfähige Features und Funktionen für Webanwendungen und mobile Anwendungen bereitstellt. (2023 [Express](http://expressjs.com/de/))
 
 ## License
 Copyright (C) 2022  Maximilian Elfers, Hendrik Lüning, Maike Schröder, Derya Sen
