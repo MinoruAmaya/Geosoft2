@@ -165,6 +165,7 @@ cd atlantGIS_app
 ``` 
 in das Frontend Verzeichnis navigieren und mit 
 ```
+npm install --save-dev jest
 npm test
 ``` 
 werden Sie ausgeführt.
