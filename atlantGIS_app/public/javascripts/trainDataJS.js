@@ -28,6 +28,9 @@ if(help.innerHTML[0] = "1"){
 
 btn_newAoa.addEventListener("click", function(){load = true; loadingFun();})
 
+/**
+ * loading screen
+ */
 function loadingFun() {
   if (!load) {
     loading.classList.add("visually-hidden");

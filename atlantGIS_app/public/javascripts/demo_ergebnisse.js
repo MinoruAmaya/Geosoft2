@@ -17,6 +17,8 @@ window.onload = function () {
     })
   })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
 
+
+  // loading screen
   function loadingFun() {
     if (!load) {
       loading.classList.add("visually-hidden");

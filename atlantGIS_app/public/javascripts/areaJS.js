@@ -99,7 +99,9 @@ function addGeoJSONToMap(URL, name) {
     })
 }
 
-
+/**
+ * loading screen
+ */
 function loadingFun() {
   if (!load) {
     loading.classList.add("visually-hidden");
@@ -121,12 +123,13 @@ let layerCtrl = L.control.layers({
   "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
     attribution: 'google'
   })
-})/*, { position: 'topleft', collapsed: false })*/.addTo(map);
+}).addTo(map);
 
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();
 map.addLayer(editableLayers);
 
+// before drawing
 self.drawControlFull = new L.Control.Draw({
   draw: {
     polyline: false,
@@ -137,6 +140,7 @@ self.drawControlFull = new L.Control.Draw({
   }
 });
 
+// ater drawing
 self.drawControlEdit = new L.Control.Draw({
   edit: {
     featureGroup: editableLayers,
@@ -151,7 +155,7 @@ self.drawControlEdit = new L.Control.Draw({
   }
 });
 
-
+// if rectangle gets created
 map.on('draw:created', function (e) {
   var type = e.layerType,
     layer = e.layer;

@@ -26,6 +26,9 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 selId = null;
 
+/**
+ * loading screen
+ */
 function loadingFun() {
     if (!load) {
       loading.classList.add("visually-hidden");
@@ -37,6 +40,14 @@ function loadingFun() {
     }
   }
 
+  /**
+   * adds the different outputs to map
+   * classification, AOA, AOA-vergleich, AOA-vorschläge
+   * @param {*} URL 
+   * @param {*} name 
+   * @param {*} call 
+   * @param {*} type 
+   */
   function addDataToMap(URL, name, call, type) {
     load = true;
     loadingFun();
@@ -45,19 +56,7 @@ function loadingFun() {
       .then(parseGeoraster)
       .then(georaster => {
         if (name == "Klassifikation") { // Klassifikation
-          // Calculate count of classification classes. Initalize array.
-          //var count = georaster.maxs - georaster.mins;
           let colorArray = ['#28ae80','#addc30','#3b528b','#59157e', '#fde725','#21918c', '#5ec962'];
-          // let randomColorArray = Array();
-          // Fill array with colors. Every color has to be unique.
-          //for (i = 0; i < count; i++) {
-            //randomColor = getRandomColor();
-            //if (!(randomColorArray.includes(randomColor))) {
-             // randomColorArray[i] = randomColor;
-            //} else {
-             // i--;
-            //}
-          //}
         
           var layer = new GeoRasterLayer({
             georaster: georaster,
@@ -67,7 +66,6 @@ function loadingFun() {
             }
           });
         }else if(name=="AOA"){ // AOA
-          // Georaster
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
@@ -80,7 +78,7 @@ function loadingFun() {
             }
           });
         }
-        else if(name=="AOA-Vergleich"){
+        else if(name=="AOA-Vergleich"){ // AOA-Vergleich
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,
@@ -97,7 +95,7 @@ function loadingFun() {
             }
           });
         }
-        else if(name=="Vorschläge"){
+        else if(name=="Vorschläge"){ // Vorschläge
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 256,

@@ -45,6 +45,9 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     })
   })/*, { position: 'topleft', collapsed: false })*/.addTo(map);
 
+  /**
+   * adds the area of interest
+   */
   function addArea(){
     var latlngs = [[51.98732690226854, 7.760461205936437], [51.97265353, 7.806045063875838]];
     var rectOptions = {color: '#FF00FF', weight: 1};
@@ -52,6 +55,9 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
     rectangle.addTo(map);
   }
 
+  /**
+   * adds georaster (geoTiff) to map
+   */
   function addDataToMap(URL, name, call, type) {
     fetch(URL)
       .then(response => response.arrayBuffer())
@@ -84,7 +90,12 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       });
   };
 
+  /**
+   * handles the demo workflow and shows specfiic texts
+   * @param {*} type 
+   */
   function handleDOMChange(type){
+    // start text
     if(type === "start"){
       form_div_sat.classList.add("active-form");
       btn_start.classList.add("visually-hidden");
@@ -95,6 +106,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
         + 'vorhanden sein (Diese Reihenfolge muss gegeben sein).<br /><br />Sobald Sie dieses hochgeladen haben (und gespeichert haben) '
         + 'wird das Satellitenbild auf der Karte als RGB angezeigt. <br /><br /><br /><br /><br /><br />';
     }
+    // satellite text
     else if(type === "satellite"){
       form_div_sat.classList.remove("active-form");
       form_div.classList.add("active-form");
@@ -105,6 +117,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       + '<br /><br />Sobald Sie einen Bereich ausgewählt (und gespeichert haben), '
       + 'werden Sie zu dem nächsten Schritt weitergeleitet. <br /><br /><br /><br /><br /><br />';
     }
+    // area text
     else if(type === "area"){
       form_div.classList.remove("active-form");
       form_div_trainData.classList.add("active-form");
@@ -117,6 +130,7 @@ window.onload = function () {//  w w w  . j  ava  2 s  .c  o m
       + '<br /><br />Sobald Sie die Trainigsdaten hochgeladen (und gespeichert haben), '
       + 'werden Sie zu dem nächsten Schritt weitergeleitet. <br /><br />';
     }
+    // traindata text
     else if(type === "traindata"){
       form_div_trainData.classList.remove("active-form");
       form_div_trainModell.classList.add("active-form");
