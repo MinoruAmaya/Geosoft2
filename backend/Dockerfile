@@ -36,9 +36,9 @@ RUN R -e "install.packages('geojsonsf', dependencies=TRUE)"
 RUN R -e "install.packages('testthat', dependencies=TRUE)"
 
 
-COPY ./backend/plumber.R ./
+COPY ./plumber.R ./
 
-COPY ./backend/ ./
+COPY ./ ./
 
 # Expose app on a given port
 EXPOSE 8000

@@ -3,9 +3,7 @@ version: '3'
 services: 
     frontend: 
         container_name: atlantgisfrontend
-        build: 
-            context: .
-            dockerfile: ./atlantGIS_app/Dockerfile
+        image: luening/geosoft2-frontend
         ports: 
             - '3000:3000'
         volumes:
@@ -13,9 +11,7 @@ services:
           
     backend:
         container_name: atlantgisbackend 
-        build:
-            context: .
-            dockerfile: ./backend/Dockerfile
+        image: luening/geosoft2-backend
         restart: always
         ports:
             - "8000:8000"

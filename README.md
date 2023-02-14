@@ -115,11 +115,22 @@ herunterladen. Man hat auch die Option das Modell, mit dem man das Training durc
 
 ## Installation
 
-Die Webanwendung kann ganz einfach durch den Befehl
+In der IDE ihrer Wahl können Sie dieses GitHub repository ganz einfach mit diesem Befehl clonen. Oder Sie downloaden das Projekt als zip-Datei.
+```
+git clone https://github.com/MinoruAmaya/Geosoft2
+```
+Sie benötigen außerdem [Docker](#https://www.docker.com/products/docker-desktop/) und [NodeJS](#https://nodejs.org/en/download/).<br>
+Die Webanwendung kann dann ganz einfach durch den Befehl
 ```
 docker compose up 
 ```
-im root-Verzeichnis des Projekts gestartet werden. Das erstmalige Starten kann einige Minuten in Anspruch nehmen, da alle benötigten Abhängigkeiten und Pakete installiert werden müssen. Dafür muss eine Internetverbindung vorhanden sein. 
+im root-Verzeichnis des Projekts gestartet werden. Achten Sie darauf, dass Docker Desktop ebenfalls gestartet ist. Das erstmalige Starten kann einige Minuten in Anspruch nehmen, da alle benötigten Images sowie Abhängigkeiten und Pakete von Docker Hub gepullt werden müssen. Dafür muss eine Internetverbindung vorhanden sein.
+
+Falls Sie Die Images einzeln verwenden möchten, finden Sie sie hier (nicht zu empfehlen):
+- [Frontend](#https://hub.docker.com/repository/docker/luening/geosoft2-frontend/general)
+- [Backend](#https://hub.docker.com/repository/docker/luening/geosoft2-backend/general)
+
+Die Images werden dann durch den "docker compose up" Befehl zu einem Network.
 
 ## Hauptkomponenten unserer App
 Unsere App ist in drei Abschnitte gegliedert. Einer Upload-Seite, einer Ergebnis-Seite und einer Bearbeitungsseite. 
